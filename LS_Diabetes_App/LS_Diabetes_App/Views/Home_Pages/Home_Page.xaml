@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LS_Diabetes_App.Home_Pages.Home_Page"
+             xmlns:CustomFrame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:resources="clr-namespace:LS_Diabetes_App"
+             xmlns:system="clr-namespace:System;assembly=netstandard">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Open Sans" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView Padding="0">
+        
+            
+                <Grid Grid.Row="0" BackgroundColor="#F9FAFB">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="210"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="backgound.jpg" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+
+                <Frame HeightRequest="220" WidthRequest="220" Margin="20,20,20,20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HasShadow="True" BackgroundColor="#00B2C8" CornerRadius="160">
+                    <Frame  HeightRequest="200" WidthRequest="200" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HasShadow="True" BackgroundColor="White" CornerRadius="150">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.6*"/>
+                            <RowDefinition Height="0.2*"/>
+                        </Grid.RowDefinitions>
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="0" Text="1d Ago" FontSize="15"  FontFamily="{StaticResource NormalFont}"/>
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1" Text="{Binding Last_Glycemia}" FontSize="40" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}"/>
+                        <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="2" Text="mg/dL" FontSize="15"  FontFamily="{StaticResource NormalFont}"/>
+                    </Grid>
+                </Frame>
+                </Frame>
+                <sfButtons:SfButton ImageSource="plus.png" ShowIcon="True" ImageAlignment="Left" Text="New Entry" BackgroundColor="Transparent" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Start" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,5,0,10" Command="{Binding AddDataTypeCommand}"/>
+                </StackLayout>
+                <Frame Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="20,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+                    <StackLayout >
+                        <Image Source="step.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="6,854" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        <Label Text="of 10,000 steps" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="5,10,20,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+                    <StackLayout >
+                        <Image Source="bloo.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="6%" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        <Label Text="HbA1c" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.Row="2" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="20,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+                    <StackLayout >
+                        <Image Source="patient.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="84/138" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        <Label Text="mmHg" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.Row="2" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="5,10,20,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+                    <StackLayout >
+                        <Image Source="weight.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="84" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        <Label Text="Kg" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                    </StackLayout>
+                </Frame>
+                <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="200" WidthRequest="300" Margin="5,10,5,0" CornerRadius="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Row="1" Grid.Column="0">
+                        <Label Text="195" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                            <Label Text="averege" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="1">
+                        <Label Text="286" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                            <Label Text="heighest" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="2">
+                        <Label Text="120" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                            <Label Text="lowest" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
+            </Grid>
+                
+            
+       
+        
+        
+    </ScrollView>
+      
+</ContentPage>
