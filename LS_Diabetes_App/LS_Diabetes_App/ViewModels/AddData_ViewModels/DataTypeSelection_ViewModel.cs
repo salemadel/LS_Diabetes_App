@@ -1,4 +1,5 @@
-﻿using LS_Diabetes_App.Views;
+﻿using LS_Diabetes_App.Models;
+using LS_Diabetes_App.Views;
 using LS_Diabetes_App.Views.AddData_Views;
 using System;
 using System.Collections.Generic;
@@ -16,18 +17,50 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 
 
         public Command GlucoseCommand { get; set; }
-        public DataTypeSelection_ViewModel(INavigation navigation)
+        public Command PressionCommand { get; set; }
+        public Command Hb1AcCommand { get; set; }
+        public Command WeightCommand { get; set; }
+        private Profil_Model Profil { get; set; }
+        public DataTypeSelection_ViewModel(INavigation navigation , Profil_Model profil)
         {
             Navigation = navigation;
+            Profil = profil;
             GlucoseCommand = new Command(async () =>
             {
                 await ExecuteOnGlucoseClicked();
+            });
+            PressionCommand = new Command(async () =>
+            {
+                await ExecuteOnPressionClicked();
+            });
+            Hb1AcCommand = new Command(async () =>
+            {
+                await ExecuteOnHb1acClicked();
+            });
+            WeightCommand = new Command(async () =>
+            {
+                await ExecuteOnWeightClicked();
             });
         }
         private async Task ExecuteOnGlucoseClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddGlugose_View(), true);
+            await Navigation.PushModalAsync(new AddGlugose_View(Profil), true);
+        }
+        private async Task ExecuteOnPressionClicked()
+        {
+            SendHidePopUpd();
+            await Navigation.PushModalAsync(new AddPression_View(Profil), true);
+        }
+        private async Task ExecuteOnHb1acClicked()
+        {
+            SendHidePopUpd();
+            await Navigation.PushModalAsync(new AddHb1Ac_View(Profil), true);
+        }
+        private async Task ExecuteOnWeightClicked()
+        {
+            SendHidePopUpd();
+            await Navigation.PushModalAsync(new AddWeight_View(Profil) , true);
         }
         private void SendHidePopUpd()
         {

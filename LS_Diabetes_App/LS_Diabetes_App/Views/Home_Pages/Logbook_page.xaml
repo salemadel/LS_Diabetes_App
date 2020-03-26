@@ -11,6 +11,7 @@
             </OnPlatform>
             <Converter:TimeSpanDateTimeConverter x:Key="TimeSpanToDateTime"/>
             <Converter:StringDoubleConvertercs x:Key="StringToDouble"/>
+            <Converter:TypeToImageConverter x:Key="TypeToImage"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -35,43 +36,16 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Frame HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0" Padding="0" CornerRadius="50" BackgroundColor="#56CB94" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                    <Label Text="{Binding Time , StringFormat='{0:HH:mm}'}" TextColor="White"  FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                                <Frame HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0" Padding="0" CornerRadius="50" BackgroundColor="#00B2C8" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                    <Label Text="{Binding Date , StringFormat='{0:HH:mm}'}" TextColor="White"  FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
                                 </Frame>
-                                <Grid Grid.Column="1" Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition  Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <StackLayout Orientation="Horizontal" Spacing="1" Grid.Row="0" Grid.Column="0">
-                                        <Image Source="blood1.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand"/>
-                                        <Label Text="{Binding Glycemia ,Converter={StaticResource StringToDouble}}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" VerticalOptions="CenterAndExpand"  />
-                                        <Label Text="mg/dL"  FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand"  />
+                                <StackLayout Grid.Column="1">
+                                    <StackLayout Orientation="Horizontal" Spacing="1" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                                        <Image Source="{Binding Type , Converter={StaticResource TypeToImage}}" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand"/>
+                                        <Label Text="{Binding DataValue}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" VerticalOptions="CenterAndExpand"  />
+                                        <Label Text="{Binding Unit}"  FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand"  />
                                     </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Spacing="1"  Grid.Row="1" Grid.Column="0">
-                                        <Image Source="insulin.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand"/>
-                                        <Label Text="{Binding Insuline , Converter={StaticResource StringToDouble}}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" VerticalOptions="CenterAndExpand"/>
-                                        <Label Text=""  FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" />
-                                    </StackLayout>
-
-
-                                    <StackLayout Orientation="Horizontal" Spacing="1"  Grid.Row="0" Grid.Column="1">
-                                        <Image Source="pressure.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand"/>
-                                        <Label Text="{Binding Arterial_Pressure ,Converter={StaticResource StringToDouble}}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" VerticalOptions="CenterAndExpand"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Spacing="1" Grid.Row="1" Grid.Column="1">
-                                        <Image Source="weight.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand"/>
-
-                                        <Label Text="{Binding Weight ,Converter={StaticResource StringToDouble}}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" VerticalOptions="CenterAndExpand"/>
-                                        <Label Text="Kg" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" />
-                                    </StackLayout>
-
-                                </Grid>
+                                </StackLayout>
                             </Grid>
                         </ViewCell>
                 </DataTemplate>

@@ -13,14 +13,14 @@ using Xamarin.Forms.Xaml;
 namespace LS_Diabetes_App.Views.AddData_Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddGlugose_View : ContentPage
+    public partial class AddPression_View : ContentPage
     {
         private bool timepickerfucused { get; set; }
-        public AddGlugose_View(Profil_Model profil)
+        public AddPression_View(Profil_Model profil)
         {
             InitializeComponent();
             var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
-            BindingContext = new AddData_ViewModel(Navigation, datastore , profil);
+            BindingContext = new AddData_ViewModel(Navigation, datastore, profil);
             TimePicker.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             DatePicker.MaximumDate = DateTime.Now.Date;
         }

@@ -9,13 +9,13 @@ using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Models.Data_Models
 {
-    public class Glucose_Model : INotifyPropertyChanged
+    public class Hb1Ac_Model : INotifyPropertyChanged
     {
         [JsonIgnore]
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        
+       
         [JsonIgnore]
         [Ignore]
         private DateTime date { get; set; } = DateTime.Now;
@@ -28,21 +28,21 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (date != value)
                     date = value;
                 OnPropertyChanged();
-               
+                OnPropertyChanged("GlucoseDateTime");
             }
         }
 
         [JsonIgnore]
         [Ignore]
-        private double glycemia { get; set; }
+        private double hb1ac { get; set; }
 
-        public double Glycemia
+        public double Hb1Ac
         {
-            get { return glycemia; }
+            get { return hb1ac; }
             set
             {
-                if (glycemia != value)
-                    glycemia = value;
+                if (hb1ac != value)
+                    hb1ac = value;
                 OnPropertyChanged();
             }
         }

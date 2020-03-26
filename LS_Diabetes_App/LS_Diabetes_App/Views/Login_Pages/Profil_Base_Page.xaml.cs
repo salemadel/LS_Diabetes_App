@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LS_Diabetes_App.Interfaces;
+using LS_Diabetes_App.ViewModels;
+using Syncfusion.XForms.ComboBox;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,21 +19,32 @@ namespace LS_Diabetes_App.Views.Login_Pages
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
-            var Type_list = new string[] { "Type 1", "Type 2" , "Autre" };
-            var Pompe_list = new string[] { "Seringue / Stylo" , "Pompe" , "Pas d'insuline" };
-            var Unit_list = new string[] { "mg / dL", "mmol / L" };
-            var Glucometer_list = new string[] { "Check 3" , "Autre" };
-            var Insuline_list = new string[] { "Autre" };
-            DiabetesTypes_Combobox.DataSource = Type_list;
-            TherapyTypes_Combobox.DataSource = Pompe_list;
-            UnitTypes_Combobox.DataSource = Unit_list;
-            Glucometer_Combobox.DataSource = Glucometer_list;
-            Insuline_Combobox.DataSource = Insuline_list;
+            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
+            BindingContext = new SignUp_ViewModel(Navigation, datastore, "ProfilBase");
         }
 
-        private async void ImageButton_Clicked(object sender, EventArgs e)
+        private void Glucometer_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
         {
-            await Navigation.PushAsync(new MainPage() ,true);
+            var combobox = sender as SfComboBox;
+            (BindingContext as SignUp_ViewModel).Profil.Glucometer = combobox.SelectedItem as string;
+        }
+
+        private void UnitTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
+        {
+            var combobox = sender as SfComboBox;
+            (BindingContext as SignUp_ViewModel).Profil.GlycemiaUnit = combobox.SelectedItem as string;
+        }
+
+        private void TherapyTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
+        {
+            var combobox = sender as SfComboBox;
+            (BindingContext as SignUp_ViewModel).Profil.WeightUnit = combobox.SelectedItem as string;
+        }
+
+        private void DiabetesTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
+        {
+            var combobox = sender as SfComboBox;
+            (BindingContext as SignUp_ViewModel).Profil.DiabetesType = combobox.SelectedItem as string;
         }
     }
 }

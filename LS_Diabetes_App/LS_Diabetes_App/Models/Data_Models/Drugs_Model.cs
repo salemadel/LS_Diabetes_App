@@ -9,13 +9,12 @@ using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Models.Data_Models
 {
-    public class Glucose_Model : INotifyPropertyChanged
+    public class Drugs_Model : INotifyPropertyChanged
     {
         [JsonIgnore]
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        
         [JsonIgnore]
         [Ignore]
         private DateTime date { get; set; } = DateTime.Now;
@@ -28,21 +27,35 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (date != value)
                     date = value;
                 OnPropertyChanged();
-               
+                OnPropertyChanged("GlucoseDateTime");
             }
         }
 
         [JsonIgnore]
         [Ignore]
-        private double glycemia { get; set; }
+        private double dose { get; set; }
 
-        public double Glycemia
+        public double Dose
         {
-            get { return glycemia; }
+            get { return dose; }
             set
             {
-                if (glycemia != value)
-                    glycemia = value;
+                if (dose != value)
+                    dose = value;
+                OnPropertyChanged();
+            }
+        }
+        [JsonIgnore]
+        [Ignore]
+        private string drug { get; set; }
+
+        public string Druf
+        {
+            get { return drug; }
+            set
+            {
+                if (drug != value)
+                    drug = value;
                 OnPropertyChanged();
             }
         }
@@ -105,7 +118,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
-       
+        
         [JsonIgnore]
         [Ignore]
         public string DateSort

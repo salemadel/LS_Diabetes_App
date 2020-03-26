@@ -48,7 +48,7 @@
                         </Grid>
                     </sfButton:SfButton.Content>
                 </sfButton:SfButton>
-                <sfButton:SfButton Grid.Row="1" VerticalOptions="CenterAndExpand"  HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70">
+                <sfButton:SfButton Grid.Row="1" VerticalOptions="CenterAndExpand"  HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70" Command="{Binding PressionCommand}">
                     <sfButton:SfButton.Content>
                         <Grid Margin="25,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                         </Grid>
                     </sfButton:SfButton.Content>
                 </sfButton:SfButton>
-                <sfButton:SfButton Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70">
+                <sfButton:SfButton Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70" Command="{Binding WeightCommand}">
                     <sfButton:SfButton.Content>
                         <Grid Margin="25,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -104,7 +104,7 @@
                           </Grid>
                     </sfButton:SfButton.Content>
                 </sfButton:SfButton>
-                <sfButton:SfButton Grid.Row="5" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70">
+                <sfButton:SfButton Grid.Row="5" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70" Command="{Binding Hb1AcCommand}">
                     <sfButton:SfButton.Content>
                         <Grid Margin="25,0,0,0">
                             <Grid.ColumnDefinitions>

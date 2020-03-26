@@ -4,6 +4,7 @@ using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
 using LS_Diabetes_App.Views.Home_Pages;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -17,11 +18,26 @@ namespace LS_Diabetes_App.ViewModels
     {
         private IDataStore DataStore;
         private INavigation Navigation;
+        private Profil_Model profil { get; set; }
+        public Profil_Model Profil
+        {
+            get { return profil; }
+            set
+            {
+                if (profil != value)
+                    profil = value;
+                OnPropertyChanged();
+            }
+        }
+        private GlycemiaConverter GlycemiaConverter { get; set; }
+        private WeightConverter WeightConverter { get; set; }
         public LogBook_ViewModel(IDataStore _dataStore , INavigation _navigation)
         {
             IsBusy = true;
-            this.DataStore = _dataStore;
-            this.Navigation = _navigation;
+            DataStore = _dataStore;
+            Navigation = _navigation;
+            GlycemiaConverter = new GlycemiaConverter();
+            WeightConverter = new WeightConverter();
             UpdateData();
             MessagingCenter.Subscribe<AddData_ViewModel>(this, "DataUpdated", (sender) =>
             {
@@ -42,7 +58,7 @@ namespace LS_Diabetes_App.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<Grouping<string, Glucose_Model>> DataGrouped
+        public ObservableCollection<Grouping<string, LogBook_Model>> DataGrouped
         {
             get { return dataGrouped; }
             set
@@ -75,7 +91,7 @@ namespace LS_Diabetes_App.ViewModels
             }
         }
 
-        private ObservableCollection<Grouping<string, Glucose_Model>> dataGrouped { get; set; }
+        private ObservableCollection<Grouping<string, LogBook_Model>> dataGrouped { get; set; }
         private bool isBusy { get; set; }
         private Data_Model selected_item { get; set; }
         public Command ItemTappedCommand { get; set; }
@@ -86,13 +102,85 @@ namespace LS_Diabetes_App.ViewModels
 
         private void UpdateData()
         {
-            
-            var _data = DataStore.GetGlucosAsync().ToList();
+
+            List<LogBook_Model> _data = new List<LogBook_Model>();
+            Profil = DataStore.GetProfilAsync().First();
+            foreach(var item in DataStore.GetDrugsAsync())
+            {
+                var drug = new LogBook_Model
+                {
+                    Data = item,
+                    DataValue = item.Dose.ToString(),
+                    Date = item.Date,
+                    Type = "Drugs"
+                };
+                _data.Add(drug);
+            }
+            foreach (var item in DataStore.GetGlucosAsync())
+            {
+                var glucose = new LogBook_Model
+                {
+                    Data = item,
+                    DataValue = GlycemiaConverter.Convert(item , Profil.GlycemiaUnit).Glycemia.ToString(),
+                    Date = item.Date,
+                    Type = "Glucose",
+                    Unit = Profil.GlycemiaUnit
+                    
+                };
+                _data.Add(glucose);
+            }
+            foreach (var item in DataStore.GetHb1acAsync())
+            {
+                var drug = new LogBook_Model
+                {
+                    Data = item,
+                    DataValue = item.Hb1Ac.ToString(),
+                    Date = item.Date,
+                    Type = "Hb1Ac",
+                    Unit = "%"
+                };
+                _data.Add(drug);
+            }
+            foreach (var item in DataStore.GetInsulineAsync())
+            {
+                var drug = new LogBook_Model
+                {
+                    Data = item,
+                    DataValue = item.Glycemia.ToString(),
+                    Date = item.Date,
+                    Type = "Insuline"
+                };
+                _data.Add(drug);
+            }
+            foreach (var item in DataStore.GetPressionAsync())
+            {
+                var drug = new LogBook_Model
+                {
+                    Data = item,
+                    DataValue = item.Diastolique.ToString() + "/"+ item.Systolique.ToString(),
+                    Date = item.Date,
+                    Type = "Pression",
+                    Unit = "mmgH"
+                };
+                _data.Add(drug);
+            }
+            foreach (var item in DataStore.GetWeightAsync())
+            {
+                var drug = new LogBook_Model
+                {
+                    Data = item,
+                    DataValue = WeightConverter.Convert(item, Profil.WeightUnit).Weight.ToString(),
+                    Date = item.Date,
+                    Type = "Weight",
+                    Unit = Profil.WeightUnit
+                };
+                _data.Add(drug);
+            }
             var sorted = from data in _data
-                         orderby data.Time descending
-                         group data by data.DateSort into DataGroup
-                         select new Grouping<string, Glucose_Model>(DataGroup.Key, DataGroup);
-            DataGrouped = new ObservableCollection<Grouping<string, Glucose_Model>>(sorted);
+                           orderby data.Date descending
+                           group data by data.DateSort into DataGroup
+                           select new Grouping<string, LogBook_Model>(DataGroup.Key, DataGroup);
+              DataGrouped = new ObservableCollection<Grouping<string, LogBook_Model>>(sorted);
         }
 
     }

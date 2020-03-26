@@ -15,21 +15,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [JsonIgnore]
-        [Ignore]
-        private DateTime time { get; set; } = DateTime.Now;
-
-        public DateTime Time
-        {
-            get { return time; }
-            set
-            {
-                if (time != value)
-                    time = value;
-                OnPropertyChanged();
-                OnPropertyChanged("GlucoseDateTime");
-            }
-        }
+       
         [JsonIgnore]
         [Ignore]
         private DateTime date { get; set; } = DateTime.Now;
@@ -119,22 +105,14 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
-        [JsonIgnore]
-        [Ignore]
-        public string GlucoseDateTime
-        {
-            get
-            {
-                return Time.ToString("HH:mm") + " " + Date.ToString("dd/MM/yyyy");
-            }
-        }
+       
         [JsonIgnore]
         [Ignore]
         public string DateSort
         {
             get
             {
-                return Time.ToString("yyyy/MM/dd");
+                return Date.ToString("yyyy/MM/dd");
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;

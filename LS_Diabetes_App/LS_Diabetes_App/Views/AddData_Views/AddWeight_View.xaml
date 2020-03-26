@@ -5,9 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:CustomEntry="clr-namespace:LS_Diabetes_App.Custom_Controls"
              xmlns:resources="clr-namespace:LS_Diabetes_App"
-             xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters"
+             xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters" xmlns:Behavior="clr-namespace:LS_Diabetes_App.Behaviors"
              mc:Ignorable="d"
-             x:Class="LS_Diabetes_App.Views.AddData_Views.AddGlugose_View">
+             x:Class="LS_Diabetes_App.Views.AddData_Views.AddWeight_View">
     <ContentPage.Resources>
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
@@ -39,13 +39,13 @@
             <CustomEntry:Custom_Entry x:Name="DateTimeEntry" Grid.Row="0" Grid.Column="1" Text="{Binding AddDateTime , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused"/>
             <TimePicker x:Name="TimePicker" Focused="TimePicker_Focused" PropertyChanged="TimePicker_PropertyChanged" IsVisible="False" Time="{Binding Time}"/>
             <DatePicker x:Name="DatePicker" IsVisible="False" Date="{Binding Date}"/>
-            <Label Text="{x:Static resources:AppResources.Home_Glucose_Lavel_Label}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Grid.Row="1" Keyboard="Numeric" Grid.Column="1" Text="{Binding Glucose.Glycemia ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="{Binding Profil.GlycemiaUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <Label Text="Weight" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Entry Grid.Row="1" Keyboard="Numeric" Grid.Column="1" Text="{Binding Weight.Weight ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="{Binding Profil.WeightUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
 
             <ImageButton Source="camera.png" Padding="15" BackgroundColor="#00B2C8"  Grid.Row="2" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
             <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <Frame BorderColor="LightGray" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
-                    <Image Source="{Binding Glucose.Picture}" Aspect="AspectFill">
+                    <Image Source="{Binding Weight.Picture}" Aspect="AspectFill">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PictureTappedCommand}"/>
                         </Image.GestureRecognizers>
@@ -53,7 +53,7 @@
                 </Frame>
             </StackLayout>
             <Label Text="{x:Static resources:AppResources.Position_Label}" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Grid.Row="3" Grid.Column="1" Text="{Binding Glucose.Position , Converter={StaticResource DoubleArrayToString}}" IsEnabled="False" FontFamily="{StaticResource NormalFont}" FontSize="13" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Entry Grid.Row="3" Grid.Column="1" Text="{Binding Weight.Position , Converter={StaticResource DoubleArrayToString}}" IsEnabled="False" FontFamily="{StaticResource NormalFont}" FontSize="13" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <Image Source="gps.png" Grid.Row="3" HeightRequest="25" WidthRequest="25" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy ,Converter={StaticResource BoolRevers}}" IsEnabled="{Binding IsBusy ,Converter={StaticResource BoolRevers}}">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GetPositionCommand}"/>
@@ -61,8 +61,8 @@
             </Image>
             <ActivityIndicator Grid.Row="3" Grid.Column="0" Color="#56CB94"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  HeightRequest="25" WidthRequest="25"/>
             <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Text="{Binding Glucose.Note}" Grid.Row="4" Grid.Column="1" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
-            <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveGlucoseCommand}" />
+            <CustomEntry:Custom_Entry Text="{Binding Weight.Note}" Grid.Row="4" Grid.Column="1" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveWeightCommand}" />
         </Grid>
     </ScrollView>
 </ContentPage>

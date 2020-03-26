@@ -25,6 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -34,6 +40,15 @@
       <DependentUpon>AppResources.fr.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Views\AddData_Views\AddWeight_View.xaml.cs">
+      <DependentUpon>AddWeight_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddData_Views\AddHb1Ac_View.xaml.cs">
+      <DependentUpon>AddHb1Ac_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddData_Views\AddPression_View.xaml.cs">
+      <DependentUpon>AddPression_View.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Home_Pages\Profil_Page.xaml.cs">
       <DependentUpon>Profil_Page.xaml</DependentUpon>

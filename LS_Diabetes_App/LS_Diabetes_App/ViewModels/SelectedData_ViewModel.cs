@@ -130,7 +130,7 @@ namespace LS_Diabetes_App.ViewModels
         private async Task ExecuteOnUpdateData()
         {
             IsBusy = true;
-            dataStore.UpdateData(Data);
+           // dataStore.UpdateData(Data);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
             IsBusy = false;
@@ -138,7 +138,7 @@ namespace LS_Diabetes_App.ViewModels
         private async Task ExecuteOnDeleteData()
         {
             IsBusy = true;
-            dataStore.DeleteData(Data);
+          //  dataStore.DeleteData(Data);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
             IsBusy = false;

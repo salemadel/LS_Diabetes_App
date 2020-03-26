@@ -19,7 +19,7 @@ namespace LS_Diabetes_App.Views.Home_Pages
         {
             InitializeComponent();
             var data = _data;
-            var datastore = new DataStorecs(DependencyService.Get<IDatabaseAccess>());
+            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
             BindingContext = new SelectedData_ViewModel(data, datastore, Navigation);
         }
     }
