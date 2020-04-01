@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using SQLite;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace LS_Diabetes_App.Models
 {
@@ -17,6 +15,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string firstname { get; set; }
+
         public string FirstName
         {
             get { return firstname; }
@@ -27,9 +26,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string lastname { get; set; }
+
         public string LastName
         {
             get { return lastname; }
@@ -40,9 +41,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string email { get; set; }
+
         public string Email
         {
             get { return email; }
@@ -53,9 +56,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string sexe { get; set; }
+
         public string Sexe
         {
             get { return sexe; }
@@ -66,9 +71,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string diabetestype { get; set; }
+
         public string DiabetesType
         {
             get { return diabetestype; }
@@ -79,9 +86,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string glycemiaunit { get; set; }
+
         public string GlycemiaUnit
         {
             get { return glycemiaunit; }
@@ -92,9 +101,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string weightunit { get; set; }
+
         public string WeightUnit
         {
             get { return weightunit; }
@@ -105,10 +116,26 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-        
+
+        [JsonIgnore]
+        [Ignore]
+        private string heighttunit { get; set; }
+
+        public string HeighttUnit
+        {
+            get { return heighttunit; }
+            set
+            {
+                if (heighttunit != value)
+                    heighttunit = value;
+                OnPropertyChanged();
+            }
+        }
+
         [JsonIgnore]
         [Ignore]
         private string glucometer { get; set; }
+
         public string Glucometer
         {
             get { return glucometer; }
@@ -119,9 +146,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private DateTime diagnostic_year { get; set; }
+
         public DateTime Diagnostic_Year
         {
             get { return diagnostic_year; }
@@ -132,9 +161,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private DateTime birth_date { get; set; }
+
         public DateTime Birth_Date
         {
             get { return birth_date; }
@@ -145,6 +176,22 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
+        [JsonIgnore]
+        [Ignore]
+        private double height { get; set; }
+
+        public double Height
+        {
+            get { return height; }
+            set
+            {
+                if (height != value)
+                    height = value;
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

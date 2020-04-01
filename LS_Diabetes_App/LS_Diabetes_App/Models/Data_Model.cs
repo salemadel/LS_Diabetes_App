@@ -27,6 +27,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private DateTime date { get; set; }
@@ -71,6 +72,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private double weight { get; set; }
@@ -85,7 +87,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private double[] arterial_pressure { get; set; }
+
         [JsonIgnore]
         [Ignore]
         public double[] Arterial_Pressure
@@ -98,6 +102,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string insuline_time { get; set; }
@@ -129,8 +134,6 @@ namespace LS_Diabetes_App.Models
             }
         }
 
-       
-
         [JsonIgnore]
         [Ignore]
         private string note { get; set; }
@@ -145,6 +148,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         public string DateSort
@@ -154,9 +158,11 @@ namespace LS_Diabetes_App.Models
                 return Time.ToString("yyyy/MM/dd");
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string picturePath { get; set; }
+
         public string PicturePathe
         {
             get { return picturePath; }
@@ -168,13 +174,14 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged("Picture");
             }
         }
+
         [JsonIgnore]
         [Ignore]
         public ImageSource Picture
         {
             get
             {
-                if(!string.IsNullOrWhiteSpace(PicturePathe))
+                if (!string.IsNullOrWhiteSpace(PicturePathe))
                 {
                     return ImageSource.FromFile(PicturePathe);
                 }
@@ -184,6 +191,7 @@ namespace LS_Diabetes_App.Models
                 }
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

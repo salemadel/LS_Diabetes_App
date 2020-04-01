@@ -17,28 +17,28 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
-    <Grid Margin="10,10,10,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Label Text="{x:Static resources:AppResources.DiabetesType_Label}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <combobox:SfComboBox x:Name="DiabetesTypes_Combobox" DataSource="{Binding Type_List}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="0" Grid.Column="1" SelectionChanged="DiabetesTypes_Combobox_SelectionChanged"/>
-        <Label Text="Weight unit" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <combobox:SfComboBox x:Name="TherapyTypes_Combobox" DataSource="{Binding Weight_Unit}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="1" Grid.Column="1" SelectionChanged="TherapyTypes_Combobox_SelectionChanged"/>
-        <Label Text="{x:Static resources:AppResources.Unit_Label}" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+        <Grid Margin="10,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="{x:Static resources:AppResources.DiabetesType_Label}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox x:Name="DiabetesTypes_Combobox" DataSource="{Binding Type_List}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="0" Grid.Column="1" SelectionChanged="DiabetesTypes_Combobox_SelectionChanged" />
+            <Label Text="Weight unit" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox x:Name="TherapyTypes_Combobox" DataSource="{Binding Weight_Unit}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="1" Grid.Column="1" SelectionChanged="TherapyTypes_Combobox_SelectionChanged" />
+            <Label Text="{x:Static resources:AppResources.Unit_Label}" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <combobox:SfComboBox x:Name="UnitTypes_Combobox" DataSource="{Binding Unit_List}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="2" Grid.Column="1" SelectionChanged="UnitTypes_Combobox_SelectionChanged" />
-        <Label Text="{x:Static resources:AppResources.Glucometer_Label}" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <combobox:SfComboBox x:Name="Glucometer_Combobox" DataSource="{Binding Glucometer_List}" ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="3" Grid.Column="1" SelectionChanged="Glucometer_Combobox_SelectionChanged"/>
+            <Label Text="{x:Static resources:AppResources.Glucometer_Label}" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox x:Name="Glucometer_Combobox" DataSource="{Binding Glucometer_List}" ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="3" Grid.Column="1" SelectionChanged="Glucometer_Combobox_SelectionChanged" />
             <ImageButton Source="next.png" Padding="25" BackgroundColor="#56CB94"  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding ProfilBaseCommand}" />
-    </Grid>
+        </Grid>
     </ScrollView>
 </ContentPage>

@@ -1,10 +1,5 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,7 +11,6 @@ namespace LS_Diabetes_App.Views.Login_Pages
     {
         public SingUp_Page()
         {
-           
             InitializeComponent();
             var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
             BindingContext = new SignUp_ViewModel(Navigation, datastore, "SignUp");

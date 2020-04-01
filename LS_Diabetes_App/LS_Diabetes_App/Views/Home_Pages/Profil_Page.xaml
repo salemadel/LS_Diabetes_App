@@ -12,82 +12,81 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"/>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer/>
+                    <TapGestureRecognizer />
                 </Grid.GestureRecognizers>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Unités de mesure" FontSize="17" TextColor="Black" FontFamily="{StaticResource NormalFont}"/>
-                    <Label  Text="Unités de mesure , Unité de glycémie , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}"/>
+                    <Label  Text="Unités de mesure" FontSize="17" TextColor="Black" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="Unités de mesure , Unité de glycémie , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
-                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0"/>
+                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
             </Grid>
             <Grid Grid.Row="1" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"/>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer/>
+                    <TapGestureRecognizer />
                 </Grid.GestureRecognizers>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Données personnelles" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}"/>
-                    <Label  Text="Sexe , Pois , Nom , Prénom , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}"/>
+                    <Label  Text="Données personnelles" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="Sexe , Pois , Nom , Prénom , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
-                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0"/>
+                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
             </Grid>
             <Grid Grid.Row="2" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"/>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer/>
+                    <TapGestureRecognizer />
                 </Grid.GestureRecognizers>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Glycémie ciblée" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}"/>
-                    <Label  Text="Glycémie zone , Objectif , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}"/>
+                    <Label  Text="Glycémie ciblée" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="Glycémie zone , Objectif , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
-                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0"/>
+                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
             </Grid>
             <Grid Grid.Row="3" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"/>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer/>
+                    <TapGestureRecognizer />
                 </Grid.GestureRecognizers>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Traitement diabéte" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}"/>
-                    <Label  Text="Glucide ratio , Heures de repas , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}"/>
+                    <Label  Text="Traitement diabéte" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="Glucide ratio , Heures de repas , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
-                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0"/>
+                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
             </Grid>
             <Grid Grid.Row="4" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*"/>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer/>
+                    <TapGestureRecognizer />
                 </Grid.GestureRecognizers>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Médicaments" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}"/>
-                    <Label  Text="Insuline , Médicaments ,  Autre" FontSize="13" FontFamily="{StaticResource NormalFont}"/>
+                    <Label  Text="Médicaments" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="Insuline , Médicaments ,  Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
-                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0"/>
+                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
             </Grid>
         </Grid>
     </ScrollView>

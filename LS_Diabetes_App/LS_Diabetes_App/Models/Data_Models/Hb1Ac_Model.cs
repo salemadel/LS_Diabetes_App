@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using SQLite;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Models.Data_Models
@@ -15,7 +13,6 @@ namespace LS_Diabetes_App.Models.Data_Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-       
         [JsonIgnore]
         [Ignore]
         private DateTime date { get; set; } = DateTime.Now;
@@ -46,6 +43,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string note { get; set; }
@@ -60,9 +58,11 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string picturePath { get; set; }
+
         public string PicturePathe
         {
             get { return picturePath; }
@@ -74,6 +74,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged("Picture");
             }
         }
+
         [JsonIgnore]
         [Ignore]
         public ImageSource Picture
@@ -90,6 +91,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 }
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private double[] position { get; set; }
@@ -105,7 +107,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
-       
+
         [JsonIgnore]
         [Ignore]
         public string DateSort
@@ -115,6 +117,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 return Date.ToString("yyyy/MM/dd");
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

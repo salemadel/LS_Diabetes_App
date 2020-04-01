@@ -1,11 +1,7 @@
 ﻿using LS_Diabetes_App.Models;
-using LS_Diabetes_App.Views;
 using LS_Diabetes_App.Views.AddData_Views;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,13 +11,13 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
     {
         private INavigation Navigation { get; set; }
 
-
         public Command GlucoseCommand { get; set; }
         public Command PressionCommand { get; set; }
         public Command Hb1AcCommand { get; set; }
         public Command WeightCommand { get; set; }
         private Profil_Model Profil { get; set; }
-        public DataTypeSelection_ViewModel(INavigation navigation , Profil_Model profil)
+
+        public DataTypeSelection_ViewModel(INavigation navigation, Profil_Model profil)
         {
             Navigation = navigation;
             Profil = profil;
@@ -42,30 +38,36 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 await ExecuteOnWeightClicked();
             });
         }
+
         private async Task ExecuteOnGlucoseClicked()
         {
             SendHidePopUpd();
             await Navigation.PushModalAsync(new AddGlugose_View(Profil), true);
         }
+
         private async Task ExecuteOnPressionClicked()
         {
             SendHidePopUpd();
             await Navigation.PushModalAsync(new AddPression_View(Profil), true);
         }
+
         private async Task ExecuteOnHb1acClicked()
         {
             SendHidePopUpd();
             await Navigation.PushModalAsync(new AddHb1Ac_View(Profil), true);
         }
+
         private async Task ExecuteOnWeightClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddWeight_View(Profil) , true);
+            await Navigation.PushModalAsync(new AddWeight_View(Profil), true);
         }
+
         private void SendHidePopUpd()
         {
             MessagingCenter.Send(this, "HidePopUp");
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Converters
@@ -10,7 +8,7 @@ namespace LS_Diabetes_App.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is DateTime)
+            if (value is DateTime)
             {
                 DateTime _value = (DateTime)value;
                 return _value.TimeOfDay;
@@ -28,8 +26,6 @@ namespace LS_Diabetes_App.Converters
                 TimeSpan _value = (TimeSpan)value;
                 DateTime dt = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
                 return dt + _value;
-               
-
             }
             else
             {

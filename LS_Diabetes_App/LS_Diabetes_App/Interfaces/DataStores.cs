@@ -1,18 +1,15 @@
 ﻿using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
 using SQLite;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LS_Diabetes_App.Interfaces
 {
     public class DataStores : IDataStore
     {
-
         private SQLiteConnection _connection;
-        public  DataStores(IDatabaseAccess db)
+
+        public DataStores(IDatabaseAccess db)
         {
             _connection = new SQLiteConnection(db.DatabasePath());
             _connection.CreateTable<Data_Model>();

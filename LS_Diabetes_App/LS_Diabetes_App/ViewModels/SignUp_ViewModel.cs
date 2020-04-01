@@ -1,12 +1,10 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Views.Login_Pages;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -24,30 +22,36 @@ namespace LS_Diabetes_App.ViewModels
         {
             get { return type_list.ToList(); }
         }
+
         public List<string> Weight_Unit
         {
             get { return weight_unit.ToList(); }
         }
+
         public List<string> Unit_List
         {
             get { return unit_list.ToList(); }
         }
+
         public List<string> Glucometer_List
         {
             get { return glucometer_list.ToList(); }
         }
+
         public List<string> Insuline_List
         {
             get { return insuline_list.ToList(); }
         }
+
         public Profil_Model Profil { get; set; }
         private IDataStore DataStore;
         private INavigation Navigation;
+
         public bool Male_Cheked
         {
             set
             {
-                if(value)
+                if (value)
                 {
                     Profil.Sexe = "Male";
                 }
@@ -57,7 +61,9 @@ namespace LS_Diabetes_App.ViewModels
                 }
             }
         }
+
         private bool isBusy { get; set; }
+
         public bool IsBusy
         {
             get { return isBusy; }
@@ -68,9 +74,11 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public Command SignUpCommand { get; set; }
         public Command ProfilBaseCommand { get; set; }
-        public SignUp_ViewModel(INavigation navigation, IDataStore dataStore , string source)
+
+        public SignUp_ViewModel(INavigation navigation, IDataStore dataStore, string source)
         {
             DataStore = dataStore;
             Navigation = navigation;
@@ -104,6 +112,7 @@ namespace LS_Diabetes_App.ViewModels
                 await Navigation.PushAsync(new Profil_Base_Page(), true);
             }
         }
+
         private async Task ExecuteOnProfilBase()
         {
             if (!string.IsNullOrWhiteSpace(Profil.DiabetesType) & !string.IsNullOrWhiteSpace(Profil.Glucometer) & !string.IsNullOrWhiteSpace(Profil.GlycemiaUnit) & !string.IsNullOrWhiteSpace(Profil.WeightUnit))
@@ -115,6 +124,7 @@ namespace LS_Diabetes_App.ViewModels
                 await Navigation.PushAsync(new MainPage(), true);
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

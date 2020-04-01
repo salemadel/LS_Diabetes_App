@@ -16,30 +16,30 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
-    <Grid Margin="10,10,10,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <CustomEntry:Custom_Entry Grid.Row="0" Text="{Binding Profil.Email}" Placeholder="{x:Static resources:AppResources.UserName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+        <Grid Margin="10,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <CustomEntry:Custom_Entry Grid.Row="0" Text="{Binding Profil.Email}" Placeholder="{x:Static resources:AppResources.UserName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <CustomEntry:Custom_Entry Grid.Row="1"  Placeholder="{x:Static resources:AppResources.Password_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="True" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <CustomEntry:Custom_Entry Grid.Row="2"  Placeholder="{x:Static resources:AppResources.ConfirmPassword_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="True" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <CustomEntry:Custom_Entry Grid.Row="3" Text="{Binding Profil.LastName}" Placeholder="{x:Static resources:AppResources.LastName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <CustomEntry:Custom_Entry Grid.Row="4" Text="{Binding Profil.FirstName}" Placeholder="{x:Static resources:AppResources.FirstName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
-        <CustomEntry:Custom_Entry x:Name="BirthDate_Entry" Grid.Row="5" Placeholder="{x:Static resources:AppResources.BirthDate_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" />
-        <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="6">
-                <syncfusion:SfRadioButton x:Name="Male_RadioButton" Text="{x:Static resources:AppResources.Male_RadioButton}" CheckedColor="#56CB94" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0"  IsChecked="{Binding Male_Cheked}"/>
-            <syncfusion:SfRadioButton x:Name="Female_RadioButton" Text="{x:Static resources:AppResources.Female_RadioButton}" CheckedColor="#56CB94" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0"/>
-        </syncfusion:SfRadioGroup>
-        <DatePicker x:Name="BirthDate_Picker" IsVisible="False" Date="{Binding Birth_Date}" DateSelected="BirthDate_Picker_DateSelected"/>
-            <ActivityIndicator Grid.Row="7" Color="#56CB94"  VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40"/>
-            <ImageButton Source="next.png" Padding="25" BackgroundColor="#56CB94"  Grid.Row="7" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SignUpCommand}"/>
-    </Grid>
+            <CustomEntry:Custom_Entry x:Name="BirthDate_Entry" Grid.Row="5" Placeholder="{x:Static resources:AppResources.BirthDate_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" />
+            <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="6">
+                <syncfusion:SfRadioButton x:Name="Male_RadioButton" Text="{x:Static resources:AppResources.Male_RadioButton}" CheckedColor="#56CB94" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0"  IsChecked="{Binding Male_Cheked}" />
+                <syncfusion:SfRadioButton x:Name="Female_RadioButton" Text="{x:Static resources:AppResources.Female_RadioButton}" CheckedColor="#56CB94" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
+            </syncfusion:SfRadioGroup>
+            <DatePicker x:Name="BirthDate_Picker" IsVisible="False" Date="{Binding Birth_Date}" DateSelected="BirthDate_Picker_DateSelected" />
+            <ActivityIndicator Grid.Row="7" Color="#56CB94"  VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+            <ImageButton Source="next.png" Padding="25" BackgroundColor="#56CB94"  Grid.Row="7" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SignUpCommand}" />
+        </Grid>
     </ScrollView>
 </ContentPage>

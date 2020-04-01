@@ -1,10 +1,5 @@
-﻿using LS_Diabetes_App.Home_Pages;
-using LS_Diabetes_App.ViewModels;
+﻿using LS_Diabetes_App.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -26,9 +21,7 @@ namespace LS_Diabetes_App.Views.Login_Pages
 
         private async void Custom_Entry_Focused(object sender, FocusEventArgs e)
         {
-            
             await UserName_Frame.ScaleTo(1.4, 100);
-            
         }
 
         private async void Custom_Entry_Unfocused(object sender, FocusEventArgs e)
@@ -46,8 +39,7 @@ namespace LS_Diabetes_App.Views.Login_Pages
             await Password_Frame.ScaleTo(1, 100);
         }
 
-       
-        private async void SignUp_Clicked(object sender , EventArgs e)
+        private async void SignUp_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SingUp_Page(), true);
         }

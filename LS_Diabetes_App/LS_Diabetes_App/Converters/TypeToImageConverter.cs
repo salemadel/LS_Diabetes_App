@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Converters
@@ -10,33 +8,38 @@ namespace LS_Diabetes_App.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-           if(value is string)
+            if (value is string)
             {
                 string image = null;
                 switch (value)
                 {
                     case "Glucose":
-                         image = "blood1.png";
+                        image = "blood1.png";
                         break;
+
                     case "Pression":
-                         image = ("pressure.png");
+                        image = ("bloodpressure.png");
                         break;
+
                     case "Weight":
-                         image = ("weight.png");
+                        image = ("scaleb.png");
                         break;
+
                     case "Insuline":
-                         image = ("insulin.png");
+                        image = ("insulin.png");
                         break;
+
                     case "Hb1Ac":
-                         image = ("blood1.png");
+                        image = ("hb1acb.png");
                         break;
+
                     case "Drugs":
-                         image = ("blood1.png");
+                        image = ("tabletb.png");
                         break;
                 }
                 return ImageSource.FromFile(image);
             }
-           else
+            else
             {
                 return null;
             }

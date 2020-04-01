@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace LS_Diabetes_App.Models
 {
     public class LogBook_Model : INotifyPropertyChanged
     {
         private DateTime date { get; set; }
+
         public DateTime Date
         {
             get { return date; }
@@ -19,7 +18,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private string type { get; set; }
+
         public string Type
         {
             get { return type; }
@@ -30,7 +31,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private string unit { get; set; }
+
         public string Unit
         {
             get { return unit; }
@@ -41,7 +44,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private string datavalue { get; set; }
+
         public string DataValue
         {
             get { return datavalue; }
@@ -52,7 +57,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private object data { get; set; }
+
         public object Data
         {
             get { return data; }
@@ -63,7 +70,6 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-        
 
         public string DateSort
         {
@@ -72,6 +78,7 @@ namespace LS_Diabetes_App.Models
                 return Date.ToString("yyyy/MM/dd");
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

@@ -14,15 +14,14 @@ namespace LS_Diabetes_App.Home_Pages
         {
             InitializeComponent();
             var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
-            BindingContext = new LogBook_ViewModel(datastore , Navigation);
+            BindingContext = new LogBook_ViewModel(datastore, Navigation);
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             // var _viewModel = BindingContext as LogBook_ViewModel;
             var item = e.Item as Data_Model;   //_viewModel.Selected_item;
-                Navigation.PushModalAsync(new SelectedData_View(item) , true);
-         
+            Navigation.PushModalAsync(new SelectedData_View(item), true);
         }
     }
 }

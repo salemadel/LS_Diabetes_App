@@ -10,7 +10,6 @@
              xmlns:resources="clr-namespace:LS_Diabetes_App"
              xmlns:system="clr-namespace:System;assembly=netstandard">
 
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
@@ -19,121 +18,137 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
                 <On Platform="Android" Value="Roboto-Bold.ttf#Open Sans" />
             </OnPlatform>
-            <Converters:TimeToStringConverter x:Key="TimeConverter"/>
-            <Converters:GlycemiaConverter x:Key="GlycemiaConverter"/>
+            <Converters:TimeToStringConverter x:Key="TimeConverter" />
+            <Converters:GlycemiaConverter x:Key="GlycemiaConverter" />
+            <Converters:ZeroToDashConverter x:Key="ZeroConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
-    <ScrollView Padding="0">
-        
-            
-                <Grid Grid.Row="0" BackgroundColor="#F9FAFB">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="400"/>
-                    <RowDefinition Height="160"/>
-                    <RowDefinition Height="160"/>
-                    <RowDefinition Height="210"/>
-                    <RowDefinition Height="20"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="backgound.jpg" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
 
-                <Frame HeightRequest="220" WidthRequest="220" Margin="20,20,20,20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HasShadow="True" BackgroundColor="#00B2C8" CornerRadius="160">
+    <ScrollView Padding="0">
+
+        <Grid Grid.Row="0" BackgroundColor="#F9FAFB">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="400" />
+                <RowDefinition Height="240" />
+                <RowDefinition Height="160" />
+                <RowDefinition Height="160" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="backgound.jpg" Aspect="AspectFill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+
+                <Frame HeightRequest="220" WidthRequest="220" Margin="20,20,20,20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HasShadow="True" BackgroundColor="{Binding GlucoseColor}" CornerRadius="160">
                     <Frame  HeightRequest="200" WidthRequest="200" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HasShadow="True" BackgroundColor="White" CornerRadius="150">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="0.2*"/>
-                            <RowDefinition Height="0.6*"/>
-                            <RowDefinition Height="0.2*"/>
-                        </Grid.RowDefinitions>
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="0" Text="{Binding Last_Glycemia.Date , Converter={StaticResource TimeConverter}}" FontSize="15"  FontFamily="{StaticResource NormalFont}"/>
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1" Text="{Binding Last_Glycemia.Glycemia}" FontSize="40" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}"/>
-                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="2" Text="{Binding Profil.GlycemiaUnit}" FontSize="15"  FontFamily="{StaticResource NormalFont}"/>
-                    </Grid>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.2*" />
+                                <RowDefinition Height="0.6*" />
+                                <RowDefinition Height="0.2*" />
+                            </Grid.RowDefinitions>
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="0" Text="{Binding Last_Glycemia.Date , Converter={StaticResource TimeConverter}}" FontSize="15"  FontFamily="{StaticResource NormalFont}" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="1" Text="{Binding Last_Glycemia.Glycemia ,Converter={StaticResource ZeroConverter}}" FontSize="40" TextColor="Black" FontFamily="{StaticResource BoldFont}" />
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="2" Text="{Binding Profil.GlycemiaUnit}" FontSize="15"  FontFamily="{StaticResource NormalFont}" />
+                        </Grid>
+                    </Frame>
                 </Frame>
-                </Frame>
-                <sfButtons:SfButton ImageSource="plus.png" ShowIcon="True" ImageAlignment="Left" Text="New Entry" BackgroundColor="Transparent" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Start" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,5,0,10" Command="{Binding AddDataTypeCommand}"/>
+                <sfButtons:SfButton ImageSource="plus.png" ShowIcon="True" ImageAlignment="Left" Text="New Entry" BackgroundColor="Transparent" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Start" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,5,0,10" Command="{Binding AddDataTypeCommand}" />
+            </StackLayout>
+            <Frame Grid.Row="2" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="10,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <Label Text="Pas" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Image Source="step.png" HeightRequest="24" WidthRequest="24" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                        <Label Text="6,856" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Label Text="sur 10,000"  FontSize="14" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
                 </StackLayout>
-                <Frame Grid.Row="1" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="20,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
-                    <StackLayout >
-                        <Image Source="step.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="6,854" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        <Label Text="of 10,000 steps" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+            </Frame>
+            <Frame Grid.Row="2" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="5,10,10,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <Label Text="Hb1Ac" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Image Source="hb1ac.png" HeightRequest="24" WidthRequest="24" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
                     </StackLayout>
-                </Frame>
-                <Frame Grid.Row="1" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="5,10,20,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
-                    <StackLayout >
-                        <Image Source="bloo.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="{Binding Last_Hb1Ac.Hb1Ac}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        <Label Text="HbA1c" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                        <Label Text="{Binding Last_Hb1Ac.Hb1Ac , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontSize="24" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Label Text="%"  FontSize="14" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                     </StackLayout>
-                </Frame>
-                <Frame Grid.Row="2" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="20,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
-                    <StackLayout >
-                        <Image Source="patient.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding Last_Pression.Systolique}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        <Label Text="/" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        <Label Text="{Binding Last_Pression.Diastolique}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                </StackLayout>
+            </Frame>
+            <Frame Grid.Row="3" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="10,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <Label Text="Tension Artérielle" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Image Source="bloodpressureb.png" HeightRequest="24" WidthRequest="24" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
                     </StackLayout>
-                    
-                        <Label Text="mmHg" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                            <Label Text="{Binding Last_Pression.Systolique , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                            <Label Text="/" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                            <Label Text="{Binding Last_Pression.Diastolique , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        </StackLayout>
+                        <Label Text="mmHg"  FontSize="14" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                     </StackLayout>
-                </Frame>
-                <Frame Grid.Row="2" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="5,10,20,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
-                    <StackLayout >
-                        <Image Source="weight.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="{Binding Last_Weight.Weight}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        <Label Text="{Binding Profil.WeightUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                </StackLayout>
+            </Frame>
+            <Frame Grid.Row="3" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="5,10,10,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <Label Text="Poid" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Image Source="scale.png" HeightRequest="24" WidthRequest="24" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
                     </StackLayout>
-                </Frame>
-                <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="200" WidthRequest="300" Margin="20,10,20,0" CornerRadius="10">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                        <Label Text="{Binding Last_Weight.Weight , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontSize="24" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Label Text="{Binding Profil.WeightUnit}"  FontSize="14" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="230" WidthRequest="300" Margin="10,10,10,0" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
                     <StackLayout Grid.Row="0" Grid.Column="0">
-                        <Label Text="{Binding Nbr_Normal}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        <Label Text="normal" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        <Label Text="Bonne" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Nbr_Normal ,Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                     </StackLayout>
                     <StackLayout Grid.Row="0" Grid.Column="1">
-                        <Label Text="{Binding Nbr_Hight}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        <Label Text="hight" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        <Label Text="Elevée" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Nbr_Hight ,Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                     </StackLayout>
                     <StackLayout Grid.Row="0" Grid.Column="2">
-                        <Label Text="{Binding Nbr_Low}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        <Label Text="low" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
+                        <Label Text="Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Nbr_Low ,Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                     </StackLayout>
                     <StackLayout Grid.Row="1" Grid.Column="0">
-                        <Label Text="{Binding Average}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                            <Label Text="averege" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        </StackLayout>
-                        <StackLayout Grid.Row="1" Grid.Column="1">
-                        <Label Text="{Binding Max}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                            <Label Text="heighest" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        </StackLayout>
-                        <StackLayout Grid.Row="1" Grid.Column="2">
-                        <Label Text="{Binding Min}" TextColor="#00B2C8" FontFamily="{StaticResource BoldFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                            <Label Text="lowest" FontFamily="{StaticResource NormalFont}" FontSize="15" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0"/>
-                        </StackLayout>
-                    </Grid>
-                </Frame>
-            </Grid>
-                
-            
-       
-        
-        
+                        <Label Text="Moyenne" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Average ,Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="1">
+                        <Label Text="La Plus haute" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Max ,Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="2">
+                        <Label Text="La Plus Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Min ,Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                    </StackLayout>
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GlucoseStatistiqueCommand}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </Grid>
     </ScrollView>
-      
 </ContentPage>

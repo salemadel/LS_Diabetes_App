@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Converters
@@ -10,10 +8,10 @@ namespace LS_Diabetes_App.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is DateTime)
+            if (value is DateTime)
             {
                 DateTime new_value = (DateTime)value;
-                if((DateTime.Now - new_value).TotalDays > 1)
+                if ((DateTime.Now - new_value).TotalDays > 1)
                 {
                     return Math.Truncate((DateTime.Now - new_value).TotalDays).ToString() + " d Ago";
                 }
@@ -40,6 +38,4 @@ namespace LS_Diabetes_App.Converters
             throw new NotImplementedException();
         }
     }
-    
 }
-

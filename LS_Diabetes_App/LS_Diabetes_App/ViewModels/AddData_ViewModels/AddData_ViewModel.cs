@@ -12,16 +12,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 {
-    class AddData_ViewModel : INotifyPropertyChanged
+    internal class AddData_ViewModel : INotifyPropertyChanged
     {
         private IDataStore dataStore;
         private TimeSpan time { get; set; } = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+
         public TimeSpan Time
         {
             get { return time; }
@@ -33,7 +33,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged("AddDateTime");
             }
         }
+
         private DateTime date { get; set; } = DateTime.Now;
+
         public DateTime Date
         {
             get { return date; }
@@ -45,6 +47,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged("AddDateTime");
             }
         }
+
         public DateTime AddDateTime
         {
             get
@@ -53,7 +56,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 return dt + Time;
             }
         }
+
         private Glucose_Model glucose { get; set; }
+
         public Glucose_Model Glucose
         {
             get { return glucose; }
@@ -64,7 +69,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Pression_Model pression { get; set; }
+
         public Pression_Model Pression
         {
             get { return pression; }
@@ -75,7 +82,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Weight_Model weight { get; set; }
+
         public Weight_Model Weight
         {
             get { return weight; }
@@ -86,7 +95,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Drugs_Model drug { get; set; }
+
         public Drugs_Model Drug
         {
             get { return drug; }
@@ -97,7 +108,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Hb1Ac_Model hb1ac { get; set; }
+
         public Hb1Ac_Model Hb1Ac
         {
             get { return hb1ac; }
@@ -108,7 +121,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Insulune_Model insuline { get; set; }
+
         public Insulune_Model Insuline
         {
             get { return insuline; }
@@ -119,7 +134,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private bool isbusy { get; set; }
+
         public bool IsBusy
         {
             get { return isbusy; }
@@ -130,12 +147,13 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
         public Profil_Model Profil { get; set; }
         private INavigation Navigation { get; set; }
 
-        public AddData_ViewModel(INavigation navigation, IDataStore _datastore , Profil_Model profil)
+        public AddData_ViewModel(INavigation navigation, IDataStore _datastore, Profil_Model profil)
         {
             this.Navigation = navigation;
             this.dataStore = _datastore;
@@ -148,7 +166,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             GlycemiaConverter = new GlycemiaConverter();
             WeightConverter = new WeightConverter();
             Profil = profil;
-            
+
             SaveGlucoseCommand = new Command(async () =>
             {
                 await ExecuteOnSaveGlucose();
@@ -194,7 +212,6 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-
         public Command SaveGlucoseCommand { get; private set; }
         public Command SavePressionCommand { get; set; }
         public Command SaveWeightCommand { get; set; }
@@ -209,11 +226,12 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         {
             IsBusy = true;
             Glucose.Date = AddDateTime;
-            dataStore.AddGlucose(GlycemiaConverter.ConvertBack(Glucose , Profil.GlycemiaUnit));
+            dataStore.AddGlucose(GlycemiaConverter.ConvertBack(Glucose, Profil.GlycemiaUnit));
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
+
         private async Task ExecuteOnSavePression()
         {
             IsBusy = true;
@@ -223,15 +241,17 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
+
         private async Task ExecuteOnSaveWeight()
         {
             IsBusy = true;
             Weight.Date = AddDateTime;
-            dataStore.AddWeight(WeightConverter.ConvertBack(Weight , Profil.WeightUnit));
+            dataStore.AddWeight(WeightConverter.ConvertBack(Weight, Profil.WeightUnit));
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
+
         private async Task ExecuteOnSaveHb1ac()
         {
             IsBusy = true;
@@ -241,6 +261,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
+
         private async Task ExecuteOnSaveDrugs()
         {
             IsBusy = true;
@@ -250,6 +271,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
+
         private async Task ExecuteOnSaveInsuline()
         {
             IsBusy = true;
@@ -267,7 +289,6 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 await CrossMedia.Current.Initialize();
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                 {
-
                     return;
                 }
 
@@ -283,12 +304,12 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                     return;
 
                 Glucose.PicturePathe = file.Path;
-
             }
             catch
             {
             }
         }
+
         private async Task ExecuteOnGetPosition()
         {
             IsBusy = true;
@@ -325,13 +346,11 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             }
             catch
             {
-
             }
             finally
             {
                 if (position != null)
                 {
-
                     List<double> _position = new List<double>();
                     _position.Add(position.Latitude);
                     _position.Add(position.Longitude);

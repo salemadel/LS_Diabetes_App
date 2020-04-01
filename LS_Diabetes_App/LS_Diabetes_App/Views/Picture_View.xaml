@@ -7,7 +7,7 @@
              x:Class="LS_Diabetes_App.Views.Picture_View">
     <ContentPage.Content>
         <StackLayout>
-            <Image x:Name="Picture" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+            <Image x:Name="Picture" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

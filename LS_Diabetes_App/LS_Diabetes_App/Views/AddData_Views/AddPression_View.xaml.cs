@@ -2,10 +2,6 @@
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -16,6 +12,7 @@ namespace LS_Diabetes_App.Views.AddData_Views
     public partial class AddPression_View : ContentPage
     {
         private bool timepickerfucused { get; set; }
+
         public AddPression_View(Profil_Model profil)
         {
             InitializeComponent();
@@ -37,7 +34,7 @@ namespace LS_Diabetes_App.Views.AddData_Views
 
         private void TimePicker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(timepickerfucused)
+            if (timepickerfucused)
             {
                 DatePicker.Focus();
             }

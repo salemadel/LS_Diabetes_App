@@ -1,10 +1,8 @@
-﻿using LS_Diabetes_App.Interfaces;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SQLite;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Models
 {
@@ -36,7 +34,6 @@ namespace LS_Diabetes_App.Models
             get { return steps; }
             set
             {
-                
                 if (steps != value)
                     steps = value;
                 OnPropertyChanged();

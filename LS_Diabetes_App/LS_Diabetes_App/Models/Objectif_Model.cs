@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LS_Diabetes_App.Models
+﻿namespace LS_Diabetes_App.Models
 {
     public class Objectif_Model
     {

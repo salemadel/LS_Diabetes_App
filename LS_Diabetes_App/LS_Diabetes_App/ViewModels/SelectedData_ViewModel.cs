@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -19,6 +18,7 @@ namespace LS_Diabetes_App.ViewModels
     public class SelectedData_ViewModel : INotifyPropertyChanged
     {
         private Data_Model data { get; set; }
+
         public Data_Model Data
         {
             get { return data; }
@@ -29,7 +29,9 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private bool isbusy { get; set; }
+
         public bool IsBusy
         {
             get { return isbusy; }
@@ -40,7 +42,9 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private bool updating { get; set; }
+
         public bool Updating
         {
             get { return updating; }
@@ -51,7 +55,9 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private bool delting { get; set; }
+
         public bool Delting
         {
             get { return delting; }
@@ -62,7 +68,9 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private bool isVisible { get; set; } = true;
+
         public bool IsVisible
         {
             get { return isVisible; }
@@ -73,9 +81,11 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private INavigation Navigation { get; set; }
         private IDataStore dataStore;
-        public SelectedData_ViewModel(Data_Model _data , IDataStore _datastore , INavigation _navigation)
+
+        public SelectedData_ViewModel(Data_Model _data, IDataStore _datastore, INavigation _navigation)
         {
             this.Data = _data;
             this.dataStore = _datastore;
@@ -94,7 +104,7 @@ namespace LS_Diabetes_App.ViewModels
             });
             TakePictureCommand = new Command(async () =>
             {
-               await ExecuteOnTakePicture();
+                await ExecuteOnTakePicture();
             });
             PictureTappedCommand = new Command(async () =>
             {
@@ -113,12 +123,14 @@ namespace LS_Diabetes_App.ViewModels
                 ExecuteOnDeleteButtonTapped();
             });
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
         public Command UpdateCommand { get; private set; }
         public Command DeleteCommand { get; private set; }
         public Command GetPositionCommand { get; private set; }
@@ -127,22 +139,25 @@ namespace LS_Diabetes_App.ViewModels
         public Command UpdateButtonTappedCommand { get; set; }
         public Command CancelButtonTappedCommand { get; set; }
         public Command DeleteButtonTappedCommand { get; set; }
+
         private async Task ExecuteOnUpdateData()
         {
             IsBusy = true;
-           // dataStore.UpdateData(Data);
+            // dataStore.UpdateData(Data);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
+
         private async Task ExecuteOnDeleteData()
         {
             IsBusy = true;
-          //  dataStore.DeleteData(Data);
+            //  dataStore.DeleteData(Data);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
+
         private async Task ExecuteOnTakePicture()
         {
             try
@@ -150,7 +165,6 @@ namespace LS_Diabetes_App.ViewModels
                 await CrossMedia.Current.Initialize();
                 if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
                 {
-
                     return;
                 }
 
@@ -166,12 +180,12 @@ namespace LS_Diabetes_App.ViewModels
                     return;
 
                 Data.PicturePathe = file.Path;
-
             }
             catch
             {
             }
         }
+
         private async Task ExecuteOnGetPosition()
         {
             if (Updating)
@@ -210,13 +224,11 @@ namespace LS_Diabetes_App.ViewModels
                 }
                 catch
                 {
-
                 }
                 finally
                 {
                     if (position != null)
                     {
-
                         List<double> _position = new List<double>();
                         _position.Add(position.Latitude);
                         _position.Add(position.Longitude);
@@ -226,22 +238,26 @@ namespace LS_Diabetes_App.ViewModels
                 IsBusy = false;
             }
         }
+
         private async Task ExecuteOnPictureTapped()
         {
             if (!string.IsNullOrWhiteSpace(Data.PicturePathe))
-            await Navigation.PushModalAsync(new Picture_View(Data.Picture), true);
+                await Navigation.PushModalAsync(new Picture_View(Data.Picture), true);
         }
+
         private void ExecuteOnUpdateButtonTapped()
         {
             IsVisible = false;
             Updating = true;
         }
+
         private void ExecuteOnCancelButtonTapped()
         {
             IsVisible = true;
             Updating = false;
             Delting = false;
         }
+
         private void ExecuteOnDeleteButtonTapped()
         {
             IsVisible = false;

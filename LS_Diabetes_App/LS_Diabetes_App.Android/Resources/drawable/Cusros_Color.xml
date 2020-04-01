@@ -4,5 +4,4 @@
 
   <solid android:color="@color/colorCursors"></solid>
   <size android:width="2dp" />
-
 </shape>

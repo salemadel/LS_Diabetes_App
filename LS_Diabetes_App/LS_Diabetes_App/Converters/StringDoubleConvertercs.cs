@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Converters
@@ -10,16 +8,15 @@ namespace LS_Diabetes_App.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is double)
+            if (value is double)
             {
                 double _value = (double)value;
-                
-                switch(_value)
+
+                switch (_value)
                 {
-                    case 0 : return string.Empty;
+                    case 0: return string.Empty;
                     default: return _value.ToString();
                 }
-                  
             }
             else
             {
@@ -38,7 +35,6 @@ namespace LS_Diabetes_App.Converters
                     case "": return 0;
                     default: return System.Convert.ToDouble(_value);
                 }
-
             }
             else
             {

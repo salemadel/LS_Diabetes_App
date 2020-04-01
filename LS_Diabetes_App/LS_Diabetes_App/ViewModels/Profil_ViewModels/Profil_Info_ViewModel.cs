@@ -1,11 +1,8 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -17,7 +14,8 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
         private IDataStore DataStore { get; set; }
         private INavigation Navigation { get; set; }
         public Command EditProfilCommand { get; set; }
-        public Profil_Info_ViewModel(IDataStore dataStore , INavigation navigation)
+
+        public Profil_Info_ViewModel(IDataStore dataStore, INavigation navigation)
         {
             DataStore = dataStore;
             Navigation = navigation;
@@ -26,7 +24,6 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
             {
                 await ExecuteOnEditProfil();
             });
-
         }
 
         private async Task ExecuteOnEditProfil()
@@ -34,6 +31,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
             DataStore.UpdateProfil(Profil);
             await Navigation.PopModalAsync();
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")
