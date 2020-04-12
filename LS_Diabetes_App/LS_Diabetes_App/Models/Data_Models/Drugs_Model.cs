@@ -48,7 +48,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [Ignore]
         private string drug { get; set; }
 
-        public string Druf
+        public string Drug
         {
             get { return drug; }
             set

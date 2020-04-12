@@ -16,18 +16,17 @@ namespace LS_Diabetes_App.Droid.Custom_Controls_Renderer
         {
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
-        {
+       
+           protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+           {
             base.OnElementChanged(e);
             if (e.OldElement == null)
             {
-                Control.Background = null;
-                IntPtr IntPtrtextViewClass = JNIEnv.FindClass(typeof(TextView));
-                IntPtr mCursorDrawableResProperty = JNIEnv.GetFieldID(IntPtrtextViewClass, "mCursorDrawableRes", "I");
 
-                // my_cursor is the xml file name which we defined above
-                JNIEnv.SetField(Control.Handle, mCursorDrawableResProperty, Resource.Drawable.Cusros_Color);
+                Control.Background = null;
+
             }
         }
     }
+    
 }

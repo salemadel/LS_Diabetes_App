@@ -258,6 +258,9 @@ namespace LS_Diabetes_App.ViewModels
         private WeightConverter WeightConverter { get; set; }
         public Command AddDataTypeCommand { get; set; }
         public Command GlucoseStatistiqueCommand { get; set; }
+        public Command WeightStatistiqueCommand { get; set; }
+        public Command Hb1acSatistiqueCommand { get; set; }
+        public Command PressionStatiqtiqueCommand { get; set; }
 
         public HomePage_ViewModel(INavigation navigation, IDataStore dataStore)
         {
@@ -268,10 +271,6 @@ namespace LS_Diabetes_App.ViewModels
             Weight_Data = new ObservableCollection<Weight_Model>();
             GlycemiaConverter = new GlycemiaConverter();
             WeightConverter = new WeightConverter();
-            Last_Glycemia = new Glucose_Model();
-            Last_Hb1Ac = new Hb1Ac_Model();
-            Last_Pression = new Pression_Model();
-            Last_Weight = new Weight_Model();
             UpdateData();
             AddDataTypeCommand = new Command(async () =>
             {
@@ -281,6 +280,18 @@ namespace LS_Diabetes_App.ViewModels
             {
                 await ExecuteOnGlucoseTapped();
             });
+            WeightStatistiqueCommand = new Command(async () =>
+            {
+                await ExecuteOnWeightTapped();
+            });
+            Hb1acSatistiqueCommand = new Command(async () =>
+            {
+                await ExecuteOnHb1acTapped();
+            });
+            PressionStatiqtiqueCommand = new Command(async () =>
+            {
+                await ExecuteOnPressionTapped();
+            });
             DependencyService.Get<IStepCounter>().InitSensorService();
             DependencyService.Get<IStepCounter>().PropertyChanged += (sender, e) =>
             {
@@ -289,14 +300,21 @@ namespace LS_Diabetes_App.ViewModels
             MessagingCenter.Subscribe<AddData_ViewModel>(this, "DataUpdated", (sender) =>
             {
                 IsBusy = true;
-                Glucose_Data.Clear();
+               
                 UpdateData();
                 IsBusy = false;
             });
             MessagingCenter.Subscribe<SelectedData_ViewModel>(this, "DataUpdated", (sender) =>
             {
                 IsBusy = true;
-                Glucose_Data.Clear();
+               
+                UpdateData();
+                IsBusy = false;
+            });
+            MessagingCenter.Subscribe<LogBook_ViewModel>(this, "DataUpdated", (sender) =>
+            {
+                IsBusy = true;
+              
                 UpdateData();
                 IsBusy = false;
             });
@@ -304,6 +322,13 @@ namespace LS_Diabetes_App.ViewModels
             {
                 await Navigation.PopPopupAsync(true);
             });
+            var startTimeSpan = TimeSpan.Zero;
+            var periodTimeSpan = TimeSpan.FromMinutes(1);
+
+            var timer = new System.Threading.Timer((e) =>
+            {
+                UpdateData();
+            }, null, startTimeSpan, periodTimeSpan);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -316,7 +341,19 @@ namespace LS_Diabetes_App.ViewModels
         private void UpdateData()
         {
             Profil = DataStore.GetProfilAsync().First();
-            foreach (var item in DataStore.GetGlucosAsync())
+            Glucose_Data.Clear();
+            Weight_Data.Clear();
+            Last_Glycemia = null;
+            Last_Hb1Ac = null;
+            Last_Pression = null;
+            Last_Weight = null;
+            Average = 0;
+            Nbr_Hight = 0;
+            Nbr_Low = 0;
+            Nbr_Normal = 0;
+            Min = 0;
+            Max = 0;
+            foreach (var item in DataStore.GetGlucosAsync().Where(i => i.Date.Date == DateTime.Now.Date))
             {
                 Glucose_Data.Add(GlycemiaConverter.Convert(item, Profil.GlycemiaUnit));
             }
@@ -324,12 +361,12 @@ namespace LS_Diabetes_App.ViewModels
             {
                 Weight_Data.Add(WeightConverter.Convert(item, Profil.WeightUnit));
             }
-            pression_data = new ObservableCollection<Pression_Model>(DataStore.GetPressionAsync());
+            pression_data = new ObservableCollection<Pression_Model>(DataStore.GetPressionAsync().Where(i => i.Date.Date == DateTime.Now.Date));
             Hb1Ac_Data = new ObservableCollection<Hb1Ac_Model>(DataStore.GetHb1acAsync());
 
             if (Glucose_Data.Count > 0)
             {
-                Last_Glycemia = Glucose_Data.Where(i => i.Date <= DateTime.Now).OrderBy(i => i.Date).Last();
+                Last_Glycemia = Glucose_Data.OrderBy(i => i.Date).Last();
                 Average = Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 3);
                 Min = Glucose_Data.OrderBy(i => i.Glycemia).First().Glycemia;
                 Max = Glucose_Data.OrderBy(i => i.Glycemia).Last().Glycemia;
@@ -338,11 +375,11 @@ namespace LS_Diabetes_App.ViewModels
                     Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= 80 & i.Glycemia <= 120).Count();
                     Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > 120).Count();
                     Nbr_Low = Glucose_Data.Where(i => i.Glycemia < 80).Count();
-                    if (Last_Glycemia.Glycemia < 80 & Average != 0)
+                    if (Last_Glycemia.Glycemia < 80 & Last_Glycemia.Glycemia != 0)
                     {
                         GlucoseColor = Color.FromHex("#f1c40f");
                     }
-                    if (Last_Glycemia.Glycemia >= 80 & Average <= 120)
+                    if (Last_Glycemia.Glycemia >= 80 & Last_Glycemia.Glycemia <= 120)
                     {
                         GlucoseColor = Color.FromHex("#0AC774");
                     }
@@ -372,15 +409,15 @@ namespace LS_Diabetes_App.ViewModels
             }
             if (pression_data.Count > 0)
             {
-                Last_Pression = Pression_Data.Where(i => i.Date <= DateTime.Now).OrderBy(i => i.Date).Last();
+                Last_Pression = Pression_Data.Where(i => i.Date.Date <= DateTime.Now.Date).OrderBy(i => i.Date).Last();
             }
             if (Hb1Ac_Data.Count > 0)
             {
-                Last_Hb1Ac = Hb1Ac_Data.Where(i => i.Date <= DateTime.Now).OrderBy(i => i.Date).Last();
+                Last_Hb1Ac = Hb1Ac_Data.Where(i => i.Date.Date <= DateTime.Now.Date).OrderBy(i => i.Date).Last();
             }
             if (Weight_Data.Count > 0)
             {
-                Last_Weight = Weight_Data.Where(i => i.Date <= DateTime.Now).OrderBy(i => i.Date).Last();
+                Last_Weight = Weight_Data.Where(i => i.Date.Date <= DateTime.Now.Date).OrderBy(i => i.Date).Last();
             }
         }
 
@@ -395,6 +432,24 @@ namespace LS_Diabetes_App.ViewModels
         {
             IsBusy = true;
             await Navigation.PushModalAsync(new GlucoseStatistique_Page(), true);
+            IsBusy = false;
+        }
+        private async Task ExecuteOnWeightTapped()
+        {
+            IsBusy = true;
+            await Navigation.PushModalAsync(new WeightStatistique_Page(), true);
+            IsBusy = false;
+        }
+        private async Task ExecuteOnHb1acTapped()
+        {
+            IsBusy = true;
+            await Navigation.PushModalAsync(new Hb1AcStatistique_Page(), true);
+            IsBusy = false;
+        }
+        private async Task ExecuteOnPressionTapped()
+        {
+            IsBusy = true;
+            await Navigation.PushModalAsync(new PressionStatistique_Page(), true);
             IsBusy = false;
         }
     }

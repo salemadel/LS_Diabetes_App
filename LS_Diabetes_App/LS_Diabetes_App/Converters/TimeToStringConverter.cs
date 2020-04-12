@@ -13,17 +13,17 @@ namespace LS_Diabetes_App.Converters
                 DateTime new_value = (DateTime)value;
                 if ((DateTime.Now - new_value).TotalDays > 1)
                 {
-                    return Math.Truncate((DateTime.Now - new_value).TotalDays).ToString() + " d Ago";
+                    return "il y a " + Math.Truncate((DateTime.Now - new_value).TotalDays).ToString() + " j";
                 }
                 else
                 {
                     if ((DateTime.Now - new_value).TotalHours > 1)
                     {
-                        return Math.Truncate((DateTime.Now - new_value).TotalHours).ToString() + " h Ago";
+                        return "il y a " + Math.Truncate((DateTime.Now - new_value).TotalHours).ToString() + " h";
                     }
                     else
                     {
-                        return Math.Truncate((DateTime.Now - new_value).TotalMinutes).ToString() + " m Ago";
+                        return "il y a " + Math.Truncate((DateTime.Now - new_value).TotalMinutes).ToString() + " m";
                     }
                 }
             }

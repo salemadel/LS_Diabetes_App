@@ -53,6 +53,18 @@
     <Compile Update="Views\Home_Pages\Profil_Page.xaml.cs">
       <DependentUpon>Profil_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Home_Pages\Hurt_Page.xaml.cs">
+      <DependentUpon>Hurt_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Statistiques_Pages\PressionStatistique_Page.xaml.cs">
+      <DependentUpon>PressionStatistique_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Statistiques_Pages\Hb1AcStatistique_Page.xaml.cs">
+      <DependentUpon>Hb1AcStatistique_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Statistiques_Pages\WeightStatistique_Page.xaml.cs">
+      <DependentUpon>WeightStatistique_Page.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -85,10 +97,7 @@
     <EmbeddedResource Update="Views\Home_Pages\Profil_Page.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Home_Pages\SelectedData_View.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Home_Pages\Stats_Page.xaml">
+    <EmbeddedResource Update="Views\Home_Pages\Hurt_Page.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Login_Pages\Login_Page.xaml">

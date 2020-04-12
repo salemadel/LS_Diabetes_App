@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Custom="clr-namespace:LS_Diabetes_App.Custom_Controls"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters"
+             mc:Ignorable="d"
+             x:Class="LS_Diabetes_App.Views.Statistiques_Pages.Hb1AcStatistique_Page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="ExtraBoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
+            <Converters:ZeroToDashConverter x:Key="ZeroConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" BackgroundColor="Default">
+                <Label Text="Statistique Hb1ac." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+            <Grid Grid.Row="1" VerticalOptions="StartAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
+                    <Custom:Cusom_DatePicker Grid.Column="0" Date="{Binding Selected_MinDate}" FontFamily="{StaticResource NormalFont}" FontSize="16" Format="dd/MM/yyyy" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Custom:Cusom_DatePicker Grid.Column="1" Date="{Binding Selected_MaxDate}" FontFamily="{StaticResource NormalFont}" FontSize="16" Format="dd/MM/yyyy" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" />
+                    <ImageButton Grid.Column="2" HeightRequest="40" WidthRequest="40" CornerRadius="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0" BackgroundColor="#00B2C8" Source="next.png" Padding="10" Command="{Binding FiltreCommand}" />
+                </StackLayout>
+                <Frame Grid.Row="1" Margin="5,5,5,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="240" />
+                            <RowDefinition Height="160" />
+                            <RowDefinition Height="160" />
+                            <RowDefinition Height="290" />
+                        </Grid.RowDefinitions>
+                        <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="100" WidthRequest="100" CornerRadius="60" BackgroundColor="{Binding GlucoseColor}">
+                            <StackLayout>
+                                <Label Text="Moyenne" FontFamily="{StaticResource NormalFont}" FontSize="14" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                                <Label Text="{Binding Average , Converter={StaticResource ZeroConverter}}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="24" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                                <Label Text="%" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                            </StackLayout>
+                        </Frame>
+                        <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="155" WidthRequest="300" Margin="5,10,5,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Row="0" Grid.Column="0">
+                                    <Label Text="Bonne" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Nbr_Normal , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                </StackLayout>
+                                <StackLayout Grid.Row="0" Grid.Column="1">
+                                    <Label Text="Elevée" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Nbr_Hight , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                </StackLayout>
+                                <StackLayout Grid.Row="0" Grid.Column="2">
+                                    <Label Text="Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Nbr_Low , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="155" WidthRequest="300" Margin="5,10,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout  Grid.Column="0">
+                                    <Label Text="La Plus haute" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Max.Hb1Ac , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Max.Date , StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="La Plus Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Min.Hb1Ac , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Min.Date , StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+
+                        <chart:SfChart Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="280" WidthRequest="300" Margin="5,10,5,0">
+
+                            <chart:SfChart.PrimaryAxis>
+
+                                <chart:DateTimeCategoryAxis Interval="1" IntervalType="Days">
+                                </chart:DateTimeCategoryAxis>
+                            </chart:SfChart.PrimaryAxis>
+
+                            <chart:SfChart.SecondaryAxis>
+
+                                <chart:NumericalAxis Minimum="0" Maximum="{Binding MaximumChart}" ShowMajorGridLines="False" ShowMinorGridLines="False">
+                                </chart:NumericalAxis>
+                            </chart:SfChart.SecondaryAxis>
+                            <chart:LineSeries ItemsSource="{Binding Hb1Ac_Data}" XBindingPath="Date" YBindingPath="Hb1Ac" Color="{Binding GlucoseColor}" StrokeWidth="5">
+                            </chart:LineSeries>
+                        </chart:SfChart>
+                    </Grid>
+                </Frame>
+
+                <Frame Grid.Row="2" VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="0" BackgroundColor="White" Margin="0,0,0,10">
+                    <ActivityIndicator  Color="#275db5"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+                </Frame>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

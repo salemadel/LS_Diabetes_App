@@ -2,56 +2,96 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters"
-              xmlns:resources="clr-namespace:LS_Diabetes_App"
-             x:Class="LS_Diabetes_App.Home_Pages.Logbook_page">
+              xmlns:resources="clr-namespace:LS_Diabetes_App" xmlns:Behaviors="clr-namespace:LS_Diabetes_App.Behaviors" xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="LS_Diabetes_App.Home_Pages.Logbook_page"
+             x:Name="LogBookPage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
                 <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
             </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="ExtraBoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
             <Converter:TimeSpanDateTimeConverter x:Key="TimeSpanToDateTime" />
             <Converter:StringDoubleConvertercs x:Key="StringToDouble" />
             <Converter:TypeToImageConverter x:Key="TypeToImage" />
+            <Converter:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
+            <Converter:NullToBoolConverter x:Key="NullToBool"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid>
-            <ListView ItemsSource="{Binding DataGrouped}" SelectedItem="{Binding Selected_item}" ItemTapped="ListView_ItemTapped" HasUnevenRows="True" SeparatorColor="LightGray" Margin="5,0,0,0" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Key}" CachingStrategy ="RecycleElement">
-                <ListView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <ViewCell Height="50">
-                            <Label Text="{Binding Key}" Margin="10,0,0,0"  FontSize="18" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.GroupHeaderTemplate>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell Height="90">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.3*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" BackgroundColor="Default">
+                <Label Text="LogBook." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+            <Grid Grid.Row="1">
+                <ListView ItemsSource="{Binding DataGrouped}" SelectedItem="{Binding Selected_item}" HasUnevenRows="True" SeparatorColor="LightGray" Margin="5,0,0,0" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Key}" CachingStrategy ="RecycleElement">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="50">
+                                <Label Text="{Binding Key}" Margin="10,0,0,0"  FontSize="18" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.3*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-                                <Frame HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.Column="0" Padding="0" CornerRadius="50" BackgroundColor="#00B2C8" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                    <Label Text="{Binding Date , StringFormat='{0:HH:mm}'}" TextColor="White"  FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-                                </Frame>
-                                <StackLayout Grid.Column="1">
-                                    <StackLayout Orientation="Horizontal" Spacing="1" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
-                                        <Image Source="{Binding Type , Converter={StaticResource TypeToImage}}" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" />
-                                        <Label Text="{Binding DataValue}" FontFamily="{StaticResource NormalFont}" FontSize="20" TextColor="Black" Margin="5,0,0,0" VerticalOptions="CenterAndExpand" />
-                                        <Label Text="{Binding Unit}"  FontSize="16" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" />
+                                    <Frame HeightRequest="50" WidthRequest="50" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Padding="0" CornerRadius="50" BackgroundColor="#00B2C8" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                        <Label Text="{Binding Date , StringFormat='{0:HH:mm}'}" TextColor="White"  FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                                    </Frame>
+                                    <StackLayout Grid.Row="0" Grid.Column="1">
+                                        <StackLayout Orientation="Horizontal" Spacing="1" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                                            <Image Source="{Binding Type , Converter={StaticResource TypeToImage}}" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" />
+                                            <Label Text="{Binding DataValue}" FontFamily="{StaticResource NormalFont}" FontSize="20" TextColor="Black" Margin="5,0,0,0" VerticalOptions="CenterAndExpand" />
+                                            <Label Text="{Binding Unit}"  FontSize="16" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" />
+                                        </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <ActivityIndicator  Color="#56CB94"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+                                    <Grid Grid.Row="1" Grid.Column="1" IsVisible="{Binding IsVisible}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Label Text="{Binding Data.Note}" Grid.Row="0" FontFamily="{StaticResource NormalFont}" FontSize="17" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+
+                                        <Frame BorderColor="LightGray" Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"   IsVisible="{Binding Data.Picture , Converter={StaticResource NullToBool}}" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
+                                            <Image Source="{Binding Data.Picture}" Aspect="AspectFill">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding PictureTappedCommand}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Frame>
+                                        <sfButtons:SfButton Grid.Row="2" ImageSource="quit.png" ShowIcon="True" ImageAlignment="Left" Text="Supprimer" BackgroundColor="#e74c3c" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Start" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand" Margin="0,5,0,10" Command="{Binding Source={x:Reference LogBookPage}, Path=BindingContext.DeleteCommand}" />
+                                    </Grid>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Behaviors>
+                        <Behaviors:EventToCommandBehavior EventName="ItemTapped" EventArgsConverter="{StaticResource ItemTappedConverter}" Command="{Binding ItemTappedCommand}" />
+                    </ListView.Behaviors>
+                </ListView>
+                <ActivityIndicator  Color="#56CB94"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

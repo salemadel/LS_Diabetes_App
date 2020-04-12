@@ -73,6 +73,48 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged("Picture");
             }
         }
+        [JsonIgnore]
+        [Ignore]
+        private string glucose_time { get; set; }
+        public string Glucose_time
+        {
+            get { return picturePath; }
+            set
+            {
+                if (glucose_time != value)
+                    glucose_time = value;
+                OnPropertyChanged();
+                
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        private bool activity { get; set; }
+        public bool Activity
+        {
+            get { return activity; }
+            set
+            {
+                if (activity != value)
+                    activity = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        private bool taking_medication { get; set; }
+        public bool Taking_Medication
+        {
+            get { return taking_medication; }
+            set
+            {
+                if (taking_medication != value)
+                    taking_medication = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonIgnore]
         [Ignore]

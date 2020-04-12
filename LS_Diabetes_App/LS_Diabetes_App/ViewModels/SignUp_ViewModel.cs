@@ -1,4 +1,5 @@
-﻿using LS_Diabetes_App.Interfaces;
+﻿using LS_Diabetes_App.Converters;
+using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Views.Login_Pages;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace LS_Diabetes_App.ViewModels
     {
         private string[] type_list = new string[] { "Type 1", "Type 2", "Autre" };
         private string[] weight_unit = new string[] { "Kg", "lbs" };
+        private string[] height_unit = new string[] { "cm" , "pied" };
         private string[] unit_list = new string[] { "mg / dL", "mmol / L" };
         private string[] glucometer_list = new string[] { "Check 3", "Autre" };
         private string[] insuline_list = new string[] { "Autre" };
@@ -22,7 +24,10 @@ namespace LS_Diabetes_App.ViewModels
         {
             get { return type_list.ToList(); }
         }
-
+        public List<string> Height_Unit
+        {
+            get { return height_unit.ToList(); }
+        }
         public List<string> Weight_Unit
         {
             get { return weight_unit.ToList(); }
@@ -42,7 +47,7 @@ namespace LS_Diabetes_App.ViewModels
         {
             get { return insuline_list.ToList(); }
         }
-
+        public string Date { get; set; }
         public Profil_Model Profil { get; set; }
         private IDataStore DataStore;
         private INavigation Navigation;
@@ -102,11 +107,12 @@ namespace LS_Diabetes_App.ViewModels
 
         private async Task ExecuteOnSignUp()
         {
-            if (!string.IsNullOrWhiteSpace(Profil.Email) & !string.IsNullOrWhiteSpace(Profil.FirstName) & !string.IsNullOrWhiteSpace(Profil.LastName) & !string.IsNullOrWhiteSpace(Profil.Sexe))
+            if (!string.IsNullOrWhiteSpace(Profil.Email) & !string.IsNullOrWhiteSpace(Profil.FirstName) & !string.IsNullOrWhiteSpace(Profil.LastName) & !string.IsNullOrWhiteSpace(Profil.Sexe) & !string.IsNullOrWhiteSpace(Date))
             {
                 IsBusy = true;
                 await Task.Delay(2000);
                 DataStore.DeleteProfil(Profil);
+                Profil.Birth_Date = System.Convert.ToDateTime(Date);
                 DataStore.AddProfil(Profil);
                 IsBusy = false;
                 await Navigation.PushAsync(new Profil_Base_Page(), true);
@@ -119,9 +125,11 @@ namespace LS_Diabetes_App.ViewModels
             {
                 IsBusy = true;
                 await Task.Delay(2000);
+                var heightconverter = new HeightConverter();
+                Profil.Height = heightconverter.Convert(Profil.Height, Profil.HeighttUnit);
                 DataStore.UpdateProfil(Profil);
                 IsBusy = false;
-                await Navigation.PushAsync(new MainPage(), true);
+                Application.Current.MainPage = new MainPage();
             }
         }
 

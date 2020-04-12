@@ -147,24 +147,42 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
-
+        public bool Befor_Eat { get; set; }
+        public bool After_Eat { get; set; }
+        public bool No_Eat { get; set; }
+        public bool At_Home { get; set; } = true;
+        public bool IsVisible { get; set; }
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
         public Profil_Model Profil { get; set; }
+
+
         private INavigation Navigation { get; set; }
 
-        public AddData_ViewModel(INavigation navigation, IDataStore _datastore, Profil_Model profil)
+        public AddData_ViewModel(string source , INavigation navigation, IDataStore _datastore, Profil_Model profil , object data = null)
         {
             this.Navigation = navigation;
             this.dataStore = _datastore;
-            Glucose = new Glucose_Model();
-            Pression = new Pression_Model();
-            Hb1Ac = new Hb1Ac_Model();
-            Drug = new Drugs_Model();
-            Insuline = new Insulune_Model();
-            Weight = new Weight_Model();
-            GlycemiaConverter = new GlycemiaConverter();
-            WeightConverter = new WeightConverter();
+            if (source == "Add_Data")
+            {
+                IsVisible = true;
+                Glucose = new Glucose_Model();
+                Pression = new Pression_Model();
+                Hb1Ac = new Hb1Ac_Model();
+                Drug = new Drugs_Model();
+                Insuline = new Insulune_Model();
+                Weight = new Weight_Model();
+                GlycemiaConverter = new GlycemiaConverter();
+                WeightConverter = new WeightConverter();
+            }
+            else
+            {
+                IsVisible = false;
+                Glucose = (typeof(Glucose_Model) == data.GetType()) ? data as Glucose_Model : null;
+                Pression = (typeof(Pression_Model) == data.GetType()) ? data as Pression_Model : null;
+                Hb1Ac = (typeof(Hb1Ac_Model) == data.GetType()) ? data as Hb1Ac_Model : null;
+                Weight = (typeof(Weight_Model) == data.GetType()) ? data as Weight_Model : null;
+            }
             Profil = profil;
 
             SaveGlucoseCommand = new Command(async () =>
@@ -226,6 +244,18 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         {
             IsBusy = true;
             Glucose.Date = AddDateTime;
+            if(Befor_Eat)
+            {
+                Glucose.Glucose_time = "Avant Repas";
+            }
+            if(After_Eat)
+            {
+                Glucose.Glucose_time = "Apres Repas";
+            }
+            if(No_Eat)
+            {
+                Glucose.Glucose_time = "à Jeun";
+            }
             dataStore.AddGlucose(GlycemiaConverter.ConvertBack(Glucose, Profil.GlycemiaUnit));
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
@@ -236,6 +266,14 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         {
             IsBusy = true;
             Pression.Date = AddDateTime;
+            if(At_Home)
+            {
+                Pression.Where = "à La Maison";
+            }
+            else
+            {
+                Pression.Where = "Chez le Medecin";
+            }
             dataStore.AddPression(Pression);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();

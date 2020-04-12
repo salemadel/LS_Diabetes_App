@@ -5,6 +5,7 @@ using Android.Views;
 using LS_Diabetes_App.Droid.Interfaces;
 using Plugin.CurrentActivity;
 using Plugin.Media;
+using Rg.Plugins.Popup.Services;
 
 namespace LS_Diabetes_App.Droid
 {
@@ -28,7 +29,17 @@ namespace LS_Diabetes_App.Droid
             Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
             Window.SetStatusBarColor(Android.Graphics.Color.Rgb(13, 106, 203));
         }
-
+        public async override void OnBackPressed()
+        {
+            if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
+            {
+                await PopupNavigation.Instance.PopAsync();
+            }
+            else
+            {
+                
+            }
+        }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);

@@ -61,6 +61,21 @@ namespace LS_Diabetes_App.Models.Data_Models
 
         [JsonIgnore]
         [Ignore]
+        private string laboratory { get; set; }
+
+        public string Laboratory
+        {
+            get { return laboratory; }
+            set
+            {
+                if (laboratory != value)
+                    laboratory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
         private string picturePath { get; set; }
 
         public string PicturePathe

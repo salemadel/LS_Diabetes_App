@@ -21,7 +21,7 @@ namespace LS_Diabetes_App.Behaviors
         {
             if (!string.IsNullOrWhiteSpace(args.NewTextValue))
             {
-                bool isValid = args.NewTextValue.ToCharArray().All(x => char.IsDigit(x)) & args.NewTextValue.Length <= 3;
+                bool isValid = args.NewTextValue.ToCharArray().All(x => char.IsDigit(x)) && args.NewTextValue.Length <= 3;
 
                 ((Entry)sender).Text = isValid ? args.NewTextValue : args.NewTextValue.Remove(args.NewTextValue.Length - 1);
             }

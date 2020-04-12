@@ -11,11 +11,11 @@ namespace LS_Diabetes_App.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Add_Data_Page : ContentPage
     {
-        public Add_Data_Page(Profil_Model profil)
+        public Add_Data_Page(string source, Profil_Model profil)
         {
             InitializeComponent();
             var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
-            BindingContext = new AddData_ViewModel(Navigation, datastore, profil);
+            BindingContext = new AddData_ViewModel(source, Navigation, datastore, profil);
             TimePicker.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
         }
 

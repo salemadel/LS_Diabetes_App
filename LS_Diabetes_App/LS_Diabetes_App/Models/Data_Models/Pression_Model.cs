@@ -73,6 +73,20 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+        [JsonIgnore]
+        [Ignore]
+        private string where { get; set; }
+
+        public string Where
+        {
+            get { return where; }
+            set
+            {
+                if (where != value)
+                    where = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonIgnore]
         [Ignore]

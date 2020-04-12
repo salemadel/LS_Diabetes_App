@@ -16,7 +16,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         public Command Hb1AcCommand { get; set; }
         public Command WeightCommand { get; set; }
         private Profil_Model Profil { get; set; }
-
+        private string Source = "Add_Data";
         public DataTypeSelection_ViewModel(INavigation navigation, Profil_Model profil)
         {
             Navigation = navigation;
@@ -42,25 +42,25 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         private async Task ExecuteOnGlucoseClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddGlugose_View(Profil), true);
+            await Navigation.PushModalAsync(new AddGlugose_View(Source,Profil,null), true);
         }
 
         private async Task ExecuteOnPressionClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddPression_View(Profil), true);
+            await Navigation.PushModalAsync(new AddPression_View(Source,Profil,null), true);
         }
 
         private async Task ExecuteOnHb1acClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddHb1Ac_View(Profil), true);
+            await Navigation.PushModalAsync(new AddHb1Ac_View(Source,Profil,null), true);
         }
 
         private async Task ExecuteOnWeightClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddWeight_View(Profil), true);
+            await Navigation.PushModalAsync(new AddWeight_View(Source,Profil,null), true);
         }
 
         private void SendHidePopUpd()

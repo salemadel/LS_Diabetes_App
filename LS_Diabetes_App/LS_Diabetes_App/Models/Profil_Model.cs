@@ -89,7 +89,7 @@ namespace LS_Diabetes_App.Models
 
         [JsonIgnore]
         [Ignore]
-        private string glycemiaunit { get; set; }
+        private string glycemiaunit { get; set; } = "mg / dL";
 
         public string GlycemiaUnit
         {
@@ -104,7 +104,7 @@ namespace LS_Diabetes_App.Models
 
         [JsonIgnore]
         [Ignore]
-        private string weightunit { get; set; }
+        private string weightunit { get; set; } = "Kg";
 
         public string WeightUnit
         {
@@ -119,7 +119,7 @@ namespace LS_Diabetes_App.Models
 
         [JsonIgnore]
         [Ignore]
-        private string heighttunit { get; set; }
+        private string heighttunit { get; set; } = "cm";
 
         public string HeighttUnit
         {

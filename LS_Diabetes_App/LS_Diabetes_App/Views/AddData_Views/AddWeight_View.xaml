@@ -27,8 +27,8 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="100" />
+               
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -59,9 +59,9 @@
                     <TapGestureRecognizer Command="{Binding GetPositionCommand}" />
                 </Image.GestureRecognizers>
             </Image>
-            <ActivityIndicator Grid.Row="3" Grid.Column="0" Color="#56CB94"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  HeightRequest="25" WidthRequest="25" />
+            <ActivityIndicator Grid.Row="3" Grid.Column="0" Color="#00B2C8"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  HeightRequest="25" WidthRequest="25" />
             <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Text="{Binding Weight.Note}" Grid.Row="4" Grid.Column="1" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Editor Text="{Binding Weight.Note}" Grid.Row="5" Grid.Column="0" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="100" WidthRequest="200" />
             <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveWeightCommand}" />
         </Grid>
     </ScrollView>

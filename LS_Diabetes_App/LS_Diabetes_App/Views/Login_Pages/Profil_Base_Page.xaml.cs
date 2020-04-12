@@ -41,5 +41,11 @@ namespace LS_Diabetes_App.Views.Login_Pages
             var combobox = sender as SfComboBox;
             (BindingContext as SignUp_ViewModel).Profil.DiabetesType = combobox.SelectedItem as string;
         }
+
+        private void Height_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
+        {
+            var combobox = sender as SfComboBox;
+            (BindingContext as SignUp_ViewModel).Profil.HeighttUnit = combobox.SelectedItem as string;
+        }
     }
 }

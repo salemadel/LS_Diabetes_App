@@ -162,6 +162,18 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 
         private GlycemiaConverter GlycemiaConverter { get; set; }
         public Profil_Model Profil { get; set; }
+        private ObservableCollection<Slice_Model> slices { get; set; }
+
+        public ObservableCollection<Slice_Model> Slices
+        {
+            get { return slices; }
+            set
+            {
+                if (slices != value)
+                    slices = value;
+                OnPropertyChanged();
+            }
+        }
         public Command FiltreCommand { get; set; }
 
         public GlucoseStatistique_ViewModel(INavigation navigation, IDataStore dataStore)
@@ -171,6 +183,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Profil = DataStore.GetProfilAsync().First();
             Glucose_Data = new ObservableCollection<Glucose_Model>();
             GlycemiaConverter = new GlycemiaConverter();
+            Slices = new ObservableCollection<Slice_Model>();
             Selected_MaxDate = DateTime.Now.Date;
             Selected_MinDate = DateTime.Now.Date.AddDays(-7);
             UpdateData();
@@ -183,8 +196,9 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
         private void UpdateData()
         {
             Glucose_Data.Clear();
-            Min = new Glucose_Model();
-            Max = new Glucose_Model();
+            Slices.Clear();
+            Min = null;
+            Max = null;
             Average = 0;
             Nbr_Normal = 0;
             Nbr_Hight = 0;
@@ -195,17 +209,19 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             }
             if (Glucose_Data.Count > 0)
             {
+                Glucose_Data = new ObservableCollection<Glucose_Model>(Glucose_Data.OrderBy(i => i.Date));
                 Min = Glucose_Data.OrderBy(i => i.Glycemia).First();
                 Max = Glucose_Data.OrderBy(i => i.Glycemia).Last();
                 Average = Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 3);
+                MaximumChart = Convert.ToInt32(Max.Glycemia + 100);
             }
             if (Profil.GlycemiaUnit == "mg / dL")
             {
                 Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= 80 & i.Glycemia <= 120).Count();
                 Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > 120).Count();
                 Nbr_Low = Glucose_Data.Where(i => i.Glycemia < 80).Count();
-                MaximumChart = Convert.ToInt32(Max.Glycemia + 100);
-                if (Average < 80 & Average != 0)
+                
+                if (Average < 80)
                 {
                     GlucoseColor = Color.FromHex("#f1c40f");
                 }
@@ -224,7 +240,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > 6.67).Count();
                 Nbr_Low = Glucose_Data.Where(i => i.Glycemia < 4.43).Count();
                 MaximumChart = Convert.ToInt32(Max.Glycemia + 10);
-                if (Average < 4.43 & Average != 0)
+                if (Average < 4.43)
                 {
                     GlucoseColor = Color.FromHex("#f1c40f");
                 }
@@ -237,6 +253,21 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                     GlucoseColor = Color.FromHex("#e74c3c");
                 }
             }
+            Slices.Add(new Slice_Model
+            {
+                type = "Normal",
+                value = Nbr_Normal
+            });
+            Slices.Add(new Slice_Model
+            {
+                type = "Elevée",
+                value = Nbr_Hight
+            });
+            Slices.Add(new Slice_Model
+            {
+                type = "Basse",
+                value = Nbr_Low
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -245,5 +276,10 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+    }
+   public class Slice_Model
+    {
+        public string type { get; set; }
+        public double value { get; set; }
     }
 }

@@ -1,12 +1,16 @@
 ﻿using LS_Diabetes_App.Converters;
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
+using LS_Diabetes_App.Models.Data_Models;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
+using LS_Diabetes_App.Views;
+using LS_Diabetes_App.Views.AddData_Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels
@@ -38,6 +42,14 @@ namespace LS_Diabetes_App.ViewModels
             Navigation = _navigation;
             GlycemiaConverter = new GlycemiaConverter();
             WeightConverter = new WeightConverter();
+            ItemTappedCommand = new Command(async () =>
+            {
+                await ExecuteOnItemTapped();
+            });
+            DeleteCommand = new Command(async() =>
+            {
+                await ExecuteOnDelete();
+            });
             UpdateData();
             MessagingCenter.Subscribe<AddData_ViewModel>(this, "DataUpdated", (sender) =>
             {
@@ -80,7 +92,7 @@ namespace LS_Diabetes_App.ViewModels
             }
         }
 
-        public Data_Model Selected_item
+        public LogBook_Model Selected_item
         {
             get { return selected_item; }
             set
@@ -90,12 +102,14 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        private LogBook_Model old_selected { get; set; }
+        private ObservableCollection<LogBook_Model> private_list { get; set; }
         private ObservableCollection<Grouping<string, LogBook_Model>> dataGrouped { get; set; }
         private bool isBusy { get; set; }
-        private Data_Model selected_item { get; set; }
+        private LogBook_Model selected_item { get; set; }
         public Command ItemTappedCommand { get; set; }
-
+        public Command DeleteCommand { get; set; }
+        public Command PictureTappedCommand { get; set; }
         private void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
@@ -175,11 +189,90 @@ namespace LS_Diabetes_App.ViewModels
                 };
                 _data.Add(drug);
             }
+            private_list = new ObservableCollection<LogBook_Model>(_data);
+            Selected_item = null;
+            old_selected = null;
             var sorted = from data in _data
                          orderby data.Date descending
                          group data by data.DateSort into DataGroup
                          select new Grouping<string, LogBook_Model>(DataGroup.Key, DataGroup);
             DataGrouped = new ObservableCollection<Grouping<string, LogBook_Model>>(sorted);
         }
+
+        private async Task ExecuteOnItemTapped()
+        {
+            if(Selected_item == old_selected)
+            {
+                Selected_item.IsVisible =  !Selected_item.IsVisible;
+                UpdateList(Selected_item);
+            }
+            else
+            {
+                if(old_selected != null)
+                {
+                    old_selected.IsVisible = false;
+                    UpdateList(old_selected);
+                }
+                Selected_item.IsVisible = true;
+                UpdateList(Selected_item);
+            }
+            old_selected = Selected_item;
+            var sorted = from data in private_list
+                         orderby data.Date descending
+                         group data by data.DateSort into DataGroup
+                         select new Grouping<string, LogBook_Model>(DataGroup.Key, DataGroup);
+            DataGrouped = new ObservableCollection<Grouping<string, LogBook_Model>>(sorted);
+
+        }
+
+        private void UpdateList(LogBook_Model data)
+        {
+            var index = private_list.IndexOf(data);
+            private_list.Remove(data);
+            private_list.Insert(index, data);
+        }
+        private async Task ExecuteOnDelete()
+        {
+            if(Selected_item != null)
+            {
+                if (await DependencyService.Get<IDialog>().AlertAsync("Info", "Voulez vous Supprimer ?", "Oui", "Non"))
+                {
+                    IsBusy = true;
+                    if (Selected_item.Type == "Glucose")
+                    {
+                        DataStore.DeleteGlucose(Selected_item.Data as Glucose_Model);
+                    }
+                    if (Selected_item.Type == "Drugs")
+                    {
+                        DataStore.DeleteDrugs(Selected_item.Data as Drugs_Model);
+                    }
+                    if (Selected_item.Type == "Weight")
+                    {
+                        DataStore.DeleteWeight(Selected_item.Data as Weight_Model);
+                    }
+                    if (Selected_item.Type == "Hb1Ac")
+                    {
+                        DataStore.DeleteHb1Ac(Selected_item.Data as Hb1Ac_Model);
+                    }
+                    if (Selected_item.Type == "Pression")
+                    {
+                        DataStore.DeletePression(Selected_item.Data as Pression_Model);
+                    }
+                    if (Selected_item.Type == "Insuline")
+                    {
+                        DataStore.DeleteInsuline(Selected_item.Data as Insulune_Model);
+                    }
+
+                    UpdateData();
+                    MessagingCenter.Send(this, "DataUpdated");
+                    IsBusy = false;
+                }
+            }
+        }
+      /*  private async Task ExecuteOnPictureTapped()
+        {
+            if (!string.IsNullOrWhiteSpace(Selected_item.PicturePathe))
+                await Navigation.PushModalAsync(new Picture_View(Glucose.Picture), true);
+        }*/
     }
 }

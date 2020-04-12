@@ -20,6 +20,11 @@
                 <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
             </OnPlatform>
             <Converters:ZeroToDashConverter x:Key="ZeroConverter" />
+            <chart:ChartColorCollection x:Key="Colors">
+                <Color>#0AC774</Color>
+                <Color>#e74c3c</Color>
+                <Color>#f1c40f</Color>
+            </chart:ChartColorCollection>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
@@ -40,7 +45,7 @@
                 <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
                     <Custom:Cusom_DatePicker Grid.Column="0" Date="{Binding Selected_MinDate}" FontFamily="{StaticResource NormalFont}" FontSize="16" Format="dd/MM/yyyy" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                     <Custom:Cusom_DatePicker Grid.Column="1" Date="{Binding Selected_MaxDate}" FontFamily="{StaticResource NormalFont}" FontSize="16" Format="dd/MM/yyyy" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" />
-                    <ImageButton Grid.Column="2" HeightRequest="40" WidthRequest="40" CornerRadius="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0" BackgroundColor="Black" Source="next.png" Padding="10" Command="{Binding FiltreCommand}" />
+                    <ImageButton Grid.Column="2" HeightRequest="40" WidthRequest="40" CornerRadius="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0" BackgroundColor="#00B2C8" Source="next.png" Padding="10" Command="{Binding FiltreCommand}" />
                 </StackLayout>
                 <Frame Grid.Row="1" Margin="5,5,5,5">
                     <Grid>
@@ -50,13 +55,21 @@
                             <RowDefinition Height="160" />
                             <RowDefinition Height="290" />
                         </Grid.RowDefinitions>
-                        <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="120" WidthRequest="120" CornerRadius="60" BackgroundColor="{Binding GlucoseColor}">
-                            <StackLayout>
-                                <Label Text="Moyenne" FontFamily="{StaticResource NormalFont}" FontSize="14" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                <Label Text="{Binding Average}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
-                                <Label Text="{Binding Profil.GlycemiaUnit}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
-                            </StackLayout>
-                        </Frame>
+                        <chart:SfChart Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="400" WidthRequest="400">
+                            <chart:SfChart.Series>
+                                <chart:DoughnutSeries ItemsSource="{Binding Slices}" XBindingPath="type" YBindingPath="value" DoughnutCoefficient="0.85">
+                                   
+                                    <chart:DoughnutSeries.ColorModel>
+                                        <chart:ChartColorModel Palette="Custom" CustomBrushes="{StaticResource Colors}"/>
+                                    </chart:DoughnutSeries.ColorModel>
+                                </chart:DoughnutSeries>
+                            </chart:SfChart.Series>
+                        </chart:SfChart>
+                        <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                            <Label Text="Moyenne" FontFamily="{StaticResource NormalFont}" FontSize="14" TextColor="{Binding GlucoseColor}" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                            <Label Text="{Binding Average , Converter={StaticResource ZeroConverter}}" TextColor="{Binding GlucoseColor}" FontFamily="{StaticResource NormalFont}" FontSize="24" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                            <Label Text="{Binding Profil.GlycemiaUnit}" TextColor="{Binding GlucoseColor}" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                        </StackLayout>
                         <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="155" WidthRequest="300" Margin="5,10,5,0">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -68,16 +81,16 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Grid.Row="0" Grid.Column="0">
-                                    <Label Text="Bonne" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Nbr_Normal , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="Bonne" FontFamily="{StaticResource NormalFont}" FontSize="14" TextColor="#0AC774" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Nbr_Normal , Converter={StaticResource ZeroConverter}}" TextColor="#0AC774" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Row="0" Grid.Column="1">
-                                    <Label Text="Elevée" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Nbr_Hight , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="Elevée" FontFamily="{StaticResource NormalFont}" FontSize="14" TextColor="#e74c3c" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Nbr_Hight , Converter={StaticResource ZeroConverter}}" TextColor="#e74c3c" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Row="0" Grid.Column="2">
-                                    <Label Text="Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Nbr_Low , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" TextColor="#f1c40f" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Nbr_Low , Converter={StaticResource ZeroConverter}}" TextColor="#f1c40f" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                             </Grid>
                         </StackLayout>
@@ -89,13 +102,13 @@
                                 </Grid.ColumnDefinitions>
                                 <StackLayout  Grid.Column="0">
                                     <Label Text="La Plus haute" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Max.Glycemia , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Max.Date , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Max.Glycemia , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Max.Date , StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Column="1">
                                     <Label Text="La Plus Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Min.Glycemia , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Min.Date , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Min.Glycemia , Converter={StaticResource ZeroConverter} , FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Min.Date , StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                             </Grid>
                         </StackLayout>

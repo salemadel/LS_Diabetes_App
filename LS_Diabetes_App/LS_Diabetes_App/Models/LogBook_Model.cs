@@ -70,7 +70,17 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-
+        private bool isVisible { get; set; }
+        public bool IsVisible
+        {
+            get { return isVisible; }
+            set
+            {
+                if (isVisible != value)
+                    isVisible = value;
+                OnPropertyChanged();
+            }
+        }
         public string DateSort
         {
             get

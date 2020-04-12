@@ -12,5 +12,9 @@ namespace LS_Diabetes_App.Views.AddData_Views
             InitializeComponent();
             BindingContext = new DataTypeSelection_ViewModel(Navigation, profil);
         }
+        protected override bool OnBackButtonPressed()
+        {
+            return base.OnBackButtonPressed();
+        }
     }
 }
