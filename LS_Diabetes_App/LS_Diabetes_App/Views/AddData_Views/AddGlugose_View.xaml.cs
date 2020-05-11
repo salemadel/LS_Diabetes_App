@@ -2,8 +2,9 @@
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
 using System;
-
+using System.Linq;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace LS_Diabetes_App.Views.AddData_Views
@@ -12,14 +13,16 @@ namespace LS_Diabetes_App.Views.AddData_Views
     public partial class AddGlugose_View : ContentPage
     {
         private bool timepickerfucused { get; set; }
-
+        private Profil_Model Profil { get; set; }
         public AddGlugose_View(string source , Profil_Model profil , object data)
         {
             InitializeComponent();
-            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
+            var datastore = new DataStores();
             BindingContext = new AddData_ViewModel(source, Navigation, datastore, profil , data);
+            Profil = profil;
             TimePicker.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             DatePicker.MaximumDate = DateTime.Now.Date;
+            glucose_Entry.Focus();
         }
 
         private void Custom_Entry_Focused(object sender, FocusEventArgs e)
@@ -37,6 +40,37 @@ namespace LS_Diabetes_App.Views.AddData_Views
             if (timepickerfucused)
             {
                 DatePicker.Focus();
+            }
+        }
+
+        private void glucose_Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           
+            if (e.NewTextValue.ToCharArray().All(x => char.IsDigit(x)))
+            {
+                int k;
+                if (int.TryParse(e.NewTextValue, out k))
+                {
+                    if(Profil.GlycemiaUnit == "mmol / L")
+                    {
+                        if (Convert.ToInt32(e.NewTextValue) > 33)
+                        {
+                            glucose_Entry.Text = (33).ToString();
+                        }
+                    }
+                    else
+                    {
+                        if (Convert.ToInt32(e.NewTextValue) > 600)
+                        {
+                            glucose_Entry.Text = (600).ToString();
+                        }
+                    }
+                    
+                }
+            }
+            else
+            {
+                glucose_Entry.Text = e.NewTextValue.Remove(e.NewTextValue.Length - 1);
             }
         }
     }

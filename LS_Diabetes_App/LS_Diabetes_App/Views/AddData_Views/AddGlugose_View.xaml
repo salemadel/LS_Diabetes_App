@@ -42,7 +42,7 @@
             <TimePicker x:Name="TimePicker" Focused="TimePicker_Focused" PropertyChanged="TimePicker_PropertyChanged" IsVisible="False" Time="{Binding Time}" />
             <DatePicker x:Name="DatePicker" IsVisible="False" Date="{Binding Date}" />
             <Label Text="{x:Static resources:AppResources.Home_Glucose_Lavel_Label}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Grid.Row="1" Keyboard="Numeric" IsEnabled="{Binding IsVisible}" Grid.Column="1" Text="{Binding Glucose.Glycemia ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="{Binding Profil.GlycemiaUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Entry x:Name="glucose_Entry" Grid.Row="1" Keyboard="Numeric" IsEnabled="{Binding IsVisible}" Grid.Column="1" Text="{Binding Glucose.Glycemia ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="{Binding Profil.GlycemiaUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" TextChanged="glucose_Entry_TextChanged"/>
             <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <syncfusion:SfRadioButton  Text="à jeun" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" IsChecked="{Binding No_Eat}" Margin="5,0,0,0"  />
                 <syncfusion:SfRadioButton  Text="avant repas" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding Befor_Eat}" FontSize="15" Margin="5,0,0,0" />
@@ -55,7 +55,7 @@
             <ImageButton Source="camera.png" Padding="15" IsVisible="{Binding IsVisible}" BackgroundColor="#00B2C8"  Grid.Row="5" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
             <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <Frame BorderColor="LightGray" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
-                    <Image Source="{Binding Glucose.Picture}" Aspect="AspectFill">
+                    <Image Source="{Binding Picture}" Aspect="AspectFill">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PictureTappedCommand}" />
                         </Image.GestureRecognizers>

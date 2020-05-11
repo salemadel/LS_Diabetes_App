@@ -2,11 +2,14 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Views.Statistiques_Pages;
+using Syncfusion.XForms.Buttons;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
@@ -40,7 +43,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
-
+        public string Message { get; set; }
         private DateTime selected_mindate { get; set; }
 
         public DateTime Selected_MinDate
@@ -157,11 +160,24 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
-
+        private int selected_index { get; set; }
+        public int Selected_Index
+        {
+            get { return selected_index; }
+            set
+            {
+                if (selected_index != value)
+                {
+                    selected_index = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public int MaximumChart { get; set; }
-
+        public ObservableCollection<SfSegmentItem> SegmentItems { get; set; }
         private GlycemiaConverter GlycemiaConverter { get; set; }
         public Profil_Model Profil { get; set; }
+        private Objectif_Model Objectifs { get; set; }
         private ObservableCollection<Slice_Model> slices { get; set; }
 
         public ObservableCollection<Slice_Model> Slices
@@ -181,20 +197,42 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Navigation = navigation;
             DataStore = dataStore;
             Profil = DataStore.GetProfilAsync().First();
+            Objectifs = dataStore.GetObjectifAsync().First();
             Glucose_Data = new ObservableCollection<Glucose_Model>();
             GlycemiaConverter = new GlycemiaConverter();
+            Message = "Vos Objectifs entre: " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit + " et " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit;
             Slices = new ObservableCollection<Slice_Model>();
             Selected_MaxDate = DateTime.Now.Date;
             Selected_MinDate = DateTime.Now.Date.AddDays(-7);
-            UpdateData();
+            Selected_Index = 0;
+            SegmentItems = new ObservableCollection<SfSegmentItem>
+        {
+            new SfSegmentItem(){Text="Tous" },
+            new SfSegmentItem(){Text="à Jeun"},
+            new SfSegmentItem(){Text="Avant Repas"},
+            new SfSegmentItem(){Text="Apres Repas"},
+            
+        };
             FiltreCommand = new Command(() =>
             {
-                UpdateData();
+                Selected_Index = 0;
+                 UpdateData();
             });
+            UpdateData();
+            MessagingCenter.Subscribe<GlucoseStatistique_Page>(this, "Filter", (sender) =>
+           {
+               UpdateData();
+           });
         }
 
         private void UpdateData()
         {
+            if (!(Selected_MaxDate >= Selected_MinDate))
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Date Non Valide");
+                return;
+            }
+            IsBusy = true;
             Glucose_Data.Clear();
             Slices.Clear();
             Min = null;
@@ -203,10 +241,34 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Nbr_Normal = 0;
             Nbr_Hight = 0;
             Nbr_Low = 0;
-            foreach (var item in DataStore.GetGlucosAsync().Where(i => i.Date.Date >= Selected_MinDate & i.Date.Date <= Selected_MaxDate))
+            string type = "Tous";
+            if(Selected_Index == 1)
             {
-                Glucose_Data.Add(GlycemiaConverter.Convert(item, Profil.GlycemiaUnit));
+                type = "à Jeun";
             }
+            if(Selected_Index == 2)
+            {
+                type = "Avant Repas";
+            }
+            if (Selected_Index == 3)
+            {
+                type = "Apres Repas";
+            }
+            if(type == "Tous")
+            {
+                foreach (var item in DataStore.GetGlucosAsync().Where(i => i.Date.Date >= Selected_MinDate & i.Date.Date <= Selected_MaxDate))
+                {
+                    Glucose_Data.Add(GlycemiaConverter.Convert(item, Profil.GlycemiaUnit));
+                }
+            }
+            else
+            {
+                foreach (var item in DataStore.GetGlucosAsync().Where(i => i.Date.Date >= Selected_MinDate & i.Date.Date <= Selected_MaxDate).Where(i => i.Glucose_time == type))
+                {
+                    Glucose_Data.Add(GlycemiaConverter.Convert(item, Profil.GlycemiaUnit));
+                }
+            }
+           
             if (Glucose_Data.Count > 0)
             {
                 Glucose_Data = new ObservableCollection<Glucose_Model>(Glucose_Data.OrderBy(i => i.Date));
@@ -217,38 +279,38 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             }
             if (Profil.GlycemiaUnit == "mg / dL")
             {
-                Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= 80 & i.Glycemia <= 120).Count();
-                Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > 120).Count();
-                Nbr_Low = Glucose_Data.Where(i => i.Glycemia < 80).Count();
+                Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= Objectifs.Min_Glycemia & i.Glycemia <= Objectifs.Max_Glycemia).Count();
+                Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > Objectifs.Max_Glycemia).Count();
+                Nbr_Low = Glucose_Data.Where(i => i.Glycemia < Objectifs.Min_Glycemia).Count();
                 
-                if (Average < 80)
+                if (Average < Objectifs.Min_Glycemia)
                 {
                     GlucoseColor = Color.FromHex("#f1c40f");
                 }
-                if (Average >= 80 & Average <= 120)
+                if (Average >= Objectifs.Min_Glycemia & Average <= Objectifs.Max_Glycemia)
                 {
                     GlucoseColor = Color.FromHex("#0AC774");
                 }
-                if (Average > 120)
+                if (Average > Objectifs.Max_Glycemia)
                 {
                     GlucoseColor = Color.FromHex("#C72D14");
                 }
             }
             else
             {
-                Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= 4.43 & i.Glycemia <= 6.67).Count();
-                Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > 6.67).Count();
-                Nbr_Low = Glucose_Data.Where(i => i.Glycemia < 4.43).Count();
+                Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia , Profil.GlycemiaUnit) & i.Glycemia <= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit)).Count();
+                Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit)).Count();
+                Nbr_Low = Glucose_Data.Where(i => i.Glycemia < GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit)).Count();
                 MaximumChart = Convert.ToInt32(Max.Glycemia + 10);
-                if (Average < 4.43)
+                if (Average < GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit))
                 {
                     GlucoseColor = Color.FromHex("#f1c40f");
                 }
-                if (Average >= 4.43 & Average <= 6.67)
+                if (Average >= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit) & Average <= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit))
                 {
                     GlucoseColor = Color.FromHex("#2ecc71");
                 }
-                if (Average > 6.67)
+                if (Average > GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit))
                 {
                     GlucoseColor = Color.FromHex("#e74c3c");
                 }
@@ -268,6 +330,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 type = "Basse",
                 value = Nbr_Low
             });
+            IsBusy = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -30,22 +30,27 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <CustomEntry:Custom_Entry Grid.Row="0" Text="{Binding Profil.Email}" Placeholder="{x:Static resources:AppResources.UserName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
-            <CustomEntry:Custom_Entry Grid.Row="1"  Placeholder="{x:Static resources:AppResources.Password_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="True" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
-            <CustomEntry:Custom_Entry Grid.Row="2"  Placeholder="{x:Static resources:AppResources.ConfirmPassword_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="True" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Entry Grid.Row="1" Text="{Binding PassWord}"  Placeholder="{x:Static resources:AppResources.Password_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="True" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Entry Grid.Row="2" Text="{Binding ConfirmPassword}" Placeholder="{x:Static resources:AppResources.ConfirmPassword_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="True" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <CustomEntry:Custom_Entry Grid.Row="3" Text="{Binding Profil.LastName}" Placeholder="{x:Static resources:AppResources.LastName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <CustomEntry:Custom_Entry Grid.Row="4" Text="{Binding Profil.FirstName}" Placeholder="{x:Static resources:AppResources.FirstName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
-            <CustomEntry:Custom_Entry x:Name="BirthDate_Entry" Text="{Binding Date}" Grid.Row="5" Placeholder="dd/mm/yyyy" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
+            <CustomEntry:Custom_Entry x:Name="BirthDate_Entry" Keyboard="Numeric" Text="{Binding Date}" Grid.Row="5" Placeholder="dd/mm/yyyy" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
                 <CustomEntry:Custom_Entry.Behaviors>
                     <Behaviors:MaskedBehavior Mask="XX/XX/XXXX"/>
                 </CustomEntry:Custom_Entry.Behaviors>
             </CustomEntry:Custom_Entry>
-            <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="6">
+            <CustomEntry:Custom_Entry Grid.Row="6" Text="{Binding Diagnostic_Date}" Placeholder="dd/mm/yyyy" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" >
+                <CustomEntry:Custom_Entry.Behaviors>
+                    <Behaviors:MaskedBehavior Mask="XX/XX/XXXX"/>
+                </CustomEntry:Custom_Entry.Behaviors>
+            </CustomEntry:Custom_Entry>
+            <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="7">
                 <syncfusion:SfRadioButton x:Name="Male_RadioButton" Text="{x:Static resources:AppResources.Male_RadioButton}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0"  IsChecked="{Binding Male_Cheked}" />
                 <syncfusion:SfRadioButton x:Name="Female_RadioButton" Text="{x:Static resources:AppResources.Female_RadioButton}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
             </syncfusion:SfRadioGroup>
             <DatePicker x:Name="BirthDate_Picker" IsVisible="False" Date="{Binding Birth_Date}" DateSelected="BirthDate_Picker_DateSelected" />
-            <ActivityIndicator Grid.Row="7" Color="#00B2C8"  VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
-            <ImageButton Source="next.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="7" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SignUpCommand}" />
+            <ActivityIndicator Grid.Row="8" Color="#00B2C8"  VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+            <ImageButton Source="next.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="9" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SignUpCommand}" />
         </Grid>
     </ScrollView>
 </ContentPage>

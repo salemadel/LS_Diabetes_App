@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters"
-             x:Class="LS_Diabetes_App.Home_Pages.Hurt_Page">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters"
+             x:Class="LS_Diabetes_App.Home_Pages.Heart_Page">
     <ContentPage.Resources>
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">

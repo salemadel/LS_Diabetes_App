@@ -22,5 +22,21 @@ namespace LS_Diabetes_App.Converters
             }
             return value;
         }
+        public double DoubleWeightConvet(double value , string parameter)
+        {
+            if (parameter == "lbs")
+            {
+                value = Math.Round((value * 2.205), 3);
+            }
+            return value;
+        }
+        public double DoubleWeightConvetBack(double value, string parameter)
+        {
+            if (parameter == "lbs")
+            {
+                value = Math.Round((value / 2.205), 3);
+            }
+            return value;
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace LS_Diabetes_App.Views
         public Add_Data_Page(string source, Profil_Model profil)
         {
             InitializeComponent();
-            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
+            var datastore = new DataStores();
             BindingContext = new AddData_ViewModel(source, Navigation, datastore, profil);
             TimePicker.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
         }

@@ -3,6 +3,7 @@ using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
+using LS_Diabetes_App.ViewModels.Profil_ViewModels;
 using LS_Diabetes_App.Views.AddData_Views;
 using LS_Diabetes_App.Views.Statistiques_Pages;
 using Rg.Plugins.Popup.Extensions;
@@ -20,18 +21,7 @@ namespace LS_Diabetes_App.ViewModels
     {
         private IDataStore DataStore;
         private INavigation Navigation;
-        private Steps_Model steps_model { get; set; }
-
-        public Steps_Model Steps_Model
-        {
-            get { return steps_model; }
-            set
-            {
-                if (steps_model != value)
-                    steps_model = value;
-                OnPropertyChanged();
-            }
-        }
+       
 
         private Profil_Model profil { get; set; }
 
@@ -253,7 +243,28 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        private int steps { get; set; }
+        public int Steps
+        {
+            get { return steps; }
+            set
+            {
+                if (steps != value)
+                    steps = value;
+                OnPropertyChanged();
+            }
+        }
+        private Objectif_Model objectifs { get; set; }
+        public Objectif_Model Objectifs
+        {
+            get { return objectifs; }
+            set
+            {
+                if (objectifs != value)
+                    objectifs = value;
+                OnPropertyChanged();
+            }
+        }
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
         public Command AddDataTypeCommand { get; set; }
@@ -266,7 +277,7 @@ namespace LS_Diabetes_App.ViewModels
         {
             this.DataStore = dataStore;
             Navigation = navigation;
-            Steps_Model = new Steps_Model();
+           
             Glucose_Data = new ObservableCollection<Glucose_Model>();
             Weight_Data = new ObservableCollection<Weight_Model>();
             GlycemiaConverter = new GlycemiaConverter();
@@ -292,11 +303,11 @@ namespace LS_Diabetes_App.ViewModels
             {
                 await ExecuteOnPressionTapped();
             });
-            DependencyService.Get<IStepCounter>().InitSensorService();
-            DependencyService.Get<IStepCounter>().PropertyChanged += (sender, e) =>
-            {
-                Steps_Model.Steps = DependencyService.Get<IStepCounter>().Steps;
-            };
+            MessagingCenter.Subscribe<object , int>(Application.Current, "Steps", (sender , args) =>
+          {
+              Steps = args;
+          });
+            
             MessagingCenter.Subscribe<AddData_ViewModel>(this, "DataUpdated", (sender) =>
             {
                 IsBusy = true;
@@ -307,7 +318,6 @@ namespace LS_Diabetes_App.ViewModels
             MessagingCenter.Subscribe<SelectedData_ViewModel>(this, "DataUpdated", (sender) =>
             {
                 IsBusy = true;
-               
                 UpdateData();
                 IsBusy = false;
             });
@@ -315,6 +325,12 @@ namespace LS_Diabetes_App.ViewModels
             {
                 IsBusy = true;
               
+                UpdateData();
+                IsBusy = false;
+            });
+            MessagingCenter.Subscribe<Objectifs_ViewModel>(this, "DataUpdated", (sender) =>
+            {
+                IsBusy = true;
                 UpdateData();
                 IsBusy = false;
             });
@@ -341,6 +357,7 @@ namespace LS_Diabetes_App.ViewModels
         private void UpdateData()
         {
             Profil = DataStore.GetProfilAsync().First();
+            Objectifs = DataStore.GetObjectifAsync().First();
             Glucose_Data.Clear();
             Weight_Data.Clear();
             Last_Glycemia = null;
@@ -372,36 +389,36 @@ namespace LS_Diabetes_App.ViewModels
                 Max = Glucose_Data.OrderBy(i => i.Glycemia).Last().Glycemia;
                 if (Profil.GlycemiaUnit == "mg / dL")
                 {
-                    Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= 80 & i.Glycemia <= 120).Count();
-                    Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > 120).Count();
-                    Nbr_Low = Glucose_Data.Where(i => i.Glycemia < 80).Count();
-                    if (Last_Glycemia.Glycemia < 80 & Last_Glycemia.Glycemia != 0)
+                    Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= Objectifs.Min_Glycemia & i.Glycemia <= Objectifs.Max_Glycemia).Count();
+                    Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > Objectifs.Max_Glycemia).Count();
+                    Nbr_Low = Glucose_Data.Where(i => i.Glycemia < Objectifs.Min_Glycemia).Count();
+                    if (Last_Glycemia.Glycemia < Objectifs.Min_Glycemia & Last_Glycemia.Glycemia != 0)
                     {
                         GlucoseColor = Color.FromHex("#f1c40f");
                     }
-                    if (Last_Glycemia.Glycemia >= 80 & Last_Glycemia.Glycemia <= 120)
+                    if (Last_Glycemia.Glycemia >= Objectifs.Min_Glycemia & Last_Glycemia.Glycemia <= Objectifs.Max_Glycemia)
                     {
                         GlucoseColor = Color.FromHex("#0AC774");
                     }
-                    if (Last_Glycemia.Glycemia > 120)
+                    if (Last_Glycemia.Glycemia > Objectifs.Max_Glycemia)
                     {
                         GlucoseColor = Color.FromHex("#C72D14");
                     }
                 }
                 else
                 {
-                    Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= 4.43 & i.Glycemia <= 6.67).Count();
-                    Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > 6.67).Count();
-                    Nbr_Low = Glucose_Data.Where(i => i.Glycemia < 4.43).Count();
-                    if (Last_Glycemia.Glycemia < 4.43 & Average != 0)
+                    Nbr_Normal = Glucose_Data.Where(i => i.Glycemia >= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia , Profil.GlycemiaUnit) & i.Glycemia <= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit)).Count();
+                    Nbr_Hight = Glucose_Data.Where(i => i.Glycemia > GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit)).Count();
+                    Nbr_Low = Glucose_Data.Where(i => i.Glycemia < GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit)).Count();
+                    if (Last_Glycemia.Glycemia < GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit) & Average != 0)
                     {
                         GlucoseColor = Color.FromHex("#f1c40f");
                     }
-                    if (Last_Glycemia.Glycemia >= 4.43 & Average <= 6.67)
+                    if (Last_Glycemia.Glycemia >= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit) & Average <= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit))
                     {
                         GlucoseColor = Color.FromHex("#2ecc71");
                     }
-                    if (Last_Glycemia.Glycemia > 6.67)
+                    if (Last_Glycemia.Glycemia > GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit))
                     {
                         GlucoseColor = Color.FromHex("#e74c3c");
                     }
@@ -419,6 +436,14 @@ namespace LS_Diabetes_App.ViewModels
             {
                 Last_Weight = Weight_Data.Where(i => i.Date.Date <= DateTime.Now.Date).OrderBy(i => i.Date).Last();
             }
+            if(DataStore.GetStepsAsync().Count() > 0)
+            {
+                if(DataStore.GetStepsAsync().Where(i => i.Date.Date == DateTime.Now.Date).Count() > 0)
+                {
+                    Steps = DataStore.GetStepsAsync().Single(i => i.Date.Date == DateTime.Now.Date).Steps;
+                }
+            }
+       
         }
 
         private async Task ExecuteOnAddDataType()

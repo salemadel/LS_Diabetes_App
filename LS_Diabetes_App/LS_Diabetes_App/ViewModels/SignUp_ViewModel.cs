@@ -2,6 +2,7 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Views.Login_Pages;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -48,6 +49,9 @@ namespace LS_Diabetes_App.ViewModels
             get { return insuline_list.ToList(); }
         }
         public string Date { get; set; }
+        public string Diagnostic_Date { get; set; }
+        public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
         public Profil_Model Profil { get; set; }
         private IDataStore DataStore;
         private INavigation Navigation;
@@ -107,15 +111,37 @@ namespace LS_Diabetes_App.ViewModels
 
         private async Task ExecuteOnSignUp()
         {
-            if (!string.IsNullOrWhiteSpace(Profil.Email) & !string.IsNullOrWhiteSpace(Profil.FirstName) & !string.IsNullOrWhiteSpace(Profil.LastName) & !string.IsNullOrWhiteSpace(Profil.Sexe) & !string.IsNullOrWhiteSpace(Date))
+            Password = "adel";
+            ConfirmPassword = "adel";
+            if (!string.IsNullOrWhiteSpace(Profil.Email) & !string.IsNullOrWhiteSpace(Profil.FirstName) & !string.IsNullOrWhiteSpace(Profil.LastName) & !string.IsNullOrWhiteSpace(Profil.Sexe) & !string.IsNullOrWhiteSpace(Date) & !string.IsNullOrWhiteSpace(Password) & !string.IsNullOrWhiteSpace(ConfirmPassword))
             {
                 IsBusy = true;
+                if(!Password.Equals(ConfirmPassword))
+                {
+                    DependencyService.Get<IMessage>().ShortAlert("Veuillez Confirmer votre Mot de Passe !");
+                    return;
+                }
+                DateTime temp;
+                if(!DateTime.TryParse(Date , out temp))
+                {
+                    DependencyService.Get<IMessage>().ShortAlert("Date de naissance Non Valide !");
+                    return;
+                }
+                if(!DateTime.TryParse(Diagnostic_Date , out temp))
+                {
+                    DependencyService.Get<IMessage>().ShortAlert("Date de Diagnostic Non Valide !");
+                    return;
+                }
                 await Task.Delay(2000);
                 DataStore.DeleteProfil(Profil);
                 Profil.Birth_Date = System.Convert.ToDateTime(Date);
                 DataStore.AddProfil(Profil);
                 IsBusy = false;
                 await Navigation.PushAsync(new Profil_Base_Page(), true);
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Il Faut remplir tous les champs !");
             }
         }
 
@@ -128,6 +154,12 @@ namespace LS_Diabetes_App.ViewModels
                 var heightconverter = new HeightConverter();
                 Profil.Height = heightconverter.Convert(Profil.Height, Profil.HeighttUnit);
                 DataStore.UpdateProfil(Profil);
+                var Objectifs = new Objectif_Model();
+                Objectifs.Max_Glycemia = 120;
+                Objectifs.Min_Glycemia = 70;
+                Objectifs.Weight_Objectif = 80;
+                Objectifs.Steps_Objectif = 10000;
+                DataStore.AddObjectif(Objectifs);
                 IsBusy = false;
                 Application.Current.MainPage = new MainPage();
             }

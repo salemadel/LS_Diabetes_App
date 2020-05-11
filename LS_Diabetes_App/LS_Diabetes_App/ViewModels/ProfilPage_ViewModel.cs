@@ -1,5 +1,6 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
+using LS_Diabetes_App.Views.Profil_Pages;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -26,23 +27,23 @@ namespace LS_Diabetes_App.ViewModels
             }
         }
 
-        public Command ProfilCommand { get; set; }
+        public Command ObjectifsCommand { get; set; }
 
         public ProfilPage_ViewModel(INavigation navigation, IDataStore dataStore)
         {
             Navigation = navigation;
-            DataStore = DataStore;
+            DataStore = dataStore;
             Profil = DataStore.GetProfilAsync().First();
-            ProfilCommand = new Command(async () =>
+            ObjectifsCommand = new Command(async () =>
             {
-                await ExecuteOnProfilClicked();
+                await ExecuteOnObjectifsClicked();
             });
         }
 
-        private async Task ExecuteOnProfilClicked()
+        private async Task ExecuteOnObjectifsClicked()
         {
             IsBusy = true;
-            // await Navigation.PushModalAsync(new Profil_ViewM(), true);
+            await Navigation.PushModalAsync(new Objectivs_Page(Profil), true);
             IsBusy = false;
         }
 

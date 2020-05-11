@@ -7,7 +7,7 @@ namespace LS_Diabetes_App.Interfaces
     public interface IDataStore
     {
         IEnumerable<Glucose_Model> GetGlucosAsync();
-
+        IEnumerable<Steps_Model> GetStepsAsync();
         IEnumerable<Pression_Model> GetPressionAsync();
 
         IEnumerable<Weight_Model> GetWeightAsync();
@@ -19,11 +19,12 @@ namespace LS_Diabetes_App.Interfaces
         IEnumerable<Hb1Ac_Model> GetHb1acAsync();
 
         IEnumerable<Profil_Model> GetProfilAsync();
+        IEnumerable<Objectif_Model> GetObjectifAsync();
 
         void AddPression(Pression_Model data);
-
+        void AddObjectif(Objectif_Model data);
         void AddGlucose(Glucose_Model data);
-
+        void AddSteps(Steps_Model data);
         void AddWeight(Weight_Model data);
 
         void AddDrugs(Drugs_Model data);
@@ -35,9 +36,9 @@ namespace LS_Diabetes_App.Interfaces
         void AddProfil(Profil_Model data);
 
         void UpdateGlucose(Glucose_Model data);
-
+        void UpdateObjectif(Objectif_Model data);
         void UpdatePression(Pression_Model data);
-
+        void UpdateSteps(Steps_Model data);
         void UpdateWeight(Weight_Model data);
 
         void UpdateDrugs(Drugs_Model data);
@@ -51,7 +52,7 @@ namespace LS_Diabetes_App.Interfaces
         void DeleteGlucose(Glucose_Model data);
 
         void DeletePression(Pression_Model data);
-
+        void DeleteObjectif(Objectif_Model data);
         void DeleteWeight(Weight_Model data);
 
         void DeleteDrugs(Drugs_Model data);
@@ -61,5 +62,6 @@ namespace LS_Diabetes_App.Interfaces
         void DeleteHb1Ac(Hb1Ac_Model data);
 
         void DeleteProfil(Profil_Model data);
+
     }
 }

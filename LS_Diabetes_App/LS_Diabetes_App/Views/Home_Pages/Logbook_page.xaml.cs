@@ -11,7 +11,7 @@ namespace LS_Diabetes_App.Home_Pages
         public Logbook_page()
         {
             InitializeComponent();
-            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
+            var datastore = new DataStores();
             BindingContext = new LogBook_ViewModel(datastore, Navigation);
         }
     }

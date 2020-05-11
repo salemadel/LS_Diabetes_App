@@ -76,7 +76,7 @@
                         </Grid>
                     </sfButton:SfButton.Content>
                 </sfButton:SfButton>
-                <sfButton:SfButton Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="60" WidthRequest="250">
+                <sfButton:SfButton Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="60" WidthRequest="250" Command="{Binding DrugsCommand}">
                     <sfButton:SfButton.Content>
                         <Grid Margin="25,0,0,0">
                             <Grid.ColumnDefinitions>
@@ -86,25 +86,12 @@
                             <Frame Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" HeightRequest="50" WidthRequest="50" CornerRadius="25" BackgroundColor="#6466DD" Padding="0">
                                 <Image Source="tabletw.png" HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
                             </Frame>
-                            <Label Grid.Column="1" TextColor="#44465B" Text="Médicaments" Margin="5,0,0,0" FontSize="18" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                            <Label Grid.Column="1" TextColor="#44465B" Text="Rappel Médicaments" Margin="5,0,0,0" FontSize="18" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                         </Grid>
                     </sfButton:SfButton.Content>
                 </sfButton:SfButton>
-                <sfButton:SfButton Grid.Row="4" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70">
-                    <sfButton:SfButton.Content>
-                        <Grid Margin="25,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Frame Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" HeightRequest="50" WidthRequest="50" CornerRadius="25" BackgroundColor="#0B1A7C" Padding="0">
-                                <Image Source="injectionw.png" HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-                            </Frame>
-                            <Label Grid.Column="1" TextColor="#44465B" Text="Insuline" Margin="5,0,0,0" FontSize="18" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                        </Grid>
-                    </sfButton:SfButton.Content>
-                </sfButton:SfButton>
-                <sfButton:SfButton Grid.Row="5" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70" Command="{Binding Hb1AcCommand}">
+               
+                <sfButton:SfButton Grid.Row="4" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="70" Command="{Binding Hb1AcCommand}">
                     <sfButton:SfButton.Content>
                         <Grid Margin="25,0,0,0">
                             <Grid.ColumnDefinitions>

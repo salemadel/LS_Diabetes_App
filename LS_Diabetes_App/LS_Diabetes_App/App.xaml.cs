@@ -10,7 +10,7 @@ namespace LS_Diabetes_App
     {
         public App()
         {
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTkzNzQ2QDMxMzcyZTM0MmUzMG5jUWx6VDFzUC9uSHpOc1F4bUhmTFZiVkdmbzR4eUJaVE5sN2txZVFSck09");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQzNzAyQDMxMzgyZTMxMmUzMGlDWTJIVjZqZ2swTU1GOFdDaVhrQkhYMktvZjV0TjRtUldJWFN4akpKRlU9");
             InitializeComponent();
             MainPage = new NavigationPage(new Login_Page());
         }

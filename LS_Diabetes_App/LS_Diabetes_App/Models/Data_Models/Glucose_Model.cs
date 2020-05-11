@@ -73,12 +73,13 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged("Picture");
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string glucose_time { get; set; }
         public string Glucose_time
         {
-            get { return picturePath; }
+            get { return glucose_time; }
             set
             {
                 if (glucose_time != value)

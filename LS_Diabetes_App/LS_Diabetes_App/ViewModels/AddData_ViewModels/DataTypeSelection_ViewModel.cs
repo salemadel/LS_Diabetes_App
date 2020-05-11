@@ -15,6 +15,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         public Command PressionCommand { get; set; }
         public Command Hb1AcCommand { get; set; }
         public Command WeightCommand { get; set; }
+        public Command DrugsCommand { get; set; }
         private Profil_Model Profil { get; set; }
         private string Source = "Add_Data";
         public DataTypeSelection_ViewModel(INavigation navigation, Profil_Model profil)
@@ -37,6 +38,11 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             {
                 await ExecuteOnWeightClicked();
             });
+            DrugsCommand = new Command(async () =>
+            {
+                await ExecuteOnDrugsClicked();
+            });
+
         }
 
         private async Task ExecuteOnGlucoseClicked()
@@ -62,7 +68,11 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             SendHidePopUpd();
             await Navigation.PushModalAsync(new AddWeight_View(Source,Profil,null), true);
         }
-
+        private async Task ExecuteOnDrugsClicked()
+        {
+            SendHidePopUpd();
+            await Navigation.PushModalAsync(new Drugs_Page(), true);
+        }
         private void SendHidePopUpd()
         {
             MessagingCenter.Send(this, "HidePopUp");

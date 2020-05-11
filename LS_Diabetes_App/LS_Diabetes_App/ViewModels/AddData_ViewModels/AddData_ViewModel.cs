@@ -149,9 +149,21 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         }
         public bool Befor_Eat { get; set; }
         public bool After_Eat { get; set; }
-        public bool No_Eat { get; set; }
+        public bool No_Eat { get; set; } = true;
         public bool At_Home { get; set; } = true;
         public bool IsVisible { get; set; }
+        private string PicturePath { get; set; }
+        private ImageSource picture { get; set; }
+        public ImageSource Picture
+        {
+            get { return picture; }
+            set
+            {
+                if (picture != value)
+                    picture = value;
+                OnPropertyChanged();
+            }
+        }
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
         public Profil_Model Profil { get; set; }
@@ -189,18 +201,12 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             {
                 await ExecuteOnSaveGlucose();
             });
-            SaveDrugsCommand = new Command(async () =>
-            {
-                await ExecuteOnSaveDrugs();
-            });
+           
             SaveHb1AcCommand = new Command(async () =>
             {
                 await ExecuteOnSaveHb1ac();
             });
-            SaveInsulineCommand = new Command(async () =>
-            {
-                await ExecuteOnSaveInsuline();
-            });
+          
             SavePressionCommand = new Command(async () =>
             {
                 await ExecuteOnSavePression();
@@ -234,16 +240,21 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         public Command SavePressionCommand { get; set; }
         public Command SaveWeightCommand { get; set; }
         public Command SaveHb1AcCommand { get; set; }
-        public Command SaveDrugsCommand { get; set; }
-        public Command SaveInsulineCommand { get; set; }
+      
         public Command GetPositionCommand { get; private set; }
         public Command TakePictureCommand { get; private set; }
         public Command PictureTappedCommand { get; set; }
 
         private async Task ExecuteOnSaveGlucose()
         {
-            IsBusy = true;
+          //  IsBusy = true;
+            if(Glucose.Glycemia == 0)
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Glycemie Non Valide !");
+                return;
+            }
             Glucose.Date = AddDateTime;
+            Glucose.PicturePathe = PicturePath;
             if(Befor_Eat)
             {
                 Glucose.Glucose_time = "Avant Repas";
@@ -257,15 +268,22 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 Glucose.Glucose_time = "à Jeun";
             }
             dataStore.AddGlucose(GlycemiaConverter.ConvertBack(Glucose, Profil.GlycemiaUnit));
+            System.Diagnostics.Debug.WriteLine(Glucose.Glucose_time);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
-            IsBusy = false;
+          //  IsBusy = false;
         }
 
         private async Task ExecuteOnSavePression()
         {
-            IsBusy = true;
+          //  IsBusy = true;
+            if(Pression.Systolique == 0 | Pression.Diastolique == 0)
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Pression Non Valide !");
+                return;
+            }
             Pression.Date = AddDateTime;
+            Pression.PicturePathe = PicturePath;
             if(At_Home)
             {
                 Pression.Where = "à La Maison";
@@ -282,8 +300,14 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 
         private async Task ExecuteOnSaveWeight()
         {
-            IsBusy = true;
+          //  IsBusy = true;
+            if(Weight.Weight == 0)
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Poids Non Valide !");
+                return;
+            }
             Weight.Date = AddDateTime;
+            Weight.PicturePathe = PicturePath;
             dataStore.AddWeight(WeightConverter.ConvertBack(Weight, Profil.WeightUnit));
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
@@ -292,33 +316,21 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 
         private async Task ExecuteOnSaveHb1ac()
         {
-            IsBusy = true;
+           // IsBusy = true;
+            if(Hb1Ac.Hb1Ac == 0)
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Hb1Ac Non Valide !");
+                return;
+            }
             Hb1Ac.Date = AddDateTime;
+            Hb1Ac.PicturePathe = PicturePath;
             dataStore.AddHbaAc(Hb1Ac);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
 
-        private async Task ExecuteOnSaveDrugs()
-        {
-            IsBusy = true;
-            Drug.Date = AddDateTime;
-            dataStore.AddDrugs(Drug);
-            MessagingCenter.Send(this, "DataUpdated");
-            await Navigation.PopModalAsync();
-            IsBusy = false;
-        }
-
-        private async Task ExecuteOnSaveInsuline()
-        {
-            IsBusy = true;
-            Insuline.Date = AddDateTime;
-            dataStore.AddInsuline(Insuline);
-            MessagingCenter.Send(this, "DataUpdated");
-            await Navigation.PopModalAsync();
-            IsBusy = false;
-        }
+      
 
         private async Task ExecuteOnTakePicture()
         {
@@ -335,13 +347,14 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                     PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
                     CompressionQuality = 50,
                     Directory = "LS_Diabetes_pictures",
-                    Name = "Ls_" + DateTime.Now.ToString() + ".jpg"
+                    Name = "Sh_" + DateTime.Now.ToString() + ".jpg"
                 });
 
                 if (file == null)
                     return;
 
-                Glucose.PicturePathe = file.Path;
+                PicturePath = file.Path;
+                Picture = ImageSource.FromFile(PicturePath);
             }
             catch
             {
@@ -400,8 +413,8 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 
         private async Task ExecuteOnPictureTapped()
         {
-            if (!string.IsNullOrWhiteSpace(Glucose.PicturePathe))
-                await Navigation.PushModalAsync(new Picture_View(Glucose.Picture), true);
+            if (!string.IsNullOrWhiteSpace(PicturePath))
+                await Navigation.PushModalAsync(new Picture_View(Picture), true);
         }
     }
 }

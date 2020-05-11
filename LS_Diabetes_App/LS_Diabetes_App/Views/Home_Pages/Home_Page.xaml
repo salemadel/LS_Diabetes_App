@@ -4,7 +4,6 @@
              x:Class="LS_Diabetes_App.Home_Pages.Home_Page"
              xmlns:CustomFrame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:Custom="clr-namespace:LS_Diabetes_App.Custom_Controls"
-             xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters"
              xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
@@ -30,9 +29,9 @@
         <Grid BackgroundColor="#F9FAFB">
             <Grid.RowDefinitions>
                 <RowDefinition Height="400" />
-                <RowDefinition Height="260" />
-                <RowDefinition Height="160" />
-                <RowDefinition Height="160" />
+                <RowDefinition Height="280" />
+                <RowDefinition Height="180" />
+                <RowDefinition Height="180" />
                 <RowDefinition Height="20" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -59,20 +58,20 @@
                 <sfButtons:SfButton ImageSource="plus.png" ShowIcon="True" ImageAlignment="Left" Text="Ajouter" BackgroundColor="#00B2C8" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Start" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,5,0,10" Command="{Binding AddDataTypeCommand}" />
             </StackLayout>
           
-            <Frame Grid.Row="2" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="10,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+            <Frame Grid.Row="2" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="170" WidthRequest="150" Margin="10,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
                         <Label Text="Pas" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                         <Image Source="step.png" HeightRequest="24" WidthRequest="24" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
-                        <Label Text="--" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                        <Label Text="sur 10,000"  FontSize="14" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
+                        <Label Text="{Binding Steps , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Label Text="{Binding Objectifs.Steps_Objectif , StringFormat='sur {0:#,###.##}'}"  FontSize="14" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
                     </StackLayout>
                     <Label HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"  Text="Aujourd'hui" FontSize="13"  FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
             </Frame>
-            <Frame Grid.Row="2" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="5,10,10,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+            <Frame Grid.Row="2" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="170" WidthRequest="150" Margin="5,10,10,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
                         <Label Text="Hb1Ac" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
@@ -89,7 +88,7 @@
                     <TapGestureRecognizer Command="{Binding Hb1acSatistiqueCommand}"/>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Frame Grid.Row="3" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="10,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+            <Frame Grid.Row="3" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="170" WidthRequest="150" Margin="10,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
                         <Label Text="Tension Artérielle" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
@@ -97,9 +96,9 @@
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
                         <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
-                            <Label Text="{Binding Last_Pression.Systolique , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                            <Label Text="{Binding Last_Pression.Systolique , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                             <Label Text="\" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                            <Label Text="{Binding Last_Pression.Diastolique , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontSize="20" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                            <Label Text="{Binding Last_Pression.Diastolique , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                         </StackLayout>
                         <Label Text="mmHg"  FontSize="14" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                     </StackLayout>
@@ -109,7 +108,7 @@
                     <TapGestureRecognizer Command="{Binding PressionStatiqtiqueCommand}"/>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Frame Grid.Row="3" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="5,10,10,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
+            <Frame Grid.Row="3" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="170" WidthRequest="150" Margin="5,10,10,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
                         <Label Text="Poids" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
@@ -125,7 +124,7 @@
                     <TapGestureRecognizer Command="{Binding WeightStatistiqueCommand}"/>
                 </Frame.GestureRecognizers>
             </Frame>
-            <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="250" WidthRequest="300" Margin="10,10,10,0" CornerRadius="10">
+            <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="270" WidthRequest="300" Margin="10,10,10,0" CornerRadius="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />

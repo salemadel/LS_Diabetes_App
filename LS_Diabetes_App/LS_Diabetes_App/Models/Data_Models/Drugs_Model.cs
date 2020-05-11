@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using SQLite;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -25,7 +27,21 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (date != value)
                     date = value;
                 OnPropertyChanged();
-                OnPropertyChanged("GlucoseDateTime");
+                
+            }
+        }
+        [JsonIgnore]
+        [Ignore]
+        private DateTime startdate { get; set; } = DateTime.Now;
+
+        public DateTime StartDate
+        {
+            get { return startdate; }
+            set
+            {
+                if (startdate != value)
+                    startdate = value;
+                OnPropertyChanged();
             }
         }
 
@@ -43,6 +59,20 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+        [JsonIgnore]
+        [Ignore]
+        private int duration { get; set; }
+
+        public int Duration
+        {
+            get { return duration; }
+            set
+            {
+                if (duration != value)
+                    duration = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonIgnore]
         [Ignore]
@@ -56,6 +86,61 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (drug != value)
                     drug = value;
                 OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        private string taking_time { get; set; }
+
+        public string Taking_Time
+        {
+            get { return taking_time; }
+            set
+            {
+                if (taking_time != value)
+                    taking_time = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        private string times { get; set; }
+
+        public string Times
+        {
+            get { return times; }
+            set
+            {
+                if (times != value)
+                {
+                    times = value;
+
+                    OnPropertyChanged();
+                    OnPropertyChanged("Times_List");
+                }
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        public List<string> Times_List
+        {
+            get 
+            {
+                if (!string.IsNullOrWhiteSpace(Times))
+                {
+                    return JsonConvert.DeserializeObject<List<string>>(Times);
+                }
+                else
+                {
+                    return new List<string>();
+                }
+            }
+            set
+            {
+                Times = JsonConvert.SerializeObject(value);
             }
         }
 
@@ -122,7 +207,56 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+        [JsonIgnore]
+        [Ignore]
+        private bool rappel { get; set; }
+        public bool Rappel
+        {
+            get { return rappel; }
+            set
+            {
+                if (rappel != value)
+                    rappel = value;
+                OnPropertyChanged();
+                    
+            }
+        }
+        [JsonIgnore]
+        [Ignore]
+        private bool indeterminer { get; set; }
+        public bool Indeterminer
+        {
+            get { return indeterminer; }
+            set
+            {
+                if (indeterminer != value)
+                    indeterminer = value;
+                OnPropertyChanged();
 
+            }
+        }
+        [JsonIgnore]
+        [Ignore]
+        private bool isvisible { get; set; }
+        [JsonIgnore]
+        [Ignore]
+        public bool IsVisible
+        {
+            get { return isvisible; }
+            set
+            {
+                if (isvisible != value)
+                    isvisible = value;
+                OnPropertyChanged();
+
+            }
+        }
+        [JsonIgnore]
+        [Ignore]
+        public string ArrayToString
+        {
+            get { return string.Join(" , ", Times_List); }
+        }
         [JsonIgnore]
         [Ignore]
         public string DateSort

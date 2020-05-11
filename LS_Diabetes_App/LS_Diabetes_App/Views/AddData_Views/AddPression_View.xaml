@@ -5,7 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:CustomEntry="clr-namespace:LS_Diabetes_App.Custom_Controls"
              xmlns:resources="clr-namespace:LS_Diabetes_App"
-             xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters" xmlns:Behavior="clr-namespace:LS_Diabetes_App.Behaviors" xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters" 
+             xmlns:Behavior="clr-namespace:LS_Diabetes_App.Behaviors" 
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="LS_Diabetes_App.Views.AddData_Views.AddPression_View">
     <ContentPage.Resources>
@@ -61,7 +63,7 @@
             <ImageButton Source="camera.png" Padding="15" BackgroundColor="#00B2C8"  Grid.Row="3" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
             <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <Frame BorderColor="LightGray" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
-                    <Image Source="{Binding Pression.Picture}" Aspect="AspectFill">
+                    <Image Source="{Binding Picture}" Aspect="AspectFill">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PictureTappedCommand}" />
                         </Image.GestureRecognizers>

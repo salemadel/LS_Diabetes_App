@@ -81,6 +81,50 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+        private bool activity { get; set; }
+        public bool Activity
+        {
+            get { return activity; }
+            set
+            {
+                if (activity != value)
+                    activity = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool take_medication { get; set; }
+        public bool Take_Medication
+        {
+            get { return take_medication; }
+            set
+            {
+                if (take_medication != value)
+                    take_medication = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool at_home { get; set; }
+        public bool At_Home
+        {
+            get { return at_home; }
+            set
+            {
+                if (at_home != value)
+                    at_home = value;
+                OnPropertyChanged();
+            }
+        }
+        private bool at_doctor { get; set; }
+        public bool At_Doctor
+        {
+            get { return at_doctor; }
+            set
+            {
+                if (at_doctor != value)
+                    at_doctor = value;
+                OnPropertyChanged();
+            }
+        }
         public string DateSort
         {
             get

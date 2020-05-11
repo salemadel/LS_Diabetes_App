@@ -15,7 +15,7 @@ namespace LS_Diabetes_App.Home_Pages
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
-            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
+            var datastore = new DataStores();
             BindingContext = new HomePage_ViewModel(Navigation, datastore);
         }
     }

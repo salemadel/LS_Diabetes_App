@@ -119,17 +119,6 @@ namespace LS_Diabetes_App.ViewModels
         {
             List<LogBook_Model> _data = new List<LogBook_Model>();
             Profil = DataStore.GetProfilAsync().First();
-            foreach (var item in DataStore.GetDrugsAsync())
-            {
-                var drug = new LogBook_Model
-                {
-                    Data = item,
-                    DataValue = item.Dose.ToString(),
-                    Date = item.Date,
-                    Type = "Drugs"
-                };
-                _data.Add(drug);
-            }
             foreach (var item in DataStore.GetGlucosAsync())
             {
                 var glucose = new LogBook_Model
@@ -137,6 +126,8 @@ namespace LS_Diabetes_App.ViewModels
                     Data = item,
                     DataValue = GlycemiaConverter.Convert(item, Profil.GlycemiaUnit).Glycemia.ToString(),
                     Date = item.Date,
+                    Activity = item.Activity,
+                    Take_Medication = item.Taking_Medication,
                     Type = "Glucose",
                     Unit = Profil.GlycemiaUnit
                 };
@@ -154,17 +145,7 @@ namespace LS_Diabetes_App.ViewModels
                 };
                 _data.Add(drug);
             }
-            foreach (var item in DataStore.GetInsulineAsync())
-            {
-                var drug = new LogBook_Model
-                {
-                    Data = item,
-                    DataValue = item.Glycemia.ToString(),
-                    Date = item.Date,
-                    Type = "Insuline"
-                };
-                _data.Add(drug);
-            }
+           
             foreach (var item in DataStore.GetPressionAsync())
             {
                 var drug = new LogBook_Model
@@ -172,6 +153,8 @@ namespace LS_Diabetes_App.ViewModels
                     Data = item,
                     DataValue = item.Diastolique.ToString() + "/" + item.Systolique.ToString(),
                     Date = item.Date,
+                    At_Home = (item.Where == "à La Maison") ? true : false,
+                    At_Doctor = (item.Where == "Chez le Medecin") ? true : false,
                     Type = "Pression",
                     Unit = "mmgH"
                 };
@@ -242,10 +225,7 @@ namespace LS_Diabetes_App.ViewModels
                     {
                         DataStore.DeleteGlucose(Selected_item.Data as Glucose_Model);
                     }
-                    if (Selected_item.Type == "Drugs")
-                    {
-                        DataStore.DeleteDrugs(Selected_item.Data as Drugs_Model);
-                    }
+                  
                     if (Selected_item.Type == "Weight")
                     {
                         DataStore.DeleteWeight(Selected_item.Data as Weight_Model);
@@ -258,10 +238,7 @@ namespace LS_Diabetes_App.ViewModels
                     {
                         DataStore.DeletePression(Selected_item.Data as Pression_Model);
                     }
-                    if (Selected_item.Type == "Insuline")
-                    {
-                        DataStore.DeleteInsuline(Selected_item.Data as Insulune_Model);
-                    }
+                  
 
                     UpdateData();
                     MessagingCenter.Send(this, "DataUpdated");

@@ -8,8 +8,8 @@
             android:TabbedPage.BarSelectedItemColor="#00B2C8">
 
     <home:Home_Page IconImageSource="home.png" />
-    <home:Hurt_Page IconImageSource="ecg.png" />
+    <home:Heart_Page IconImageSource="ecg.png" />
     <home:Logbook_page IconImageSource="book.png" />
     <home:Connections_Page IconImageSource="link.png" />
-    <home:Profil_Pagexaml IconImageSource="user.png" />
+    <home:Profil_Page IconImageSource="user.png" />
 </TabbedPage>

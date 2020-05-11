@@ -216,8 +216,8 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             get { return nbr_normal_dia; }
             set
             {
-                if (nbr_normal_sys != value)
-                    nbr_normal_sys = value;
+                if (nbr_normal_dia != value)
+                    nbr_normal_dia = value;
                 OnPropertyChanged();
             }
         }
@@ -270,6 +270,11 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 
         private void UpdateData()
         {
+            if(!(Selected_MaxDate >= Selected_MinDate))
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Date Non Valide");
+                return;
+            }
             Pression_Data.Clear();
             Min_sys = null;
             Max_sys = null;
@@ -292,39 +297,39 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Pression_Data = new ObservableCollection<Pression_Model>(Pression_Data.OrderBy(i => i.Date));
                 Min_sys = Pression_Data.OrderBy(i => i.Systolique).First();
                 Max_sys = Pression_Data.OrderBy(i => i.Systolique).Last();
-                Nbr_Normal_sys = Pression_Data.Where(i => i.Systolique >= 91 & i.Systolique <= 119).Count();
-                Nbr_Hight_sys = Pression_Data.Where(i => i.Systolique > 119).Count();
-                Nbr_Low_sys = Pression_Data.Where(i => i.Systolique < 91).Count();
+                Nbr_Normal_sys = Pression_Data.Where(i => i.Systolique >= 90 & i.Systolique <= 120).Count();
+                Nbr_Hight_sys = Pression_Data.Where(i => i.Systolique > 120).Count();
+                Nbr_Low_sys = Pression_Data.Where(i => i.Systolique < 90).Count();
                 MaximumChart = Convert.ToInt32(Max_sys.Systolique + 30);
                 Average_sys = Math.Round(Convert.ToDouble(Pression_Data.Sum(i => i.Systolique) / Pression_Data.Count) , 1);
                 Min_dia = Pression_Data.OrderBy(i => i.Diastolique).First();
                 Max_dia = Pression_Data.OrderBy(i => i.Diastolique).Last();
-                Nbr_Normal_dia = Pression_Data.Where(i => i.Diastolique >= 61 & i.Diastolique <= 79).Count();
-                Nbr_Hight_dia = Pression_Data.Where(i => i.Diastolique > 79).Count();
-                Nbr_Low_dia = Pression_Data.Where(i => i.Diastolique < 61).Count();
+                Nbr_Normal_dia = Pression_Data.Where(i => i.Diastolique >= 60 & i.Diastolique <= 80).Count();
+                Nbr_Hight_dia = Pression_Data.Where(i => i.Diastolique > 80).Count();
+                Nbr_Low_dia = Pression_Data.Where(i => i.Diastolique < 60).Count();
                 Average_dia = Math.Round(Convert.ToDouble(Pression_Data.Sum(i => i.Diastolique) / Pression_Data.Count), 1);
             }
-           if(Average_sys >= 91 & Average_sys <= 119)
+           if(Average_sys >= 90 & Average_sys <= 120)
             {
                 Sys_Color = Color.FromHex("#0AC774");
             }
-           if(Average_sys < 91)
+           if(Average_sys < 90)
             {
                 Sys_Color = Color.FromHex("#f1c40f");
             }
-           if(Average_sys > 119)
+           if(Average_sys > 120)
             {
                 Sys_Color = Color.FromHex("#C72D14");
             }
-            if (Average_dia >= 61 & Average_dia <= 79)
+            if (Average_dia >= 60 & Average_dia <= 80)
             {
                 Dia_Color = Color.FromHex("#0AC774");
             }
-            if (Average_dia < 61)
+            if (Average_dia < 60)
             {
                 Dia_Color = Color.FromHex("#f1c40f");
             }
-            if (Average_dia > 79)
+            if (Average_dia > 80)
             {
                 Dia_Color = Color.FromHex("#C72D14");
             }

@@ -47,7 +47,7 @@
             <ImageButton Source="camera.png" Padding="15" BackgroundColor="#00B2C8"  Grid.Row="3" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
             <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <Frame BorderColor="LightGray" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
-                    <Image Source="{Binding Hb1Ac.Picture}" Aspect="AspectFill">
+                    <Image Source="{Binding Picture}" Aspect="AspectFill">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PictureTappedCommand}" />
                         </Image.GestureRecognizers>

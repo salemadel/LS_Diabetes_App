@@ -1,5 +1,6 @@
 ﻿using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
 using SQLite;
 using System.Collections.Generic;
 
@@ -9,17 +10,9 @@ namespace LS_Diabetes_App.Interfaces
     {
         private SQLiteConnection _connection;
 
-        public DataStores(IDatabaseAccess db)
+        public DataStores()
         {
-            _connection = new SQLiteConnection(db.DatabasePath());
-            _connection.CreateTable<Data_Model>();
-            _connection.CreateTable<Glucose_Model>();
-            _connection.CreateTable<Pression_Model>();
-            _connection.CreateTable<Weight_Model>();
-            _connection.CreateTable<Drugs_Model>();
-            _connection.CreateTable<Insulune_Model>();
-            _connection.CreateTable<Hb1Ac_Model>();
-            _connection.CreateTable<Profil_Model>();
+            _connection = StaticSqlConnection.GetConnection();
         }
 
         public void AddDrugs(Drugs_Model data)
@@ -42,12 +35,22 @@ namespace LS_Diabetes_App.Interfaces
             _connection.Insert(data);
         }
 
+        public void AddObjectif(Objectif_Model data)
+        {
+            _connection.Insert(data);
+        }
+
         public void AddPression(Pression_Model data)
         {
             _connection.Insert(data);
         }
 
         public void AddProfil(Profil_Model data)
+        {
+            _connection.Insert(data);
+        }
+
+        public void AddSteps(Steps_Model data)
         {
             _connection.Insert(data);
         }
@@ -73,6 +76,11 @@ namespace LS_Diabetes_App.Interfaces
         }
 
         public void DeleteInsuline(Insulune_Model data)
+        {
+            _connection.Delete(data);
+        }
+
+        public void DeleteObjectif(Objectif_Model data)
         {
             _connection.Delete(data);
         }
@@ -112,6 +120,11 @@ namespace LS_Diabetes_App.Interfaces
             return _connection.Table<Insulune_Model>();
         }
 
+        public IEnumerable<Objectif_Model> GetObjectifAsync()
+        {
+            return _connection.Table<Objectif_Model>();
+        }
+
         public IEnumerable<Pression_Model> GetPressionAsync()
         {
             return _connection.Table<Pression_Model>();
@@ -120,6 +133,11 @@ namespace LS_Diabetes_App.Interfaces
         public IEnumerable<Profil_Model> GetProfilAsync()
         {
             return _connection.Table<Profil_Model>();
+        }
+
+        public IEnumerable<Steps_Model> GetStepsAsync()
+        {
+            return _connection.Table<Steps_Model>();
         }
 
         public IEnumerable<Weight_Model> GetWeightAsync()
@@ -147,12 +165,22 @@ namespace LS_Diabetes_App.Interfaces
             _connection.Update(data);
         }
 
+        public void UpdateObjectif(Objectif_Model data)
+        {
+            _connection.Update(data);
+        }
+
         public void UpdatePression(Pression_Model data)
         {
             _connection.Update(data);
         }
 
         public void UpdateProfil(Profil_Model data)
+        {
+            _connection.Update(data);
+        }
+
+        public void UpdateSteps(Steps_Model data)
         {
             _connection.Update(data);
         }

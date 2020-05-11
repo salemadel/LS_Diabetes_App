@@ -12,7 +12,7 @@ namespace LS_Diabetes_App.Views.Statistiques_Pages
         public WeightStatistique_Page()
         {
             InitializeComponent();
-            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
+            var datastore = new DataStores();
             BindingContext = new WeightStatistique_ViewModel(Navigation, datastore);
         }
     }

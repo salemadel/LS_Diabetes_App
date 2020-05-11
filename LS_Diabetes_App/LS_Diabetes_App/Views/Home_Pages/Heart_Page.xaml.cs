@@ -5,17 +5,17 @@ using Xamarin.Forms.Xaml;
 namespace LS_Diabetes_App.Home_Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Hurt_Page : ContentPage
+    public partial class Heart_Page : ContentPage
     {
-        public Hurt_Page()
+        public Heart_Page()
         {
             InitializeComponent();
-            BindingContext = new HurtPage_ViewModel();
+            BindingContext = new HeartPage_ViewModel();
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            await (BindingContext as HurtPage_ViewModel).ExecuteOnAppring();
+            await (BindingContext as HeartPage_ViewModel).ExecuteOnAppring();
         }
     }
 }

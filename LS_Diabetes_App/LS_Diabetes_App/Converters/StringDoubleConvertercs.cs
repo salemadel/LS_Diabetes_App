@@ -29,12 +29,9 @@ namespace LS_Diabetes_App.Converters
             if (value is string)
             {
                 string _value = (string)value;
-
-                switch (_value)
-                {
-                    case "": return 0;
-                    default: return System.Convert.ToDouble(_value);
-                }
+                int x;
+                return int.TryParse(_value , out x) ? System.Convert.ToDouble(_value) : 0;
+              
             }
             else
             {

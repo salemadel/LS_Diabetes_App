@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels
 {
-    public class HurtPage_ViewModel : INotifyPropertyChanged
+    public class HeartPage_ViewModel : INotifyPropertyChanged
     {
        
         private bool isBusy { get; set; }
@@ -24,7 +24,7 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
-        public HurtPage_ViewModel()
+        public HeartPage_ViewModel()
         {
 
         }

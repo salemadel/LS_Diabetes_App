@@ -191,7 +191,20 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-
+        [JsonIgnore]
+        [Ignore]
+        private bool atrial_fibrilation { get; set; }
+        public bool Atrial_Fibrilation
+        {
+            get { return atrial_fibrilation; }
+            set
+            {
+                if (atrial_fibrilation != value)
+                    atrial_fibrilation = value;
+                OnPropertyChanged();
+            }
+        }
+       
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

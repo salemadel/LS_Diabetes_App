@@ -14,7 +14,7 @@ namespace LS_Diabetes_App.Views.Login_Pages
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
-            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
+            var datastore = new DataStores();
             BindingContext = new SignUp_ViewModel(Navigation, datastore, "ProfilBase");
         }
 

@@ -178,7 +178,7 @@
     <value>Pas</value>
   </data>
   <data name="Time_Label" xml:space="preserve">
-    <value>Temp</value>
+    <value>Heure/Date</value>
   </data>
   <data name="Unit_Label" xml:space="preserve">
     <value>Unité de glycémie</value>

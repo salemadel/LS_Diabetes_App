@@ -12,8 +12,13 @@ namespace LS_Diabetes_App.Views.Statistiques_Pages
         public GlucoseStatistique_Page()
         {
             InitializeComponent();
-            var datastore = new DataStores(DependencyService.Get<IDatabaseAccess>());
+            var datastore = new DataStores();
             BindingContext = new GlucoseStatistique_ViewModel(Navigation, datastore);
+        }
+
+        private void SfSegmentedControl_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
+        {
+            MessagingCenter.Send(this, "Filter");
         }
     }
 }

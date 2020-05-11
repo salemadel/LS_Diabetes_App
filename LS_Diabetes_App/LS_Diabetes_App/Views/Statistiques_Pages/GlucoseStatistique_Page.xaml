@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:Custom="clr-namespace:LS_Diabetes_App.Custom_Controls"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
-             xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters"
+             xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="LS_Diabetes_App.Views.Statistiques_Pages.GlucoseStatistique_Page">
     <ContentPage.Resources>
@@ -38,16 +38,28 @@
             </StackLayout>
             <Grid Grid.Row="1" VerticalOptions="StartAndExpand">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="180" />
+                    <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0">
+                <StackLayout Grid.Row="0" Orientation="Horizontal" Margin="10,0,0,0" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
                     <Custom:Cusom_DatePicker Grid.Column="0" Date="{Binding Selected_MinDate}" FontFamily="{StaticResource NormalFont}" FontSize="16" Format="dd/MM/yyyy" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                     <Custom:Cusom_DatePicker Grid.Column="1" Date="{Binding Selected_MaxDate}" FontFamily="{StaticResource NormalFont}" FontSize="16" Format="dd/MM/yyyy" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="10,0,0,0" />
                     <ImageButton Grid.Column="2" HeightRequest="40" WidthRequest="40" CornerRadius="40" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0" BackgroundColor="#00B2C8" Source="next.png" Padding="10" Command="{Binding FiltreCommand}" />
                 </StackLayout>
-                <Frame Grid.Row="1" Margin="5,5,5,5">
+                <Label Text="{Binding Message}" TextColor="Black" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" />
+                <buttons:SfSegmentedControl SelectionTextColor="White" FontColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="16" CornerRadius="10" Margin="10,0,10,0"  HeightRequest="80" Color="Transparent"   VisibleSegmentsCount="4" BorderColor="#00B2C8" SelectedIndex="{Binding Selected_Index}"  Grid.Row="0"   VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" ItemsSource="{Binding SegmentItems}" SelectionChanged="SfSegmentedControl_SelectionChanged">
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings 
+    Color="#00B2C8">
+                        </buttons:SelectionIndicatorSettings>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                </buttons:SfSegmentedControl>
+                <Frame Grid.Row="2" VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="0" BackgroundColor="White" Margin="0,0,0,10">
+                    <ActivityIndicator  Color="#00B2C8"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+                </Frame>
+                <Frame Grid.Row="2" Margin="5,5,5,5">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="240" />
@@ -55,10 +67,11 @@
                             <RowDefinition Height="160" />
                             <RowDefinition Height="290" />
                         </Grid.RowDefinitions>
+
                         <chart:SfChart Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="400" WidthRequest="400">
                             <chart:SfChart.Series>
                                 <chart:DoughnutSeries ItemsSource="{Binding Slices}" XBindingPath="type" YBindingPath="value" DoughnutCoefficient="0.85">
-                                   
+
                                     <chart:DoughnutSeries.ColorModel>
                                         <chart:ChartColorModel Palette="Custom" CustomBrushes="{StaticResource Colors}"/>
                                     </chart:DoughnutSeries.ColorModel>
@@ -131,11 +144,8 @@
                         </chart:SfChart>
                     </Grid>
                 </Frame>
-
-                <Frame Grid.Row="2" VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="0" BackgroundColor="White" Margin="0,0,0,10">
-                    <ActivityIndicator  Color="#275db5"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
-                </Frame>
             </Grid>
+            
         </Grid>
     </ScrollView>
 </ContentPage>

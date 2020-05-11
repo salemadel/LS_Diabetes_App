@@ -182,6 +182,11 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 
         private void UpdateData()
         {
+            if (!(Selected_MaxDate >= Selected_MinDate))
+            {
+                DependencyService.Get<IMessage>().ShortAlert("Date Non Valide");
+                return;
+            }
             Hb1Ac_Data.Clear();
             Min = null;
             Max = null;
