@@ -4,9 +4,14 @@
   <item android:drawable="@color/splash_screen" />
 
   <item>
-    <bitmap android:src="@drawable/smarthealthicon"
+    <bitmap android:src="@drawable/splash"
             android:tileMode="disabled"
             android:gravity="center" />
 
   </item>
+   <item android:bottom="40dp">
+     <bitmap
+       android:src="@drawable/innovative"
+       android:gravity="center_horizontal|bottom"/>
+   </item>
 </layer-list>

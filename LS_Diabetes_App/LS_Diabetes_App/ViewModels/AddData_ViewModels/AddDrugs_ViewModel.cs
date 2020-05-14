@@ -1,7 +1,11 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
+using LS_Diabetes_App.Views;
 using LS_Diabetes_App.Views.AddData_Views;
 using Newtonsoft.Json;
+using Plugin.Media;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -62,12 +66,14 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         }
 
         public Command SaveCommand { get; set; }
+        public Command TakePictureCommand { get; set; }
         public AddDrugs_ViewModel(INavigation navigation , IDataStore dataStore)
         {
             DataStore = dataStore;
             Navigation = navigation;
             Drugs = new Drugs_Model();
             Times_List = new ObservableCollection<string>();
+            PermissionsRequest = new PermissionsRequest();
             MessagingCenter.Subscribe<AddDrugs_View , string>(this, "AddDrugs", (sender , args) =>
             {
               Times_List.Add(args);
@@ -76,8 +82,16 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             {
                 await ExecuteOnSave();
             });
+            TakePictureCommand = new Command(async () =>
+            {
+                await ExecuteOnTakePicture();
+            });
+            PictureTappedCommand = new Command(async () =>
+            {
+                await ExecuteOnPictureTapped();
+            });
         }
-        private string MessageText { get; set; }
+        public Command PictureTappedCommand { get; set; }
         private async Task ExecuteOnSave()
         {
             if (!string.IsNullOrEmpty(Drugs.Drug) & !string.IsNullOrEmpty(Drugs.Taking_Time) & Times_List.Count > 0 & Drugs.Dose > 0)
@@ -88,23 +102,61 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                     Drugs.Times_List = Times_List.ToList();
                     DataStore.AddDrugs(Drugs);
                     MessagingCenter.Send(this, "DataUpdated");
+                    RappelService.SetRappel();
                     await Navigation.PopModalAsync();
-                 /*   if (Drugs.Rappel == true)
-                    {
-                        var date = (Drugs.StartDate.Date.Month.ToString("00") + "-" + Drugs.StartDate.Date.Day.ToString("00") + "-" + Drugs.StartDate.Date.Year.ToString());
-                        var time = Convert.ToDateTime(Drugs.Times_List[0]).ToString("HH:mm");
-                        var dateTime = date + " " + time;
-                        var selectedDateTime = DateTime.ParseExact(dateTime, "MM-dd-yyyy HH:mm", CultureInfo.InvariantCulture);
-                        if (!string.IsNullOrEmpty(MessageText))
-                        {
-                            DependencyService.Get<ILocalNotificationService>().Cancel(0);
-                            DependencyService.Get<ILocalNotificationService>().LocalNotification("Rappel", MessageText, 0, selectedDateTime);
-                            DependencyService.Get<IMessage>().ShortAlert("Rani dezit lalarm " + selectedDateTime.ToString());
-                        }
-                    }*/
+                
 
                 }
             }
+        }
+        private string PicturePath { get; set; }
+        private ImageSource picture { get; set; }
+        public ImageSource Picture
+        {
+            get { return picture; }
+            set
+            {
+                if (picture != value)
+                    picture = value;
+                OnPropertyChanged();
+            }
+        }
+        private PermissionsRequest PermissionsRequest { get; set; }
+        private async Task ExecuteOnTakePicture()
+        {
+            if (await PermissionsRequest.Check_permissions("Storage") == PermissionStatus.Granted)
+            {
+                try
+                {
+                    await CrossMedia.Current.Initialize();
+                    if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                    {
+                        return;
+                    }
+
+                    var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                    {
+                        PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
+                        CompressionQuality = 50,
+                        Directory = "LS_Diabetes_pictures",
+                        Name = "Sh_" + DateTime.Now.ToString() + ".jpg"
+                    });
+
+                    if (file == null)
+                        return;
+
+                    PicturePath = file.Path;
+                    Picture = ImageSource.FromFile(PicturePath);
+                }
+                catch
+                {
+                }
+            }
+        }
+        private async Task ExecuteOnPictureTapped()
+        {
+            if (!string.IsNullOrWhiteSpace(PicturePath))
+                await Navigation.PushModalAsync(new Picture_View(Picture), true);
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

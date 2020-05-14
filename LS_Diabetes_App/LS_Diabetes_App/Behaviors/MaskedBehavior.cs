@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
@@ -51,7 +52,7 @@ namespace LS_Diabetes_App.Behaviors
         private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
         {
             var entry = sender as Entry;
-
+            bool isValid = args.NewTextValue.ToCharArray().All(x => char.IsDigit(x) | x.Equals('/'));
             var text = entry.Text;
 
             if (string.IsNullOrWhiteSpace(text) || _positions == null)
@@ -62,7 +63,11 @@ namespace LS_Diabetes_App.Behaviors
                 entry.Text = text.Remove(text.Length - 1);
                 return;
             }
-
+            if(!isValid)
+            {
+                entry.Text = text.Remove(text.Length - 1);
+                return;
+            }
             foreach (var position in _positions)
                 if (text.Length >= position.Key + 1)
                 {

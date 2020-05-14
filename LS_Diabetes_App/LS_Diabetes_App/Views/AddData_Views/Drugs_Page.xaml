@@ -88,7 +88,7 @@
                     <Behaviors:EventToCommandBehavior EventName="ItemTapped" EventArgsConverter="{StaticResource ItemTappedConverter}" Command="{Binding ItemTappedCommand}" />
                 </ListView.Behaviors>
             </ListView>
-            <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="1" CornerRadius="50" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,30,30" HeightRequest="70" WidthRequest="70" Command="{Binding AddDrugCommand}" />
+            <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="1" CornerRadius="50" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,30" HeightRequest="70" WidthRequest="70" Command="{Binding AddDrugCommand}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

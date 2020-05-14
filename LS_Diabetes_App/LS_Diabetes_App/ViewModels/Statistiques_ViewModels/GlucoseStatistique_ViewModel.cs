@@ -200,7 +200,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Objectifs = dataStore.GetObjectifAsync().First();
             Glucose_Data = new ObservableCollection<Glucose_Model>();
             GlycemiaConverter = new GlycemiaConverter();
-            Message = "Vos Objectifs entre: " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit + " et " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit;
+            Message = "Glycemie Zone : " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit + " et " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit;
             Slices = new ObservableCollection<Slice_Model>();
             Selected_MaxDate = DateTime.Now.Date;
             Selected_MinDate = DateTime.Now.Date.AddDays(-7);

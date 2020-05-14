@@ -162,6 +162,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 
        
         public Profil_Model Profil { get; set; }
+        public string Message { get; set; }
         public Command FiltreCommand { get; set; }
 
         public Hb1AcStatistique_ViewModel(INavigation navigation, IDataStore dataStore)
@@ -200,6 +201,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             }
             if (Hb1Ac_Data.Count > 0)
             {
+
                 Hb1Ac_Data = new ObservableCollection<Hb1Ac_Model>(Hb1Ac_Data.OrderBy(i => i.Date));
                 Min = Hb1Ac_Data.OrderBy(i => i.Hb1Ac).First();
                 Max = Hb1Ac_Data.OrderBy(i => i.Hb1Ac).Last();
@@ -208,6 +210,10 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Nbr_Low = Hb1Ac_Data.Where(i => i.Hb1Ac < 5).Count();
                 MaximumChart = Convert.ToInt32(Max.Hb1Ac + 5);
                 Average = Math.Round(Hb1Ac_Data.Sum(i => i.Hb1Ac) / Hb1Ac_Data.Count , 1);
+                if(string.IsNullOrWhiteSpace(Message))
+                {
+                    Message = "Dernier Hb1Ac :" + Hb1Ac_Data.Last().Hb1Ac + " % ";
+                }
             }
             if(Average < 5)
             {

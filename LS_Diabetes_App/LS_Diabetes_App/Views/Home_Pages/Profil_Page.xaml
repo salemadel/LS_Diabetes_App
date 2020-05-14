@@ -7,6 +7,9 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
                 <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
             </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Open Sans" />
+            </OnPlatform>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
@@ -23,14 +26,15 @@
                     <ColumnDefinition Width="0.8*" />
                     <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer />
-                </Grid.GestureRecognizers>
+               
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
                     <Label  Text="Unités de mesure" FontSize="17" TextColor="Black" FontFamily="{StaticResource NormalFont}" />
                     <Label  Text="Unités de mesure , Unité de glycémie , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
                 <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UnitsCommand}"/>
+                </Grid.GestureRecognizers>
             </Grid>
             <Grid Grid.Row="1" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
@@ -38,11 +42,11 @@
                     <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer />
+                    <TapGestureRecognizer Command="{Binding EditProfilCommand}"/>
                 </Grid.GestureRecognizers>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
                     <Label  Text="Données personnelles" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
-                    <Label  Text="Sexe , Pois , Nom , Prénom , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="Sexe , Nom , Prénom , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
                 <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
             </Grid>
@@ -53,7 +57,7 @@
                 </Grid.ColumnDefinitions>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
                     <Label  Text="Objectifs" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
-                    <Label  Text="Glycémie zone , Poids , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="Glycémie zone , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
                 <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
                 <Grid.GestureRecognizers>
@@ -66,28 +70,18 @@
                     <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer />
+                    <TapGestureRecognizer Command="{Binding SettingsCommand}"/>
                 </Grid.GestureRecognizers>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Traitement diabéte" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
-                    <Label  Text="Glucide ratio , Heures de repas , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="paramètres de l'application" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="Notification , Localisation , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
                 <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
             </Grid>
-            <Grid Grid.Row="4" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*" />
-                    <ColumnDefinition Width="0.2*" />
-                </Grid.ColumnDefinitions>
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer />
-                </Grid.GestureRecognizers>
-                <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Médicaments" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
-                    <Label  Text="Insuline , Médicaments ,  Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
-                </StackLayout>
-                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
-            </Grid>
+            <StackLayout Grid.Row="4" Orientation="Horizontal" HeightRequest="60" BackgroundColor="Default" Margin="5,5,5,5">
+                <Label  Text="{Binding MessageText}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="19" FontFamily="{StaticResource BoldFont}" />
+                <ImageButton Source="share.png" Padding="10" BackgroundColor="#00B2C8"    CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,0" HeightRequest="40" WidthRequest="40"  Command="{Binding ShareCommand}"/>
+            </StackLayout>
         </Grid>
     </ScrollView>
 </ContentPage>

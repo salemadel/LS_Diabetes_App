@@ -26,7 +26,7 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
+               
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <CustomEntry:Custom_Entry Grid.Row="0" Text="{Binding Profil.Email}" Placeholder="{x:Static resources:AppResources.UserName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
@@ -39,17 +39,13 @@
                     <Behaviors:MaskedBehavior Mask="XX/XX/XXXX"/>
                 </CustomEntry:Custom_Entry.Behaviors>
             </CustomEntry:Custom_Entry>
-            <CustomEntry:Custom_Entry Grid.Row="6" Text="{Binding Diagnostic_Date}" Placeholder="dd/mm/yyyy" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" >
-                <CustomEntry:Custom_Entry.Behaviors>
-                    <Behaviors:MaskedBehavior Mask="XX/XX/XXXX"/>
-                </CustomEntry:Custom_Entry.Behaviors>
-            </CustomEntry:Custom_Entry>
-            <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="7">
+          
+            <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="6">
                 <syncfusion:SfRadioButton x:Name="Male_RadioButton" Text="{x:Static resources:AppResources.Male_RadioButton}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0"  IsChecked="{Binding Male_Cheked}" />
                 <syncfusion:SfRadioButton x:Name="Female_RadioButton" Text="{x:Static resources:AppResources.Female_RadioButton}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
             </syncfusion:SfRadioGroup>
             <DatePicker x:Name="BirthDate_Picker" IsVisible="False" Date="{Binding Birth_Date}" DateSelected="BirthDate_Picker_DateSelected" />
-            <ActivityIndicator Grid.Row="8" Color="#00B2C8"  VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+            <ActivityIndicator Grid.Row="7" Color="#00B2C8"  VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
             <ImageButton Source="next.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="9" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SignUpCommand}" />
         </Grid>
     </ScrollView>

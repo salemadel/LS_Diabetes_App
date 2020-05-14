@@ -149,9 +149,9 @@ namespace LS_Diabetes_App.Models
 
         [JsonIgnore]
         [Ignore]
-        private DateTime diagnostic_year { get; set; }
+        private int diagnostic_year { get; set; }
 
-        public DateTime Diagnostic_Year
+        public int Diagnostic_Year
         {
             get { return diagnostic_year; }
             set

@@ -68,7 +68,7 @@
             </syncfusion:SfChipGroup>
             <StackLayout Grid.Row="7" Grid.Column="0" Orientation="Horizontal">
                 <Label Text="Heure de prise" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                <ImageButton HeightRequest="30" WidthRequest="30" BackgroundColor="#00B2C8" CornerRadius="15" Clicked="ImageButton_Clicked" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                <ImageButton HeightRequest="40" WidthRequest="40" Source="time.png" Padding="10" BackgroundColor="#00B2C8" CornerRadius="20" Clicked="ImageButton_Clicked" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                 <TimePicker x:Name="Time_Picker" IsVisible="False" PropertyChanged="Time_Picker_PropertyChanged"/>
             </StackLayout>
             <ImageButton Source="camera.png" Padding="15" IsVisible="{Binding IsVisible}" BackgroundColor="#00B2C8"  Grid.Row="8" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
@@ -83,7 +83,7 @@
             </StackLayout>
             <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="9" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Editor  Text="{Binding Glucose.Note}" Grid.Row="10" Grid.Column="0" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="100" WidthRequest="200" />
-            <ImageButton  Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveCommand}" />
+            <ImageButton  Source="ok.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveCommand}" />
 
         </Grid>
     </ScrollView>

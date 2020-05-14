@@ -59,7 +59,7 @@
                     </CustomEntry:Custom_Entry.Behaviors>
                 </CustomEntry:Custom_Entry>
             </StackLayout>
-
+            
             <Label Text="{x:Static resources:AppResources.Weight_Label}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Entry Text="{Binding Data.Weight , Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Grid.Row="4" Keyboard="Numeric" Grid.Column="1" Placeholder="Ex : 67 Kg" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <Label Text="{x:Static resources:AppResources.Drugs_Label}" Grid.Row="5" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />

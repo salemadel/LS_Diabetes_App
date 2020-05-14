@@ -46,32 +46,7 @@ namespace LS_Diabetes_App.Views.AddData_Views
         private void glucose_Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
            
-            if (e.NewTextValue.ToCharArray().All(x => char.IsDigit(x)))
-            {
-                int k;
-                if (int.TryParse(e.NewTextValue, out k))
-                {
-                    if(Profil.GlycemiaUnit == "mmol / L")
-                    {
-                        if (Convert.ToInt32(e.NewTextValue) > 33)
-                        {
-                            glucose_Entry.Text = (33).ToString();
-                        }
-                    }
-                    else
-                    {
-                        if (Convert.ToInt32(e.NewTextValue) > 600)
-                        {
-                            glucose_Entry.Text = (600).ToString();
-                        }
-                    }
-                    
-                }
-            }
-            else
-            {
-                glucose_Entry.Text = e.NewTextValue.Remove(e.NewTextValue.Length - 1);
-            }
+           
         }
     }
 }

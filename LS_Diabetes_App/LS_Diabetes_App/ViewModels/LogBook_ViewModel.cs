@@ -3,6 +3,7 @@ using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
+using LS_Diabetes_App.ViewModels.Profil_ViewModels;
 using LS_Diabetes_App.Views;
 using LS_Diabetes_App.Views.AddData_Views;
 using System.Collections.Generic;
@@ -50,6 +51,10 @@ namespace LS_Diabetes_App.ViewModels
             {
                 await ExecuteOnDelete();
             });
+            PictureTappedCommand = new Command(async () =>
+            {
+                await ExecuteOnPictureTapped();
+            });
             UpdateData();
             MessagingCenter.Subscribe<AddData_ViewModel>(this, "DataUpdated", (sender) =>
             {
@@ -59,6 +64,13 @@ namespace LS_Diabetes_App.ViewModels
                 IsBusy = false;
             });
             MessagingCenter.Subscribe<SelectedData_ViewModel>(this, "DataUpdated", (sender) =>
+            {
+                IsBusy = true;
+                DataGrouped.Clear();
+                UpdateData();
+                IsBusy = false;
+            });
+            MessagingCenter.Subscribe<Units_ViewModel>(this, "DataUpdated", (sender) =>
             {
                 IsBusy = true;
                 DataGrouped.Clear();
@@ -129,7 +141,8 @@ namespace LS_Diabetes_App.ViewModels
                     Activity = item.Activity,
                     Take_Medication = item.Taking_Medication,
                     Type = "Glucose",
-                    Unit = Profil.GlycemiaUnit
+                    Unit = Profil.GlycemiaUnit,
+                    PicturePath = item.PicturePathe
                 };
                 _data.Add(glucose);
             }
@@ -141,7 +154,8 @@ namespace LS_Diabetes_App.ViewModels
                     DataValue = item.Hb1Ac.ToString(),
                     Date = item.Date,
                     Type = "Hb1Ac",
-                    Unit = "%"
+                    Unit = "%",
+                    PicturePath = item.PicturePathe
                 };
                 _data.Add(drug);
             }
@@ -156,7 +170,8 @@ namespace LS_Diabetes_App.ViewModels
                     At_Home = (item.Where == "à La Maison") ? true : false,
                     At_Doctor = (item.Where == "Chez le Medecin") ? true : false,
                     Type = "Pression",
-                    Unit = "mmgH"
+                    Unit = "mmgH",
+                    PicturePath = item.PicturePathe
                 };
                 _data.Add(drug);
             }
@@ -168,7 +183,8 @@ namespace LS_Diabetes_App.ViewModels
                     DataValue = WeightConverter.Convert(item, Profil.WeightUnit).Weight.ToString(),
                     Date = item.Date,
                     Type = "Weight",
-                    Unit = Profil.WeightUnit
+                    Unit = Profil.WeightUnit,
+                    PicturePath = item.PicturePathe
                 };
                 _data.Add(drug);
             }
@@ -246,10 +262,10 @@ namespace LS_Diabetes_App.ViewModels
                 }
             }
         }
-      /*  private async Task ExecuteOnPictureTapped()
+        private async Task ExecuteOnPictureTapped()
         {
-            if (!string.IsNullOrWhiteSpace(Selected_item.PicturePathe))
-                await Navigation.PushModalAsync(new Picture_View(Glucose.Picture), true);
-        }*/
+            if (!string.IsNullOrWhiteSpace(Selected_item.PicturePath))
+                await Navigation.PushModalAsync(new Picture_View(Selected_item.PicturePath), true);
+        }
     }
 }

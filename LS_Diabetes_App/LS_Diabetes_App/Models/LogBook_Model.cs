@@ -57,6 +57,18 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+        private string picturepath { get; set; }
+
+        public string PicturePath
+        {
+            get { return picturepath; }
+            set
+            {
+                if (picturepath != value)
+                    picturepath = value;
+                OnPropertyChanged();
+            }
+        }
 
         private object data { get; set; }
 

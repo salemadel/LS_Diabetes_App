@@ -253,6 +253,22 @@ namespace LS_Diabetes_App.Models.Data_Models
         }
         [JsonIgnore]
         [Ignore]
+        private bool alarmset { get; set; }
+
+        [JsonIgnore]
+        public bool AlarmSet
+        {
+            get { return alarmset; }
+            set
+            {
+                if (alarmset != value)
+                    alarmset = value;
+                OnPropertyChanged();
+
+            }
+        }
+        [JsonIgnore]
+        [Ignore]
         public string ArrayToString
         {
             get { return string.Join(" , ", Times_List); }

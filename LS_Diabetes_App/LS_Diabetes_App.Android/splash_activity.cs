@@ -18,7 +18,9 @@ namespace LS_Diabetes_App.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 178, 200));
             StartActivity(typeof(MainActivity));
             Finish();
         }

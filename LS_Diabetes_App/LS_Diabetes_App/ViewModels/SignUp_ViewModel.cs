@@ -127,11 +127,7 @@ namespace LS_Diabetes_App.ViewModels
                     DependencyService.Get<IMessage>().ShortAlert("Date de naissance Non Valide !");
                     return;
                 }
-                if(!DateTime.TryParse(Diagnostic_Date , out temp))
-                {
-                    DependencyService.Get<IMessage>().ShortAlert("Date de Diagnostic Non Valide !");
-                    return;
-                }
+              
                 await Task.Delay(2000);
                 DataStore.DeleteProfil(Profil);
                 Profil.Birth_Date = System.Convert.ToDateTime(Date);
@@ -147,12 +143,20 @@ namespace LS_Diabetes_App.ViewModels
 
         private async Task ExecuteOnProfilBase()
         {
+           
             if (!string.IsNullOrWhiteSpace(Profil.DiabetesType) & !string.IsNullOrWhiteSpace(Profil.Glucometer) & !string.IsNullOrWhiteSpace(Profil.GlycemiaUnit) & !string.IsNullOrWhiteSpace(Profil.WeightUnit))
             {
+                int x;
+                if (!int.TryParse(Diagnostic_Date, out x) | Diagnostic_Date.Length <4)
+                {
+                    DependencyService.Get<IMessage>().ShortAlert("Année du Diagnostic Non Valide !");
+                    return;
+                }
                 IsBusy = true;
                 await Task.Delay(2000);
                 var heightconverter = new HeightConverter();
                 Profil.Height = heightconverter.Convert(Profil.Height, Profil.HeighttUnit);
+                Profil.Diagnostic_Year = x;
                 DataStore.UpdateProfil(Profil);
                 var Objectifs = new Objectif_Model();
                 Objectifs.Max_Glycemia = 120;

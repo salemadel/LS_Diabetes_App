@@ -122,8 +122,9 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
         }
 
         public int MaximumChart { get; set; }
-
+        public string Message { get; set; }
         private WeightConverter WeightConverter { get; set; }
+        private HeightConverter HeightConverter { get; set; }
         public Profil_Model Profil { get; set; }
         public Command FiltreCommand { get; set; }
 
@@ -134,6 +135,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Profil = DataStore.GetProfilAsync().First();
             Weight_Data = new ObservableCollection<Weight_Model>();
             WeightConverter = new WeightConverter();
+            HeightConverter = new HeightConverter();
             Selected_MaxDate = DateTime.Now.Date;
             Selected_MinDate = DateTime.Now.Date.AddDays(-7);
             UpdateData();
@@ -165,7 +167,11 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Min = Weight_Data.OrderBy(i => i.Weight).First();
                 Max = Weight_Data.OrderBy(i => i.Weight).Last();
                 MaximumChart = Convert.ToInt32(Max.Weight + 100);
-                IMC = Math.Round(Weight_Data.OrderBy(i => i.Date).Last().Weight / Math.Pow(Profil.Height / 100, 2), 1);
+                IMC = Math.Round(WeightConverter.DoubleWeightConvetBack(Weight_Data.OrderBy(i => i.Date).Last().Weight , Profil.WeightUnit) / Math.Pow(Profil.Height / 100, 2), 1);
+                if(string.IsNullOrWhiteSpace(Message))
+                {
+                    Message = "Dernier Poids :" + Weight_Data.Last().Weight + " " + Profil.WeightUnit;
+                }
             }
             if(IMC < 18.5)
             {

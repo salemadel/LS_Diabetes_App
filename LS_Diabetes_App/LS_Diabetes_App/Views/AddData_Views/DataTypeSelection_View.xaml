@@ -9,7 +9,7 @@
                   xmlns:CustomFrame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              mc:Ignorable="d"
              x:Class="LS_Diabetes_App.Views.AddData_Views.DataTypeSelection_View"
-                  Padding="0,150,0,0"
+                  Padding="0,300,0,0"
                   CloseWhenBackgroundIsClicked="True">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -25,7 +25,6 @@
         <CustomFrame:PancakeView BackgroundColor="White" HasShadow="True" CornerRadius="40,40,0,0">
             <Grid BackgroundColor="White">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="90" />
                     <RowDefinition Height="90" />
                     <RowDefinition Height="90" />
                     <RowDefinition Height="90" />

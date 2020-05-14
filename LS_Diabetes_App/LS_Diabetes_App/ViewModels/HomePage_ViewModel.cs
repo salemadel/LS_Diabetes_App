@@ -338,6 +338,12 @@ namespace LS_Diabetes_App.ViewModels
             {
                 await Navigation.PopPopupAsync(true);
             });
+            MessagingCenter.Subscribe<Units_ViewModel>(this, "DataUpdated", (sender) =>
+          {
+              IsBusy = true;
+              UpdateData();
+              IsBusy = false;
+          });
             var startTimeSpan = TimeSpan.Zero;
             var periodTimeSpan = TimeSpan.FromMinutes(1);
 

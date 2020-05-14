@@ -8,20 +8,21 @@ namespace LS_Diabetes_App.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double)
-            {
-                double _value = (double)value;
+             if (value is double)
+             {
+                 double _value = (double)value;
 
-                switch (_value)
-                {
-                    case 0: return string.Empty;
-                    default: return _value.ToString();
-                }
-            }
-            else
-            {
-                return null;
-            }
+                 switch (_value)
+                 {
+                     case 0: return string.Empty;
+                     default: return _value.ToString();
+                 }
+             }
+             else
+             {
+                 return null;
+             }
+          
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -29,8 +30,8 @@ namespace LS_Diabetes_App.Converters
             if (value is string)
             {
                 string _value = (string)value;
-                int x;
-                return int.TryParse(_value , out x) ? System.Convert.ToDouble(_value) : 0;
+                double x;
+                return double.TryParse(_value , out x) ? x : 0;
               
             }
             else

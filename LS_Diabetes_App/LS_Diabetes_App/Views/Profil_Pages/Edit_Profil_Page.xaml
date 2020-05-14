@@ -3,7 +3,80 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:CustomEntry="clr-namespace:LS_Diabetes_App.Custom_Controls" 
+             xmlns:Behaviors="clr-namespace:LS_Diabetes_App.Behaviors" 
+             xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" 
+             xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters"
+            xmlns:resources="clr-namespace:LS_Diabetes_App"
              mc:Ignorable="d"
              x:Class="LS_Diabetes_App.Views.Profil_Pages.Edit_Profil_Page">
-    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <Converters:BoolReversConverter x:Key="ReversBool"/>
+            <Converters:StringDoubleConvertercs x:Key="StringToDouble"/>
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid Margin="10,10,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="{x:Static resources:AppResources.UserName_PlaceHolder}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{x:Static resources:AppResources.Password_PlaceHolder}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{x:Static resources:AppResources.ConfirmPassword_PlaceHolder}" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{x:Static resources:AppResources.LastName_PlaceHolder}" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{x:Static resources:AppResources.FirstName_PlaceHolder}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Entry Grid.Row="0" Grid.Column="1" Text="{Binding Profil.Email}" Placeholder="{x:Static resources:AppResources.UserName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Entry Grid.Row="1" Grid.Column="1"  Text="{Binding PassWord}"  Placeholder="{x:Static resources:AppResources.Password_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="True" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Entry Grid.Row="2" Grid.Column="1"  Text="{Binding ConfirmPassword}" Placeholder="{x:Static resources:AppResources.ConfirmPassword_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="True" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Entry Grid.Row="3" Grid.Column="1"  Text="{Binding Profil.LastName}" Placeholder="{x:Static resources:AppResources.LastName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <CustomEntry:Custom_Entry Grid.Row="4" Grid.Column="1"  Text="{Binding Profil.FirstName}" Placeholder="{x:Static resources:AppResources.FirstName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <Label Text="{x:Static resources:AppResources.BirthDate_PlaceHolder}" Grid.Row="5" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Entry x:Name="BirthDate_Entry" Keyboard="Numeric" Text="{Binding Date}" Grid.Row="5" Grid.Column="1"  Placeholder="dd/mm/yyyy" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
+                <CustomEntry:Custom_Entry.Behaviors>
+                    <Behaviors:MaskedBehavior Mask="XX/XX/XXXX"/>
+                </CustomEntry:Custom_Entry.Behaviors>
+            </CustomEntry:Custom_Entry>
+            <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="6" Grid.Column="0" >
+                <syncfusion:SfRadioButton x:Name="Male_RadioButton" Text="{x:Static resources:AppResources.Male_RadioButton}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0"  IsChecked="{Binding Male_Cheked}" />
+                <syncfusion:SfRadioButton x:Name="Female_RadioButton" Text="{x:Static resources:AppResources.Female_RadioButton}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" IsChecked="{Binding Male_Cheked , Converter={StaticResource ReversBool}}"/>
+            </syncfusion:SfRadioGroup>
+            <DatePicker x:Name="BirthDate_Picker" IsVisible="False" Date="{Binding Birth_Date}"/>
+            <Label Text="{x:Static resources:AppResources.DiabetesType_Label}" Grid.Row="7" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox x:Name="DiabetesTypes_Combobox" DataSource="{Binding Type_List}" SelectedItem="{Binding Profil.DiabetesType}" ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="7" Grid.Column="1" SelectionChanged="DiabetesTypes_Combobox_SelectionChanged" />
+            <Label Text="{x:Static resources:AppResources.Glucometer_Label}" Grid.Row="8" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <combobox:SfComboBox x:Name="Glucometer_Combobox" DataSource="{Binding Glucometer_List}" SelectedItem="{Binding Profil.Glucometer}" ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="8" Grid.Column="1" SelectionChanged="Glucometer_Combobox_SelectionChanged" />
+            <Label Text="Taille" Grid.Row="9" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Entry Grid.Row="9" Grid.Column="1" Text="{Binding Profil.Height , Converter={StaticResource StringToDouble}}" Placeholder="Ex : 188 cm" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+            <Label Text="Année du Diagnostic" Grid.Row="10"  Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Entry Grid.Row="10" Grid.Column="1" Keyboard="Numeric" Text="{Binding Diagnostic_Date}" Placeholder="yyyy" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" >
+                <CustomEntry:Custom_Entry.Behaviors>
+                    <Behaviors:MaskedBehavior Mask="XXXX"/>
+                </CustomEntry:Custom_Entry.Behaviors>
+            </CustomEntry:Custom_Entry>
+            <ActivityIndicator Grid.Row="11" Color="#00B2C8"  VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+            <ImageButton Source="ok.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding EditProfilCommand}" />
+        </Grid>
+    </ScrollView>
 </ContentPage>

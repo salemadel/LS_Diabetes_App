@@ -22,20 +22,22 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
         public Command SaveCommand { get; set; }
-        public Objectifs_ViewModel(IDataStore dataStore , INavigation navigation , Profil_Model profil)
+        public Objectifs_ViewModel(IDataStore dataStore , INavigation navigation)
         {
             DataStore = dataStore;
             Navigation = navigation;
-            Profil = profil;
+            Profil = DataStore.GetProfilAsync().First();
             GlycemiaConverter = new GlycemiaConverter();
             WeightConverter = new WeightConverter();
-            if(DataStore.GetObjectifAsync().Count() > 0)
-            {
-                Objectifs = DataStore.GetObjectifAsync().First();
-                Objectifs.Max_Glycemia = GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit);
-                Objectifs.Min_Glycemia = GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit);
-                Objectifs.Weight_Objectif = WeightConverter.DoubleWeightConvet(Objectifs.Weight_Objectif, Profil.WeightUnit);
-            }
+           
+            Objectifs = DataStore.GetObjectifAsync().First();
+            var new_max = GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit);
+            var new_min = GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit);
+            var new_weght = WeightConverter.DoubleWeightConvet(Objectifs.Weight_Objectif, Profil.WeightUnit);
+            Objectifs.Max_Glycemia = new_max;
+            Objectifs.Min_Glycemia = new_min;
+            Objectifs.Weight_Objectif = new_weght;
+           
             SaveCommand = new Command(async () =>
             {
                 await ExecuteOnSaveObjectifs();
@@ -43,7 +45,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
         }
         private async Task ExecuteOnSaveObjectifs()
         {
-            if (Objectifs.Min_Glycemia <= Objectifs.Max_Glycemia)
+            if ((Objectifs.Min_Glycemia <= Objectifs.Max_Glycemia) & Objectifs.Max_Glycemia > 0 & Objectifs.Min_Glycemia > 0)
             {
                 if (await DependencyService.Get<IDialog>().AlertAsync("Info", "Voulez vous Modifier les objectifs ?", "Oui", "Non"))
                 {

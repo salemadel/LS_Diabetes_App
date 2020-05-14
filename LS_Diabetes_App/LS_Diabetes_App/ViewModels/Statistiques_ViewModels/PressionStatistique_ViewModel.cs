@@ -251,6 +251,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 
        
         public Profil_Model Profil { get; set; }
+        public string Message { get; set; }
         public Command FiltreCommand { get; set; }
 
         public PressionStatistique_ViewModel(INavigation navigation, IDataStore dataStore)
@@ -308,6 +309,10 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Nbr_Hight_dia = Pression_Data.Where(i => i.Diastolique > 80).Count();
                 Nbr_Low_dia = Pression_Data.Where(i => i.Diastolique < 60).Count();
                 Average_dia = Math.Round(Convert.ToDouble(Pression_Data.Sum(i => i.Diastolique) / Pression_Data.Count), 1);
+                if(string.IsNullOrWhiteSpace(Message))
+                {
+                    Message = "Derniere Tension Artérielle : " + Pression_Data.Last().Systolique + " mmGh " + Pression_Data.Last().Diastolique + " mmGh";
+                }
             }
            if(Average_sys >= 90 & Average_sys <= 120)
             {

@@ -57,6 +57,7 @@
                                 <Label Text="%" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
                             </StackLayout>
                         </Frame>
+                        <Label Text="{Binding Message}" TextColor="Black" Margin="10,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" />
                         <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="155" WidthRequest="300" Margin="5,10,5,0">
                             <Grid>
                                 <Grid.RowDefinitions>

@@ -47,6 +47,10 @@
                     </CustomFrame:PancakeView>
                     <Label Grid.Row="3" Text="{x:Static resources:AppResources.ForgotPassword_Label}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,20,0" />
                     <Label x:Name="SignUp_Label" Grid.Row="3" Text="{x:Static resources:AppResources.SignUp_Label}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" Margin="20,0,0,0" />
+                    <StackLayout Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                        <ImageButton Source="facebook.png" Padding="10" BackgroundColor="#4267B2"    CornerRadius="30" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,0,0" HeightRequest="60" WidthRequest="60"  />
+                        <ImageButton Source="google.png" Padding="10" BackgroundColor="Transparent"   CornerRadius="30" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,0" HeightRequest="60" WidthRequest="60" />
+                    </StackLayout>
                     <Label Grid.Row="2" Text="{x:Static resources:AppResources.SignIn_Label}" FontSize="28" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="20,0,0,0" />
                     <ImageButton Source="next.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,30,0" HeightRequest="70" WidthRequest="70" Command="{Binding LoginCommand}" />
 

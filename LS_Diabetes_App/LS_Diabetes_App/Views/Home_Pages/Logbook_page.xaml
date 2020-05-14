@@ -87,7 +87,7 @@
                                         <Frame BorderColor="LightGray" Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  IsVisible="{Binding Data.Picture , Converter={StaticResource NullToBool}}" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
                                             <Image Source="{Binding Data.Picture}" Aspect="AspectFill">
                                                 <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding PictureTappedCommand}" />
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference LogBookPage}, Path=BindingContext.PictureTappedCommand}" />
                                                 </Image.GestureRecognizers>
                                             </Image>
                                         </Frame>

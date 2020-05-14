@@ -167,7 +167,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
         public Profil_Model Profil { get; set; }
-
+        private PermissionsRequest PermissionsRequest { get; set; }
 
         private INavigation Navigation { get; set; }
 
@@ -186,6 +186,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 Weight = new Weight_Model();
                 GlycemiaConverter = new GlycemiaConverter();
                 WeightConverter = new WeightConverter();
+                PermissionsRequest = new PermissionsRequest();
             }
             else
             {
@@ -215,10 +216,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             {
                 await ExecuteOnSaveWeight();
             });
-            GetPositionCommand = new Command(async () =>
-            {
-                await ExecuteOnGetPosition();
-            });
+           
             TakePictureCommand = new Command(async () =>
             {
                 await ExecuteOnTakePicture();
@@ -334,82 +332,37 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 
         private async Task ExecuteOnTakePicture()
         {
-            try
+            if (await PermissionsRequest.Check_permissions("Storage") == PermissionStatus.Granted)
             {
-                await CrossMedia.Current.Initialize();
-                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                try
                 {
-                    return;
+                    await CrossMedia.Current.Initialize();
+                    if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+                    {
+                        return;
+                    }
+
+                    var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                    {
+                        PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
+                        CompressionQuality = 50,
+                        Directory = "LS_Diabetes_pictures",
+                        Name = "Sh_" + DateTime.Now.ToString() + ".jpg"
+                    });
+
+                    if (file == null)
+                        return;
+
+                    PicturePath = file.Path;
+                    Picture = ImageSource.FromFile(PicturePath);
                 }
-
-                var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                catch
                 {
-                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
-                    CompressionQuality = 50,
-                    Directory = "LS_Diabetes_pictures",
-                    Name = "Sh_" + DateTime.Now.ToString() + ".jpg"
-                });
-
-                if (file == null)
-                    return;
-
-                PicturePath = file.Path;
-                Picture = ImageSource.FromFile(PicturePath);
-            }
-            catch
-            {
+                }
             }
         }
 
-        private async Task ExecuteOnGetPosition()
-        {
-            IsBusy = true;
-            Position position = null;
-            try
-            {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                if (status != PermissionStatus.Granted)
-                {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
-                    {
-                    }
-
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
-
-                    if (results.ContainsKey(Permission.Location))
-                        status = results[Permission.Location];
-                }
-                if (status == PermissionStatus.Granted)
-                {
-                    var locator = CrossGeolocator.Current;
-
-                    locator.DesiredAccuracy = 100;
-
-                    if (locator.IsGeolocationAvailable && locator.IsGeolocationEnabled)
-                    {
-                        position = await locator.GetPositionAsync(TimeSpan.FromSeconds(30), null, true);
-                    }
-                    else
-                    {
-                        DependencyService.Get<ISettingService>().OpenSetting();
-                    }
-                }
-            }
-            catch
-            {
-            }
-            finally
-            {
-                if (position != null)
-                {
-                    List<double> _position = new List<double>();
-                    _position.Add(position.Latitude);
-                    _position.Add(position.Longitude);
-                    Glucose.Position = _position.ToArray();
-                }
-            }
-            IsBusy = false;
-        }
+       
 
         private async Task ExecuteOnPictureTapped()
         {

@@ -36,7 +36,7 @@ namespace LS_Diabetes_App.Droid
             ToolbarResource = Resource.Layout.Toolbar;
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Forms.DependencyService.Register<StepCounter>();
-
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);

@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using LS_Diabetes_App.Servies;
 
 namespace LS_Diabetes_App.Droid.Interfaces
 {
@@ -20,6 +21,8 @@ namespace LS_Diabetes_App.Droid.Interfaces
         {
             var stepServiceIntent = new Intent(context, typeof(StepCounter));
             context.StartService(stepServiceIntent);
+            RappelService.ReRappel();
+            RappelService.SetRappel();
         }
     }
 }

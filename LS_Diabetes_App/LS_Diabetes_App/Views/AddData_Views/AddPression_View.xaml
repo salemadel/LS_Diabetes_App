@@ -29,7 +29,7 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
+              
                 <RowDefinition Height="100" />
            
                 <RowDefinition Height="*" />
@@ -70,17 +70,11 @@
                     </Image>
                 </Frame>
             </StackLayout>
-            <Label Text="{x:Static resources:AppResources.Position_Label}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Grid.Row="4" Grid.Column="1" Text="{Binding Pression.Position , Converter={StaticResource DoubleArrayToString}}" IsEnabled="False" FontFamily="{StaticResource NormalFont}" FontSize="13" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
-            <Image Source="gps.png" Grid.Row="4" HeightRequest="25" WidthRequest="25" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy ,Converter={StaticResource BoolRevers}}" IsEnabled="{Binding IsBusy ,Converter={StaticResource BoolRevers}}">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding GetPositionCommand}" />
-                </Image.GestureRecognizers>
-            </Image>
-            <ActivityIndicator Grid.Row="4" Grid.Column="0" Color="#00B2C8"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"  HeightRequest="25" WidthRequest="25" />
-            <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="5" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Editor Text="{Binding Pression.Note}" Grid.Row="6" Grid.Column="0" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="100" WidthRequest="200" />
-            <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SavePressionCommand}" />
+           
+          
+            <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Editor Text="{Binding Pression.Note}" Grid.Row="5" Grid.Column="0" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="100" WidthRequest="200" />
+            <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SavePressionCommand}" />
         </Grid>
     </ScrollView>
 </ContentPage>

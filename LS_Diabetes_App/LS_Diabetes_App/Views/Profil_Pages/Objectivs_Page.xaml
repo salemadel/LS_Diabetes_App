@@ -49,28 +49,28 @@
 
 
                 <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="0">
-                    <CustomEntry:Custom_Entry Keyboard="Numeric"  Text="{Binding Objectifs.Weight_Objectif}" Placeholder="{Binding Profil.WeightUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40" >
+                    <CustomEntry:Custom_Entry Keyboard="Numeric"  Text="{Binding Objectifs.Weight_Objectif , Converter={StaticResource StringToDouble}}" Placeholder="{Binding Profil.WeightUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40" >
                         <CustomEntry:Custom_Entry.Behaviors>
-                            <Behavior:NumericValidationBehavior />
+                           
                         </CustomEntry:Custom_Entry.Behaviors>
                     </CustomEntry:Custom_Entry>
-                    <Label Text="{Binding Profil.WeightUnit ,StringFormat=' {0:N}'}" TextColor="Black" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Profil.WeightUnit}" TextColor="Black" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 </StackLayout>
                
                 <Label Text="Glycemie" TextColor="Black" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 <StackLayout Orientation="Horizontal" Spacing="0" Grid.Row="1" Grid.Column="1">
-                    <CustomEntry:Custom_Entry x:Name="Sys_Entry"  Keyboard="Numeric" Text="{Binding Objectifs.Min_Glycemia}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Min" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
+                    <CustomEntry:Custom_Entry Keyboard="Numeric" Text="{Binding Objectifs.Min_Glycemia , Converter={StaticResource StringToDouble}}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Min" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
                         <CustomEntry:Custom_Entry.Behaviors>
-                            <Behavior:NumericValidationBehavior />
+                         
                         </CustomEntry:Custom_Entry.Behaviors>
                     </CustomEntry:Custom_Entry>
                     <Label Text="\" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                    <CustomEntry:Custom_Entry x:Name="Dia_Entry"  Keyboard="Numeric" Text="{Binding Objectifs.Max_Glycemia}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Max" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
+                    <CustomEntry:Custom_Entry Keyboard="Numeric" Text="{Binding Objectifs.Max_Glycemia , Converter={StaticResource StringToDouble}}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Max" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
                         <CustomEntry:Custom_Entry.Behaviors>
-                            <Behavior:NumericValidationBehavior />
+
                         </CustomEntry:Custom_Entry.Behaviors>
                     </CustomEntry:Custom_Entry>
-                    <Label Text="{Binding Profil.GlycemiaUnit ,StringFormat=' {0:N}'}" TextColor="Black" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                    <Label Text="{Binding Profil.GlycemiaUnit}" TextColor="Black" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 </StackLayout>
                 <Label Grid.Row="2" Grid.Column="0" TextColor="Black" Text="Pas" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
 
@@ -81,7 +81,7 @@
                     </CustomEntry:Custom_Entry>
                     <Label Text="Pas" TextColor="Black" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 </StackLayout>
-                <ImageButton  Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveCommand}" />
+                <ImageButton  Source="ok.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveCommand}" />
             </Grid>
         </Grid>
     </ScrollView>

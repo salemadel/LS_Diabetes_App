@@ -26,43 +26,81 @@ namespace LS_Diabetes_App.Droid.Interfaces
         readonly DateTime _jan1st1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         internal string _randomNumber;
 
-        public void LocalNotification(string title, string body, int id, DateTime notifyTime)
+        public void LocalNotification(string title, string body, int id, DateTime notifyTime , int duration)
         {
-
-            //long repeateDay = 1000 * 60 * 60 * 24;      
-            long repeateForMinute = 60000; // In milliseconds     
-            long totalMilliSeconds = (long)(notifyTime.ToUniversalTime() - _jan1st1970).TotalMilliseconds;
-            if (totalMilliSeconds < JavaSystem.CurrentTimeMillis())
+            if (duration > 0)
             {
-                totalMilliSeconds = totalMilliSeconds + repeateForMinute;
-            }
+                //long repeateDay = 1000 * 60 * 60 * 24;      
+                long repeateForMinute = 60000; // In milliseconds     
+                long totalMilliSeconds = (long)(notifyTime.ToUniversalTime() - _jan1st1970).TotalMilliseconds;
+                if (totalMilliSeconds < JavaSystem.CurrentTimeMillis())
+                {
+                    totalMilliSeconds = totalMilliSeconds + repeateForMinute;
+                }
 
-            var intent = CreateIntent(id);
-            var localNotification = new LocalNotification();
-            localNotification.Title = title;
-            localNotification.Body = body;
-            localNotification.Id = id;
-            localNotification.NotifyTime = notifyTime;
+                var intent = CreateIntent(id);
+                var localNotification = new LocalNotification();
+                localNotification.Title = title;
+                localNotification.Body = body;
+                localNotification.Id = id;
+                localNotification.NotifyTime = notifyTime;
 
-            if (_notificationIconId != 0)
-            {
-                localNotification.IconId = _notificationIconId;
+                if (_notificationIconId != 0)
+                {
+                    localNotification.IconId = _notificationIconId;
+                }
+                else
+                {
+                    //  localNotification.IconId = Resource.Drawable.notificationgrey;
+                }
+
+                var serializedNotification = SerializeNotification(localNotification);
+                intent.PutExtra(ScheduledAlarmHandler.LocalNotificationKey, serializedNotification);
+
+                Random generator = new Random();
+                _randomNumber = generator.Next(100000, 999999).ToString("D6");
+                intent.SetData(Android.Net.Uri.Parse("myalarms://" + _randomNumber));
+                var pendingIntent = PendingIntent.GetBroadcast(Application.Context, Convert.ToInt32(_randomNumber), intent, PendingIntentFlags.Immutable);
+                var alarmManager = GetAlarmManager();
+                alarmManager.SetRepeating(AlarmType.RtcWakeup, totalMilliSeconds, repeateForMinute, pendingIntent);
             }
             else
             {
-              //  localNotification.IconId = Resource.Drawable.notificationgrey;
+                //long repeateDay = 1000 * 60 * 60 * 24;      
+                long repeateForMinute = 60000; // In milliseconds   
+               long reminderInterval = AlarmManager.IntervalDay * 1;
+                long totalMilliSeconds = (long)(notifyTime.ToUniversalTime() - _jan1st1970).TotalMilliseconds;
+                if (totalMilliSeconds < JavaSystem.CurrentTimeMillis())
+                {
+                    totalMilliSeconds = totalMilliSeconds + repeateForMinute;
+                }
+
+                var intent = CreateIntent(id);
+                var localNotification = new LocalNotification();
+                localNotification.Title = title;
+                localNotification.Body = body;
+                localNotification.Id = id;
+                localNotification.NotifyTime = notifyTime;
+
+                if (_notificationIconId != 0)
+                {
+                    localNotification.IconId = _notificationIconId;
+                }
+                else
+                {
+                    //  localNotification.IconId = Resource.Drawable.notificationgrey;
+                }
+                
+                var serializedNotification = SerializeNotification(localNotification);
+                intent.PutExtra(ScheduledAlarmHandler.LocalNotificationKey, serializedNotification);
+                
+                Random generator = new Random();
+                _randomNumber = generator.Next(100000, 999999).ToString("D6");
+                intent.SetData(Android.Net.Uri.Parse("myalarms://" + _randomNumber));
+                var pendingIntent = PendingIntent.GetBroadcast(Application.Context, Convert.ToInt32(_randomNumber), intent, PendingIntentFlags.Immutable);
+                var alarmManager = GetAlarmManager();
+                alarmManager.SetRepeating(AlarmType.RtcWakeup, totalMilliSeconds, reminderInterval, pendingIntent);
             }
-
-            var serializedNotification = SerializeNotification(localNotification);
-            intent.PutExtra(ScheduledAlarmHandler.LocalNotificationKey, serializedNotification);
-
-            Random generator = new Random();
-            _randomNumber = generator.Next(100000, 999999).ToString("D6");
-
-            var pendingIntent = PendingIntent.GetBroadcast(Application.Context, Convert.ToInt32(_randomNumber), intent, PendingIntentFlags.Immutable);
-            var alarmManager = GetAlarmManager();
-            alarmManager.SetRepeating(AlarmType.RtcWakeup, totalMilliSeconds, repeateForMinute, pendingIntent);
-           
         }
 
         public void Cancel(int id)
