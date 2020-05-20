@@ -40,7 +40,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Text="{x:Static resources:AppResources.Time_Label}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry x:Name="DateTimeEntry" Grid.Row="0" Grid.Column="1" Text="{Binding AddDateTime , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" IsEnabled="{Binding IsVisible}"/>
+            <CustomEntry:Custom_Entry x:Name="DateTimeEntry" Grid.Row="0" Grid.Column="1" Text="{Binding AddDateTime , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" IsEnabled="{Binding IsVisible}"/>
             <TimePicker x:Name="TimePicker" Focused="TimePicker_Focused" PropertyChanged="TimePicker_PropertyChanged" IsVisible="False" Time="{Binding Time}" />
             <DatePicker x:Name="DatePicker" IsVisible="False" Date="{Binding Date}" />
             <Label Text="{x:Static resources:AppResources.Home_Glucose_Lavel_Label}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
@@ -52,7 +52,7 @@
             <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <syncfusion:SfRadioButton  Text="à jeun" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" IsChecked="{Binding No_Eat}" Margin="5,0,0,0"  />
                 <syncfusion:SfRadioButton  Text="avant repas" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding Befor_Eat}" FontSize="15" Margin="5,0,0,0" />
-                <syncfusion:SfRadioButton  Text="apees repas" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding After_Eat}" FontSize="15" Margin="5,0,0,0" />
+                <syncfusion:SfRadioButton  Text="apres repas" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding After_Eat}" FontSize="15" Margin="5,0,0,0" />
             </syncfusion:SfRadioGroup>
             <Label Text="Activité" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <syncfusion:SfCheckBox Grid.Row="3" Grid.Column="1" CheckedColor="#00B2C8" IsChecked="{Binding Glucose.Activity}"/>

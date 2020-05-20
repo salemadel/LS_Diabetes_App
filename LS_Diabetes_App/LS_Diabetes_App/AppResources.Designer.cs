@@ -61,11 +61,29 @@ namespace LS_Diabetes_App {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à You must fill in all fields.
+        /// </summary>
+        internal static string AllFieldsMessage {
+            get {
+                return ResourceManager.GetString("AllFieldsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Date of birth.
         /// </summary>
         internal static string BirthDate_PlaceHolder {
             get {
                 return ResourceManager.GetString("BirthDate_PlaceHolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date of birth Not Valid!.
+        /// </summary>
+        internal static string BirthDateMessage {
+            get {
+                return ResourceManager.GetString("BirthDateMessage", resourceCulture);
             }
         }
         
@@ -79,11 +97,29 @@ namespace LS_Diabetes_App {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please confirm your password !.
+        /// </summary>
+        internal static string ConfirmPasswordMessage {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Diabetes type.
         /// </summary>
         internal static string DiabetesType_Label {
             get {
                 return ResourceManager.GetString("DiabetesType_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Diagnostic year.
+        /// </summary>
+        internal static string Diagnostic_Year {
+            get {
+                return ResourceManager.GetString("Diagnostic_Year", resourceCulture);
             }
         }
         
@@ -129,6 +165,24 @@ namespace LS_Diabetes_App {
         internal static string Glucometer_Label {
             get {
                 return ResourceManager.GetString("Glucometer_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Good.
+        /// </summary>
+        internal static string Good {
+            get {
+                return ResourceManager.GetString("Good", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Height unit.
+        /// </summary>
+        internal static string Height_Unit {
+            get {
+                return ResourceManager.GetString("Height_Unit", resourceCulture);
             }
         }
         
@@ -246,6 +300,15 @@ namespace LS_Diabetes_App {
         internal static string Time_Label {
             get {
                 return ResourceManager.GetString("Time_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Today.
+        /// </summary>
+        internal static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
             }
         }
         

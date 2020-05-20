@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -137,6 +138,7 @@ namespace LS_Diabetes_App.ViewModels
             }
             else
             {
+               
                 DependencyService.Get<IMessage>().ShortAlert("Il Faut remplir tous les champs !");
             }
         }

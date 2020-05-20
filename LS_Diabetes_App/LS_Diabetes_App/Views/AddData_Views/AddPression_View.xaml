@@ -29,7 +29,8 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
-              
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="100" />
            
                 <RowDefinition Height="*" />
@@ -49,19 +50,27 @@
                         <Behavior:NumericValidationBehavior />
                     </CustomEntry:Custom_Entry.Behaviors>
                 </CustomEntry:Custom_Entry>
-                <Label Text="\" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                <Label Text="/" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 <CustomEntry:Custom_Entry x:Name="Dia_Entry"  Keyboard="Numeric" Text="{Binding Pression.Diastolique , Mode=OneWayToSource}" FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Dia" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="60">
                     <CustomEntry:Custom_Entry.Behaviors>
                         <Behavior:NumericValidationBehavior />
                     </CustomEntry:Custom_Entry.Behaviors>
                 </CustomEntry:Custom_Entry>
             </StackLayout>
-            <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="2" Grid.Column="0">
+            <Label Text="Fréquence cardiaque" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Entry  Grid.Row="2" Keyboard="Numeric" IsEnabled="{Binding IsVisible}" Grid.Column="1" Text="{Binding Pression.Heart_Frequancy ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="BPM" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
+                <CustomEntry:Custom_Entry.Behaviors>
+                    <Behavior:GlycemieBehavior/>
+                </CustomEntry:Custom_Entry.Behaviors>
+            </CustomEntry:Custom_Entry>
+            <Label Text="Fibrillation atriale" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <syncfusion:SfCheckBox Grid.Row="3" Grid.Column="1" CheckedColor="#00B2C8" IsChecked="{Binding Pression.Atrial_Fibrilation}"/>
+            <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="4" Grid.Column="0">
                 <syncfusion:SfRadioButton  Text="à la maison" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding At_Home}" FontSize="15" Margin="5,0,0,0"  />
                 <syncfusion:SfRadioButton  Text="chez le medecin" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />
             </syncfusion:SfRadioGroup>
-            <ImageButton Source="camera.png" Padding="15" BackgroundColor="#00B2C8"  Grid.Row="3" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
-            <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+            <ImageButton Source="camera.png" Padding="15" BackgroundColor="#00B2C8"  Grid.Row="5" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
+            <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <Frame BorderColor="LightGray" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
                     <Image Source="{Binding Picture}" Aspect="AspectFill">
                         <Image.GestureRecognizers>
@@ -72,9 +81,9 @@
             </StackLayout>
            
           
-            <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Editor Text="{Binding Pression.Note}" Grid.Row="5" Grid.Column="0" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="100" WidthRequest="200" />
-            <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SavePressionCommand}" />
+            <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="6" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Editor Text="{Binding Pression.Note}" Grid.Row="7" Grid.Column="0" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="100" WidthRequest="200" />
+            <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SavePressionCommand}" />
         </Grid>
     </ScrollView>
 </ContentPage>

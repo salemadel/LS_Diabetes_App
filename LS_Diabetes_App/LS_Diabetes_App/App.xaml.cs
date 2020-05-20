@@ -8,6 +8,7 @@ namespace LS_Diabetes_App
 {
     public partial class App : Application
     {
+        public static string CurrentLanguage = "EN";
         public App()
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQzNzAyQDMxMzgyZTMxMmUzMGlDWTJIVjZqZ2swTU1GOFdDaVhrQkhYMktvZjV0TjRtUldJWFN4akpKRlU9");

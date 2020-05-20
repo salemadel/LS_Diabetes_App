@@ -43,6 +43,33 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+        [JsonIgnore]
+        [Ignore]
+        private int heart_freaquancy { get; set; }
+
+        public int Heart_Freaquancy
+        {
+            get { return heart_freaquancy; }
+            set
+            {
+                if (heart_freaquancy != value)
+                    heart_freaquancy = value;
+                OnPropertyChanged();
+            }
+        }
+        [JsonIgnore]
+        [Ignore]
+        private bool atrial_fibrilation { get; set; }
+        public bool Atrial_Fibrilation
+        {
+            get { return atrial_fibrilation; }
+            set
+            {
+                if (atrial_fibrilation != value)
+                    atrial_fibrilation = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonIgnore]
         [Ignore]

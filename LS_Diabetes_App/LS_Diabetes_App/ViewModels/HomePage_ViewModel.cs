@@ -2,12 +2,14 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
 using LS_Diabetes_App.ViewModels.Profil_ViewModels;
 using LS_Diabetes_App.Views.AddData_Views;
 using LS_Diabetes_App.Views.Statistiques_Pages;
 using Rg.Plugins.Popup.Extensions;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -17,7 +19,7 @@ using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels
 {
-    public class HomePage_ViewModel : INotifyPropertyChanged
+    public class HomePage_ViewModel : ViewModelBase , INotifyPropertyChanged
     {
         private IDataStore DataStore;
         private INavigation Navigation;
@@ -265,6 +267,30 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        private string restdate { get; set; }
+
+        public string RestDate
+        {
+            get { return restdate; }
+            set
+            {
+                if (restdate != value)
+                    restdate = value;
+                OnPropertyChanged();
+            }
+        }
+        private Drugs_Model drug { get; set; }
+        public Drugs_Model Drug
+        {
+            get { return drug; }
+            set
+            {
+                if (drug != value)
+                    drug = value;
+                OnPropertyChanged();
+            }
+        }
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
         public Command AddDataTypeCommand { get; set; }
@@ -272,7 +298,7 @@ namespace LS_Diabetes_App.ViewModels
         public Command WeightStatistiqueCommand { get; set; }
         public Command Hb1acSatistiqueCommand { get; set; }
         public Command PressionStatiqtiqueCommand { get; set; }
-
+        public Command MedicationCommand { get; set; }
         public HomePage_ViewModel(INavigation navigation, IDataStore dataStore)
         {
             this.DataStore = dataStore;
@@ -302,6 +328,10 @@ namespace LS_Diabetes_App.ViewModels
             PressionStatiqtiqueCommand = new Command(async () =>
             {
                 await ExecuteOnPressionTapped();
+            });
+            MedicationCommand = new Command(async () =>
+            {
+                await ExecuteOnMedicationTapped();
             });
             MessagingCenter.Subscribe<object , int>(Application.Current, "Steps", (sender , args) =>
           {
@@ -344,6 +374,12 @@ namespace LS_Diabetes_App.ViewModels
               UpdateData();
               IsBusy = false;
           });
+            MessagingCenter.Subscribe<AddDrugs_ViewModel>(this, "DataUpdated", (sender) =>
+            {
+                IsBusy = true;
+                UpdateData();
+                IsBusy = false;
+            });
             var startTimeSpan = TimeSpan.Zero;
             var periodTimeSpan = TimeSpan.FromMinutes(1);
 
@@ -390,7 +426,7 @@ namespace LS_Diabetes_App.ViewModels
             if (Glucose_Data.Count > 0)
             {
                 Last_Glycemia = Glucose_Data.OrderBy(i => i.Date).Last();
-                Average = Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 3);
+                Average = (Profil.GlycemiaUnit == "mg / dL") ? Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 0) : Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 3);
                 Min = Glucose_Data.OrderBy(i => i.Glycemia).First().Glycemia;
                 Max = Glucose_Data.OrderBy(i => i.Glycemia).Last().Glycemia;
                 if (Profil.GlycemiaUnit == "mg / dL")
@@ -449,9 +485,66 @@ namespace LS_Diabetes_App.ViewModels
                     Steps = DataStore.GetStepsAsync().Single(i => i.Date.Date == DateTime.Now.Date).Steps;
                 }
             }
-       
+            NextMedication();
         }
+        private void NextMedication()
+        {
+            
+           
+            if(DataStore.GetDrugsAsync().Count()> 0)
+            {
+                var Drugs = DataStore.GetDrugsAsync().ToList();
+                var keyvalue = new List<KeyValuePair<string, string>>();
+                foreach(var drug in Drugs.Where(i => i.Rappel == true))
+                {
+                   
+                        foreach(var time in drug.Times_List)
+                        {
+                            for(int i =0;i<=drug.Duration; i++)
+                            {
+                            if ((drug.Indeterminer) || (!drug.Indeterminer & drug.StartDate.AddDays(i).Date >= DateTime.Now.Date))
+                            {
+                               
+                                if(drug.Indeterminer)
+                                {
+                                    DateTime date = new DateTime();
+                                    date = (drug.StartDate.Date < DateTime.Now.Date) ? DateTime.Now.Date : drug.StartDate;
+                                    date = ((date != drug.StartDate) & DateTime.Now.TimeOfDay > TimeSpan.Parse(time)) ? date.AddDays(1) : date;
+                                    var rappeltime = date.Date + TimeSpan.Parse(time);
+                                    keyvalue.Add(new KeyValuePair<string, string>(drug.Id.ToString(), rappeltime.ToString()));
+                                }
+                                else
+                                {
+                                   if(!(drug.StartDate.AddDays(i).Date == DateTime.Now.Date & DateTime.Now.TimeOfDay > TimeSpan.Parse(time)))
+                                    {
+                                        var rappeltime =drug.StartDate.AddDays(i).Date + TimeSpan.Parse(time);
+                                        keyvalue.Add(new KeyValuePair<string, string>(drug.Id.ToString(), rappeltime.ToString()));
+                                    }
+                                }
+                              
+                            }
+                          }
+                        }
+                }
+                if(keyvalue.Count > 0)
+                {
+                    var t = TimeSpan.FromTicks((Convert.ToDateTime(keyvalue.OrderBy(k => Convert.ToDateTime(k.Value)).First().Value) - DateTime.Now).Ticks);
+                    RestDate =(t.Days >0) ? string.Format("{0:D2}j {1:D2}h", t.Days, t.Hours) : string.Format("{0:D2}h {1:D2}m", t.Hours, t.Minutes);
 
+
+
+
+                    Drug = Drugs.SingleOrDefault(i => i.Id == Convert.ToInt32(keyvalue.OrderBy(k => Convert.ToDateTime(k.Value)).First().Key));
+                }
+                else
+                {
+                    Drug = null;
+                    RestDate = "--";
+                }
+               
+                
+            }
+        }
         private async Task ExecuteOnAddDataType()
         {
             IsBusy = true;
@@ -481,6 +574,12 @@ namespace LS_Diabetes_App.ViewModels
         {
             IsBusy = true;
             await Navigation.PushModalAsync(new PressionStatistique_Page(), true);
+            IsBusy = false;
+        }
+        private async Task ExecuteOnMedicationTapped()
+        {
+            IsBusy = true;
+            await Navigation.PushModalAsync(new Drugs_Page() , true);
             IsBusy = false;
         }
     }

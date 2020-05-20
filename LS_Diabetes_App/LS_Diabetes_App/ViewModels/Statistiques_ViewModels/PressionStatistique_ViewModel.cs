@@ -2,6 +2,8 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Views.Statistiques_Pages;
+using Syncfusion.XForms.Buttons;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -247,10 +249,33 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+        private int selected_date_index { get; set; }
+        public int Selected_Date_Index
+        {
+            get { return selected_date_index; }
+            set
+            {
+                if (selected_date_index != value)
+                {
+                    selected_date_index = value;
+                    switch (value)
+                    {
+                        case 0: Selected_MinDate = DateTime.Now.Date; Selected_MaxDate = DateTime.Now.Date; break;
+                        case 1: Selected_MinDate = DateTime.Now.Date.AddDays(-7); Selected_MaxDate = DateTime.Now.Date; break;
+                        case 2: Selected_MinDate = DateTime.Now.Date.AddDays(-14); Selected_MaxDate = DateTime.Now.Date; break;
+                        case 3: Selected_MinDate = DateTime.Now.Date.AddDays(-30); Selected_MaxDate = DateTime.Now.Date; break;
+                        case 4: Selected_MinDate = DateTime.Now.Date.AddDays(-90); Selected_MaxDate = DateTime.Now.Date; break;
+                    }
+                    OnPropertyChanged();
+                    
+                }
+            }
+        }
         public int MaximumChart { get; set; }
 
        
         public Profil_Model Profil { get; set; }
+        public ObservableCollection<SfSegmentItem> DateItems { get; set; }
         public string Message { get; set; }
         public Command FiltreCommand { get; set; }
 
@@ -261,11 +286,26 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Profil = DataStore.GetProfilAsync().First();
             Pression_Data = new ObservableCollection<Pression_Model>();       
             Selected_MaxDate = DateTime.Now.Date;
-            Selected_MinDate = DateTime.Now.Date.AddDays(-7);
+            Selected_MinDate = DateTime.Now.Date;
+            Selected_Date_Index = 0;
+            DateItems = new ObservableCollection<SfSegmentItem>
+        {
+            new SfSegmentItem(){Text="Aujourd'hui" },
+            new SfSegmentItem(){Text="7 Jours"},
+            new SfSegmentItem(){Text="14 Jours"},
+            new SfSegmentItem(){Text="30 Jours"},
+            new SfSegmentItem(){Text="90 Jours"}
+
+        };
             UpdateData();
             FiltreCommand = new Command(() =>
             {
                 UpdateData();
+            });
+            MessagingCenter.Subscribe<PressionStatistique_Page>(this, "Filter", (sender) =>
+            {
+                UpdateData();
+
             });
         }
 
@@ -311,7 +351,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Average_dia = Math.Round(Convert.ToDouble(Pression_Data.Sum(i => i.Diastolique) / Pression_Data.Count), 1);
                 if(string.IsNullOrWhiteSpace(Message))
                 {
-                    Message = "Derniere Tension Artérielle : " + Pression_Data.Last().Systolique + " mmGh " + Pression_Data.Last().Diastolique + " mmGh";
+                    Message = "Derniere Tension Artérielle : " + Pression_Data.Last().Systolique + " mmGh / " + Pression_Data.Last().Diastolique + " mmGh";
                 }
             }
            if(Average_sys >= 90 & Average_sys <= 120)

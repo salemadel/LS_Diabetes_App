@@ -1,6 +1,6 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.ViewModels.Statistiques_ViewModels;
-
+using Syncfusion.XForms.Buttons;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,11 +14,16 @@ namespace LS_Diabetes_App.Views.Statistiques_Pages
             InitializeComponent();
             var datastore = new DataStores();
             BindingContext = new GlucoseStatistique_ViewModel(Navigation, datastore);
-        }
 
-        private void SfSegmentedControl_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
+
+
+        }
+        private void Handle_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
         {
+          
             MessagingCenter.Send(this, "Filter");
         }
+
+       
     }
 }

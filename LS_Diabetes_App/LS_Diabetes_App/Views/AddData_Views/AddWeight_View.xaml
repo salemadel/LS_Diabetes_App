@@ -37,7 +37,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Text="{x:Static resources:AppResources.Time_Label}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry x:Name="DateTimeEntry" Grid.Row="0" Grid.Column="1" Text="{Binding AddDateTime , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" />
+            <CustomEntry:Custom_Entry x:Name="DateTimeEntry" Grid.Row="0" Grid.Column="1" Text="{Binding AddDateTime , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" />
             <TimePicker x:Name="TimePicker" Focused="TimePicker_Focused" PropertyChanged="TimePicker_PropertyChanged" IsVisible="False" Time="{Binding Time}" />
             <DatePicker x:Name="DatePicker" IsVisible="False" Date="{Binding Date}" />
             <Label Text="Weight" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />

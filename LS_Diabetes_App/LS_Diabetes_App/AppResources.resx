@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllFieldsMessage" xml:space="preserve">
+    <value>You must fill in all fields</value>
+  </data>
+  <data name="BirthDateMessage" xml:space="preserve">
+    <value>Date of birth Not Valid!</value>
+  </data>
   <data name="BirthDate_PlaceHolder" xml:space="preserve">
     <value>Date of birth</value>
+  </data>
+  <data name="ConfirmPasswordMessage" xml:space="preserve">
+    <value>Please confirm your password !</value>
   </data>
   <data name="ConfirmPassword_PlaceHolder" xml:space="preserve">
     <value>Confirm Passwod</value>
   </data>
   <data name="DiabetesType_Label" xml:space="preserve">
     <value>Diabetes type</value>
+  </data>
+  <data name="Diagnostic_Year" xml:space="preserve">
+    <value>Diagnostic year</value>
   </data>
   <data name="Drugs_Label" xml:space="preserve">
     <value>Drugs</value>
@@ -140,6 +152,12 @@
   </data>
   <data name="Glucometer_Label" xml:space="preserve">
     <value>Glucometer</value>
+  </data>
+  <data name="Good" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="Height_Unit" xml:space="preserve">
+    <value>Height unit</value>
   </data>
   <data name="Home_Glucose_Lavel_Label" xml:space="preserve">
     <value>Glycemia</value>
@@ -179,6 +197,9 @@
   </data>
   <data name="Time_Label" xml:space="preserve">
     <value>Time</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
   </data>
   <data name="Unit_Label" xml:space="preserve">
     <value>Unit</value>

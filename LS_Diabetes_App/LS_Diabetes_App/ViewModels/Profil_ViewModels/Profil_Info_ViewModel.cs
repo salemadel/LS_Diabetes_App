@@ -1,6 +1,7 @@
 ﻿using LS_Diabetes_App.Converters;
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
+using LS_Diabetes_App.Servies;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
 {
-    public class Profil_Info_ViewModel : INotifyPropertyChanged
+    public class Profil_Info_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private string[] type_list = new string[] { "Type 1", "Type 2", "Autre" };
         private string[] glucometer_list = new string[] { "Check 3", "Autre" };

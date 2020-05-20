@@ -31,7 +31,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
             if (duration > 0)
             {
                 //long repeateDay = 1000 * 60 * 60 * 24;      
-                long repeateForMinute = 60000; // In milliseconds     
+                long repeateForMinute = 0; // In milliseconds     
                 long totalMilliSeconds = (long)(notifyTime.ToUniversalTime() - _jan1st1970).TotalMilliseconds;
                 if (totalMilliSeconds < JavaSystem.CurrentTimeMillis())
                 {
@@ -67,7 +67,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
             else
             {
                 //long repeateDay = 1000 * 60 * 60 * 24;      
-                long repeateForMinute = 60000; // In milliseconds   
+                long repeateForMinute = 0; // In milliseconds   
                long reminderInterval = AlarmManager.IntervalDay * 1;
                 long totalMilliSeconds = (long)(notifyTime.ToUniversalTime() - _jan1st1970).TotalMilliseconds;
                 if (totalMilliSeconds < JavaSystem.CurrentTimeMillis())

@@ -117,14 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllFieldsMessage" xml:space="preserve">
+    <value>يجب أن تملأ جميع الحقول</value>
+  </data>
+  <data name="BirthDateMessage" xml:space="preserve">
+    <value>تاريخ الميلاد غير صالح!</value>
+  </data>
   <data name="BirthDate_PlaceHolder" xml:space="preserve">
     <value>تاريخ الميلاد</value>
+  </data>
+  <data name="ConfirmPasswordMessage" xml:space="preserve">
+    <value>يرجى التأكد من صحة كلمة المرور الخاصة بك !</value>
   </data>
   <data name="ConfirmPassword_PlaceHolder" xml:space="preserve">
     <value>تأكيد كلمة السر</value>
   </data>
   <data name="DiabetesType_Label" xml:space="preserve">
     <value>نوع مرض السكري</value>
+  </data>
+  <data name="Diagnostic_Year" xml:space="preserve">
+    <value>عام الاصابة</value>
   </data>
   <data name="Drugs_Label" xml:space="preserve">
     <value>أدوية</value>
@@ -140,6 +152,12 @@
   </data>
   <data name="Glucometer_Label" xml:space="preserve">
     <value>غلوكومتر</value>
+  </data>
+  <data name="Good" xml:space="preserve">
+    <value>جيدة</value>
+  </data>
+  <data name="Height_Unit" xml:space="preserve">
+    <value>وحدة قياس الطول</value>
   </data>
   <data name="Home_Glucose_Lavel_Label" xml:space="preserve">
     <value>نسبة السكر في الدم</value>
@@ -179,6 +197,9 @@
   </data>
   <data name="Time_Label" xml:space="preserve">
     <value>الوقت</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>اليوم</value>
   </data>
   <data name="Unit_Label" xml:space="preserve">
     <value>وحدة القياس</value>
