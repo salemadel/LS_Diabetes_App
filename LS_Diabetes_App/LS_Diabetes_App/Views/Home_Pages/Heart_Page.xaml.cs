@@ -12,6 +12,7 @@ namespace LS_Diabetes_App.Home_Pages
             InitializeComponent();
             BindingContext = new HeartPage_ViewModel();
         }
+
         protected async override void OnAppearing()
         {
             base.OnAppearing();

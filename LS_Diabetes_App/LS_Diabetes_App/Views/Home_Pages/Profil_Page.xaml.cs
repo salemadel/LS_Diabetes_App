@@ -1,6 +1,5 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.ViewModels;
-using LS_Diabetes_App.Views.Profil_Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +12,7 @@ namespace LS_Diabetes_App.Home_Pages
         {
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new ProfilPage_ViewModel(Navigation , datastore);
+            BindingContext = new ProfilPage_ViewModel(Navigation, datastore);
         }
     }
 }

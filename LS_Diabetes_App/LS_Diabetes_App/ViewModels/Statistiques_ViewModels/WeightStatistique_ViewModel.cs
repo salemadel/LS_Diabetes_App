@@ -2,18 +2,18 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.Statistiques_Pages;
 using Syncfusion.XForms.Buttons;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 {
-    public class WeightStatistique_ViewModel : INotifyPropertyChanged
+    public class WeightStatistique_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private IDataStore DataStore;
         private INavigation Navigation;
@@ -108,8 +108,6 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             }
         }
 
-        
-
         private double imc { get; set; }
 
         public double IMC
@@ -122,7 +120,9 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private int selected_date_index { get; set; }
+
         public int Selected_Date_Index
         {
             get { return selected_date_index; }
@@ -140,7 +140,6 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                         case 4: Selected_MinDate = DateTime.Now.Date.AddDays(-90); Selected_MaxDate = DateTime.Now.Date; break;
                     }
                     OnPropertyChanged();
-                  
                 }
             }
         }
@@ -168,12 +167,11 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Selected_Date_Index = 0;
             DateItems = new ObservableCollection<SfSegmentItem>
         {
-            new SfSegmentItem(){Text="Aujourd'hui" },
-            new SfSegmentItem(){Text="7 Jours"},
-            new SfSegmentItem(){Text="14 Jours"},
-            new SfSegmentItem(){Text="30 Jours"},
-            new SfSegmentItem(){Text="90 Jours"}
-
+            new SfSegmentItem(){Text=Resources["Today"] },
+            new SfSegmentItem(){Text="7 "+Resources["Days"]},
+            new SfSegmentItem(){Text="14 "+Resources["Days"]},
+            new SfSegmentItem(){Text="30 "+Resources["Days"]},
+            new SfSegmentItem(){Text="90 "+Resources["Days"]}
         };
             UpdateData();
             FiltreCommand = new Command(() =>
@@ -183,7 +181,6 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             MessagingCenter.Subscribe<WeightStatistique_Page>(this, "Filter", (sender) =>
             {
                 UpdateData();
-
             });
         }
 
@@ -198,7 +195,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Min = null;
             Max = null;
             IMC = 0;
-           
+
             foreach (var item in DataStore.GetWeightAsync().Where(i => i.Date.Date >= Selected_MinDate & i.Date.Date <= Selected_MaxDate))
             {
                 Weight_Data.Add(WeightConverter.Convert(item, Settings.WeightUnit));
@@ -209,32 +206,24 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Min = Weight_Data.OrderBy(i => i.Weight).First();
                 Max = Weight_Data.OrderBy(i => i.Weight).Last();
                 MaximumChart = Convert.ToInt32(Max.Weight + 100);
-                IMC = Math.Round(WeightConverter.DoubleWeightConvetBack(Weight_Data.OrderBy(i => i.Date).Last().Weight , Settings.WeightUnit) / Math.Pow(Profil.Height / 100, 2), 1);
-                if(string.IsNullOrWhiteSpace(Message))
+                IMC = Math.Round(WeightConverter.DoubleWeightConvetBack(Weight_Data.OrderBy(i => i.Date).Last().Weight, Settings.WeightUnit) / Math.Pow(Profil.Height / 100, 2), 1);
+                if (string.IsNullOrWhiteSpace(Message))
                 {
-                    Message = "Dernier Poids : " + Weight_Data.Last().Weight + " " + Settings.WeightUnit;
+                    Message = Resources["Last"] + " " + Resources["Weight_Label"] + " : " + Weight_Data.Last().Weight + " " + Settings.WeightUnit;
                 }
             }
-            if(IMC < 18.5)
+            if (IMC < 18.5)
             {
                 GlucoseColor = Color.FromHex("#f1c40f");
             }
-            if(IMC >= 18.5 & IMC <= 25)
+            if (IMC >= 18.5 & IMC <= 25)
             {
                 GlucoseColor = Color.FromHex("#2ecc71");
             }
-            if(IMC > 25)
+            if (IMC > 25)
             {
                 GlucoseColor = Color.FromHex("#e74c3c");
             }
-           
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

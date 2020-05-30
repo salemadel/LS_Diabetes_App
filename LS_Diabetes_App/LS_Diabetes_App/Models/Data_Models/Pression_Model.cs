@@ -43,6 +43,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private int heart_freaquancy { get; set; }
@@ -57,9 +58,11 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private bool atrial_fibrilation { get; set; }
+
         public bool Atrial_Fibrilation
         {
             get { return atrial_fibrilation; }
@@ -100,6 +103,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private string where { get; set; }

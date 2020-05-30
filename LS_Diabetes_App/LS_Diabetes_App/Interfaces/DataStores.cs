@@ -189,5 +189,10 @@ namespace LS_Diabetes_App.Interfaces
         {
             _connection.Update(data);
         }
+
+        public void DeleteAllProfiles()
+        {
+            _connection.DeleteAll<Profil_Model>();
+        }
     }
 }

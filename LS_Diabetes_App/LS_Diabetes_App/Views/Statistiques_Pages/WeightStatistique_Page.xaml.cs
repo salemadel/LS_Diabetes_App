@@ -15,6 +15,7 @@ namespace LS_Diabetes_App.Views.Statistiques_Pages
             var datastore = new DataStores();
             BindingContext = new WeightStatistique_ViewModel(Navigation, datastore);
         }
+
         private void Handle_SelectionChanged(object sender, Syncfusion.XForms.Buttons.SelectionChangedEventArgs e)
         {
             MessagingCenter.Send(this, "Filter");

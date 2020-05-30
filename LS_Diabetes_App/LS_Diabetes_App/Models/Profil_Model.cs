@@ -15,14 +15,15 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string identifier { get; set; }
+
         [JsonProperty("identifier")]
         public string Indentifier
         {
-            get { return firstname; }
+            get { return identifier; }
             set
             {
-                if (firstname != value)
-                    firstname = value;
+                if (identifier != value)
+                    identifier = value;
                 OnPropertyChanged();
             }
         }
@@ -30,7 +31,8 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string firstname { get; set; }
-       [JsonProperty("firstname")]
+
+        [JsonProperty("firstname")]
         public string FirstName
         {
             get { return firstname; }
@@ -45,6 +47,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string lastname { get; set; }
+
         [JsonProperty("lastname")]
         public string LastName
         {
@@ -60,6 +63,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string email { get; set; }
+
         [JsonProperty("email")]
         public string Email
         {
@@ -75,6 +79,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string sexe { get; set; }
+
         [JsonProperty("sex")]
         public string Sexe
         {
@@ -90,6 +95,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string diabetestype { get; set; }
+
         [JsonProperty("diabetestype")]
         public string DiabetesType
         {
@@ -102,10 +108,10 @@ namespace LS_Diabetes_App.Models
             }
         }
 
-       
         [JsonIgnore]
         [Ignore]
         private string avatar { get; set; }
+
         [JsonProperty("avatar")]
         public string Avatar
         {
@@ -118,13 +124,10 @@ namespace LS_Diabetes_App.Models
             }
         }
 
-       
-
-       
-
         [JsonIgnore]
         [Ignore]
         private string glucometer { get; set; }
+
         [JsonProperty("glucometer")]
         public string Glucometer
         {
@@ -136,11 +139,12 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-       
+
         [JsonIgnore]
         [Ignore]
         private int diagnostic_year { get; set; }
-        [JsonProperty("diagnosis_year")]
+
+        [JsonProperty("diagnosis_date")]
         public int Diagnostic_Year
         {
             get { return diagnostic_year; }
@@ -155,6 +159,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private DateTime birth_date { get; set; }
+
         [JsonProperty("birthday")]
         public DateTime Birth_Date
         {
@@ -170,6 +175,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private double height { get; set; }
+
         [JsonProperty("height")]
         public double Height
         {
@@ -181,8 +187,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-        
-       
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

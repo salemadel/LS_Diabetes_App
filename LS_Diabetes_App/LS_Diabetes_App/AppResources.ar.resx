@@ -117,11 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>حول التطبيق</value>
+  </data>
+  <data name="About_C" xml:space="preserve">
+    <value>معلومات حول التطبيق</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>أضافة</value>
+  </data>
+  <data name="After_Meals" xml:space="preserve">
+    <value>بعد الاكل</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>الكل</value>
+  </data>
   <data name="AllFieldsMessage" xml:space="preserve">
     <value>يجب أن تملأ جميع الحقول</value>
   </data>
+  <data name="And" xml:space="preserve">
+    <value>و</value>
+  </data>
+  <data name="atrial_fibrillation" xml:space="preserve">
+    <value>رجفان اذيني</value>
+  </data>
+  <data name="At_Doctor" xml:space="preserve">
+    <value>عند الطبيب</value>
+  </data>
+  <data name="At_Home" xml:space="preserve">
+    <value>في المنزل</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>المعدل</value>
+  </data>
+  <data name="Before_Meal" xml:space="preserve">
+    <value>قبل الاكل</value>
   </data>
   <data name="BirthDateMessage" xml:space="preserve">
     <value>تاريخ الميلاد غير صالح!</value>
@@ -132,17 +162,38 @@
   <data name="Blood_pressure" xml:space="preserve">
     <value>الضغط الشرياني</value>
   </data>
+  <data name="Cardiac_Frequancy" xml:space="preserve">
+    <value>عدد ضربات القلب</value>
+  </data>
   <data name="ConfirmPasswordMessage" xml:space="preserve">
     <value>يرجى التأكد من صحة كلمة المرور الخاصة بك !</value>
   </data>
   <data name="ConfirmPassword_PlaceHolder" xml:space="preserve">
     <value>تأكيد كلمة السر</value>
   </data>
+  <data name="Connection_Requests" xml:space="preserve">
+    <value>طلبات الاتصال</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>يوم</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>أيام</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>هل تريد الحذف ؟</value>
+  </data>
   <data name="DiabetesType_Label" xml:space="preserve">
     <value>نوع مرض السكري</value>
   </data>
   <data name="Diagnostic_Year" xml:space="preserve">
     <value>عام الاصابة</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>الخروج</value>
   </data>
   <data name="Dosage" xml:space="preserve">
     <value>الجرعة</value>
@@ -152,6 +203,18 @@
   </data>
   <data name="Drugs_Label" xml:space="preserve">
     <value>أدوية</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>المدة</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="EditMessage" xml:space="preserve">
+    <value>هل تريد التعديل ؟</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>معدة فارغة</value>
   </data>
   <data name="EnterCode" xml:space="preserve">
     <value>يرجى إدخال رمز التحقق</value>
@@ -168,20 +231,44 @@
   <data name="Glucometer_Label" xml:space="preserve">
     <value>غلوكومتر</value>
   </data>
+  <data name="Glucose" xml:space="preserve">
+    <value>الجلوتوز</value>
+  </data>
+  <data name="Glycemia" xml:space="preserve">
+    <value>سكر الدم</value>
+  </data>
+  <data name="Glycemia_Statistics" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Goals" xml:space="preserve">
+    <value>الأهداف</value>
+  </data>
+  <data name="Goals_C" xml:space="preserve">
+    <value>منطقة السكري , آخر</value>
+  </data>
   <data name="Good" xml:space="preserve">
     <value>جيدة</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>الطول</value>
   </data>
   <data name="Height_Unit" xml:space="preserve">
     <value>وحدة قياس الطول</value>
   </data>
   <data name="Highest" xml:space="preserve">
-    <value>العالية</value>
+    <value>الأعلى</value>
+  </data>
+  <data name="Highest_M" xml:space="preserve">
+    <value>الاعلى</value>
   </data>
   <data name="Hight" xml:space="preserve">
     <value>عالية</value>
   </data>
   <data name="Home_Glucose_Lavel_Label" xml:space="preserve">
     <value>نسبة السكر في الدم</value>
+  </data>
+  <data name="Indifined_period" xml:space="preserve">
+    <value>مدة غير محددة</value>
   </data>
   <data name="Insuline_Label" xml:space="preserve">
     <value>انسولين</value>
@@ -192,17 +279,44 @@
   <data name="InternetMessage" xml:space="preserve">
     <value>الرجاء التحقق من اتصال الانترنت الخاص بك</value>
   </data>
+  <data name="Laboratory" xml:space="preserve">
+    <value>مخبر التحاليل</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>اللغة</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>آخر</value>
+  </data>
   <data name="LastName_PlaceHolder" xml:space="preserve">
     <value>اللقب</value>
+  </data>
+  <data name="Last_F" xml:space="preserve">
+    <value>آخر</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>التموقع</value>
   </data>
   <data name="Low" xml:space="preserve">
     <value>منخفضة</value>
   </data>
   <data name="Lowest" xml:space="preserve">
-    <value>المنخفضة</value>
+    <value>الأدنى</value>
+  </data>
+  <data name="Lowest_M" xml:space="preserve">
+    <value>الأدنى</value>
   </data>
   <data name="Male_RadioButton" xml:space="preserve">
     <value>ذكر</value>
+  </data>
+  <data name="Measure" xml:space="preserve">
+    <value>وحدات القياس</value>
+  </data>
+  <data name="Measure_C" xml:space="preserve">
+    <value>وحدات القياس , وحدة قياس السكر , آخر</value>
+  </data>
+  <data name="Medication_Reminder" xml:space="preserve">
+    <value>التذكير بالادوية</value>
   </data>
   <data name="NewPasswordMessage" xml:space="preserve">
     <value>يرجى إدخال كلمة المرور الجديدة الخاصة بك</value>
@@ -210,14 +324,29 @@
   <data name="Next_medication" xml:space="preserve">
     <value>الدواء التالي</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+  </data>
   <data name="Note_Label" xml:space="preserve">
     <value>ملاحظة</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>الإشعارات</value>
   </data>
   <data name="Password_PlaceHolder" xml:space="preserve">
     <value>كلمة السر</value>
   </data>
+  <data name="Personal" xml:space="preserve">
+    <value>المعلومات الخاصة</value>
+  </data>
+  <data name="Personal_C" xml:space="preserve">
+    <value>الجنس , الأسم , اللقب , آخر</value>
+  </data>
   <data name="Physical_activity" xml:space="preserve">
     <value>النشاط البدني</value>
+  </data>
+  <data name="Pick_Times" xml:space="preserve">
+    <value>أوقات الاخذ</value>
   </data>
   <data name="Position_Label" xml:space="preserve">
     <value>المكان</value>
@@ -227,6 +356,12 @@
   </data>
   <data name="Remaining_time" xml:space="preserve">
     <value>الوقت المتبقي</value>
+  </data>
+  <data name="Remember_Me" xml:space="preserve">
+    <value>تذكرني</value>
+  </data>
+  <data name="Reminder" xml:space="preserve">
+    <value>تذكير</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>اعادة التعيين</value>
@@ -243,6 +378,15 @@
   <data name="Send" xml:space="preserve">
     <value>ارسال</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>الإعدادات</value>
+  </data>
+  <data name="Settings_C" xml:space="preserve">
+    <value>الإشعارات , التموقع , اللغة , آخر</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>شارك هويتك مع طبيبك</value>
+  </data>
   <data name="SignIn_Label" xml:space="preserve">
     <value>الدخول</value>
   </data>
@@ -252,14 +396,35 @@
   <data name="SixLettersMessage" xml:space="preserve">
     <value>يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل</value>
   </data>
+  <data name="Start_Date" xml:space="preserve">
+    <value>تاريخ البداية</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>إحصائيات</value>
+  </data>
   <data name="Step_Label" xml:space="preserve">
     <value>خطوة</value>
+  </data>
+  <data name="SuccesMessage" xml:space="preserve">
+    <value>تمت العملية بنجاح</value>
+  </data>
+  <data name="Taking_Medication" xml:space="preserve">
+    <value>اكلت دواء</value>
+  </data>
+  <data name="Taking_Time" xml:space="preserve">
+    <value>وقت الاخذ</value>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>سكر الدم المستهدف</value>
   </data>
   <data name="Time_Label" xml:space="preserve">
     <value>الوقت</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>اليوم</value>
+  </data>
+  <data name="Unimportant" xml:space="preserve">
+    <value>بدون أهمية</value>
   </data>
   <data name="Unit_Label" xml:space="preserve">
     <value>وحدة القياس</value>
@@ -272,5 +437,11 @@
   </data>
   <data name="Weight_Unit" xml:space="preserve">
     <value>وحدة الميزان</value>
+  </data>
+  <data name="Without food" xml:space="preserve">
+    <value>خارج الاكل</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
   </data>
 </root>

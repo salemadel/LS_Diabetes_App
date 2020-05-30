@@ -1,10 +1,7 @@
 ﻿using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace LS_Diabetes_App.Servies
 {
@@ -14,7 +11,7 @@ namespace LS_Diabetes_App.Servies
 
         public static SQLiteConnection GetConnection()
         {
-            if(_connection == null)
+            if (_connection == null)
             {
                 var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "LS_Diabets_App_Db");
 

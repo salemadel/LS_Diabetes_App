@@ -21,6 +21,7 @@ namespace LS_Diabetes_App.Droid
         private StepServiceConnection serviceConnection;
         private bool firstRun = true;
         private StepServiceBinder binder;
+
         public StepServiceBinder Binder
         {
             get { return binder; }
@@ -37,11 +38,10 @@ namespace LS_Diabetes_App.Droid
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQzNzAyQDMxMzgyZTMxMmUzMGlDWTJIVjZqZ2swTU1GOFdDaVhrQkhYMktvZjV0TjRtUldJWFN4akpKRlU9");
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-         
-          
+
             base.OnCreate(savedInstanceState);
             FacebookSdk.SdkInitialize(this);
-            
+
             FacebookClientManager.Initialize(this);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Forms.DependencyService.Register<StepCounter>();
@@ -49,7 +49,7 @@ namespace LS_Diabetes_App.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             await CrossMedia.Current.Initialize();
-            
+
             LoadApplication(new App(new OAuth2Service()));
 #if DEBUG
             PrintHashKey(this);
@@ -64,8 +64,8 @@ namespace LS_Diabetes_App.Droid
         {
             base.OnActivityResult(requestCode, resultCode, intent);
             FacebookClientManager.OnActivityResult(requestCode, resultCode, intent);
-        
         }
+
         public async override void OnBackPressed()
         {
             if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
@@ -74,9 +74,9 @@ namespace LS_Diabetes_App.Droid
             }
             else
             {
-                
             }
         }
+
         protected override void OnStart()
         {
             base.OnStart();
@@ -90,6 +90,7 @@ namespace LS_Diabetes_App.Droid
             serviceConnection = new StepServiceConnection(this);
             BindService(serviceIntent, serviceConnection, Bind.AutoCreate);
         }
+
         protected override void OnStop()
         {
             base.OnStop();
@@ -109,9 +110,9 @@ namespace LS_Diabetes_App.Droid
                 IsBound = false;
             }
         }
+
         private void StartStepService()
         {
-
             try
             {
                 var service = new Intent(this, typeof(StepCounter));
@@ -120,14 +121,15 @@ namespace LS_Diabetes_App.Droid
             catch (Exception ex)
             {
             }
-
         }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
         public static void PrintHashKey(Context pContext)
         {
             try

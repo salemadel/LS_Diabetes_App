@@ -1,5 +1,4 @@
-﻿using LS_Diabetes_App.Models.Data_Models;
-using System;
+﻿using System;
 
 namespace LS_Diabetes_App.Converters
 {

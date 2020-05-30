@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters"
              x:Class="LS_Diabetes_App.Home_Pages.Heart_Page">
     <ContentPage.Resources>
@@ -31,8 +31,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-            
 
             <Frame Grid.Row="2" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="150" WidthRequest="150" Margin="10,10,5,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
                 <StackLayout>
@@ -86,7 +84,7 @@
                     </StackLayout>
                 </StackLayout>
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding WeightStatistiqueCommand}"/>
+                    <TapGestureRecognizer Command="{Binding WeightStatistiqueCommand}" />
                 </Frame.GestureRecognizers>
             </Frame>
             <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="230" WidthRequest="300" Margin="10,10,10,0" CornerRadius="10">

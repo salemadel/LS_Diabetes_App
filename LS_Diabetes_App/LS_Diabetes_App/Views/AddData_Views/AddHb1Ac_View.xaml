@@ -27,26 +27,26 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
-            
+
                 <RowDefinition Height="100" />
-               
+
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Text="{x:Static resources:AppResources.Time_Label}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[Time_Label]}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Entry x:Name="DateTimeEntry" Grid.Row="0" Grid.Column="1" Text="{Binding AddDateTime , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" />
             <TimePicker x:Name="TimePicker" Focused="TimePicker_Focused" PropertyChanged="TimePicker_PropertyChanged" IsVisible="False" Time="{Binding Hb1Ac.Time}" />
             <DatePicker x:Name="DatePicker" IsVisible="False" Date="{Binding Hb1Ac.Date}" />
             <Label Text="Hb1ac" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Grid.Row="1" Keyboard="Numeric" Grid.Column="1" Text="{Binding Hb1Ac.Hb1Ac ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="Ex : 6,3%" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" >
+            <CustomEntry:Custom_Entry Grid.Row="1" Keyboard="Numeric" Grid.Column="1" Text="{Binding Hb1Ac.Hb1Ac ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="Ex : 6,3%" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
                 <CustomEntry:Custom_Entry.Behaviors>
-                    <Behavior:GlycemieBehavior/>
+                    <Behavior:GlycemieBehavior />
                 </CustomEntry:Custom_Entry.Behaviors>
             </CustomEntry:Custom_Entry>
-                <Label Text="Laboratoire" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[Laboratory]}" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Entry Grid.Row="2"  Grid.Column="1" Text="{Binding Hb1Ac.Laboratory}" Placeholder="Laboratoire" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <ImageButton Source="camera.png" Padding="15" BackgroundColor="#00B2C8"  Grid.Row="3" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
             <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
@@ -58,9 +58,8 @@
                     </Image>
                 </Frame>
             </StackLayout>
-            
-          
-            <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+
+            <Label Text="{Binding Resources[Note_Label]}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Editor Text="{Binding Hb1Ac.Note}" Grid.Row="5" Grid.Column="0" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="100" WidthRequest="200" />
             <ImageButton Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveHb1AcCommand}" />
         </Grid>

@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.Content.Res;
-using Android.Graphics;
+﻿using Android.App;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
@@ -18,6 +9,7 @@ using Plugin.CurrentActivity;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(SnackBarShow))]
+
 namespace LS_Diabetes_App.Droid.Interfaces
 {
     public class SnackBarShow : ISnackBar

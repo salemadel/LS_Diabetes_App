@@ -13,11 +13,11 @@ namespace LS_Diabetes_App.Views.AddData_Views
     {
         private bool timepickerfucused { get; set; }
 
-        public AddHb1Ac_View(string source ,Settings_Model profil, object data)
+        public AddHb1Ac_View(string source, Settings_Model profil, object data)
         {
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new AddData_ViewModel(source , Navigation, datastore, profil, data);
+            BindingContext = new AddData_ViewModel(source, Navigation, datastore, profil, data);
             TimePicker.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             DatePicker.MaximumDate = DateTime.Now.Date;
         }

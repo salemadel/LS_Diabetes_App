@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.App;
 using LS_Diabetes_App.Droid.Interfaces;
 using LS_Diabetes_App.Interfaces;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(DialogShow))]
+
 namespace LS_Diabetes_App.Droid.Interfaces
 {
     public class DialogShow : IDialog
@@ -32,7 +24,6 @@ namespace LS_Diabetes_App.Droid.Interfaces
             }
 
             return await tcs.Task;
-
         }
     }
 }

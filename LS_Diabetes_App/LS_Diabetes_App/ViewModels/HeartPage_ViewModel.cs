@@ -1,9 +1,6 @@
 ﻿using LS_Diabetes_App.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,7 +8,6 @@ namespace LS_Diabetes_App.ViewModels
 {
     public class HeartPage_ViewModel : INotifyPropertyChanged
     {
-       
         private bool isBusy { get; set; }
 
         public bool IsBusy
@@ -24,10 +20,11 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public HeartPage_ViewModel()
         {
-
         }
+
         public async Task ExecuteOnAppring()
         {
             IsBusy = true;
@@ -35,6 +32,7 @@ namespace LS_Diabetes_App.ViewModels
             IsBusy = false;
             DependencyService.Get<IMessage>().ShortAlert("Aucune Montre est Connecté !");
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")
@@ -42,5 +40,4 @@ namespace LS_Diabetes_App.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
-   
 }

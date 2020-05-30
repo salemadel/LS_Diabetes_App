@@ -1,19 +1,18 @@
-﻿using LS_Diabetes_App.Converters;
-using LS_Diabetes_App.Interfaces;
+﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.Statistiques_Pages;
 using Syncfusion.XForms.Buttons;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 {
-    public class PressionStatistique_ViewModel : INotifyPropertyChanged
+    public class PressionStatistique_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private IDataStore DataStore;
         private INavigation Navigation;
@@ -42,6 +41,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Color dia_color { get; set; }
 
         public Color Dia_Color
@@ -120,8 +120,6 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             }
         }
 
-        
-
         private double average_sys { get; set; }
 
         public double Average_sys
@@ -134,6 +132,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private double nbr_normal_sys { get; set; }
 
         public double Nbr_Normal_sys
@@ -172,6 +171,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Pression_Model min_dia { get; set; }
 
         public Pression_Model Min_dia
@@ -184,6 +184,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Pression_Model max_dia { get; set; }
 
         public Pression_Model Max_dia
@@ -197,8 +198,6 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             }
         }
 
-
-
         private double average_dia { get; set; }
 
         public double Average_dia
@@ -211,6 +210,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private double nbr_normal_dia { get; set; }
 
         public double Nbr_Normal_dia
@@ -249,7 +249,9 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private int selected_date_index { get; set; }
+
         public int Selected_Date_Index
         {
             get { return selected_date_index; }
@@ -267,13 +269,12 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                         case 4: Selected_MinDate = DateTime.Now.Date.AddDays(-90); Selected_MaxDate = DateTime.Now.Date; break;
                     }
                     OnPropertyChanged();
-                    
                 }
             }
         }
+
         public int MaximumChart { get; set; }
 
-       
         public Profil_Model Profil { get; set; }
         public ObservableCollection<SfSegmentItem> DateItems { get; set; }
         public string Message { get; set; }
@@ -284,18 +285,17 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Navigation = navigation;
             DataStore = dataStore;
             Profil = DataStore.GetProfilAsync().First();
-            Pression_Data = new ObservableCollection<Pression_Model>();       
+            Pression_Data = new ObservableCollection<Pression_Model>();
             Selected_MaxDate = DateTime.Now.Date;
             Selected_MinDate = DateTime.Now.Date;
             Selected_Date_Index = 0;
             DateItems = new ObservableCollection<SfSegmentItem>
         {
-            new SfSegmentItem(){Text="Aujourd'hui" },
-            new SfSegmentItem(){Text="7 Jours"},
-            new SfSegmentItem(){Text="14 Jours"},
-            new SfSegmentItem(){Text="30 Jours"},
-            new SfSegmentItem(){Text="90 Jours"}
-
+            new SfSegmentItem(){Text=Resources["Today"] },
+            new SfSegmentItem(){Text="7 "+Resources["Days"]},
+            new SfSegmentItem(){Text="14 "+Resources["Days"]},
+            new SfSegmentItem(){Text="30 "+Resources["Days"]},
+            new SfSegmentItem(){Text="90 "+Resources["Days"]}
         };
             UpdateData();
             FiltreCommand = new Command(() =>
@@ -305,13 +305,12 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             MessagingCenter.Subscribe<PressionStatistique_Page>(this, "Filter", (sender) =>
             {
                 UpdateData();
-
             });
         }
 
         private void UpdateData()
         {
-            if(!(Selected_MaxDate >= Selected_MinDate))
+            if (!(Selected_MaxDate >= Selected_MinDate))
             {
                 DependencyService.Get<IMessage>().ShortAlert("Date Non Valide");
                 return;
@@ -342,27 +341,27 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Nbr_Hight_sys = Pression_Data.Where(i => i.Systolique > 120).Count();
                 Nbr_Low_sys = Pression_Data.Where(i => i.Systolique < 90).Count();
                 MaximumChart = Convert.ToInt32(Max_sys.Systolique + 30);
-                Average_sys = Math.Round(Convert.ToDouble(Pression_Data.Sum(i => i.Systolique) / Pression_Data.Count) , 1);
+                Average_sys = Math.Round(Convert.ToDouble(Pression_Data.Sum(i => i.Systolique) / Pression_Data.Count), 1);
                 Min_dia = Pression_Data.OrderBy(i => i.Diastolique).First();
                 Max_dia = Pression_Data.OrderBy(i => i.Diastolique).Last();
                 Nbr_Normal_dia = Pression_Data.Where(i => i.Diastolique >= 60 & i.Diastolique <= 80).Count();
                 Nbr_Hight_dia = Pression_Data.Where(i => i.Diastolique > 80).Count();
                 Nbr_Low_dia = Pression_Data.Where(i => i.Diastolique < 60).Count();
                 Average_dia = Math.Round(Convert.ToDouble(Pression_Data.Sum(i => i.Diastolique) / Pression_Data.Count), 1);
-                if(string.IsNullOrWhiteSpace(Message))
+                if (string.IsNullOrWhiteSpace(Message))
                 {
-                    Message = "Derniere Tension Artérielle : " + Pression_Data.Last().Systolique + " mmGh / " + Pression_Data.Last().Diastolique + " mmGh";
+                    Message = Resources["Last_F"] + " " + Resources["Blood_pressure"] + " : " + Pression_Data.Last().Systolique + " mmGh / " + Pression_Data.Last().Diastolique + " mmGh";
                 }
             }
-           if(Average_sys >= 90 & Average_sys <= 120)
+            if (Average_sys >= 90 & Average_sys <= 120)
             {
                 Sys_Color = Color.FromHex("#0AC774");
             }
-           if(Average_sys < 90)
+            if (Average_sys < 90)
             {
                 Sys_Color = Color.FromHex("#f1c40f");
             }
-           if(Average_sys > 120)
+            if (Average_sys > 120)
             {
                 Sys_Color = Color.FromHex("#C72D14");
             }
@@ -378,14 +377,6 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             {
                 Dia_Color = Color.FromHex("#C72D14");
             }
-
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

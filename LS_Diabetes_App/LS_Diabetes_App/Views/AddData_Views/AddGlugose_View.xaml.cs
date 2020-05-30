@@ -2,9 +2,7 @@
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
 using System;
-using System.Linq;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace LS_Diabetes_App.Views.AddData_Views
@@ -14,11 +12,12 @@ namespace LS_Diabetes_App.Views.AddData_Views
     {
         private bool timepickerfucused { get; set; }
         private Settings_Model Profil { get; set; }
-        public AddGlugose_View(string source , Settings_Model profil , object data)
+
+        public AddGlugose_View(string source, Settings_Model profil, object data)
         {
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new AddData_ViewModel(source, Navigation, datastore, profil , data);
+            BindingContext = new AddData_ViewModel(source, Navigation, datastore, profil, data);
             Profil = profil;
             TimePicker.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             DatePicker.MaximumDate = DateTime.Now.Date;
@@ -45,8 +44,6 @@ namespace LS_Diabetes_App.Views.AddData_Views
 
         private void glucose_Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-           
-           
         }
     }
 }

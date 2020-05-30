@@ -1,11 +1,6 @@
-﻿
-using LS_Diabetes_App.Models;
-using LS_Diabetes_App.Models.Data_Models;
-using Newtonsoft.Json;
+﻿using LS_Diabetes_App.Models.Data_Models;
 using Plugin.SecureStorage;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
 
 namespace LS_Diabetes_App.Servies
@@ -20,7 +15,7 @@ namespace LS_Diabetes_App.Servies
             if (token_exist)
             {
                 string token = CrossSecureStorage.Current.GetValue("acces_token");
-                return (true, JWT.JsonWebToken.DecodeToObject<Token_Model>(token,Encoding.Unicode.GetBytes(key) , false));
+                return (true, JWT.JsonWebToken.DecodeToObject<Token_Model>(token, Encoding.Unicode.GetBytes(key), false));
             }
             else
             {

@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using SQLite;
-using System;
-using System.Collections.Generic;
+﻿using SQLite;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace LS_Diabetes_App.Models
 {
@@ -15,7 +11,7 @@ namespace LS_Diabetes_App.Models
 
         [Ignore]
         private string language { get; set; } = "EN";
-      
+
         public string Language
         {
             get { return language; }
@@ -29,7 +25,7 @@ namespace LS_Diabetes_App.Models
 
         [Ignore]
         private bool location { get; set; } = true;
-  
+
         public bool Location
         {
             get { return location; }
@@ -43,7 +39,7 @@ namespace LS_Diabetes_App.Models
 
         [Ignore]
         private bool notification { get; set; } = true;
-       
+
         public bool Notification
         {
             get { return notification; }
@@ -54,6 +50,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [Ignore]
         private bool remember_me { get; set; } = false;
 
@@ -81,7 +78,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-   
+
         [Ignore]
         private string weightunit { get; set; } = "Kg";
 
@@ -95,7 +92,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-    
+
         [Ignore]
         private string heighttunit { get; set; } = "cm";
 
@@ -109,6 +106,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

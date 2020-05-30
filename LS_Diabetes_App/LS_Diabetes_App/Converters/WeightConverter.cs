@@ -22,7 +22,8 @@ namespace LS_Diabetes_App.Converters
             }
             return value;
         }
-        public double DoubleWeightConvet(double value , string parameter)
+
+        public double DoubleWeightConvet(double value, string parameter)
         {
             if (parameter == "lbs")
             {
@@ -30,6 +31,7 @@ namespace LS_Diabetes_App.Converters
             }
             return value;
         }
+
         public double DoubleWeightConvetBack(double value, string parameter)
         {
             if (parameter == "lbs")

@@ -4,11 +4,10 @@
              x:Class="LS_Diabetes_App.App">
     <Application.Resources>
         <ResourceDictionary>
-        <Style TargetType="NavigationPage">
+            <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="#00B2C8" />
-            <Setter Property="BarTextColor" Value="White" />
-        </Style>
-           
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

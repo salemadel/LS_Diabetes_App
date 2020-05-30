@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using LS_Diabetes_App.Interfaces;
+﻿using LS_Diabetes_App.Interfaces;
 using Plugin.CurrentActivity;
+using System;
 using Xamarin.Auth;
 
 namespace LS_Diabetes_App.Droid.Interfaces
@@ -19,14 +9,13 @@ namespace LS_Diabetes_App.Droid.Interfaces
     {
         public DroidOAuth2Authenticator(string clientId, string scope, Uri authorizeUrl, Uri redirectUrl) : base(clientId, scope, authorizeUrl, redirectUrl)
         {
-
         }
 
         protected override void OnPageEncountered(Uri url, System.Collections.Generic.IDictionary<string, string> query, System.Collections.Generic.IDictionary<string, string> fragment)
         {
-            // Remove state from dictionaries. 
-            // We are ignoring request state forgery status 
-            // as we're hitting an ASP.NET service which forwards 
+            // Remove state from dictionaries.
+            // We are ignoring request state forgery status
+            // as we're hitting an ASP.NET service which forwards
             // to a third-party OAuth service itself
             if (query.ContainsKey("state"))
             {
@@ -45,7 +34,9 @@ namespace LS_Diabetes_App.Droid.Interfaces
     public class OAuth2Service : IOAuth2Service
     {
         public event EventHandler<string> OnSuccess = delegate { };
+
         public event EventHandler OnCancel = delegate { };
+
         public event EventHandler<string> OnError = delegate { };
 
         public void Authenticate(string clientId, string scope, Uri authorizeUrl, Uri redirectUrl)
@@ -72,17 +63,15 @@ namespace LS_Diabetes_App.Droid.Interfaces
                 auth.Completed -= completedDelegate;
             };
 
-            completedDelegate = (sender, eventArgs) => {
-
+            completedDelegate = (sender, eventArgs) =>
+            {
                 // UI presented, so it's up to us to dimiss it on Android
                 // dismiss Activity with WebView or CustomTabs
                 CrossCurrentActivity.Current.Activity.Finish();
 
                 if (eventArgs.IsAuthenticated)
                 {
-
                     OnSuccess?.Invoke(this, eventArgs.Account.Properties["access_token"]);
-
                 }
                 else
                 {
@@ -92,7 +81,6 @@ namespace LS_Diabetes_App.Droid.Interfaces
                 }
                 auth.Error -= errorDelegate;
                 auth.Completed -= completedDelegate;
-
             };
 
             auth.Error += errorDelegate;
@@ -100,6 +88,5 @@ namespace LS_Diabetes_App.Droid.Interfaces
 
             activity.StartActivity(auth.GetUI(activity));
         }
-
     }
 }

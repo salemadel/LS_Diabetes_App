@@ -46,9 +46,9 @@
             <Label Text="{Binding Resources[Height]}" Grid.Row="5" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Entry Grid.Row="5" Grid.Column="1" Keyboard="Numeric" Text="{Binding Profil.Height , Mode=OneWayToSource}" Placeholder="Ex : 188 cm" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <Label Text="{Binding Resources[Diagnostic_Year]}" Grid.Row="6"  Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Grid.Row="6" Grid.Column="1" Text="{Binding Diagnostic_Date}" Placeholder="yyyy" Keyboard="Numeric" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" >
+            <CustomEntry:Custom_Entry Grid.Row="6" Grid.Column="1" Text="{Binding Diagnostic_Date}" Placeholder="yyyy" Keyboard="Numeric" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
                 <CustomEntry:Custom_Entry.Behaviors>
-                    <Behaviors:MaskedBehavior Mask="XXXX"/>
+                    <Behaviors:MaskedBehavior Mask="XXXX" />
                 </CustomEntry:Custom_Entry.Behaviors>
             </CustomEntry:Custom_Entry>
             <ImageButton Source="ok.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding ProfilBaseCommand}" />

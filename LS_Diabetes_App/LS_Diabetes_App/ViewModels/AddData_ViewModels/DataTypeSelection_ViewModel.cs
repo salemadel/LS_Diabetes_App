@@ -1,13 +1,13 @@
 ﻿using LS_Diabetes_App.Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.AddData_Views;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 {
-    public class DataTypeSelection_ViewModel : INotifyPropertyChanged
+    public class DataTypeSelection_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private INavigation Navigation { get; set; }
 
@@ -18,6 +18,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         public Command DrugsCommand { get; set; }
         private Settings_Model Profil { get; set; }
         private string Source = "Add_Data";
+
         public DataTypeSelection_ViewModel(INavigation navigation, Settings_Model profil)
         {
             Navigation = navigation;
@@ -42,47 +43,41 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             {
                 await ExecuteOnDrugsClicked();
             });
-
         }
 
         private async Task ExecuteOnGlucoseClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddGlugose_View(Source,Profil,null), true);
+            await Navigation.PushModalAsync(new AddGlugose_View(Source, Profil, null), true);
         }
 
         private async Task ExecuteOnPressionClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddPression_View(Source,Profil,null), true);
+            await Navigation.PushModalAsync(new AddPression_View(Source, Profil, null), true);
         }
 
         private async Task ExecuteOnHb1acClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddHb1Ac_View(Source,Profil,null), true);
+            await Navigation.PushModalAsync(new AddHb1Ac_View(Source, Profil, null), true);
         }
 
         private async Task ExecuteOnWeightClicked()
         {
             SendHidePopUpd();
-            await Navigation.PushModalAsync(new AddWeight_View(Source,Profil,null), true);
+            await Navigation.PushModalAsync(new AddWeight_View(Source, Profil, null), true);
         }
+
         private async Task ExecuteOnDrugsClicked()
         {
             SendHidePopUpd();
             await Navigation.PushModalAsync(new Drugs_Page(), true);
         }
+
         private void SendHidePopUpd()
         {
             MessagingCenter.Send(this, "HidePopUp");
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

@@ -11,7 +11,7 @@ namespace LS_Diabetes_App.Converters
             if (value is ImageSource)
             {
                 var new_value = (ImageSource)value;
-                if(new_value == null)
+                if (new_value == null)
                 {
                     return false;
                 }

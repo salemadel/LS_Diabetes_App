@@ -15,7 +15,7 @@ namespace LS_Diabetes_App.Views.Login_Pages
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new Login_ViewModel(Navigation , datastore);
+            BindingContext = new Login_ViewModel(Navigation, datastore);
             TapGestureRecognizer Tap_SignUp = new TapGestureRecognizer();
             Tap_SignUp.Tapped += SignUp_Clicked;
             SignUp_Label.GestureRecognizers.Add(Tap_SignUp);

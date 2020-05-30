@@ -57,6 +57,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private string picturepath { get; set; }
 
         public string PicturePath
@@ -82,7 +83,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private bool isVisible { get; set; }
+
         public bool IsVisible
         {
             get { return isVisible; }
@@ -93,7 +96,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private bool activity { get; set; }
+
         public bool Activity
         {
             get { return activity; }
@@ -104,7 +109,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private bool take_medication { get; set; }
+
         public bool Take_Medication
         {
             get { return take_medication; }
@@ -115,7 +122,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private bool at_home { get; set; }
+
         public bool At_Home
         {
             get { return at_home; }
@@ -126,7 +135,9 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         private bool at_doctor { get; set; }
+
         public bool At_Doctor
         {
             get { return at_doctor; }
@@ -137,6 +148,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         public string DateSort
         {
             get

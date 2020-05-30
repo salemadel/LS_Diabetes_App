@@ -1,8 +1,5 @@
-﻿using Android.Runtime;
-using Android.Widget;
-using LS_Diabetes_App.Custom_Controls;
+﻿using LS_Diabetes_App.Custom_Controls;
 using LS_Diabetes_App.Droid.Custom_Controls_Renderer;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -16,17 +13,13 @@ namespace LS_Diabetes_App.Droid.Custom_Controls_Renderer
         {
         }
 
-       
-           protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
-           {
+        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+        {
             base.OnElementChanged(e);
             if (e.OldElement == null)
             {
-
                 Control.Background = null;
-
             }
         }
     }
-    
 }

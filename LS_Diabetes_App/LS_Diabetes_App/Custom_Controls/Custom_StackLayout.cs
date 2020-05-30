@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Custom_Controls
 {
@@ -27,6 +24,7 @@ namespace LS_Diabetes_App.Custom_Controls
 
         public GradientColorStackMode Mode { get; set; }
     }
+
     public enum GradientColorStackMode
     {
         ToRight,

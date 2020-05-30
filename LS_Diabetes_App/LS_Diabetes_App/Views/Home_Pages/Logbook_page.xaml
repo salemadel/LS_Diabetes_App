@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters"
-              xmlns:resources="clr-namespace:LS_Diabetes_App" 
-             xmlns:Behaviors="clr-namespace:LS_Diabetes_App.Behaviors" 
+              xmlns:resources="clr-namespace:LS_Diabetes_App"
+             xmlns:Behaviors="clr-namespace:LS_Diabetes_App.Behaviors"
              xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="LS_Diabetes_App.Home_Pages.Logbook_page"
              x:Name="LogBookPage">
@@ -22,7 +22,7 @@
             <Converter:StringDoubleConvertercs x:Key="StringToDouble" />
             <Converter:TypeToImageConverter x:Key="TypeToImage" />
             <Converter:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
-            <Converter:NullToBoolConverter x:Key="NullToBool"/>
+            <Converter:NullToBoolConverter x:Key="NullToBool" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -64,17 +64,14 @@
                                             <Image Source="{Binding Type , Converter={StaticResource TypeToImage}}" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" />
                                             <Label Text="{Binding DataValue}" FontFamily="{StaticResource NormalFont}" FontSize="20" TextColor="Black" Margin="5,0,0,0" VerticalOptions="CenterAndExpand" />
                                             <Label Text="{Binding Unit}"  FontSize="16" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" />
-                                            
-                                                
-                                            
                                         </StackLayout>
                                     </StackLayout>
                                     <Grid Grid.Row="1" Grid.Column="1" IsVisible="{Binding IsVisible}">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
                                         <StackLayout Orientation="Horizontal" Grid.Row="0" Spacing="10"   VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                                             <Image Source="run.png" HeightRequest="25" WidthRequest="25" IsVisible="{Binding Activity}" VerticalOptions="CenterAndExpand" />
@@ -82,7 +79,7 @@
                                             <Image Source="home.png" HeightRequest="25" WidthRequest="25" IsVisible="{Binding At_Home}" VerticalOptions="CenterAndExpand" />
                                             <Image Source="doctor.png" HeightRequest="25" WidthRequest="25" IsVisible="{Binding At_Doctor}" VerticalOptions="CenterAndExpand" />
                                         </StackLayout>
-                                        <Label Text="{Binding Data.Note}" Grid.Row="1" FontFamily="{StaticResource NormalFont}" FontSize="17" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                        <Label Text="{Binding Data.Note}" Grid.Row="1" FontFamily="{StaticResource NormalFont}" FontSize="17" TextColor="Black" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" />
 
                                         <Frame BorderColor="LightGray" Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  IsVisible="{Binding Data.Picture , Converter={StaticResource NullToBool}}" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
                                             <Image Source="{Binding Data.Picture}" Aspect="AspectFill">
@@ -91,9 +88,8 @@
                                                 </Image.GestureRecognizers>
                                             </Image>
                                         </Frame>
-                                           
-                                        
-                                        <sfButtons:SfButton Grid.Row="3" ImageSource="quit.png" ShowIcon="True" ImageAlignment="Left" Text="Supprimer" BackgroundColor="#e74c3c" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Start" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand" Margin="0,5,0,10" Command="{Binding Source={x:Reference LogBookPage}, Path=BindingContext.DeleteCommand}" />
+
+                                        <sfButtons:SfButton Grid.Row="3" ImageSource="quit.png" ShowIcon="True" ImageAlignment="Left" Text="{Binding Source={x:Reference LogBookPage}, Path=BindingContext.Resources[Delete]}" BackgroundColor="#e74c3c" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Center" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="StartAndExpand" Margin="0,5,0,10" Command="{Binding Source={x:Reference LogBookPage}, Path=BindingContext.DeleteCommand}" />
                                     </Grid>
                                 </Grid>
                             </ViewCell>

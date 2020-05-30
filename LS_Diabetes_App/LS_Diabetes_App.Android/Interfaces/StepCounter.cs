@@ -2,14 +2,10 @@
 using Android.Content;
 using Android.Hardware;
 using Android.Runtime;
-using LS_Diabetes_App.Droid.Interfaces;
-using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Servies;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
-
 
 namespace LS_Diabetes_App.Droid.Interfaces
 {
@@ -31,20 +27,22 @@ namespace LS_Diabetes_App.Droid.Interfaces
                 OnPropertyChanged();
             }
         }
+
         public StepCounter()
         {
-          //  var stepservice = new SaveStepsService();
+            //  var stepservice = new SaveStepsService();
         }
-        StepServiceBinder binder;
+
+        private StepServiceBinder binder;
+
         public override Android.OS.IBinder OnBind(Android.Content.Intent intent)
         {
             binder = new StepServiceBinder(this);
             return binder;
         }
+
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
-            
-
             var alarmManager = ((AlarmManager)ApplicationContext.GetSystemService(Context.AlarmService));
             var intent2 = new Intent(this, typeof(StepCounter));
             var stepIntent = PendingIntent.GetService(ApplicationContext, 10, intent2, PendingIntentFlags.UpdateCurrent);
@@ -61,6 +59,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
 
             return StartCommandResult.Sticky;
         }
+
         public new void Dispose()
         {
             sManager.UnregisterListener(this);
@@ -69,8 +68,8 @@ namespace LS_Diabetes_App.Droid.Interfaces
 
         public void InitSensorService()
         {
-                sManager =Android.App.Application.Context.GetSystemService(SensorService) as SensorManager;
-                sManager.RegisterListener(this, sManager.GetDefaultSensor(SensorType.StepCounter), SensorDelay.Normal);
+            sManager = Android.App.Application.Context.GetSystemService(SensorService) as SensorManager;
+            sManager.RegisterListener(this, sManager.GetDefaultSensor(SensorType.StepCounter), SensorDelay.Normal);
         }
 
         public void OnAccuracyChanged(Sensor sensor, [GeneratedEnum] SensorStatus accuracy)
@@ -97,7 +96,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
                     //MessagingCenter.Send<object , int>(SaveStepsService, "Steps" , Steps);
                     SaveStepsService.SaveSteps(Steps);
                     //StepCountChanged(this, new StepCountChangedEventArgs { Value = Steps });
-                    
+
                     break;
             }
         }
@@ -113,6 +112,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         public event StepCountChangedEventHandler StepCountChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

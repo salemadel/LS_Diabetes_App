@@ -1,8 +1,5 @@
 ﻿using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LS_Diabetes_App.Interfaces
@@ -22,8 +19,6 @@ namespace LS_Diabetes_App.Interfaces
                     }
 
                     status = await CrossPermissions.Current.RequestPermissionAsync<LocationPermission>();
-
-                   
                 }
             }
             if (type == "Storage")
@@ -36,8 +31,6 @@ namespace LS_Diabetes_App.Interfaces
                     }
 
                     status = await CrossPermissions.Current.RequestPermissionAsync<StoragePermission>();
-
-                    
                 }
             }
             return status;

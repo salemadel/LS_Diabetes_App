@@ -11,7 +11,8 @@ namespace LS_Diabetes_App.Droid.Interfaces
 {
     public class SettingService : ISettingService
     {
-        Context CurrentContext => CrossCurrentActivity.Current.Activity;
+        private Context CurrentContext => CrossCurrentActivity.Current.Activity;
+
         public void OpenSetting()
         {
             LocationManager LM = (LocationManager)CurrentContext.GetSystemService(Context.LocationService);

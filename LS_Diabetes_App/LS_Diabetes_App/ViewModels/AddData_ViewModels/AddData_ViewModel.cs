@@ -2,22 +2,18 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views;
-using Plugin.Geolocator;
-using Plugin.Geolocator.Abstractions;
 using Plugin.Media;
-using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 {
-    internal class AddData_ViewModel : INotifyPropertyChanged
+    internal class AddData_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private IDataStore dataStore;
         private TimeSpan time { get; set; } = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
@@ -147,6 +143,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         public bool Befor_Eat { get; set; }
         public bool After_Eat { get; set; }
         public bool No_Eat { get; set; } = true;
@@ -154,6 +151,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         public bool IsVisible { get; set; }
         private string PicturePath { get; set; }
         private ImageSource picture { get; set; }
+
         public ImageSource Picture
         {
             get { return picture; }
@@ -164,6 +162,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
         public Settings_Model Profil { get; set; }
@@ -171,7 +170,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 
         private INavigation Navigation { get; set; }
 
-        public AddData_ViewModel(string source , INavigation navigation, IDataStore _datastore, Settings_Model profil , object data = null)
+        public AddData_ViewModel(string source, INavigation navigation, IDataStore _datastore, Settings_Model profil, object data = null)
         {
             this.Navigation = navigation;
             this.dataStore = _datastore;
@@ -202,12 +201,12 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             {
                 await ExecuteOnSaveGlucose();
             });
-           
+
             SaveHb1AcCommand = new Command(async () =>
             {
                 await ExecuteOnSaveHb1ac();
             });
-          
+
             SavePressionCommand = new Command(async () =>
             {
                 await ExecuteOnSavePression();
@@ -216,7 +215,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             {
                 await ExecuteOnSaveWeight();
             });
-           
+
             TakePictureCommand = new Command(async () =>
             {
                 await ExecuteOnTakePicture();
@@ -227,68 +226,61 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             });
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
         public Command SaveGlucoseCommand { get; private set; }
         public Command SavePressionCommand { get; set; }
         public Command SaveWeightCommand { get; set; }
         public Command SaveHb1AcCommand { get; set; }
-      
+
         public Command GetPositionCommand { get; private set; }
         public Command TakePictureCommand { get; private set; }
         public Command PictureTappedCommand { get; set; }
 
         private async Task ExecuteOnSaveGlucose()
         {
-          //  IsBusy = true;
-            if(Glucose.Glycemia == 0)
+            //  IsBusy = true;
+            if (Glucose.Glycemia == 0)
             {
                 DependencyService.Get<IMessage>().ShortAlert("Glycemie Non Valide !");
                 return;
             }
             Glucose.Date = AddDateTime;
             Glucose.PicturePathe = PicturePath;
-            if(Befor_Eat)
+            if (Befor_Eat)
             {
-                Glucose.Glucose_time = "Avant Repas";
+                Glucose.Glucose_time = "preparandial";
             }
-            if(After_Eat)
+            if (After_Eat)
             {
-                Glucose.Glucose_time = "Apres Repas";
+                Glucose.Glucose_time = "postparandial";
             }
-            if(No_Eat)
+            if (No_Eat)
             {
-                Glucose.Glucose_time = "à Jeun";
+                Glucose.Glucose_time = "fasting";
             }
             dataStore.AddGlucose(GlycemiaConverter.ConvertBack(Glucose, Profil.GlycemiaUnit));
             System.Diagnostics.Debug.WriteLine(Glucose.Glucose_time);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
-          //  IsBusy = false;
+            //  IsBusy = false;
         }
 
         private async Task ExecuteOnSavePression()
         {
-          //  IsBusy = true;
-            if(Pression.Systolique == 0 | Pression.Diastolique == 0)
+            //  IsBusy = true;
+            if (Pression.Systolique == 0 | Pression.Diastolique == 0)
             {
                 DependencyService.Get<IMessage>().ShortAlert("Pression Non Valide !");
                 return;
             }
             Pression.Date = AddDateTime;
             Pression.PicturePathe = PicturePath;
-            if(At_Home)
+            if (At_Home)
             {
-                Pression.Where = "à La Maison";
+                Pression.Where = "home";
             }
             else
             {
-                Pression.Where = "Chez le Medecin";
+                Pression.Where = "clinic";
             }
             dataStore.AddPression(Pression);
             MessagingCenter.Send(this, "DataUpdated");
@@ -298,8 +290,8 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 
         private async Task ExecuteOnSaveWeight()
         {
-          //  IsBusy = true;
-            if(Weight.Weight == 0)
+            //  IsBusy = true;
+            if (Weight.Weight == 0)
             {
                 DependencyService.Get<IMessage>().ShortAlert("Poids Non Valide !");
                 return;
@@ -314,8 +306,8 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
 
         private async Task ExecuteOnSaveHb1ac()
         {
-           // IsBusy = true;
-            if(Hb1Ac.Hb1Ac == 0)
+            // IsBusy = true;
+            if (Hb1Ac.Hb1Ac == 0)
             {
                 DependencyService.Get<IMessage>().ShortAlert("Hb1Ac Non Valide !");
                 return;
@@ -327,8 +319,6 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
             await Navigation.PopModalAsync();
             IsBusy = false;
         }
-
-      
 
         private async Task ExecuteOnTakePicture()
         {
@@ -346,7 +336,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                     {
                         PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small,
                         CompressionQuality = 50,
-                        Directory = "LS_Diabetes_pictures",
+                        Directory = "SmartHealth_pictures",
                         Name = "Sh_" + DateTime.Now.ToString() + ".jpg"
                     });
 
@@ -361,8 +351,6 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 }
             }
         }
-
-       
 
         private async Task ExecuteOnPictureTapped()
         {

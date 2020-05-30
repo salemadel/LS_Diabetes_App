@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Servies
 {
     public class LocalizedResources : INotifyPropertyChanged
     {
-        const string DEFAULT_LANGUAGE = "en";
+        private const string DEFAULT_LANGUAGE = "en";
 
-        readonly ResourceManager ResourceManager;
-        CultureInfo CurrentCultureInfo;
+        private readonly ResourceManager ResourceManager;
+        private CultureInfo CurrentCultureInfo;
 
         public string this[string key]
         {

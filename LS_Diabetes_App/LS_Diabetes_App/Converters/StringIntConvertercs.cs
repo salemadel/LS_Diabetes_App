@@ -4,13 +4,13 @@ using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Converters
 {
-    internal class StringDoubleConvertercs : IValueConverter
+    internal class StringIntConvertercs : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is double)
+            if (value is int)
             {
-                double _value = (double)value;
+                int _value = (int)value;
 
                 switch (_value)
                 {
@@ -29,8 +29,8 @@ namespace LS_Diabetes_App.Converters
             if (value is string)
             {
                 string _value = (string)value;
-                double x;
-                return double.TryParse(_value, out x) ? x : 0;
+                int x;
+                return int.TryParse(_value, out x) ? x : 0;
             }
             else
             {

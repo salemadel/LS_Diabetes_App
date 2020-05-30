@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LS_Diabetes_App.Models.Data_Models
+﻿namespace LS_Diabetes_App.Models.Data_Models
 {
     public class Token_Model
     {
@@ -13,6 +9,5 @@ namespace LS_Diabetes_App.Models.Data_Models
         public string lastname { get; set; }
         public string email { get; set; }
         public string diabete_type { get; set; }
-
     }
 }

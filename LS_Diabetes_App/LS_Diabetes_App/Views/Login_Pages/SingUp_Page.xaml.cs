@@ -13,7 +13,7 @@ namespace LS_Diabetes_App.Views.Login_Pages
         {
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new SignUp_ViewModel(Navigation, datastore, "SignUp",string.Empty);
+            BindingContext = new SignUp_ViewModel(Navigation, datastore, "SignUp", string.Empty);
         }
 
         private void Custom_Entry_Focused(object sender, FocusEventArgs e)

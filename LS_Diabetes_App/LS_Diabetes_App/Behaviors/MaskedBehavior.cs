@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Behaviors
@@ -9,6 +7,7 @@ namespace LS_Diabetes_App.Behaviors
     public class MaskedBehavior : Behavior<Entry>
     {
         private string _mask = "";
+
         public string Mask
         {
             get => _mask;
@@ -31,9 +30,9 @@ namespace LS_Diabetes_App.Behaviors
             base.OnDetachingFrom(entry);
         }
 
-        IDictionary<int, char> _positions;
+        private IDictionary<int, char> _positions;
 
-        void SetPositions()
+        private void SetPositions()
         {
             if (string.IsNullOrEmpty(Mask))
             {
@@ -63,7 +62,7 @@ namespace LS_Diabetes_App.Behaviors
                 entry.Text = text.Remove(text.Length - 1);
                 return;
             }
-            if(!isValid)
+            if (!isValid)
             {
                 entry.Text = text.Remove(text.Length - 1);
                 return;

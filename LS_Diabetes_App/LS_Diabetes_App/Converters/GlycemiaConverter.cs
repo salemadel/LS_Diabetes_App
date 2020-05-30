@@ -22,7 +22,8 @@ namespace LS_Diabetes_App.Converters
             }
             return value;
         }
-        public double DoubleGlycemiaConvert(double value , string parameter)
+
+        public double DoubleGlycemiaConvert(double value, string parameter)
         {
             if (parameter == "mmol / L")
             {
@@ -30,6 +31,7 @@ namespace LS_Diabetes_App.Converters
             }
             return value;
         }
+
         public double DoubleGlycemiaConvertBack(double value, string parameter)
         {
             if (parameter == "mmol / L")
@@ -38,6 +40,5 @@ namespace LS_Diabetes_App.Converters
             }
             return value;
         }
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using LS_Diabetes_App.Api;
-using LS_Diabetes_App.Home_Pages;
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Servies;
@@ -8,11 +7,9 @@ using Newtonsoft.Json;
 using Plugin.FacebookClient;
 using Plugin.SecureStorage;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -37,24 +34,24 @@ namespace LS_Diabetes_App.ViewModels
             }
         }
 
-        public Login_ViewModel(INavigation navigation , IDataStore dataStore)
+        public Login_ViewModel(INavigation navigation, IDataStore dataStore)
         {
             Navigation = navigation;
             DataStore = dataStore;
             Settings = DataStore.GetSettingsAsync().First();
             Remember_me = Settings.Remember_me;
-            if(Remember_me)
+            if (Remember_me)
             {
-                if(CrossSecureStorage.Current.HasKey("username") & CrossSecureStorage.Current.HasKey("password"))
+                if (CrossSecureStorage.Current.HasKey("username") & CrossSecureStorage.Current.HasKey("password"))
                 {
                     Username = CrossSecureStorage.Current.GetValue("username");
                     Password = CrossSecureStorage.Current.GetValue("password");
                 }
             }
-          //  _oAuth2Service = oAuth2Service;
+            //  _oAuth2Service = oAuth2Service;
             LoginCommand = new Command(async () =>
             {
-                 await ExecuteOnLogin();
+                await ExecuteOnLogin();
             });
             FacebookCommand = new Command(async () =>
             {
@@ -67,61 +64,61 @@ namespace LS_Diabetes_App.ViewModels
                 await ExecuteOnForgotPassword();
             });
         }
+
         public string Username { get; set; }
         public string Password { get; set; }
-        IFacebookClient _facebookService = CrossFacebookClient.Current;
-     
-      
+        private IFacebookClient _facebookService = CrossFacebookClient.Current;
+
         public Command LoginCommand { get; private set; }
         public Command FacebookCommand { get; set; }
         public Command ForgotCommand { get; set; }
-        private  async Task ExecuteOnLogin()
+
+        private async Task ExecuteOnLogin()
         {
             IsBusy = true;
-            if(Settings.Remember_me != Remember_me)
+            if (Settings.Remember_me != Remember_me)
             {
                 Settings.Remember_me = Remember_me;
                 DataStore.UpdateSettings(Settings);
             }
-            if(Remember_me)
+            if (Remember_me)
             {
                 CrossSecureStorage.Current.SetValue("username", Username);
                 CrossSecureStorage.Current.SetValue("password", Password);
             }
-            Application.Current.MainPage = new MainPage();
-            /*  var restapi = new RestApi();
-              var result = await restapi.Login(Username, Password);
-              if(result.Item1)
-              {
-                  var result2 = await restapi.GetProfile();
-                  if(result2.Item1)
-                  {
-                      DataStore.AddProfil(JsonConvert.DeserializeObject<Profil_Model>(result2.Item2));
-                      if(DataStore.GetSettingsAsync().Count() < 1)
-                      {
-                          var settings = new Settings_Model();
-                          DataStore.AddSettings(settings);
-                      }
-                      Application.Current.MainPage = new MainPage();
-                  }
-                  else
-                  {
-                      DependencyService.Get<IMessage>().ShortAlert(result2.Item2);
-                  }
-
-              }
-              else
-              {
-                  DependencyService.Get<IMessage>().ShortAlert(result.Item2);
-              */
+            //   Application.Current.MainPage = new MainPage();
+            var restapi = new RestApi();
+            var result = await restapi.Login(Username, Password);
+            if (result.Item1)
+            {
+                var result2 = await restapi.GetProfile();
+                if (result2.Item1)
+                {
+                    DataStore.DeleteAllProfiles();
+                    DataStore.AddProfil(JsonConvert.DeserializeObject<Profil_Model>(result2.Item2));
+                    if (DataStore.GetSettingsAsync().Count() < 1)
+                    {
+                        var settings = new Settings_Model();
+                        DataStore.AddSettings(settings);
+                    }
+                    Application.Current.MainPage = new MainPage();
+                }
+                else
+                {
+                    DependencyService.Get<IMessage>().ShortAlert(result2.Item2);
+                }
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+            }
             IsBusy = false;
         }
-     
-        async Task LoginFacebookAsync()
+
+        private async Task LoginFacebookAsync()
         {
             try
             {
-
                 if (_facebookService.IsLoggedIn)
                 {
                     _facebookService.Logout();
@@ -134,59 +131,63 @@ namespace LS_Diabetes_App.ViewModels
                     switch (e.Status)
                     {
                         case FacebookActionStatus.Completed:
-                        
+
                             var facebookProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
-                           
+
                             var profil = new Profil_Model();
                             CultureInfo provider = CultureInfo.InvariantCulture;
-                            profil.Birth_Date = DateTime.ParseExact(facebookProfile.Birthday , "MM/dd/yyyy",provider);
+                            profil.Birth_Date = DateTime.ParseExact(facebookProfile.Birthday, "MM/dd/yyyy", provider);
                             profil.FirstName = facebookProfile.FirstName;
                             profil.LastName = facebookProfile.LastName;
                             profil.Sexe = facebookProfile.Gender.First().ToString().ToUpper() + facebookProfile.Gender.Substring(1);
                             profil.Email = facebookProfile.Email;
                             profil.Avatar = facebookProfile.Picture.Data.Url;
-                            Application.Current.MainPage = new MainPage();
-                            /*  var restapi = new RestApi();
-                              var result = await restapi.SocialChack("facebook" , facebookProfile.Id);
-                              if(result.Item1)
-                              {
-                                  if(result.Item2)
-                                  {
-                                      var result2 = await restapi.GetProfile();
-                                      if (result2.Item1)
-                                      {
-                                          DataStore.AddProfil(JsonConvert.DeserializeObject<Profil_Model>(result2.Item2));
-                                          if (DataStore.GetSettingsAsync().Count() < 1)
-                                          {
-                                              var settings = new Settings_Model();
-                                              DataStore.AddSettings(settings);
-                                          }
-                                          Application.Current.MainPage = new MainPage();
-                                      }
-                                      else
-                                      {
-                                          DependencyService.Get<IMessage>().ShortAlert(result2.Item2);
-                                      }
-                                  }
-                                  else
-                                  {
-                                      DataStore.AddProfil(profil);
-                                      await Navigation.PushAsync(new Profil_Base_Page(facebookProfile.Id), true);
-                                  }
-
-                              }
-                              else
-                              {
-                                      DependencyService.Get<IMessage>().ShortAlert(result.Item3);
-                              }*/
+                            //   Application.Current.MainPage = new MainPage();
+                            var restapi = new RestApi();
+                            var result = await restapi.SocialChack("facebook", facebookProfile.Id);
+                            if (result.Item1)
+                            {
+                                if (result.Item2)
+                                {
+                                    var result2 = await restapi.GetProfile();
+                                    if (result2.Item1)
+                                    {
+                                        DataStore.DeleteAllProfiles();
+                                        DataStore.AddProfil(JsonConvert.DeserializeObject<Profil_Model>(result2.Item2));
+                                        if (DataStore.GetSettingsAsync().Count() < 1)
+                                        {
+                                            var settings = new Settings_Model();
+                                            DataStore.AddSettings(settings);
+                                        }
+                                        Application.Current.MainPage = new MainPage();
+                                    }
+                                    else
+                                    {
+                                        DependencyService.Get<IMessage>().ShortAlert(result2.Item2);
+                                    }
+                                }
+                                else
+                                {
+                                    DataStore.DeleteAllProfiles();
+                                    DataStore.AddProfil(profil);
+                                    await Navigation.PushAsync(new Profil_Base_Page(facebookProfile.Id, facebookProfile.Id), true);
+                                }
+                            }
+                            else
+                            {
+                                DependencyService.Get<IMessage>().ShortAlert(result.Item3);
+                            }
 
                             break;
+
                         case FacebookActionStatus.Canceled:
                             await App.Current.MainPage.DisplayAlert("Facebook Auth", "Canceled", "Ok");
                             break;
+
                         case FacebookActionStatus.Error:
                             await App.Current.MainPage.DisplayAlert("Facebook Auth", "Error", "Ok");
                             break;
+
                         case FacebookActionStatus.Unauthorized:
                             await App.Current.MainPage.DisplayAlert("Facebook Auth", "Unauthorized", "Ok");
                             break;

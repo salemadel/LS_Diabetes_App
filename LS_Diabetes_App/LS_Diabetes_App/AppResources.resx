@@ -117,11 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="About_C" xml:space="preserve">
+    <value>About application</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="After_Meals" xml:space="preserve">
+    <value>Postparandial</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
   <data name="AllFieldsMessage" xml:space="preserve">
     <value>You must fill in all fields</value>
   </data>
+  <data name="And" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="atrial_fibrillation" xml:space="preserve">
+    <value>Atrial fibrillation</value>
+  </data>
+  <data name="At_Doctor" xml:space="preserve">
+    <value>At Doctor</value>
+  </data>
+  <data name="At_Home" xml:space="preserve">
+    <value>At Home</value>
+  </data>
   <data name="Average" xml:space="preserve">
     <value>Average</value>
+  </data>
+  <data name="Before_Meal" xml:space="preserve">
+    <value>Preparandial</value>
   </data>
   <data name="BirthDateMessage" xml:space="preserve">
     <value>Date of birth Not Valid!</value>
@@ -132,17 +162,38 @@
   <data name="Blood_pressure" xml:space="preserve">
     <value>Blood pressure</value>
   </data>
+  <data name="Cardiac_Frequancy" xml:space="preserve">
+    <value>Cardiac frequancy</value>
+  </data>
   <data name="ConfirmPasswordMessage" xml:space="preserve">
     <value>Please confirm your password !</value>
   </data>
   <data name="ConfirmPassword_PlaceHolder" xml:space="preserve">
     <value>Confirm Passwod</value>
   </data>
+  <data name="Connection_Requests" xml:space="preserve">
+    <value>Connection Requests.</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>Would you like to delete ?</value>
+  </data>
   <data name="DiabetesType_Label" xml:space="preserve">
     <value>Diabetes type</value>
   </data>
   <data name="Diagnostic_Year" xml:space="preserve">
     <value>Diagnostic year</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="Dosage" xml:space="preserve">
     <value>Dosage</value>
@@ -152,6 +203,18 @@
   </data>
   <data name="Drugs_Label" xml:space="preserve">
     <value>Drugs</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditMessage" xml:space="preserve">
+    <value>Would you like to edit ?</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>Fasting</value>
   </data>
   <data name="EnterCode" xml:space="preserve">
     <value>Please enter verification code</value>
@@ -168,8 +231,26 @@
   <data name="Glucometer_Label" xml:space="preserve">
     <value>Glucometer</value>
   </data>
+  <data name="Glucose" xml:space="preserve">
+    <value>Glucose</value>
+  </data>
+  <data name="Glycemia" xml:space="preserve">
+    <value>Glycemia</value>
+  </data>
+  <data name="Glycemia_Statistics" xml:space="preserve">
+    <value>Glycemia Statistics.</value>
+  </data>
+  <data name="Goals" xml:space="preserve">
+    <value>Goals</value>
+  </data>
+  <data name="Goals_C" xml:space="preserve">
+    <value>Blood sugar zone , Other</value>
+  </data>
   <data name="Good" xml:space="preserve">
     <value>Good</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Hieght</value>
   </data>
   <data name="Height_Unit" xml:space="preserve">
     <value>Height unit</value>
@@ -177,11 +258,17 @@
   <data name="Highest" xml:space="preserve">
     <value>Highest</value>
   </data>
+  <data name="Highest_M" xml:space="preserve">
+    <value>Highest</value>
+  </data>
   <data name="Hight" xml:space="preserve">
     <value>Hight</value>
   </data>
   <data name="Home_Glucose_Lavel_Label" xml:space="preserve">
     <value>Glycemia</value>
+  </data>
+  <data name="Indifined_period" xml:space="preserve">
+    <value>indefinite period</value>
   </data>
   <data name="Insuline_Label" xml:space="preserve">
     <value>Insulin</value>
@@ -192,8 +279,23 @@
   <data name="InternetMessage" xml:space="preserve">
     <value>please check your internet connection</value>
   </data>
+  <data name="Laboratory" xml:space="preserve">
+    <value>Laboratory</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Last</value>
+  </data>
   <data name="LastName_PlaceHolder" xml:space="preserve">
     <value>Last name</value>
+  </data>
+  <data name="Last_F" xml:space="preserve">
+    <value>Last</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
   </data>
   <data name="Low" xml:space="preserve">
     <value>Low</value>
@@ -201,8 +303,20 @@
   <data name="Lowest" xml:space="preserve">
     <value>Lowest</value>
   </data>
+  <data name="Lowest_M" xml:space="preserve">
+    <value>Lowest</value>
+  </data>
   <data name="Male_RadioButton" xml:space="preserve">
     <value>Male</value>
+  </data>
+  <data name="Measure" xml:space="preserve">
+    <value>Unit of measure</value>
+  </data>
+  <data name="Measure_C" xml:space="preserve">
+    <value>Unit of measure, unit of blood sugar, other</value>
+  </data>
+  <data name="Medication_Reminder" xml:space="preserve">
+    <value>Medication reminder</value>
   </data>
   <data name="NewPasswordMessage" xml:space="preserve">
     <value>Please enter your new password</value>
@@ -210,14 +324,29 @@
   <data name="Next_medication" xml:space="preserve">
     <value>Next medication</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="Note_Label" xml:space="preserve">
     <value>Note</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
   </data>
   <data name="Password_PlaceHolder" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="Personal" xml:space="preserve">
+    <value>Personal data</value>
+  </data>
+  <data name="Personal_C" xml:space="preserve">
+    <value>Gender , Firstname , Lastname , Other</value>
+  </data>
   <data name="Physical_activity" xml:space="preserve">
     <value>Physical activity</value>
+  </data>
+  <data name="Pick_Times" xml:space="preserve">
+    <value>Pick Times</value>
   </data>
   <data name="Position_Label" xml:space="preserve">
     <value>Postition</value>
@@ -227,6 +356,12 @@
   </data>
   <data name="Remaining_time" xml:space="preserve">
     <value>Remaining time</value>
+  </data>
+  <data name="Remember_Me" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="Reminder" xml:space="preserve">
+    <value>Reminder</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
@@ -243,6 +378,15 @@
   <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Settings_C" xml:space="preserve">
+    <value>Notifications , Location , Language , Other</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>share your id with your doctor</value>
+  </data>
   <data name="SignIn_Label" xml:space="preserve">
     <value>Sign In</value>
   </data>
@@ -252,14 +396,35 @@
   <data name="SixLettersMessage" xml:space="preserve">
     <value>Password must contain at least 6 characters</value>
   </data>
+  <data name="Start_Date" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
   <data name="Step_Label" xml:space="preserve">
     <value>Step</value>
+  </data>
+  <data name="SuccesMessage" xml:space="preserve">
+    <value>Operation successfully completed</value>
+  </data>
+  <data name="Taking_Medication" xml:space="preserve">
+    <value>Taking medication</value>
+  </data>
+  <data name="Taking_Time" xml:space="preserve">
+    <value>Taking Time</value>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>Target blood sugar</value>
   </data>
   <data name="Time_Label" xml:space="preserve">
     <value>Time</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>Today</value>
+  </data>
+  <data name="Unimportant" xml:space="preserve">
+    <value>Unimportant</value>
   </data>
   <data name="Unit_Label" xml:space="preserve">
     <value>Unit</value>
@@ -272,5 +437,11 @@
   </data>
   <data name="Weight_Unit" xml:space="preserve">
     <value>Weight Unit</value>
+  </data>
+  <data name="Without food" xml:space="preserve">
+    <value>Without food</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

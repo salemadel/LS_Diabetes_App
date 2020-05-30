@@ -1,19 +1,18 @@
-﻿using LS_Diabetes_App.Converters;
-using LS_Diabetes_App.Interfaces;
+﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.Statistiques_Pages;
 using Syncfusion.XForms.Buttons;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 {
-    public class Hb1AcStatistique_ViewModel : INotifyPropertyChanged
+    public class Hb1AcStatistique_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private IDataStore DataStore;
         private INavigation Navigation;
@@ -108,8 +107,6 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             }
         }
 
-        
-
         private double average { get; set; }
 
         public double Average
@@ -122,6 +119,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private double nbr_normal { get; set; }
 
         public double Nbr_Normal
@@ -160,7 +158,9 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private int selected_date_index { get; set; }
+
         public int Selected_Date_Index
         {
             get { return selected_date_index; }
@@ -178,13 +178,12 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                         case 4: Selected_MinDate = DateTime.Now.Date.AddDays(-90); Selected_MaxDate = DateTime.Now.Date; break;
                     }
                     OnPropertyChanged();
-                    
                 }
             }
         }
+
         public int MaximumChart { get; set; }
 
-       
         public Profil_Model Profil { get; set; }
         public ObservableCollection<SfSegmentItem> DateItems { get; set; }
         public string Message { get; set; }
@@ -196,18 +195,17 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             DataStore = dataStore;
             Profil = DataStore.GetProfilAsync().First();
             Hb1Ac_Data = new ObservableCollection<Hb1Ac_Model>();
-           
+
             Selected_MaxDate = DateTime.Now.Date;
             Selected_MinDate = DateTime.Now.Date;
             Selected_Date_Index = 0;
             DateItems = new ObservableCollection<SfSegmentItem>
         {
-            new SfSegmentItem(){Text="Aujourd'hui" },
-            new SfSegmentItem(){Text="7 Jours"},
-            new SfSegmentItem(){Text="14 Jours"},
-            new SfSegmentItem(){Text="30 Jours"},
-            new SfSegmentItem(){Text="90 Jours"}
-
+            new SfSegmentItem(){Text=Resources["Today"] },
+            new SfSegmentItem(){Text="7 "+Resources["Days"]},
+            new SfSegmentItem(){Text="14 "+Resources["Days"]},
+            new SfSegmentItem(){Text="30 "+Resources["Days"]},
+            new SfSegmentItem(){Text="90 "+Resources["Days"]}
         };
             UpdateData();
             FiltreCommand = new Command(() =>
@@ -217,7 +215,6 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             MessagingCenter.Subscribe<Hb1AcStatistique_Page>(this, "Filter", (sender) =>
             {
                 UpdateData();
-
             });
         }
 
@@ -235,13 +232,12 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Nbr_Hight = 0;
             Nbr_Low = 0;
             Nbr_Normal = 0;
-            foreach(var item in DataStore.GetHb1acAsync().Where(i => i.Date.Date >= Selected_MinDate & i.Date.Date <= Selected_MaxDate))
+            foreach (var item in DataStore.GetHb1acAsync().Where(i => i.Date.Date >= Selected_MinDate & i.Date.Date <= Selected_MaxDate))
             {
                 Hb1Ac_Data.Add(item);
             }
             if (Hb1Ac_Data.Count > 0)
             {
-
                 Hb1Ac_Data = new ObservableCollection<Hb1Ac_Model>(Hb1Ac_Data.OrderBy(i => i.Date));
                 Min = Hb1Ac_Data.OrderBy(i => i.Hb1Ac).First();
                 Max = Hb1Ac_Data.OrderBy(i => i.Hb1Ac).Last();
@@ -249,32 +245,24 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Nbr_Hight = Hb1Ac_Data.Where(i => i.Hb1Ac > 6.5).Count();
                 Nbr_Low = Hb1Ac_Data.Where(i => i.Hb1Ac < 5).Count();
                 MaximumChart = Convert.ToInt32(Max.Hb1Ac + 5);
-                Average = Math.Round(Hb1Ac_Data.Sum(i => i.Hb1Ac) / Hb1Ac_Data.Count , 1);
-                if(string.IsNullOrWhiteSpace(Message))
+                Average = Math.Round(Hb1Ac_Data.Sum(i => i.Hb1Ac) / Hb1Ac_Data.Count, 1);
+                if (string.IsNullOrWhiteSpace(Message))
                 {
-                    Message = "Dernier Hb1Ac :" + Hb1Ac_Data.Last().Hb1Ac + " % ";
+                    Message = Resources["Last"] + " Hb1Ac :" + Hb1Ac_Data.Last().Hb1Ac + " % ";
                 }
             }
-            if(Average < 5)
+            if (Average < 5)
             {
                 GlucoseColor = Color.FromHex("#f1c40f");
             }
-            if(Average >= 5 & Average <= 6.5)
+            if (Average >= 5 & Average <= 6.5)
             {
                 GlucoseColor = Color.FromHex("#2ecc71");
             }
-            if(Average > 6.5)
+            if (Average > 6.5)
             {
                 GlucoseColor = Color.FromHex("#e74c3c");
             }
-           
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

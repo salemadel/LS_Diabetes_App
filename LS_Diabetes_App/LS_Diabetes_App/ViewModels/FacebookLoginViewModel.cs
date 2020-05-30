@@ -3,12 +3,9 @@ using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.Login_Pages;
 using Newtonsoft.Json;
-using Plugin.FacebookClient;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -27,13 +24,14 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
-       
+
         private INavigation Navigation { get; set; }
         private IDataStore DataStore { get; set; }
         private string ClientId = "587638608534035";
         public string Test = "https://www.google.com";
-        public string Url = "https://www.facebook.com/dialog/oauth?client_id="+ "587638608534035" + "&display=popup&response_type=token&redirect_uri=https://www.facebook.com/connect/login_success.html";
-        public FacebookLoginViewModel(INavigation navigation , IDataStore dataStore)
+        public string Url = "https://www.facebook.com/dialog/oauth?client_id=" + "587638608534035" + "&display=popup&response_type=token&redirect_uri=https://www.facebook.com/connect/login_success.html";
+
+        public FacebookLoginViewModel(INavigation navigation, IDataStore dataStore)
         {
             Navigation = navigation;
             DataStore = dataStore;
@@ -56,6 +54,7 @@ namespace LS_Diabetes_App.ViewModels
                 await Navigation.PushAsync(new Profil_Base_Page("123456"), true);
             }
         }
+
         private string ExtractAccessTokenFromUrl(string url)
         {
             if (url.Contains("access_token") && url.Contains("&expires_in="))
@@ -74,6 +73,7 @@ namespace LS_Diabetes_App.ViewModels
 
             return string.Empty;
         }
+
         public async Task<FacebookProfile> GetFacebookProfileAsync(string accessToken)
         {
             var requestUrl =

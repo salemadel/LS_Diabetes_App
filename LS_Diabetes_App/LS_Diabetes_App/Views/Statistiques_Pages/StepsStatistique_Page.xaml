@@ -39,7 +39,7 @@
                 </Grid.RowDefinitions>
                 <buttons:SfSegmentedControl x:Name="DateSegemnt" SelectionTextColor="White" FontColor="#00B2C8" SelectedIndex="{Binding Selected_Date_Index}" ItemsSource="{Binding DateItems}" FontFamily="{StaticResource NormalFont}" FontSize="13" CornerRadius="10" Margin="10,0,10,0"  HeightRequest="60" Color="Transparent"   VisibleSegmentsCount="4" BorderColor="#00B2C8"   Grid.Row="0"   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  SelectionChanged="Handle_SelectionChanged">
                     <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                        <buttons:SelectionIndicatorSettings 
+                        <buttons:SelectionIndicatorSettings
     Color="#00B2C8">
                         </buttons:SelectionIndicatorSettings>
                     </buttons:SfSegmentedControl.SelectionIndicatorSettings>
@@ -83,7 +83,7 @@
 
                                 <chart:DateTimeAxis RangePadding="Additional" LabelRotationAngle="0">
                                     <chart:DateTimeAxis.LabelStyle>
-                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11" LabelFormat="dd/MMMM"/>
+                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11" LabelFormat="dd/MMMM" />
                                     </chart:DateTimeAxis.LabelStyle>
                                 </chart:DateTimeAxis>
                             </chart:SfChart.PrimaryAxis>
@@ -92,22 +92,21 @@
 
                                 <chart:NumericalAxis Minimum="0" Maximum="{Binding MaximumChart}" ShowMajorGridLines="False" ShowMinorGridLines="False">
                                     <chart:NumericalAxis.LabelStyle>
-                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11"/>
+                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11" />
                                     </chart:NumericalAxis.LabelStyle>
                                 </chart:NumericalAxis>
                             </chart:SfChart.SecondaryAxis>
                             <chart:SplineSeries ItemsSource="{Binding Weight_Data}" XBindingPath="Date" SplineType="Monotonic" YBindingPath="Weight" Color="{Binding GlucoseColor}" StrokeWidth="2">
                                 <chart:SplineSeries.DataMarker>
 
-                                    <chart:ChartDataMarker ShowLabel="False" 
+                                    <chart:ChartDataMarker ShowLabel="False"
 						   ShowMarker="True"
-						   
-						   MarkerWidth="10" 
-						   MarkerHeight="10"
-						   MarkerColor="{Binding GlucoseColor}" 
-						   MarkerBorderColor="{Binding GlucoseColor}"
-						   MarkerBorderWidth="0"/>
 
+						   MarkerWidth="10"
+						   MarkerHeight="10"
+						   MarkerColor="{Binding GlucoseColor}"
+						   MarkerBorderColor="{Binding GlucoseColor}"
+						   MarkerBorderWidth="0" />
                                 </chart:SplineSeries.DataMarker>
                             </chart:SplineSeries>
                         </chart:SfChart>

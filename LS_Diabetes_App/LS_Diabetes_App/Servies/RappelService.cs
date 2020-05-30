@@ -1,9 +1,7 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.Servies
@@ -14,18 +12,18 @@ namespace LS_Diabetes_App.Servies
 
         public static void SetRappel()
         {
-            if(DataStore == null)
+            if (DataStore == null)
             {
                 DataStore = new DataStores();
             }
             var Drugs = DataStore.GetDrugsAsync();
-            if(Drugs.Count() > 0)
+            if (Drugs.Count() > 0)
             {
-                foreach(var drug in Drugs)
+                foreach (var drug in Drugs)
                 {
-                    if(!drug.Indeterminer & !drug.AlarmSet & drug.Rappel)
+                    if (!drug.Indeterminer & !drug.AlarmSet & drug.Rappel)
                     {
-                       foreach(var obj in drug.Times_List)
+                        foreach (var obj in drug.Times_List)
                         {
                             if (drug.Duration > 0)
                             {
@@ -38,27 +36,27 @@ namespace LS_Diabetes_App.Servies
                                     var selectedDateTime = DateTime.ParseExact(dateTime, "MM-dd-yyyy HH:mm", CultureInfo.InvariantCulture);
                                     var MessageText = drug.Drug + " " + drug.Dose + " dose " + drug.Taking_Time;
                                     DependencyService.Get<ILocalNotificationService>().Cancel(0);
-                                    DependencyService.Get<ILocalNotificationService>().LocalNotification("Rappel Médicament", MessageText, drug.Id, selectedDateTime , drug.Duration);
+                                    DependencyService.Get<ILocalNotificationService>().LocalNotification("Rappel Médicament", MessageText, drug.Id, selectedDateTime, drug.Duration);
                                 }
                             }
                         }
                         drug.AlarmSet = true;
                         DataStore.UpdateDrugs(drug);
                     }
-                    if(drug.Indeterminer & drug.Rappel)
+                    if (drug.Indeterminer & drug.Rappel)
                     {
-                        if(!drug.AlarmSet)
+                        if (!drug.AlarmSet)
                         {
                             foreach (var obj in drug.Times_List)
                             {
-                                        var alarmdate = drug.StartDate.AddDays(0);
-                                        var date = (alarmdate.Date.Month.ToString("00") + "-" + alarmdate.Date.Day.ToString("00") + "-" + alarmdate.Date.Year.ToString());
+                                var alarmdate = drug.StartDate.AddDays(0);
+                                var date = (alarmdate.Date.Month.ToString("00") + "-" + alarmdate.Date.Day.ToString("00") + "-" + alarmdate.Date.Year.ToString());
                                 var time = Convert.ToDateTime(obj).ToString("HH:mm");
                                 var dateTime = date + " " + time;
-                                        var selectedDateTime = DateTime.ParseExact(dateTime, "MM-dd-yyyy HH:mm", CultureInfo.InvariantCulture);
-                                        var MessageText = drug.Drug + " " + drug.Dose + " dose " + drug.Taking_Time;
-                                        DependencyService.Get<ILocalNotificationService>().Cancel(0);
-                                        DependencyService.Get<ILocalNotificationService>().LocalNotification("Rappel Médicament", MessageText, drug.Id, selectedDateTime , drug.Duration);
+                                var selectedDateTime = DateTime.ParseExact(dateTime, "MM-dd-yyyy HH:mm", CultureInfo.InvariantCulture);
+                                var MessageText = drug.Drug + " " + drug.Dose + " dose " + drug.Taking_Time;
+                                DependencyService.Get<ILocalNotificationService>().Cancel(0);
+                                DependencyService.Get<ILocalNotificationService>().LocalNotification("Rappel Médicament", MessageText, drug.Id, selectedDateTime, drug.Duration);
                             }
                             drug.AlarmSet = true;
                             DataStore.UpdateDrugs(drug);

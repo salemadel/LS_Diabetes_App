@@ -17,7 +17,7 @@ namespace LS_Diabetes_App.Views.AddData_Views
         {
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new AddData_ViewModel (source , Navigation, datastore, profil, data);
+            BindingContext = new AddData_ViewModel(source, Navigation, datastore, profil, data);
             TimePicker.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
             DatePicker.MaximumDate = DateTime.Now.Date;
         }
@@ -42,7 +42,7 @@ namespace LS_Diabetes_App.Views.AddData_Views
 
         private void Sys_Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if((sender as Entry).Text.Length >= 3)
+            if ((sender as Entry).Text.Length >= 3)
             {
                 Dia_Entry.Focus();
             }

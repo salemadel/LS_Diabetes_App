@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:CustomFrame="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:CustomEntry="clr-namespace:LS_Diabetes_App.Custom_Controls"
-             xmlns:resources="clr-namespace:LS_Diabetes_App"
+             xmlns:resources="clr-namespace:LS_Diabetes_App" xmlns:sfbutton="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="LS_Diabetes_App.Views.Login_Pages.Login_Page">
     <ContentPage.Resources>
@@ -30,6 +30,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
@@ -45,20 +46,22 @@
                             <CustomEntry:Custom_Entry IsPassword="True" Text="{Binding Password}"   Placeholder="{Binding Resources[Password_PlaceHolder]}" HorizontalTextAlignment="Center" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Focused="Custom_Entry_Focused_1" Unfocused="Custom_Entry_Unfocused_1" HeightRequest="60" WidthRequest="200" />
                         </StackLayout>
                     </CustomFrame:PancakeView>
-                    <Label Grid.Row="3" Text="{Binding Resources[ForgotPassword_Label]}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,20,0" >
+
+                    <sfbutton:SfCheckBox  Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Text="{Binding Resources[Remember_Me]}" FontFamily="{StaticResource NormalFont}" TextColor="Black" HeightRequest="20" WidthRequest="150" CheckedColor="#00B2C8"   IsChecked="{Binding Remember_me}" Margin="20,0,0,0" />
+
+                    <Label Grid.Row="4" Text="{Binding Resources[ForgotPassword_Label]}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,20,0">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ForgotCommand}"/>
+                            <TapGestureRecognizer Command="{Binding ForgotCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-                    <Label x:Name="SignUp_Label" Grid.Row="3" Text="{Binding Resources[SignUp_Label]}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" Margin="20,0,0,0" />
-                    <StackLayout Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                        <ImageButton Source="facebook.png" Padding="10" BackgroundColor="#4267B2"    CornerRadius="30" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,0,0" HeightRequest="60" WidthRequest="60"  Command="{Binding FacebookCommand}"/>
-                        <ImageButton Source="google.png" Padding="10" BackgroundColor="Transparent"   CornerRadius="30" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,0" HeightRequest="60" WidthRequest="60" />
+                    <Label x:Name="SignUp_Label" Grid.Row="4" Text="{Binding Resources[SignUp_Label]}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" Margin="20,0,0,0" />
+                    <StackLayout Grid.Row="4" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                        <ImageButton Source="facebook.png" Padding="10" BackgroundColor="#4267B2"    CornerRadius="30" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0" HeightRequest="60" WidthRequest="60"  Command="{Binding FacebookCommand}" />
                     </StackLayout>
-                    <Label Grid.Row="2" Text="{Binding Resources[SignIn_Label]}" FontSize="28" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="20,0,0,0" />
-                    <ImageButton Source="next.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,30,0" HeightRequest="70" WidthRequest="70" Command="{Binding LoginCommand}" />
+                    <Label Grid.Row="3" Text="{Binding Resources[SignIn_Label]}" FontSize="28" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="20,0,0,0" />
+                    <ImageButton Source="next.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="3" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,30,0" HeightRequest="70" WidthRequest="70" Command="{Binding LoginCommand}" />
 
-                    <ActivityIndicator Grid.Row="2" Color="#00B2C8"  VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+                    <ActivityIndicator Grid.Row="3" Color="#00B2C8"  VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
                 </Grid>
             </CustomFrame:PancakeView>
         </Grid>

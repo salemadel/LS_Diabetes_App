@@ -15,75 +15,91 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="80" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*" />
-                    <ColumnDefinition Width="0.2*" />
-                </Grid.ColumnDefinitions>
-               
-                <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Unités de mesure" FontSize="17" TextColor="Black" FontFamily="{StaticResource NormalFont}" />
-                    <Label  Text="Unités de mesure , Unité de glycémie , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
-                </StackLayout>
-                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding UnitsCommand}"/>
-                </Grid.GestureRecognizers>
-            </Grid>
+            <StackLayout Grid.Row="0" Orientation="Horizontal" HeightRequest="60" BackgroundColor="Default" Margin="5,5,5,5">
+                <Label  Text="{Binding MessageText}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="19" FontFamily="{StaticResource BoldFont}" />
+                <ImageButton Source="share.png" Padding="10" BackgroundColor="#00B2C8"    CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,0" HeightRequest="40" WidthRequest="40"  Command="{Binding ShareCommand}" />
+            </StackLayout>
             <Grid Grid.Row="1" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.8*" />
                     <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding EditProfilCommand}"/>
-                </Grid.GestureRecognizers>
+
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Données personnelles" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
-                    <Label  Text="Sexe , Nom , Prénom , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
-                </StackLayout>
-                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
-            </Grid>
-            <Grid Grid.Row="2" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5" x:Name="test">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.8*" />
-                    <ColumnDefinition Width="0.2*" />
-                </Grid.ColumnDefinitions>
-                <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="Objectifs" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
-                    <Label  Text="Glycémie zone , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="{Binding Resources[Measure]}" FontSize="17" TextColor="Black" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="{Binding Resources[Measure_C]}" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
                 <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ObjectifsCommand}"/>
+                    <TapGestureRecognizer Command="{Binding UnitsCommand}" />
                 </Grid.GestureRecognizers>
             </Grid>
-            <Grid Grid.Row="3" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
+            <Grid Grid.Row="2" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.8*" />
                     <ColumnDefinition Width="0.2*" />
                 </Grid.ColumnDefinitions>
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SettingsCommand}"/>
+                    <TapGestureRecognizer Command="{Binding EditProfilCommand}" />
                 </Grid.GestureRecognizers>
                 <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
-                    <Label  Text="paramètres de l'application" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
-                    <Label  Text="Notification , Localisation , Autre" FontSize="13" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="{Binding Resources[Personal]}" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="{Binding Resources[Personal_C]}" FontSize="13" FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
                 <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
             </Grid>
-            <StackLayout Grid.Row="4" Orientation="Horizontal" HeightRequest="60" BackgroundColor="Default" Margin="5,5,5,5">
-                <Label  Text="{Binding MessageText}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="19" FontFamily="{StaticResource BoldFont}" />
-                <ImageButton Source="share.png" Padding="10" BackgroundColor="#00B2C8"    CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,0" HeightRequest="40" WidthRequest="40"  Command="{Binding ShareCommand}"/>
-            </StackLayout>
-            <sfButtons:SfButton Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"  ImageSource="ok.png" ShowIcon="True" ImageAlignment="Left" Text="Disconnect" BackgroundColor="#00B2C8" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Start" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,5,0,10" Command="{Binding DisconnectCommand}"/>
+            <Grid Grid.Row="3" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5" x:Name="test">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
+                    <Label  Text="{Binding Resources[Goals]}" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="{Binding Resources[Goals_C]}" FontSize="13" FontFamily="{StaticResource NormalFont}" />
+                </StackLayout>
+                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ObjectifsCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+            <Grid Grid.Row="4" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SettingsCommand}" />
+                </Grid.GestureRecognizers>
+                <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
+                    <Label  Text="{Binding Resources[Settings]}" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="{Binding Resources[Settings_C]}" FontSize="13" FontFamily="{StaticResource NormalFont}" />
+                </StackLayout>
+                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
+            </Grid>
+            <Grid Grid.Row="5" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AboutCommand}" />
+                </Grid.GestureRecognizers>
+                <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand">
+                    <Label  Text="{Binding Resources[About]}" TextColor="Black" FontSize="19" FontFamily="{StaticResource NormalFont}" />
+                    <Label  Text="{Binding Resources[About_C]}" FontSize="13" FontFamily="{StaticResource NormalFont}" />
+                </StackLayout>
+                <Image Source="go.png" Grid.Column="1" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,5,0" />
+            </Grid>
+            <ActivityIndicator Grid.Row="3" Color="#00B2C8"  VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+            <sfButtons:SfButton Grid.Row="6"   ImageSource="ok.png" ShowIcon="True" ImageAlignment="Left" Text="{Binding Resources[Disconnect]}" BackgroundColor="#00B2C8" HeightRequest="50" WidthRequest="140" HorizontalTextAlignment="Center" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,5,0,10" Command="{Binding DisconnectCommand}" />
         </Grid>
     </ScrollView>
 </ContentPage>

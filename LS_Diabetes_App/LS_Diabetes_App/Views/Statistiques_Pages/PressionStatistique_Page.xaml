@@ -29,7 +29,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0" BackgroundColor="Default">
-                <Label Text="Statistique Pression Artérielle." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+                <Label Text="{Binding Resources[Statistics]}" FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
             </StackLayout>
             <Grid Grid.Row="1" VerticalOptions="StartAndExpand">
                 <Grid.RowDefinitions>
@@ -39,7 +39,7 @@
                 </Grid.RowDefinitions>
                 <buttons:SfSegmentedControl x:Name="DateSegemnt" SelectionTextColor="White" FontColor="#00B2C8" SelectedIndex="{Binding Selected_Date_Index}" ItemsSource="{Binding DateItems}" FontFamily="{StaticResource NormalFont}" FontSize="13" CornerRadius="10" Margin="10,0,10,0"  HeightRequest="60" Color="Transparent"   VisibleSegmentsCount="4" BorderColor="#00B2C8"   Grid.Row="0"   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  SelectionChanged="Handle_SelectionChanged">
                     <buttons:SfSegmentedControl.SelectionIndicatorSettings>
-                        <buttons:SelectionIndicatorSettings 
+                        <buttons:SelectionIndicatorSettings
     Color="#00B2C8">
                         </buttons:SelectionIndicatorSettings>
                     </buttons:SfSegmentedControl.SelectionIndicatorSettings>
@@ -55,19 +55,19 @@
                             <RowDefinition Height="290" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Frame Grid.Row="0" Grid.Column="0"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="100" WidthRequest="100" CornerRadius="60" BackgroundColor="{Binding Sys_Color}">
                             <StackLayout>
-                                <Label Text="Moyenne" FontFamily="{StaticResource NormalFont}" FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                                <Label Text="{Binding Resources[Average]}" FontFamily="{StaticResource NormalFont}" FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
                                 <Label Text="{Binding Average_sys , Converter={StaticResource ZeroConverter}}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="24" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
                                 <Label Text="Sys" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
                             </StackLayout>
                         </Frame>
                         <Frame Grid.Row="0" Grid.Column="1"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="100" WidthRequest="100" CornerRadius="60" BackgroundColor="{Binding Dia_Color}">
                             <StackLayout>
-                                <Label Text="Moyenne" FontFamily="{StaticResource NormalFont}" FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                                <Label Text="{Binding Resources[Average]}" FontFamily="{StaticResource NormalFont}" FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
                                 <Label Text="{Binding Average_dia , Converter={StaticResource ZeroConverter}}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="24" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
                                 <Label Text="Dia" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
                             </StackLayout>
@@ -86,15 +86,15 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Text="Systolique" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 <StackLayout Grid.Row="1" Grid.Column="0">
-                                    <Label Text="Bonne" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Good]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Nbr_Normal_sys , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Row="1" Grid.Column="1">
-                                    <Label Text="Elevée" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Hight]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Nbr_Hight_sys , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Row="1" Grid.Column="2">
-                                    <Label Text="Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Low]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Nbr_Low_sys , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                             </Grid>
@@ -112,15 +112,15 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Text="Diastolique" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 <StackLayout Grid.Row="1" Grid.Column="0">
-                                    <Label Text="Bonne" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Good]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Nbr_Normal_dia , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Row="1" Grid.Column="1">
-                                    <Label Text="Elevée" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Hight]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Nbr_Hight_dia , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Row="1" Grid.Column="2">
-                                    <Label Text="Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Low]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Nbr_Low_dia , Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                             </Grid>
@@ -135,14 +135,14 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                               
+
                                 <StackLayout Grid.Row="1"  Grid.Column="0">
-                                    <Label Text="La Plus haute" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Highest_M]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Max_sys.Systolique , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Max_sys.Date , StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Row="1" Grid.Column="1">
-                                    <Label Text="La Plus Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Lowest_M]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Min_sys.Systolique , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Min_sys.Date , StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
@@ -159,12 +159,12 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Grid.Row="1"  Grid.Column="0">
-                                    <Label Text="La Plus haute" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Highest_M]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Max_dia.Diastolique , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Max_dia.Date , StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Row="1" Grid.Column="1">
-                                    <Label Text="La Plus Basse" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Lowest_M]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Min_dia.Diastolique , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Min_dia.Date , StringFormat='{0:dd/MM/yyyy HH:mm}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
@@ -176,7 +176,7 @@
 
                                 <chart:DateTimeAxis RangePadding="Additional" LabelRotationAngle="0">
                                     <chart:DateTimeAxis.LabelStyle>
-                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11" LabelFormat="dd/MMMM"/>
+                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11" LabelFormat="dd/MMMM" />
                                     </chart:DateTimeAxis.LabelStyle>
                                 </chart:DateTimeAxis>
                             </chart:SfChart.PrimaryAxis>
@@ -185,36 +185,34 @@
 
                                 <chart:NumericalAxis Minimum="0" Maximum="{Binding MaximumChart}" ShowMajorGridLines="True" ShowMinorGridLines="True">
                                     <chart:NumericalAxis.LabelStyle>
-                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11"/>
+                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11" />
                                     </chart:NumericalAxis.LabelStyle>
                                 </chart:NumericalAxis>
                             </chart:SfChart.SecondaryAxis>
                             <chart:SplineSeries ItemsSource="{Binding Pression_Data}" XBindingPath="Date" SplineType="Monotonic" YBindingPath="Systolique" Color="{Binding Sys_Color}" StrokeWidth="2">
                                 <chart:SplineSeries.DataMarker>
 
-                                    <chart:ChartDataMarker ShowLabel="False" 
+                                    <chart:ChartDataMarker ShowLabel="False"
 						   ShowMarker="True"
-						   
-						   MarkerWidth="10" 
-						   MarkerHeight="10"
-						   MarkerColor="{Binding Sys_Color}" 
-						   MarkerBorderColor="{Binding Sys_Color}"
-						   MarkerBorderWidth="0"/>
 
+						   MarkerWidth="10"
+						   MarkerHeight="10"
+						   MarkerColor="{Binding Sys_Color}"
+						   MarkerBorderColor="{Binding Sys_Color}"
+						   MarkerBorderWidth="0" />
                                 </chart:SplineSeries.DataMarker>
                             </chart:SplineSeries>
                             <chart:SplineSeries ItemsSource="{Binding Pression_Data}" SplineType="Monotonic" XBindingPath="Date" YBindingPath="Diastolique" Color="{Binding Dia_Color}" StrokeWidth="2">
                                 <chart:SplineSeries.DataMarker>
 
-                                    <chart:ChartDataMarker ShowLabel="False" 
+                                    <chart:ChartDataMarker ShowLabel="False"
 						   ShowMarker="True"
-						   
-						   MarkerWidth="10" 
-						   MarkerHeight="10"
-						   MarkerColor="{Binding Dia_Color}" 
-						   MarkerBorderColor="{Binding Dia_Color}"
-						   MarkerBorderWidth="0"/>
 
+						   MarkerWidth="10"
+						   MarkerHeight="10"
+						   MarkerColor="{Binding Dia_Color}"
+						   MarkerBorderColor="{Binding Dia_Color}"
+						   MarkerBorderWidth="0" />
                                 </chart:SplineSeries.DataMarker>
                             </chart:SplineSeries>
                         </chart:SfChart>

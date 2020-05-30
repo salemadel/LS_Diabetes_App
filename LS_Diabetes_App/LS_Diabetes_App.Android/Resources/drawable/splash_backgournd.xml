@@ -1,17 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
- <layer-list xmlns:android="http://schemas.android.com/apk/res/android"
-            android:opacity="opaque">
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+           android:opacity="opaque">
   <item android:drawable="@color/splash_screen" />
 
   <item>
     <bitmap android:src="@drawable/splash"
             android:tileMode="disabled"
             android:gravity="center" />
-
   </item>
-   <item android:bottom="40dp">
-     <bitmap
-       android:src="@drawable/innovative"
-       android:gravity="center_horizontal|bottom"/>
-   </item>
+  <item android:bottom="40dp">
+    <bitmap
+      android:src="@drawable/labo"
+      android:gravity="center_horizontal|bottom" />
+  </item>
 </layer-list>

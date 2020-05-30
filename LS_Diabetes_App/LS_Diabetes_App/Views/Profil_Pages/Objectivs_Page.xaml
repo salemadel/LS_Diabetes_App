@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:CustomEntry="clr-namespace:LS_Diabetes_App.Custom_Controls" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:CustomEntry="clr-namespace:LS_Diabetes_App.Custom_Controls"
              xmlns:Behavior="clr-namespace:LS_Diabetes_App.Behaviors" xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters"
              mc:Ignorable="d"
              x:Class="LS_Diabetes_App.Views.Profil_Pages.Objectivs_Page">
@@ -31,53 +31,47 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0" BackgroundColor="Default">
-                <Label Text="Objectifs." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+                <Label Text="{Binding Resources[Goals]}" FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
             </StackLayout>
             <Grid Grid.Row="1" Margin="5,0,0,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-               
-                    <Label Grid.Row="0" Grid.Column="0" TextColor="Black" Text="Poids" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
 
+                <Label Grid.Row="0" Grid.Column="0" TextColor="Black" Text="{Binding Resources[Weight_Label]}" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
 
                 <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="0">
-                    <CustomEntry:Custom_Entry Keyboard="Numeric"  Text="{Binding Objectifs.Weight_Objectif , Converter={StaticResource StringToDouble}}" Placeholder="{Binding Profil.WeightUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40" >
+                    <CustomEntry:Custom_Entry Keyboard="Numeric"  Text="{Binding Objectifs.Weight_Objectif , Converter={StaticResource StringToDouble}}" Placeholder="{Binding Profil.WeightUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
                         <CustomEntry:Custom_Entry.Behaviors>
-                           
                         </CustomEntry:Custom_Entry.Behaviors>
                     </CustomEntry:Custom_Entry>
                     <Label Text="{Binding Profil.WeightUnit}" TextColor="Black" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 </StackLayout>
-               
-                <Label Text="Glycemie" TextColor="Black" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+
+                <Label Text="{Binding Resources[Glycemia]}" TextColor="Black" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 <StackLayout Orientation="Horizontal" Spacing="0" Grid.Row="1" Grid.Column="1">
-                    <CustomEntry:Custom_Entry Keyboard="Numeric" Text="{Binding Objectifs.Min_Glycemia , Converter={StaticResource StringToDouble}}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Min" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
+                    <CustomEntry:Custom_Entry Keyboard="Numeric" Text="{Binding Min_Glycemia}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Min" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
                         <CustomEntry:Custom_Entry.Behaviors>
-                         
                         </CustomEntry:Custom_Entry.Behaviors>
                     </CustomEntry:Custom_Entry>
                     <Label Text="\" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                    <CustomEntry:Custom_Entry Keyboard="Numeric" Text="{Binding Objectifs.Max_Glycemia , Converter={StaticResource StringToDouble}}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Max" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
+                    <CustomEntry:Custom_Entry Keyboard="Numeric" Text="{Binding Max_Glycemia}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Placeholder="Max" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="40">
                         <CustomEntry:Custom_Entry.Behaviors>
-
                         </CustomEntry:Custom_Entry.Behaviors>
                     </CustomEntry:Custom_Entry>
                     <Label Text="{Binding Profil.GlycemiaUnit}" TextColor="Black" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 </StackLayout>
-                <Label Grid.Row="2" Grid.Column="0" TextColor="Black" Text="Pas" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-
+                <Label Grid.Row="2" Grid.Column="0" TextColor="Black" Text="{Binding Resources[Step_Label]}" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
 
                 <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Spacing="0">
-                    <CustomEntry:Custom_Entry Keyboard="Numeric"  Text="{Binding Objectifs.Steps_Objectif}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="80" >
-                      
+                    <CustomEntry:Custom_Entry Keyboard="Numeric"  Text="{Binding Objectifs.Steps_Objectif}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="80">
                     </CustomEntry:Custom_Entry>
                     <Label Text="Pas" TextColor="Black" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                 </StackLayout>

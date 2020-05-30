@@ -15,7 +15,6 @@
                 <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
             </OnPlatform>
         </ResourceDictionary>
-        
     </ContentPage.Resources>
     <ScrollView>
         <Grid Margin="10,10,10,0">
@@ -26,7 +25,7 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
-               
+
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <CustomEntry:Custom_Entry Grid.Row="0" Text="{Binding Profil.Email}" Placeholder="{Binding Resources[UserName_PlaceHolder]}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
@@ -36,10 +35,10 @@
             <CustomEntry:Custom_Entry Grid.Row="4" Text="{Binding Profil.FirstName}" Placeholder="{Binding Resources[FirstName_PlaceHolder]}" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <CustomEntry:Custom_Entry x:Name="BirthDate_Entry" Keyboard="Numeric" Text="{Binding Date}" Grid.Row="5" Placeholder="dd/mm/yyyy" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
                 <CustomEntry:Custom_Entry.Behaviors>
-                    <Behaviors:MaskedBehavior Mask="XX/XX/XXXX"/>
+                    <Behaviors:MaskedBehavior Mask="XX/XX/XXXX" />
                 </CustomEntry:Custom_Entry.Behaviors>
             </CustomEntry:Custom_Entry>
-          
+
             <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="6">
                 <syncfusion:SfRadioButton x:Name="Male_RadioButton" Text="{Binding Resources[Male_RadioButton]}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0"  IsChecked="{Binding Male_Cheked}" />
                 <syncfusion:SfRadioButton x:Name="Female_RadioButton" Text="{Binding Resources[Female_RadioButton]}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" />

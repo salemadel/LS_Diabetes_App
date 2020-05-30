@@ -2,19 +2,18 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.Statistiques_Pages;
 using Syncfusion.XForms.Buttons;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
 {
-    public class GlucoseStatistique_ViewModel : INotifyPropertyChanged
+    public class GlucoseStatistique_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private IDataStore DataStore;
         private INavigation Navigation;
@@ -43,6 +42,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         public string Message { get; set; }
         private DateTime selected_mindate { get; set; }
 
@@ -160,7 +160,9 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private int selected_index { get; set; }
+
         public int Selected_Index
         {
             get { return selected_index; }
@@ -169,18 +171,20 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 if (selected_index != value)
                 {
                     selected_index = value;
-                    switch(value)
+                    switch (value)
                     {
-                        case 0:type = "Tous"; break;
-                        case 1:type = "à Jeun"; break;
-                        case 2:type = "Avant Repas"; break;
-                        case 3: type = "Apres Repas"; break;
+                        case 0: type = "All"; break;
+                        case 1: type = "fasting"; break;
+                        case 2: type = "preparandial"; break;
+                        case 3: type = "postparandial"; break;
                     }
                     OnPropertyChanged();
                 }
             }
         }
+
         private int selected_date_index { get; set; }
+
         public int Selected_Date_Index
         {
             get { return selected_date_index; }
@@ -189,19 +193,19 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 if (selected_date_index != value)
                 {
                     selected_date_index = value;
-                    switch(value)
+                    switch (value)
                     {
-                        case 0: Selected_MinDate = DateTime.Now.Date;Selected_MaxDate = DateTime.Now.Date;break;
+                        case 0: Selected_MinDate = DateTime.Now.Date; Selected_MaxDate = DateTime.Now.Date; break;
                         case 1: Selected_MinDate = DateTime.Now.Date.AddDays(-7); Selected_MaxDate = DateTime.Now.Date; break;
                         case 2: Selected_MinDate = DateTime.Now.Date.AddDays(-14); Selected_MaxDate = DateTime.Now.Date; break;
                         case 3: Selected_MinDate = DateTime.Now.Date.AddDays(-30); Selected_MaxDate = DateTime.Now.Date; break;
                         case 4: Selected_MinDate = DateTime.Now.Date.AddDays(-90); Selected_MaxDate = DateTime.Now.Date; break;
                     }
                     OnPropertyChanged();
-                    
                 }
             }
         }
+
         private string type { get; set; }
 
         public int MaximumChart { get; set; }
@@ -222,6 +226,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+
         public double Max_Widh { get; set; }
         public double Good_Wigh { get; set; }
         public double Min_Glycemia { get; set; }
@@ -234,48 +239,44 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             DataStore = dataStore;
             Profil = DataStore.GetSettingsAsync().First();
             Objectifs = dataStore.GetObjectifAsync().First();
-            
+
             Glucose_Data = new ObservableCollection<Glucose_Model>();
             GlycemiaConverter = new GlycemiaConverter();
-            Message = "Glycemie cible : " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit + " et " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit;
+            Message = Resources["Target"] + " : " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit + " " + Resources["And"] + " " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit;
             Slices = new ObservableCollection<Slice_Model>();
-            type = "Tous";
+            type = "All";
             Selected_MaxDate = DateTime.Now.Date;
             Selected_MinDate = DateTime.Now.Date;
             Selected_Index = 0;
             Selected_Date_Index = 0;
             SegmentItems = new ObservableCollection<SfSegmentItem>
         {
-            new SfSegmentItem(){Text="Tous" },
-            new SfSegmentItem(){Text="à Jeun"},
-            new SfSegmentItem(){Text="Avant Repas"},
-            new SfSegmentItem(){Text="Apres Repas"},
-            
+            new SfSegmentItem(){Text=Resources["All"] },
+            new SfSegmentItem(){Text=Resources["Empty"]},
+            new SfSegmentItem(){Text=Resources["Before_Meal"]},
+            new SfSegmentItem(){Text=Resources["After_Meals"]},
         };
             DateItems = new ObservableCollection<SfSegmentItem>
         {
-            new SfSegmentItem(){Text="Aujourd'hui" },
-            new SfSegmentItem(){Text="7 Jours"},
-            new SfSegmentItem(){Text="14 Jours"},
-            new SfSegmentItem(){Text="30 Jours"},
-            new SfSegmentItem(){Text="90 Jours"}
-
+            new SfSegmentItem(){Text=Resources["Today"] },
+            new SfSegmentItem(){Text="7 "+Resources["Days"]},
+            new SfSegmentItem(){Text="14 "+Resources["Days"]},
+            new SfSegmentItem(){Text="30 "+Resources["Days"]},
+            new SfSegmentItem(){Text="90 "+Resources["Days"]}
         };
             FiltreCommand = new Command(() =>
             {
-                 UpdateData();
+                UpdateData();
             });
             UpdateData();
             MessagingCenter.Subscribe<GlucoseStatistique_Page>(this, "Filter", (sender) =>
            {
                UpdateData();
-              
            });
         }
 
         private void UpdateData()
         {
-          
             IsBusy = true;
             Glucose_Data.Clear();
             Slices.Clear();
@@ -285,7 +286,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             Nbr_Normal = 0;
             Nbr_Hight = 0;
             Nbr_Low = 0;
-            if(type == "Tous")
+            if (type == "All")
             {
                 foreach (var item in DataStore.GetGlucosAsync().Where(i => i.Date.Date >= Selected_MinDate & i.Date.Date <= Selected_MaxDate))
                 {
@@ -299,13 +300,13 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                     Glucose_Data.Add(GlycemiaConverter.Convert(item, Profil.GlycemiaUnit));
                 }
             }
-           
+
             if (Glucose_Data.Count > 0)
             {
                 Glucose_Data = new ObservableCollection<Glucose_Model>(Glucose_Data.OrderBy(i => i.Date));
                 Min = Glucose_Data.OrderBy(i => i.Glycemia).First();
                 Max = Glucose_Data.OrderBy(i => i.Glycemia).Last();
-                Average = (Profil.GlycemiaUnit == "mg / dL") ?  Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 0) : Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 3);
+                Average = (Profil.GlycemiaUnit == "mg / dL") ? Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 0) : Math.Round((Glucose_Data.Sum(i => i.Glycemia)) / Glucose_Data.Count, 3);
                 Nbr_Normal = (Profil.GlycemiaUnit == "mg / dL") ? Glucose_Data.Where(i => i.Glycemia >= Objectifs.Min_Glycemia & i.Glycemia <= Objectifs.Max_Glycemia).Count() : Glucose_Data.Where(i => i.Glycemia >= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit) & i.Glycemia <= GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit)).Count();
                 Nbr_Hight = (Profil.GlycemiaUnit == "mg / dL") ? Glucose_Data.Where(i => i.Glycemia > Objectifs.Max_Glycemia).Count() : Glucose_Data.Where(i => i.Glycemia > GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit)).Count();
                 Nbr_Low = (Profil.GlycemiaUnit == "mg / dL") ? Glucose_Data.Where(i => i.Glycemia < Objectifs.Min_Glycemia).Count() : Glucose_Data.Where(i => i.Glycemia < GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit)).Count();
@@ -344,15 +345,9 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             });
             IsBusy = false;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
     }
-   public class Slice_Model
+
+    public class Slice_Model
     {
         public string type { get; set; }
         public double value { get; set; }

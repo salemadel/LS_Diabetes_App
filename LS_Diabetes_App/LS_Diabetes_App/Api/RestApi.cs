@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LS_Diabetes_App.Api
@@ -15,6 +14,7 @@ namespace LS_Diabetes_App.Api
     public class RestApi : ViewModelBase
     {
         private readonly string ipAdress = "192.168.100.5:5000";
+
         public async Task<(bool, string)> EmailCheck(string email)
         {
             string error_msg = null;
@@ -23,7 +23,6 @@ namespace LS_Diabetes_App.Api
             {
                 var keyvalues = new List<KeyValuePair<string, string>>{
                 new KeyValuePair<string, string>("email" , email),
-              
             };
                 try
                 {
@@ -37,14 +36,13 @@ namespace LS_Diabetes_App.Api
                     var json = await responce.Content.ReadAsStringAsync();
 
                     dynamic obj = JsonConvert.DeserializeObject(json);
-                    
+
                     if (obj.exists == false)
                     {
                         Succes = true;
                     }
                     else
                     {
-                      
                         error_msg = "Email already existe";
                     }
                 }
@@ -60,7 +58,8 @@ namespace LS_Diabetes_App.Api
 
             return (Succes, error_msg);
         }
-        public async Task<(bool,bool, string)> SocialChack(string network , string id)
+
+        public async Task<(bool, bool, string)> SocialChack(string network, string id)
         {
             string error_msg = null;
             bool Succes = false;
@@ -81,18 +80,16 @@ namespace LS_Diabetes_App.Api
                     client.Timeout = TimeSpan.FromSeconds(20);
                     var responce = await client.SendAsync(request);
                     var json = await responce.Content.ReadAsStringAsync();
-
+                    System.Diagnostics.Debug.WriteLine(json);
                     dynamic obj = JsonConvert.DeserializeObject(json);
 
                     if (obj.exists == false)
                     {
                         Succes = true;
                         existe = false;
-                        
                     }
                     else
                     {
-
                         Succes = true;
                         existe = true;
                         string token = obj["token"];
@@ -111,10 +108,10 @@ namespace LS_Diabetes_App.Api
                 error_msg = Resources["InternetMessage"];
             }
 
-            return (Succes,existe , error_msg);
+            return (Succes, existe, error_msg);
         }
 
-        public async Task<(bool, string)> Resigter(Profil_Model user, string password)
+        public async Task<(bool, string)> Resigter(Profil_Model user, string password, string facebook_id = null)
         {
             string error_msg = null;
             bool Succes = false;
@@ -122,8 +119,8 @@ namespace LS_Diabetes_App.Api
             {
                 var keyvalues = new List<KeyValuePair<string, string>>{
                 new KeyValuePair<string, string>("email" , user.Email),
-                new KeyValuePair<string, string>("facebook_id" , user.Email),
-                new KeyValuePair<string, string>("google_id" , user.Email),
+                new KeyValuePair<string, string>("facebook_id" , facebook_id),
+
                 new KeyValuePair<string, string>("avatar" , user.Avatar),
                 new KeyValuePair<string, string>("firstname" , user.FirstName),
                 new KeyValuePair<string, string>("lastname" , user.LastName),
@@ -135,7 +132,6 @@ namespace LS_Diabetes_App.Api
                 new KeyValuePair<string, string>("height" , user.Height.ToString()),
                 new KeyValuePair<string, string>("sex" , user.Sexe),
                 };
-
 
                 try
                 {
@@ -161,7 +157,6 @@ namespace LS_Diabetes_App.Api
                     }
                     else
                     {
-
                         error_msg = obj.error;
                     }
                 }
@@ -177,6 +172,7 @@ namespace LS_Diabetes_App.Api
 
             return (Succes, error_msg);
         }
+
         public async Task<(bool, string)> Login(string username, string password)
         {
             string error_msg = null;
@@ -186,15 +182,16 @@ namespace LS_Diabetes_App.Api
                 var keyvalues = new List<KeyValuePair<string, string>>{
                 new KeyValuePair<string, string>("email" , username),
                 new KeyValuePair<string, string>("password" , password),
-               
             };
                 try
                 {
+                    HttpClient client = new HttpClient();
+
                     var request = new HttpRequestMessage(HttpMethod.Post, "http://" + ipAdress + "/api/auth/login")
                     {
                         Content = new FormUrlEncodedContent(keyvalues)
                     };
-                    var client = new HttpClient();
+
                     client.Timeout = TimeSpan.FromSeconds(20);
                     var responce = await client.SendAsync(request);
                     var json = await responce.Content.ReadAsStringAsync();
@@ -204,9 +201,9 @@ namespace LS_Diabetes_App.Api
                     {
                         Succes = true;
                         string token = obj["token"];
-                        System.Diagnostics.Debug.WriteLine(token);
+
                         token = token.Substring(7, token.Length - 7);
-                        System.Diagnostics.Debug.WriteLine(token);
+
                         CrossSecureStorage.Current.SetValue("UserName", username);
                         CrossSecureStorage.Current.SetValue("PassWord", password);
                         CrossSecureStorage.Current.SetValue("LogguedIn", "True");
@@ -231,6 +228,7 @@ namespace LS_Diabetes_App.Api
 
             return (Succes, error_msg);
         }
+
         public async Task<(bool, string)> GetProfile()
         {
             string error_msg = null;
@@ -247,6 +245,7 @@ namespace LS_Diabetes_App.Api
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                         client.Timeout = TimeSpan.FromSeconds(120);
                         var json = await client.GetStringAsync("http://" + ipAdress + "/api/patient/profile");
+                        System.Diagnostics.Debug.WriteLine(json);
                         if (!json.Contains("msg") & !json.Contains("error"))
                         {
                             Succes = true;
@@ -280,9 +279,195 @@ namespace LS_Diabetes_App.Api
             }
             return (Succes, error_msg);
         }
+
+        public async Task<(bool, string)> EmailForgotCheck(string email)
+        {
+            string error_msg = null;
+            bool Succes = false;
+            if (true)
+            {
+                try
+                {
+                    var client = new HttpClient();
+                    client.Timeout = TimeSpan.FromSeconds(20);
+                    var json = await client.GetStringAsync("http://" + ipAdress + "/api/auth/forgot-password?email=" + email);
+                    //   var json = await responce.Content.ReadAsStringAsync();
+
+                    dynamic obj = JsonConvert.DeserializeObject(json);
+
+                    if (obj.sent == true)
+                    {
+                        Succes = true;
+                    }
+                    else
+                    {
+                        error_msg = "User dose not exisit";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    error_msg = ex.Message;
+                }
+            }
+            else
+            {
+                error_msg = Resources["InternetMessage"];
+            }
+
+            return (Succes, error_msg);
+        }
+
+        public async Task<(bool, string)> PostCode(string code)
+        {
+            string error_msg = null;
+            bool Succes = false;
+            if (true)
+            {
+                try
+                {
+                    var client = new HttpClient();
+                    client.Timeout = TimeSpan.FromSeconds(20);
+                    var json = await client.GetStringAsync("http://" + ipAdress + "/api/auth/verify?code=" + code);
+                    //   var json = await responce.Content.ReadAsStringAsync();
+
+                    dynamic obj = JsonConvert.DeserializeObject(json);
+
+                    if (obj.success == true)
+                    {
+                        Succes = true;
+                        string token = obj["token"];
+                        token = token.Substring(7, token.Length - 7);
+                        CrossSecureStorage.Current.SetValue("acces_token_password", token);
+                    }
+                    else
+                    {
+                        error_msg = "Code Expired !";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    error_msg = ex.Message;
+                }
+            }
+            else
+            {
+                error_msg = Resources["InternetMessage"];
+            }
+
+            return (Succes, error_msg);
+        }
+
+        public async Task<(bool, string)> EditProfil(Profil_Model user, string password, string facebook_id = null)
+        {
+            string error_msg = null;
+            bool Succes = false;
+            if (true)
+            {
+                var keyvalues = new List<KeyValuePair<string, string>>{
+                new KeyValuePair<string, string>("email" , user.Email),
+                new KeyValuePair<string, string>("facebook_id" , facebook_id),
+
+                new KeyValuePair<string, string>("avatar" , user.Avatar),
+                new KeyValuePair<string, string>("firstname" , user.FirstName),
+                new KeyValuePair<string, string>("lastname" , user.LastName),
+                new KeyValuePair<string, string>("birthday" , user.Birth_Date.ToString("yyyy-MM-dd")),
+                new KeyValuePair<string, string>("password" , password),
+                new KeyValuePair<string, string>("diabetestype" , user.DiabetesType),
+                new KeyValuePair<string, string>("glucometer" , user.Glucometer),
+                new KeyValuePair<string, string>("diagnosis_date" , user.Diagnostic_Year.ToString()),
+                new KeyValuePair<string, string>("height" , user.Height.ToString()),
+                new KeyValuePair<string, string>("sex" , user.Sexe),
+                };
+
+                try
+                {
+                    string token = CrossSecureStorage.Current.GetValue("acces_token");
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var request = new HttpRequestMessage(HttpMethod.Post, "http://" + ipAdress + "/api/patient/profile/edit")
+                    {
+                        Content = new FormUrlEncodedContent(keyvalues)
+                    };
+
+                    client.Timeout = TimeSpan.FromSeconds(20);
+                    var responce = await client.SendAsync(request);
+                    var json = await responce.Content.ReadAsStringAsync();
+
+                    dynamic obj = JsonConvert.DeserializeObject(json);
+
+                    if (obj.success == true)
+                    {
+                        Succes = true;
+                    }
+                    else
+                    {
+                        error_msg = obj.error;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    error_msg = ex.Message;
+                }
+            }
+            else
+            {
+                error_msg = Resources["InternetMessage"];
+            }
+
+            return (Succes, error_msg);
+        }
+
+        public async Task<(bool, string)> ForgotPasswordEdit(string password)
+        {
+            string error_msg = null;
+            bool Succes = false;
+            if (true)
+            {
+                var keyvalues = new List<KeyValuePair<string, string>>{
+                new KeyValuePair<string, string>("password" , password),
+                };
+
+                try
+                {
+                    string token = CrossSecureStorage.Current.GetValue("acces_token_password");
+                    HttpClient client = new HttpClient();
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                    var request = new HttpRequestMessage(HttpMethod.Post, "http://" + ipAdress + "/api/patient/profile/edit")
+                    {
+                        Content = new FormUrlEncodedContent(keyvalues)
+                    };
+
+                    client.Timeout = TimeSpan.FromSeconds(20);
+                    var responce = await client.SendAsync(request);
+                    var json = await responce.Content.ReadAsStringAsync();
+
+                    dynamic obj = JsonConvert.DeserializeObject(json);
+
+                    if (obj.success == true)
+                    {
+                        Succes = true;
+                        CrossSecureStorage.Current.DeleteKey("acces_token_password");
+                    }
+                    else
+                    {
+                        error_msg = obj.error;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    error_msg = ex.Message;
+                }
+            }
+            else
+            {
+                error_msg = Resources["InternetMessage"];
+            }
+
+            return (Succes, error_msg);
+        }
+
         private async Task<bool> Connectivity_check()
         {
-
             var connectivity = CrossConnectivity.Current;
             if (!connectivity.IsConnected)
                 return false;

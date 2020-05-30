@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using LS_Diabetes_App.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace LS_Diabetes_App.Home_Pages
@@ -9,6 +10,13 @@ namespace LS_Diabetes_App.Home_Pages
         public Connections_Page()
         {
             InitializeComponent();
+            BindingContext = new Connections_ViewModel();
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await (BindingContext as Connections_ViewModel).ExecuteOnGetConnection();
         }
     }
 }

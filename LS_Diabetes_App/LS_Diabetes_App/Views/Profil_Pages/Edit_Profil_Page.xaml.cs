@@ -1,11 +1,6 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.ViewModels.Profil_ViewModels;
 using Syncfusion.XForms.ComboBox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,6 +16,7 @@ namespace LS_Diabetes_App.Views.Profil_Pages
             var datastore = new DataStores();
             BindingContext = new Profil_Info_ViewModel(datastore, Navigation);
         }
+
         private void Glucometer_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
         {
             var combobox = sender as SfComboBox;

@@ -30,7 +30,6 @@ namespace LS_Diabetes_App.Converters
             {
                 return null;
             }
-        
-    }
+        }
     }
 }

@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:CustomEntry="clr-namespace:LS_Diabetes_App.Custom_Controls"
              xmlns:resources="clr-namespace:LS_Diabetes_App"
-             xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters" 
+             xmlns:Converter="clr-namespace:LS_Diabetes_App.Converters"
              xmlns:syncfusion="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
                xmlns:Behavior="clr-namespace:LS_Diabetes_App.Behaviors"
              mc:Ignorable="d"
@@ -31,7 +31,7 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
-          
+
                 <RowDefinition Height="100" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -39,25 +39,25 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Text="{x:Static resources:AppResources.Time_Label}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry x:Name="DateTimeEntry" Grid.Row="0" Grid.Column="1" Text="{Binding AddDateTime , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" IsEnabled="{Binding IsVisible}"/>
+            <Label Text="{Binding Resources[Time_Label]}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <CustomEntry:Custom_Entry x:Name="DateTimeEntry" Grid.Row="0" Grid.Column="1" Text="{Binding AddDateTime , StringFormat='{0:HH:mm dd/MM/yyyy}'}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" Focused="Custom_Entry_Focused" IsEnabled="{Binding IsVisible}" />
             <TimePicker x:Name="TimePicker" Focused="TimePicker_Focused" PropertyChanged="TimePicker_PropertyChanged" IsVisible="False" Time="{Binding Time}" />
             <DatePicker x:Name="DatePicker" IsVisible="False" Date="{Binding Date}" />
-            <Label Text="{x:Static resources:AppResources.Home_Glucose_Lavel_Label}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[Glycemia]}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Entry x:Name="glucose_Entry" Grid.Row="1" Keyboard="Numeric" IsEnabled="{Binding IsVisible}" Grid.Column="1" Text="{Binding Glucose.Glycemia ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="{Binding Profil.GlycemiaUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" TextChanged="glucose_Entry_TextChanged">
                 <CustomEntry:Custom_Entry.Behaviors>
-                    <Behavior:GlycemieBehavior/>
+                    <Behavior:GlycemieBehavior />
                 </CustomEntry:Custom_Entry.Behaviors>
             </CustomEntry:Custom_Entry>
             <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
-                <syncfusion:SfRadioButton  Text="à jeun" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" IsChecked="{Binding No_Eat}" Margin="5,0,0,0"  />
-                <syncfusion:SfRadioButton  Text="avant repas" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding Befor_Eat}" FontSize="15" Margin="5,0,0,0" />
-                <syncfusion:SfRadioButton  Text="apres repas" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding After_Eat}" FontSize="15" Margin="5,0,0,0" />
+                <syncfusion:SfRadioButton  Text="{Binding Resources[Empty]}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" IsChecked="{Binding No_Eat}" Margin="5,0,0,0" />
+                <syncfusion:SfRadioButton  Text="{Binding Resources[Before_Meal]}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding Befor_Eat}" FontSize="15" Margin="5,0,0,0" />
+                <syncfusion:SfRadioButton  Text="{Binding Resources[After_Meals]}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding After_Eat}" FontSize="15" Margin="5,0,0,0" />
             </syncfusion:SfRadioGroup>
-            <Label Text="Activité" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <syncfusion:SfCheckBox Grid.Row="3" Grid.Column="1" CheckedColor="#00B2C8" IsChecked="{Binding Glucose.Activity}"/>
-            <Label Text="Prise de Médicament" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <syncfusion:SfCheckBox Grid.Row="4" Grid.Column="1" CheckedColor="#00B2C8" IsChecked="{Binding Glucose.Taking_Medication}"/>
+            <Label Text="{Binding Resources[Physical_activity]}" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <syncfusion:SfCheckBox Grid.Row="3" Grid.Column="1" CheckedColor="#00B2C8" IsChecked="{Binding Glucose.Activity}" />
+            <Label Text="{Binding Resources[Taking_Medication]}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <syncfusion:SfCheckBox Grid.Row="4" Grid.Column="1" CheckedColor="#00B2C8" IsChecked="{Binding Glucose.Taking_Medication}" />
             <ImageButton Source="camera.png" Padding="15" IsVisible="{Binding IsVisible}" BackgroundColor="#00B2C8"  Grid.Row="5" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />
             <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <Frame BorderColor="LightGray" CornerRadius="10" Padding="0" HeightRequest="50" WidthRequest="50" HasShadow="False">
@@ -68,12 +68,10 @@
                     </Image>
                 </Frame>
             </StackLayout>
-            
-          
-            <Label Text="{x:Static resources:AppResources.Note_Label}" Grid.Row="6" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+
+            <Label Text="{Binding Resources[Note_Label]}" Grid.Row="6" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Editor  Text="{Binding Glucose.Note}" Grid.Row="7" Grid.Column="0" Placeholder="" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="100" WidthRequest="200" />
             <ImageButton  Source="plus.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveGlucoseCommand}" />
-           
         </Grid>
     </ScrollView>
 </ContentPage>

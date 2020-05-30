@@ -3,16 +3,14 @@ using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.Login_Pages;
 using Plugin.SecureStorage;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
 {
-    class Settings_ViewModel : ViewModelBase
+    internal class Settings_ViewModel : ViewModelBase
     {
         public List<string> Languages { get; set; } = new List<string>()
         {
@@ -20,6 +18,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
             "Français",
             "العربية"
         };
+
         private IDataStore DataStore { get; set; }
         private INavigation Navigation { get; set; }
         private string _SelectedLanguage;
@@ -29,20 +28,22 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
             get { return _SelectedLanguage; }
             set
             {
-                switch(value)
+                switch (value)
                 {
-                    case "English":_SelectedLanguage = "EN";break;
-                    case "Français":_SelectedLanguage = "FR";break;
-                    case "العربية":_SelectedLanguage = "AR";break;
-                    default:_SelectedLanguage = "EN";break;
+                    case "English": _SelectedLanguage = "EN"; break;
+                    case "Français": _SelectedLanguage = "FR"; break;
+                    case "العربية": _SelectedLanguage = "AR"; break;
+                    default: _SelectedLanguage = "EN"; break;
                 }
                 SetLanguage();
             }
         }
+
         public int Selected_Index { get; set; }
         public Command SaveCommand { get; set; }
         public Command FirstUseCommand { get; set; }
-        public Settings_ViewModel(INavigation navigation , IDataStore dataStore)
+
+        public Settings_ViewModel(INavigation navigation, IDataStore dataStore)
         {
             Navigation = navigation;
             DataStore = dataStore;
@@ -50,11 +51,11 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
             Profil = DataStore.GetSettingsAsync().First();
             Notification = Profil.Notification;
             Location = Profil.Location;
-            switch(_SelectedLanguage)
+            switch (_SelectedLanguage)
             {
-                case "EN":Selected_Index = 0;break;
-                case "FR":Selected_Index = 1;break;
-                case "AR":Selected_Index = 2;break;
+                case "EN": Selected_Index = 0; break;
+                case "FR": Selected_Index = 1; break;
+                case "AR": Selected_Index = 2; break;
             }
             SaveCommand = new Command(async () =>
             {
@@ -65,7 +66,9 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
                 ExecuteOnFirstUse();
             });
         }
+
         private bool notification { get; set; }
+
         public bool Notification
         {
             get { return notification; }
@@ -76,7 +79,9 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private bool location { get; set; }
+
         public bool Location
         {
             get { return location; }
@@ -87,19 +92,23 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
                 OnPropertyChanged();
             }
         }
+
         private Settings_Model Profil { get; set; }
+
         private void SetLanguage()
         {
             App.CurrentLanguage = SelectedLanguage;
             MessagingCenter.Send<object, CultureChangedMessage>(this,
                     string.Empty, new CultureChangedMessage(SelectedLanguage));
         }
+
         private async Task ExecuteOnSave()
         {
             Profil.Notification = Notification;
             Profil.Location = Location;
             Profil.Language = _SelectedLanguage;
             DataStore.UpdateSettings(Profil);
+            DependencyService.Get<ISnackBar>().Show(Resources["SuccesMessage"]);
             await Navigation.PopModalAsync();
         }
 

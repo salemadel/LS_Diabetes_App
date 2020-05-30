@@ -3,7 +3,6 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
@@ -27,9 +26,9 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (date != value)
                     date = value;
                 OnPropertyChanged();
-                
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private DateTime startdate { get; set; } = DateTime.Now;
@@ -59,6 +58,7 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private int duration { get; set; }
@@ -127,7 +127,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [Ignore]
         public List<string> Times_List
         {
-            get 
+            get
             {
                 if (!string.IsNullOrWhiteSpace(Times))
                 {
@@ -207,9 +207,11 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private bool rappel { get; set; }
+
         public bool Rappel
         {
             get { return rappel; }
@@ -218,12 +220,13 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (rappel != value)
                     rappel = value;
                 OnPropertyChanged();
-                    
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private bool indeterminer { get; set; }
+
         public bool Indeterminer
         {
             get { return indeterminer; }
@@ -232,12 +235,13 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (indeterminer != value)
                     indeterminer = value;
                 OnPropertyChanged();
-
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private bool isvisible { get; set; }
+
         [JsonIgnore]
         [Ignore]
         public bool IsVisible
@@ -248,9 +252,9 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (isvisible != value)
                     isvisible = value;
                 OnPropertyChanged();
-
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private bool alarmset { get; set; }
@@ -264,15 +268,16 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (alarmset != value)
                     alarmset = value;
                 OnPropertyChanged();
-
             }
         }
+
         [JsonIgnore]
         [Ignore]
         public string ArrayToString
         {
             get { return string.Join(" , ", Times_List); }
         }
+
         [JsonIgnore]
         [Ignore]
         public string DateSort

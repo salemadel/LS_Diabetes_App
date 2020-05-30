@@ -13,7 +13,8 @@ namespace LS_Diabetes_App.Models
 
         [JsonIgnore]
         [Ignore]
-        private double min_glycemia {get;set;}
+        private double min_glycemia { get; set; }
+
         public double Min_Glycemia
         {
             get { return min_glycemia; }
@@ -24,9 +25,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private double max_glycemia { get; set; }
+
         public double Max_Glycemia
         {
             get { return max_glycemia; }
@@ -41,7 +44,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private double weight_objectif { get; set; }
-        
+
         public double Weight_Objectif
         {
             get { return weight_objectif; }
@@ -52,9 +55,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         [JsonIgnore]
         [Ignore]
         private int steps_objectif { get; set; }
+
         public int Steps_Objectif
         {
             get { return steps_objectif; }
@@ -65,6 +70,7 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

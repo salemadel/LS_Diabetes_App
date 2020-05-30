@@ -1,14 +1,7 @@
 ﻿using LS_Diabetes_App.Interfaces;
+using LS_Diabetes_App.Models.Data_Models;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,11 +11,11 @@ namespace LS_Diabetes_App.Views.AddData_Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddDrugs_View : ContentPage
     {
-        public AddDrugs_View()
+        public AddDrugs_View(Drugs_Model drug = null)
         {
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new AddDrugs_ViewModel(Navigation , datastore);
+            BindingContext = new AddDrugs_ViewModel(Navigation, datastore, drug);
         }
 
         private void ImageButton_Clicked(object sender, EventArgs e)

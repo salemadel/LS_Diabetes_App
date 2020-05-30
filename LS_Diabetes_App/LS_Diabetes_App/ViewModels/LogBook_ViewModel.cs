@@ -2,21 +2,20 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
 using LS_Diabetes_App.ViewModels.Profil_ViewModels;
 using LS_Diabetes_App.Views;
-using LS_Diabetes_App.Views.AddData_Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels
 {
-    public class LogBook_ViewModel : INotifyPropertyChanged
+    public class LogBook_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private IDataStore DataStore;
         private INavigation Navigation;
@@ -47,7 +46,7 @@ namespace LS_Diabetes_App.ViewModels
             {
                 await ExecuteOnItemTapped();
             });
-            DeleteCommand = new Command(async() =>
+            DeleteCommand = new Command(async () =>
             {
                 await ExecuteOnDelete();
             });
@@ -79,8 +78,6 @@ namespace LS_Diabetes_App.ViewModels
             });
             IsBusy = false;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Grouping<string, LogBook_Model>> DataGrouped
         {
@@ -114,6 +111,7 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private LogBook_Model old_selected { get; set; }
         private ObservableCollection<LogBook_Model> private_list { get; set; }
         private ObservableCollection<Grouping<string, LogBook_Model>> dataGrouped { get; set; }
@@ -122,10 +120,6 @@ namespace LS_Diabetes_App.ViewModels
         public Command ItemTappedCommand { get; set; }
         public Command DeleteCommand { get; set; }
         public Command PictureTappedCommand { get; set; }
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
 
         private void UpdateData()
         {
@@ -159,7 +153,7 @@ namespace LS_Diabetes_App.ViewModels
                 };
                 _data.Add(drug);
             }
-           
+
             foreach (var item in DataStore.GetPressionAsync())
             {
                 var drug = new LogBook_Model
@@ -167,8 +161,8 @@ namespace LS_Diabetes_App.ViewModels
                     Data = item,
                     DataValue = item.Diastolique.ToString() + "/" + item.Systolique.ToString(),
                     Date = item.Date,
-                    At_Home = (item.Where == "à La Maison") ? true : false,
-                    At_Doctor = (item.Where == "Chez le Medecin") ? true : false,
+                    At_Home = (item.Where == "home") ? true : false,
+                    At_Doctor = (item.Where == "clinic") ? true : false,
                     Type = "Pression",
                     Unit = "mmgH",
                     PicturePath = item.PicturePathe
@@ -200,14 +194,14 @@ namespace LS_Diabetes_App.ViewModels
 
         private async Task ExecuteOnItemTapped()
         {
-            if(Selected_item == old_selected)
+            if (Selected_item == old_selected)
             {
-                Selected_item.IsVisible =  !Selected_item.IsVisible;
+                Selected_item.IsVisible = !Selected_item.IsVisible;
                 UpdateList(Selected_item);
             }
             else
             {
-                if(old_selected != null)
+                if (old_selected != null)
                 {
                     old_selected.IsVisible = false;
                     UpdateList(old_selected);
@@ -221,7 +215,6 @@ namespace LS_Diabetes_App.ViewModels
                          group data by data.DateSort into DataGroup
                          select new Grouping<string, LogBook_Model>(DataGroup.Key, DataGroup);
             DataGrouped = new ObservableCollection<Grouping<string, LogBook_Model>>(sorted);
-
         }
 
         private void UpdateList(LogBook_Model data)
@@ -230,18 +223,19 @@ namespace LS_Diabetes_App.ViewModels
             private_list.Remove(data);
             private_list.Insert(index, data);
         }
+
         private async Task ExecuteOnDelete()
         {
-            if(Selected_item != null)
+            if (Selected_item != null)
             {
-                if (await DependencyService.Get<IDialog>().AlertAsync("Info", "Voulez vous Supprimer ?", "Oui", "Non"))
+                if (await DependencyService.Get<IDialog>().AlertAsync("", Resources["DeleteMessage"], Resources["Yes"], Resources["No"]))
                 {
                     IsBusy = true;
                     if (Selected_item.Type == "Glucose")
                     {
                         DataStore.DeleteGlucose(Selected_item.Data as Glucose_Model);
                     }
-                  
+
                     if (Selected_item.Type == "Weight")
                     {
                         DataStore.DeleteWeight(Selected_item.Data as Weight_Model);
@@ -254,7 +248,6 @@ namespace LS_Diabetes_App.ViewModels
                     {
                         DataStore.DeletePression(Selected_item.Data as Pression_Model);
                     }
-                  
 
                     UpdateData();
                     MessagingCenter.Send(this, "DataUpdated");
@@ -262,6 +255,7 @@ namespace LS_Diabetes_App.ViewModels
                 }
             }
         }
+
         private async Task ExecuteOnPictureTapped()
         {
             if (!string.IsNullOrWhiteSpace(Selected_item.PicturePath))

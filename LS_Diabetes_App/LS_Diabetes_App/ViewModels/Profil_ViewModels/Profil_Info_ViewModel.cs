@@ -1,4 +1,5 @@
-﻿using LS_Diabetes_App.Converters;
+﻿using LS_Diabetes_App.Api;
+using LS_Diabetes_App.Converters;
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Servies;
@@ -6,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -25,14 +25,17 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
         {
             get { return type_list.ToList(); }
         }
+
         public List<string> Glucometer_List
         {
             get { return glucometer_list.ToList(); }
         }
+
         public string Date { get; set; }
         public string Diagnostic_Date { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+
         public bool Male_Cheked
         {
             get
@@ -54,8 +57,10 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
                 }
             }
         }
+
         public Command EditProfilCommand { get; set; }
         private HeightConverter HeightConverter { get; set; }
+
         public Profil_Info_ViewModel(IDataStore dataStore, INavigation navigation)
         {
             DataStore = dataStore;
@@ -80,41 +85,52 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
                 DependencyService.Get<IMessage>().ShortAlert("Année du Diagnostic Non Valide !");
                 return;
             }
-            
-          
 
-            /*   if (!Password.Equals(ConfirmPassword))
-               {
-                   DependencyService.Get<IMessage>().ShortAlert("Veuillez Confirmer votre Mot de Passe !");
-                   return;
-               }*/
+            if (!string.IsNullOrEmpty(CheckPassword()))
+            {
+                DependencyService.Get<IMessage>().ShortAlert(CheckPassword());
+                return;
+            }
             DateTime temp;
             if (!DateTime.TryParse(Date, out temp))
             {
                 DependencyService.Get<IMessage>().ShortAlert("Date de naissance Non Valide !");
                 return;
             }
-            if (true)
+
+            if (await DependencyService.Get<IDialog>().AlertAsync("", Resources["EditMessage"], Resources["Yes"], Resources["No"]))
             {
-                if (await DependencyService.Get<IDialog>().AlertAsync("", "Voulez Vous Modifier ?", "Oui", "Non"))
+                Profil.Diagnostic_Year = x;
+                Profil.Birth_Date = temp;
+                var restapi = new RestApi();
+                var result = await restapi.EditProfil(Profil, Password);
+                if (result.Item1)
                 {
-                    Profil.Diagnostic_Year = x;
-                    Profil.Birth_Date = temp;
                     DataStore.UpdateProfil(Profil);
+                    DependencyService.Get<ISnackBar>().Show(Resources["SuccesMessage"]);
                     await Navigation.PopModalAsync();
                 }
-            }
-            else
-            {
-                await Navigation.PopModalAsync();
+                else
+                {
+                    DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+                }
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
+        private string CheckPassword()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            if (!string.IsNullOrEmpty(Password) & !string.IsNullOrEmpty(ConfirmPassword))
+            {
+                if (!Password.Equals(ConfirmPassword))
+                {
+                    return Resources["ConfirmPasswordMessage"];
+                }
+                if (Password.Length < 6)
+                {
+                    return Resources["SixLettersMessage"];
+                }
+            }
+            return string.Empty;
         }
     }
 }

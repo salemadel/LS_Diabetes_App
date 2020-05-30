@@ -1,10 +1,5 @@
 ﻿using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.ViewModels.Profil_ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

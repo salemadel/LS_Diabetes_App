@@ -2,9 +2,6 @@
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.Login_Pages;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -19,6 +16,7 @@ namespace LS_Diabetes_App.ViewModels
         private RestApi RestApi { get; set; }
 
         private bool isBusy { get; set; }
+
         public bool IsBusy
         {
             get { return isBusy; }
@@ -29,7 +27,9 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private bool iscodevisible { get; set; }
+
         public bool IsCodeVisible
         {
             get { return iscodevisible; }
@@ -40,7 +40,9 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private bool ispasswordvisible { get; set; }
+
         public bool IsPasswordVisible
         {
             get { return iscodevisible; }
@@ -51,9 +53,11 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public Command SendEmailCommand { get; set; }
         public Command SendCodeCommand { get; set; }
         public Command ResetPasswodCommand { get; set; }
+
         public ForgotPassword_ViewModel()
         {
             RestApi = new RestApi();
@@ -73,7 +77,7 @@ namespace LS_Diabetes_App.ViewModels
 
         private async Task ExecuteOnSendEmail()
         {
-            if(!IsValidEmail(Email))
+            if (!IsValidEmail(Email))
             {
                 DependencyService.Get<IMessage>().ShortAlert("Mail Error !");
                 return;
@@ -81,18 +85,36 @@ namespace LS_Diabetes_App.ViewModels
             IsBusy = true;
             IsCodeVisible = false;
             IsPasswordVisible = false;
-            await Task.Delay(2000);
-            IsCodeVisible = true;
+            var result = await RestApi.EmailForgotCheck(Email);
+            if (result.Item1)
+            {
+                IsCodeVisible = true;
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+            }
+
             IsBusy = false;
         }
+
         private async Task ExecuteOnSendCode()
         {
             IsBusy = true;
             IsPasswordVisible = false;
-            await Task.Delay(2000);
-            IsPasswordVisible = true;
+            var result = await RestApi.PostCode(Code);
+            if (result.Item1)
+            {
+                IsPasswordVisible = true;
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+            }
+
             IsBusy = false;
         }
+
         private async Task ExecuteOnResetPassword()
         {
             string checkpassword = CheckPassword();
@@ -102,10 +124,20 @@ namespace LS_Diabetes_App.ViewModels
                 return;
             }
             IsBusy = true;
-            await Task.Delay(2000);
-            App.Current.MainPage = new Login_Page();
+            var result = await RestApi.ForgotPasswordEdit(Password);
+            if (result.Item1)
+            {
+                DependencyService.Get<ISnackBar>().Show(Resources["SuccesMessage"]);
+                App.Current.MainPage = new Login_Page();
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+            }
+
             IsBusy = false;
         }
+
         private string CheckPassword()
         {
             if (!Password.Equals(ConfirmPassword))
@@ -118,7 +150,8 @@ namespace LS_Diabetes_App.ViewModels
             }
             return string.Empty;
         }
-        bool IsValidEmail(string email)
+
+        private bool IsValidEmail(string email)
         {
             try
             {

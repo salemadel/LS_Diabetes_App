@@ -77,6 +77,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private string glucose_time { get; set; }
+
         public string Glucose_time
         {
             get { return glucose_time; }
@@ -85,13 +86,13 @@ namespace LS_Diabetes_App.Models.Data_Models
                 if (glucose_time != value)
                     glucose_time = value;
                 OnPropertyChanged();
-                
             }
         }
 
         [JsonIgnore]
         [Ignore]
         private bool activity { get; set; }
+
         public bool Activity
         {
             get { return activity; }
@@ -106,6 +107,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private bool taking_medication { get; set; }
+
         public bool Taking_Medication
         {
             get { return taking_medication; }
