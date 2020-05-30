@@ -30,13 +30,13 @@ namespace LS_Diabetes_App.Views.Profil_Pages
         private void UnitTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
         {
             var combobox = sender as SfComboBox;
-            (BindingContext as Profil_Info_ViewModel).Profil.GlycemiaUnit = combobox.SelectedItem as string;
+            (BindingContext as Profil_Info_ViewModel).Settings.GlycemiaUnit = combobox.SelectedItem as string;
         }
 
         private void TherapyTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
         {
             var combobox = sender as SfComboBox;
-            (BindingContext as Profil_Info_ViewModel).Profil.WeightUnit = combobox.SelectedItem as string;
+            (BindingContext as Profil_Info_ViewModel).Settings.WeightUnit = combobox.SelectedItem as string;
         }
 
         private void DiabetesTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
@@ -48,7 +48,7 @@ namespace LS_Diabetes_App.Views.Profil_Pages
         private void Height_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
         {
             var combobox = sender as SfComboBox;
-            (BindingContext as Profil_Info_ViewModel).Profil.HeighttUnit = combobox.SelectedItem as string;
+            (BindingContext as Profil_Info_ViewModel).Settings.HeighttUnit = combobox.SelectedItem as string;
         }
     }
 }

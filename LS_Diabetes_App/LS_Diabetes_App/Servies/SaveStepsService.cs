@@ -11,22 +11,23 @@ namespace LS_Diabetes_App.Servies
     public static class SaveStepsService
     {
         public static bool isRunnung { get; set; }
-        private static int Steps { get; set; }
+        private static double? Steps { get; set; }
         private static IDataStore DataStore { get; set; }
         
-        public static void  SaveSteps(int steps)
+        public static void  SaveSteps(double? e)
         {
             if(DataStore == null)
             {
                 DataStore =  new DataStores(); 
             }
+           
             var stepslist = DataStore.GetStepsAsync().ToList();
             if(stepslist.Count > 0)
             {
                 if(stepslist.Where(i => i.Date.Date == DateTime.Now.Date).Count() > 0)
                 {
                     var stepstoday = stepslist.Single(i => i.Date.Date == DateTime.Now.Date);
-                    stepstoday.Steps += steps;
+                    stepstoday.Steps += e.Value;
                     DataStore.UpdateSteps(stepstoday);
                     Steps = stepstoday.Steps;
                 }
@@ -35,7 +36,7 @@ namespace LS_Diabetes_App.Servies
                     Steps_Model stepstoday = new Steps_Model
                     {
                         Date = DateTime.Now,
-                        Steps = steps
+                        Steps = e.Value
                     };
                     DataStore.AddSteps(stepstoday);
                     Steps = stepstoday.Steps;
@@ -46,12 +47,12 @@ namespace LS_Diabetes_App.Servies
                 Steps_Model stepstoday = new Steps_Model
                 {
                     Date = DateTime.Now,
-                    Steps = steps
+                    Steps = e.Value
                 };
                 DataStore.AddSteps(stepstoday);
                 Steps = stepstoday.Steps;
             }
-            MessagingCenter.Send<object, int>(Application.Current,"Steps" , Steps);
+         //   MessagingCenter.Send<object, double?>(Application.Current,"Steps" , Steps);
         }
     }
 }

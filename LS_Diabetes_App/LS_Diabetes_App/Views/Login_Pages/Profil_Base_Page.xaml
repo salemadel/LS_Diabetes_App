@@ -32,20 +32,20 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Text="{x:Static resources:AppResources.DiabetesType_Label}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[DiabetesType_Label]}" Grid.Row="0" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <combobox:SfComboBox x:Name="DiabetesTypes_Combobox" DataSource="{Binding Type_List}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="0" Grid.Column="1" SelectionChanged="DiabetesTypes_Combobox_SelectionChanged" />
-            <Label Text="{x:Static resources:AppResources.Glucometer_Label}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[Glucometer_Label]}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <combobox:SfComboBox x:Name="Glucometer_Combobox" DataSource="{Binding Glucometer_List}" ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="1" Grid.Column="1" SelectionChanged="Glucometer_Combobox_SelectionChanged" />
-            <Label Text="{x:Static resources:AppResources.Unit_Label}" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[Unit_Label]}" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <combobox:SfComboBox x:Name="UnitTypes_Combobox" DataSource="{Binding Unit_List}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="2" Grid.Column="1" SelectionChanged="UnitTypes_Combobox_SelectionChanged" />
-           
-            <Label Text="Unité de Poids" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+
+            <Label Text="{Binding Resources[Weight_Unit]}" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <combobox:SfComboBox x:Name="TherapyTypes_Combobox" DataSource="{Binding Weight_Unit}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="3" Grid.Column="1" SelectionChanged="TherapyTypes_Combobox_SelectionChanged" />
-            <Label Text="Unité de Taille" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[Height_Unit]}" Grid.Row="4" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <combobox:SfComboBox x:Name="Height_Combobox" DataSource="{Binding Height_Unit}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="4" Grid.Column="1" SelectionChanged="Height_Combobox_SelectionChanged" />
-            <Label Text="Taille" Grid.Row="5" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[Height]}" Grid.Row="5" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Entry Grid.Row="5" Grid.Column="1" Keyboard="Numeric" Text="{Binding Profil.Height , Mode=OneWayToSource}" Placeholder="Ex : 188 cm" FontFamily="{StaticResource NormalFont}" IsPassword="False" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
-            <Label Text="Année du Diagnostic" Grid.Row="6"  Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[Diagnostic_Year]}" Grid.Row="6"  Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Entry Grid.Row="6" Grid.Column="1" Text="{Binding Diagnostic_Date}" Placeholder="yyyy" Keyboard="Numeric" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" >
                 <CustomEntry:Custom_Entry.Behaviors>
                     <Behaviors:MaskedBehavior Mask="XXXX"/>

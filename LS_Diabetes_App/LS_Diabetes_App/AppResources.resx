@@ -120,11 +120,17 @@
   <data name="AllFieldsMessage" xml:space="preserve">
     <value>You must fill in all fields</value>
   </data>
+  <data name="Average" xml:space="preserve">
+    <value>Average</value>
+  </data>
   <data name="BirthDateMessage" xml:space="preserve">
     <value>Date of birth Not Valid!</value>
   </data>
   <data name="BirthDate_PlaceHolder" xml:space="preserve">
     <value>Date of birth</value>
+  </data>
+  <data name="Blood_pressure" xml:space="preserve">
+    <value>Blood pressure</value>
   </data>
   <data name="ConfirmPasswordMessage" xml:space="preserve">
     <value>Please confirm your password !</value>
@@ -138,8 +144,17 @@
   <data name="Diagnostic_Year" xml:space="preserve">
     <value>Diagnostic year</value>
   </data>
+  <data name="Dosage" xml:space="preserve">
+    <value>Dosage</value>
+  </data>
+  <data name="Drug" xml:space="preserve">
+    <value>Drug</value>
+  </data>
   <data name="Drugs_Label" xml:space="preserve">
     <value>Drugs</value>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>Please enter verification code</value>
   </data>
   <data name="Female_RadioButton" xml:space="preserve">
     <value>Female</value>
@@ -159,6 +174,12 @@
   <data name="Height_Unit" xml:space="preserve">
     <value>Height unit</value>
   </data>
+  <data name="Highest" xml:space="preserve">
+    <value>Highest</value>
+  </data>
+  <data name="Hight" xml:space="preserve">
+    <value>Hight</value>
+  </data>
   <data name="Home_Glucose_Lavel_Label" xml:space="preserve">
     <value>Glycemia</value>
   </data>
@@ -168,11 +189,26 @@
   <data name="InsulinPumpTherapy_Label" xml:space="preserve">
     <value>Insulin pump therapy</value>
   </data>
+  <data name="InternetMessage" xml:space="preserve">
+    <value>please check your internet connection</value>
+  </data>
   <data name="LastName_PlaceHolder" xml:space="preserve">
     <value>Last name</value>
   </data>
+  <data name="Low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="Lowest" xml:space="preserve">
+    <value>Lowest</value>
+  </data>
   <data name="Male_RadioButton" xml:space="preserve">
     <value>Male</value>
+  </data>
+  <data name="NewPasswordMessage" xml:space="preserve">
+    <value>Please enter your new password</value>
+  </data>
+  <data name="Next_medication" xml:space="preserve">
+    <value>Next medication</value>
   </data>
   <data name="Note_Label" xml:space="preserve">
     <value>Note</value>
@@ -180,17 +216,41 @@
   <data name="Password_PlaceHolder" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="Physical_activity" xml:space="preserve">
+    <value>Physical activity</value>
+  </data>
   <data name="Position_Label" xml:space="preserve">
     <value>Postition</value>
   </data>
   <data name="Pression_Label" xml:space="preserve">
     <value>Arterial pressure</value>
   </data>
+  <data name="Remaining_time" xml:space="preserve">
+    <value>Remaining time</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="RessetPassword" xml:space="preserve">
+    <value>Enter your Email adress to reset your password</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Select_Language" xml:space="preserve">
+    <value>Please choose your language</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
   <data name="SignIn_Label" xml:space="preserve">
     <value>Sign In</value>
   </data>
   <data name="SignUp_Label" xml:space="preserve">
     <value>Sign Up</value>
+  </data>
+  <data name="SixLettersMessage" xml:space="preserve">
+    <value>Password must contain at least 6 characters</value>
   </data>
   <data name="Step_Label" xml:space="preserve">
     <value>Step</value>
@@ -209,5 +269,8 @@
   </data>
   <data name="Weight_Label" xml:space="preserve">
     <value>Weight</value>
+  </data>
+  <data name="Weight_Unit" xml:space="preserve">
+    <value>Weight Unit</value>
   </data>
 </root>

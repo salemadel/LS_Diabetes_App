@@ -19,15 +19,15 @@ using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels
 {
-    public class HomePage_ViewModel : ViewModelBase , INotifyPropertyChanged
+    public class HomePage_ViewModel : ViewModelBase
     {
         private IDataStore DataStore;
         private INavigation Navigation;
        
 
-        private Profil_Model profil { get; set; }
+        private Settings_Model profil { get; set; }
 
-        public Profil_Model Profil
+        public Settings_Model Profil
         {
             get { return profil; }
             set
@@ -245,8 +245,8 @@ namespace LS_Diabetes_App.ViewModels
                 OnPropertyChanged();
             }
         }
-        private int steps { get; set; }
-        public int Steps
+        private double? steps { get; set; }
+        public double? Steps
         {
             get { return steps; }
             set
@@ -309,6 +309,7 @@ namespace LS_Diabetes_App.ViewModels
             GlycemiaConverter = new GlycemiaConverter();
             WeightConverter = new WeightConverter();
             UpdateData();
+           // DependencyService.Get<IStepCounter>().StepCountChanged += StepCounterService_StepCountChanged;
             AddDataTypeCommand = new Command(async () =>
             {
                 await ExecuteOnAddDataType();
@@ -389,16 +390,11 @@ namespace LS_Diabetes_App.ViewModels
             }, null, startTimeSpan, periodTimeSpan);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+       
 
         private void UpdateData()
         {
-            Profil = DataStore.GetProfilAsync().First();
+            Profil = DataStore.GetSettingsAsync().First();
             Objectifs = DataStore.GetObjectifAsync().First();
             Glucose_Data.Clear();
             Weight_Data.Clear();
@@ -529,7 +525,7 @@ namespace LS_Diabetes_App.ViewModels
                 if(keyvalue.Count > 0)
                 {
                     var t = TimeSpan.FromTicks((Convert.ToDateTime(keyvalue.OrderBy(k => Convert.ToDateTime(k.Value)).First().Value) - DateTime.Now).Ticks);
-                    RestDate =(t.Days >0) ? string.Format("{0:D2}j {1:D2}h", t.Days, t.Hours) : string.Format("{0:D2}h {1:D2}m", t.Hours, t.Minutes);
+                    RestDate =(t.Days >0) ? string.Format("{0:D2}j {1:D2}h", t.Days, t.Hours) : string.Format("{0:D2}h {1:D2}mn", t.Hours, t.Minutes);
 
 
 
@@ -544,6 +540,15 @@ namespace LS_Diabetes_App.ViewModels
                
                 
             }
+            else
+            {
+                Drug = null;
+                RestDate = "--";
+            }
+        }
+        private void StepCounterService_StepCountChanged(object sender, StepCountChangedEventArgs e)
+        {
+            Steps = e.Value;
         }
         private async Task ExecuteOnAddDataType()
         {

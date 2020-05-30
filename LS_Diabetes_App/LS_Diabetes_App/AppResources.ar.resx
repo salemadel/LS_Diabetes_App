@@ -120,11 +120,17 @@
   <data name="AllFieldsMessage" xml:space="preserve">
     <value>يجب أن تملأ جميع الحقول</value>
   </data>
+  <data name="Average" xml:space="preserve">
+    <value>المعدل</value>
+  </data>
   <data name="BirthDateMessage" xml:space="preserve">
     <value>تاريخ الميلاد غير صالح!</value>
   </data>
   <data name="BirthDate_PlaceHolder" xml:space="preserve">
     <value>تاريخ الميلاد</value>
+  </data>
+  <data name="Blood_pressure" xml:space="preserve">
+    <value>الضغط الشرياني</value>
   </data>
   <data name="ConfirmPasswordMessage" xml:space="preserve">
     <value>يرجى التأكد من صحة كلمة المرور الخاصة بك !</value>
@@ -138,8 +144,17 @@
   <data name="Diagnostic_Year" xml:space="preserve">
     <value>عام الاصابة</value>
   </data>
+  <data name="Dosage" xml:space="preserve">
+    <value>الجرعة</value>
+  </data>
+  <data name="Drug" xml:space="preserve">
+    <value>الدواء</value>
+  </data>
   <data name="Drugs_Label" xml:space="preserve">
     <value>أدوية</value>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>يرجى إدخال رمز التحقق</value>
   </data>
   <data name="Female_RadioButton" xml:space="preserve">
     <value>أنثى</value>
@@ -159,6 +174,12 @@
   <data name="Height_Unit" xml:space="preserve">
     <value>وحدة قياس الطول</value>
   </data>
+  <data name="Highest" xml:space="preserve">
+    <value>العالية</value>
+  </data>
+  <data name="Hight" xml:space="preserve">
+    <value>عالية</value>
+  </data>
   <data name="Home_Glucose_Lavel_Label" xml:space="preserve">
     <value>نسبة السكر في الدم</value>
   </data>
@@ -168,11 +189,26 @@
   <data name="InsulinPumpTherapy_Label" xml:space="preserve">
     <value>مضخة الانسولين</value>
   </data>
+  <data name="InternetMessage" xml:space="preserve">
+    <value>الرجاء التحقق من اتصال الانترنت الخاص بك</value>
+  </data>
   <data name="LastName_PlaceHolder" xml:space="preserve">
     <value>اللقب</value>
   </data>
+  <data name="Low" xml:space="preserve">
+    <value>منخفضة</value>
+  </data>
+  <data name="Lowest" xml:space="preserve">
+    <value>المنخفضة</value>
+  </data>
   <data name="Male_RadioButton" xml:space="preserve">
     <value>ذكر</value>
+  </data>
+  <data name="NewPasswordMessage" xml:space="preserve">
+    <value>يرجى إدخال كلمة المرور الجديدة الخاصة بك</value>
+  </data>
+  <data name="Next_medication" xml:space="preserve">
+    <value>الدواء التالي</value>
   </data>
   <data name="Note_Label" xml:space="preserve">
     <value>ملاحظة</value>
@@ -180,17 +216,41 @@
   <data name="Password_PlaceHolder" xml:space="preserve">
     <value>كلمة السر</value>
   </data>
+  <data name="Physical_activity" xml:space="preserve">
+    <value>النشاط البدني</value>
+  </data>
   <data name="Position_Label" xml:space="preserve">
     <value>المكان</value>
   </data>
   <data name="Pression_Label" xml:space="preserve">
     <value>ضغط الدم</value>
   </data>
+  <data name="Remaining_time" xml:space="preserve">
+    <value>الوقت المتبقي</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>اعادة التعيين</value>
+  </data>
+  <data name="RessetPassword" xml:space="preserve">
+    <value>أدخل عنوان بريدك الإلكتروني لإعادة تعيين كلمة المرور الخاصة بك</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="Select_Language" xml:space="preserve">
+    <value>يرجى اختيار اللغة</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>ارسال</value>
+  </data>
   <data name="SignIn_Label" xml:space="preserve">
     <value>الدخول</value>
   </data>
   <data name="SignUp_Label" xml:space="preserve">
     <value>التسجيل</value>
+  </data>
+  <data name="SixLettersMessage" xml:space="preserve">
+    <value>يجب أن تحتوي كلمة المرور على 6 أحرف على الأقل</value>
   </data>
   <data name="Step_Label" xml:space="preserve">
     <value>خطوة</value>
@@ -209,5 +269,8 @@
   </data>
   <data name="Weight_Label" xml:space="preserve">
     <value>الميزان</value>
+  </data>
+  <data name="Weight_Unit" xml:space="preserve">
+    <value>وحدة الميزان</value>
   </data>
 </root>

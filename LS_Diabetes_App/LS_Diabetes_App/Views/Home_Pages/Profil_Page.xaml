@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="LS_Diabetes_App.Home_Pages.Profil_Page">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -19,7 +19,8 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" HeightRequest="60" BackgroundColor="White" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
@@ -82,6 +83,7 @@
                 <Label  Text="{Binding MessageText}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" TextColor="Black" FontSize="19" FontFamily="{StaticResource BoldFont}" />
                 <ImageButton Source="share.png" Padding="10" BackgroundColor="#00B2C8"    CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,0" HeightRequest="40" WidthRequest="40"  Command="{Binding ShareCommand}"/>
             </StackLayout>
+            <sfButtons:SfButton Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"  ImageSource="ok.png" ShowIcon="True" ImageAlignment="Left" Text="Disconnect" BackgroundColor="#00B2C8" HeightRequest="35" WidthRequest="120" HorizontalTextAlignment="Start" ImageWidth="30" CornerRadius="10" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,5,0,10" Command="{Binding DisconnectCommand}"/>
         </Grid>
     </ScrollView>
 </ContentPage>

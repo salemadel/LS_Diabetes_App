@@ -13,7 +13,7 @@ namespace LS_Diabetes_App.Views.AddData_Views
     {
         private bool timepickerfucused { get; set; }
 
-        public AddWeight_View(string source , Profil_Model profil, object data)
+        public AddWeight_View(string source , Settings_Model profil, object data)
         {
             InitializeComponent();
             var datastore = new DataStores();

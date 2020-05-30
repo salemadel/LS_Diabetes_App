@@ -1,4 +1,5 @@
-﻿using LS_Diabetes_App.ViewModels.Profil_ViewModels;
+﻿using LS_Diabetes_App.Interfaces;
+using LS_Diabetes_App.ViewModels.Profil_ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace LS_Diabetes_App.Views.Profil_Pages
         public Settings_Page()
         {
             InitializeComponent();
-            BindingContext = new Settings_ViewModel();
+            var datastore = new DataStores();
+            BindingContext = new Settings_ViewModel(Navigation , datastore);
         }
     }
 }

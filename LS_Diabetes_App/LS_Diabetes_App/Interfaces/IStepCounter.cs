@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using LS_Diabetes_App.Models;
+using System.ComponentModel;
 
 namespace LS_Diabetes_App.Interfaces
 {
@@ -11,5 +12,7 @@ namespace LS_Diabetes_App.Interfaces
         void InitSensorService();
 
         void StopSensorService();
+
+        event StepCountChangedEventHandler StepCountChanged;
     }
 }

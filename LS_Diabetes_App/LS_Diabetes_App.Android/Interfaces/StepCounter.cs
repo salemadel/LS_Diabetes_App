@@ -4,6 +4,7 @@ using Android.Hardware;
 using Android.Runtime;
 using LS_Diabetes_App.Droid.Interfaces;
 using LS_Diabetes_App.Interfaces;
+using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Servies;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -30,7 +31,10 @@ namespace LS_Diabetes_App.Droid.Interfaces
                 OnPropertyChanged();
             }
         }
-
+        public StepCounter()
+        {
+          //  var stepservice = new SaveStepsService();
+        }
         StepServiceBinder binder;
         public override Android.OS.IBinder OnBind(Android.Content.Intent intent)
         {
@@ -80,6 +84,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
             {
                 case SensorType.StepDetector:
                     stepDetector++;
+                    StepCountChanged(this, new StepCountChangedEventArgs { Value = stepDetector });
                     break;
 
                 case SensorType.StepCounter:
@@ -91,6 +96,8 @@ namespace LS_Diabetes_App.Droid.Interfaces
                     Steps = (int)e.Values[0] - counterSteps;
                     //MessagingCenter.Send<object , int>(SaveStepsService, "Steps" , Steps);
                     SaveStepsService.SaveSteps(Steps);
+                    //StepCountChanged(this, new StepCountChangedEventArgs { Value = Steps });
+                    
                     break;
             }
         }
@@ -106,6 +113,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event StepCountChangedEventHandler StepCountChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")
         {

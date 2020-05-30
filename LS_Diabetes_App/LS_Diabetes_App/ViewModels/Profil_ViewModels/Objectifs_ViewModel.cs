@@ -17,7 +17,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
     {
         private IDataStore DataStore { get; set; }
         private INavigation Navigation { get; set; }
-        public Profil_Model Profil { get; set; }
+        public Settings_Model Profil { get; set; }
         public Objectif_Model Objectifs { get; set; }
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
@@ -26,7 +26,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
         {
             DataStore = dataStore;
             Navigation = navigation;
-            Profil = DataStore.GetProfilAsync().First();
+            Profil = DataStore.GetSettingsAsync().First();
             GlycemiaConverter = new GlycemiaConverter();
             WeightConverter = new WeightConverter();
            

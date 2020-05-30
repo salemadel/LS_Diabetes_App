@@ -36,22 +36,26 @@
                     <CustomFrame:PancakeView   Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="20,0,0,0" Padding="0">
                         <StackLayout Orientation="Horizontal">
                             <Image x:Name="UserName_Frame" Source="username.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="5,0,0,0" />
-                            <CustomEntry:Custom_Entry  Placeholder="{x:Static resources:AppResources.UserName_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Focused="Custom_Entry_Focused" Unfocused="Custom_Entry_Unfocused" HeightRequest="60" WidthRequest="200" />
+                            <CustomEntry:Custom_Entry HorizontalTextAlignment="Center" Text="{Binding Username}"  Placeholder="{Binding Resources[UserName_PlaceHolder]}"  FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Focused="Custom_Entry_Focused" Unfocused="Custom_Entry_Unfocused" HeightRequest="60" WidthRequest="200" />
                         </StackLayout>
                     </CustomFrame:PancakeView>
                     <CustomFrame:PancakeView   Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="20,0,0,0" Padding="0">
                         <StackLayout Orientation="Horizontal">
                             <Image x:Name="Password_Frame" Source="key.png" HeightRequest="20" WidthRequest="20" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="5,0,0,0" />
-                            <CustomEntry:Custom_Entry IsPassword="True"  Placeholder="{x:Static resources:AppResources.Password_PlaceHolder}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Focused="Custom_Entry_Focused_1" Unfocused="Custom_Entry_Unfocused_1" HeightRequest="60" WidthRequest="200" />
+                            <CustomEntry:Custom_Entry IsPassword="True" Text="{Binding Password}"   Placeholder="{Binding Resources[Password_PlaceHolder]}" HorizontalTextAlignment="Center" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Focused="Custom_Entry_Focused_1" Unfocused="Custom_Entry_Unfocused_1" HeightRequest="60" WidthRequest="200" />
                         </StackLayout>
                     </CustomFrame:PancakeView>
-                    <Label Grid.Row="3" Text="{x:Static resources:AppResources.ForgotPassword_Label}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,20,0" />
-                    <Label x:Name="SignUp_Label" Grid.Row="3" Text="{x:Static resources:AppResources.SignUp_Label}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" Margin="20,0,0,0" />
+                    <Label Grid.Row="3" Text="{Binding Resources[ForgotPassword_Label]}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand" Margin="0,0,20,0" >
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ForgotCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label x:Name="SignUp_Label" Grid.Row="3" Text="{Binding Resources[SignUp_Label]}" FontFamily="{StaticResource NormalFont}" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand" Margin="20,0,0,0" />
                     <StackLayout Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                        <ImageButton Source="facebook.png" Padding="10" BackgroundColor="#4267B2"    CornerRadius="30" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,0,0" HeightRequest="60" WidthRequest="60"  />
+                        <ImageButton Source="facebook.png" Padding="10" BackgroundColor="#4267B2"    CornerRadius="30" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,0,0" HeightRequest="60" WidthRequest="60"  Command="{Binding FacebookCommand}"/>
                         <ImageButton Source="google.png" Padding="10" BackgroundColor="Transparent"   CornerRadius="30" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,0,0,0" HeightRequest="60" WidthRequest="60" />
                     </StackLayout>
-                    <Label Grid.Row="2" Text="{x:Static resources:AppResources.SignIn_Label}" FontSize="28" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="20,0,0,0" />
+                    <Label Grid.Row="2" Text="{Binding Resources[SignIn_Label]}" FontSize="28" FontFamily="{StaticResource NormalFont}" FontAttributes="Bold" TextColor="#00B2C8" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="20,0,0,0" />
                     <ImageButton Source="next.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,30,0" HeightRequest="70" WidthRequest="70" Command="{Binding LoginCommand}" />
 
                     <ActivityIndicator Grid.Row="2" Color="#00B2C8"  VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />

@@ -7,7 +7,7 @@ namespace LS_Diabetes_App.Views.AddData_Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DataTypeSelection_View : Rg.Plugins.Popup.Pages.PopupPage
     {
-        public DataTypeSelection_View(Profil_Model profil)
+        public DataTypeSelection_View(Settings_Model profil)
         {
             InitializeComponent();
             BindingContext = new DataTypeSelection_ViewModel(Navigation, profil);

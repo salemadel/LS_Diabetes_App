@@ -208,8 +208,8 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
         public ObservableCollection<SfSegmentItem> SegmentItems { get; set; }
         public ObservableCollection<SfSegmentItem> DateItems { get; set; }
         private GlycemiaConverter GlycemiaConverter { get; set; }
-        public Profil_Model Profil { get; set; }
-        private Objectif_Model Objectifs { get; set; }
+        public Settings_Model Profil { get; set; }
+        public Objectif_Model Objectifs { get; set; }
         private ObservableCollection<Slice_Model> slices { get; set; }
 
         public ObservableCollection<Slice_Model> Slices
@@ -222,14 +222,19 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 OnPropertyChanged();
             }
         }
+        public double Max_Widh { get; set; }
+        public double Good_Wigh { get; set; }
+        public double Min_Glycemia { get; set; }
+        public double Max_Glycemia { get; set; }
         public Command FiltreCommand { get; set; }
 
         public GlucoseStatistique_ViewModel(INavigation navigation, IDataStore dataStore)
         {
             Navigation = navigation;
             DataStore = dataStore;
-            Profil = DataStore.GetProfilAsync().First();
+            Profil = DataStore.GetSettingsAsync().First();
             Objectifs = dataStore.GetObjectifAsync().First();
+            
             Glucose_Data = new ObservableCollection<Glucose_Model>();
             GlycemiaConverter = new GlycemiaConverter();
             Message = "Glycemie cible : " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit + " et " + GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit).ToString() + " " + Profil.GlycemiaUnit;
@@ -317,7 +322,10 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 {
                     GlucoseColor = Color.FromHex("#e74c3c");
                 }
-
+                Min_Glycemia = GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Min_Glycemia, Profil.GlycemiaUnit);
+                Max_Glycemia = GlycemiaConverter.DoubleGlycemiaConvert(Objectifs.Max_Glycemia, Profil.GlycemiaUnit);
+                Max_Widh = MaximumChart - Max_Glycemia;
+                Good_Wigh = Max_Glycemia - Min_Glycemia;
             }
             Slices.Add(new Slice_Model
             {

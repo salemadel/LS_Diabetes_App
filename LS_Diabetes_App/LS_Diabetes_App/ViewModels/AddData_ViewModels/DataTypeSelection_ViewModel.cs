@@ -16,9 +16,9 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         public Command Hb1AcCommand { get; set; }
         public Command WeightCommand { get; set; }
         public Command DrugsCommand { get; set; }
-        private Profil_Model Profil { get; set; }
+        private Settings_Model Profil { get; set; }
         private string Source = "Add_Data";
-        public DataTypeSelection_ViewModel(INavigation navigation, Profil_Model profil)
+        public DataTypeSelection_ViewModel(INavigation navigation, Settings_Model profil)
         {
             Navigation = navigation;
             Profil = profil;

@@ -10,12 +10,12 @@ namespace LS_Diabetes_App.Views.Login_Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Profil_Base_Page : ContentPage
     {
-        public Profil_Base_Page()
+        public Profil_Base_Page(string password)
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new SignUp_ViewModel(Navigation, datastore, "ProfilBase");
+            BindingContext = new SignUp_ViewModel(Navigation, datastore, "ProfilBase" , password);
         }
 
         private void Glucometer_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
@@ -27,13 +27,13 @@ namespace LS_Diabetes_App.Views.Login_Pages
         private void UnitTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
         {
             var combobox = sender as SfComboBox;
-            (BindingContext as SignUp_ViewModel).Profil.GlycemiaUnit = combobox.SelectedItem as string;
+            (BindingContext as SignUp_ViewModel).Settings.GlycemiaUnit = combobox.SelectedItem as string;
         }
 
         private void TherapyTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
         {
             var combobox = sender as SfComboBox;
-            (BindingContext as SignUp_ViewModel).Profil.WeightUnit = combobox.SelectedItem as string;
+            (BindingContext as SignUp_ViewModel).Settings.WeightUnit = combobox.SelectedItem as string;
         }
 
         private void DiabetesTypes_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
@@ -45,7 +45,7 @@ namespace LS_Diabetes_App.Views.Login_Pages
         private void Height_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)
         {
             var combobox = sender as SfComboBox;
-            (BindingContext as SignUp_ViewModel).Profil.HeighttUnit = combobox.SelectedItem as string;
+            (BindingContext as SignUp_ViewModel).Settings.HeighttUnit = combobox.SelectedItem as string;
         }
     }
 }

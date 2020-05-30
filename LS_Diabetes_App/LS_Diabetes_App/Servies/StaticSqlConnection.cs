@@ -24,6 +24,7 @@ namespace LS_Diabetes_App.Servies
                 }
                 _connection = new SQLiteConnection(path, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex);
                 _connection.CreateTable<Data_Model>();
+                _connection.CreateTable<Settings_Model>();
                 _connection.CreateTable<Glucose_Model>();
                 _connection.CreateTable<Pression_Model>();
                 _connection.CreateTable<Weight_Model>();

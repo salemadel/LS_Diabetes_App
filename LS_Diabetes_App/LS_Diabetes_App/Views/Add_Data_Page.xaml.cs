@@ -11,7 +11,7 @@ namespace LS_Diabetes_App.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Add_Data_Page : ContentPage
     {
-        public Add_Data_Page(string source, Profil_Model profil)
+        public Add_Data_Page(string source, Settings_Model profil)
         {
             InitializeComponent();
             var datastore = new DataStores();

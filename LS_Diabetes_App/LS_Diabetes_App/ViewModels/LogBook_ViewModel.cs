@@ -20,9 +20,9 @@ namespace LS_Diabetes_App.ViewModels
     {
         private IDataStore DataStore;
         private INavigation Navigation;
-        private Profil_Model profil { get; set; }
+        private Settings_Model profil { get; set; }
 
-        public Profil_Model Profil
+        public Settings_Model Profil
         {
             get { return profil; }
             set
@@ -130,7 +130,7 @@ namespace LS_Diabetes_App.ViewModels
         private void UpdateData()
         {
             List<LogBook_Model> _data = new List<LogBook_Model>();
-            Profil = DataStore.GetProfilAsync().First();
+            Profil = DataStore.GetSettingsAsync().First();
             foreach (var item in DataStore.GetGlucosAsync())
             {
                 var glucose = new LogBook_Model

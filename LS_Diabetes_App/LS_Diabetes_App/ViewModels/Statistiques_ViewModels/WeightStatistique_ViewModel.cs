@@ -150,6 +150,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
         private WeightConverter WeightConverter { get; set; }
         private HeightConverter HeightConverter { get; set; }
         public ObservableCollection<SfSegmentItem> DateItems { get; set; }
+        public Settings_Model Settings { get; set; }
         public Profil_Model Profil { get; set; }
         public Command FiltreCommand { get; set; }
 
@@ -157,6 +158,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
         {
             Navigation = navigation;
             DataStore = dataStore;
+            Settings = DataStore.GetSettingsAsync().First();
             Profil = DataStore.GetProfilAsync().First();
             Weight_Data = new ObservableCollection<Weight_Model>();
             WeightConverter = new WeightConverter();
@@ -199,7 +201,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
            
             foreach (var item in DataStore.GetWeightAsync().Where(i => i.Date.Date >= Selected_MinDate & i.Date.Date <= Selected_MaxDate))
             {
-                Weight_Data.Add(WeightConverter.Convert(item, Profil.WeightUnit));
+                Weight_Data.Add(WeightConverter.Convert(item, Settings.WeightUnit));
             }
             if (Weight_Data.Count > 0)
             {
@@ -207,10 +209,10 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Min = Weight_Data.OrderBy(i => i.Weight).First();
                 Max = Weight_Data.OrderBy(i => i.Weight).Last();
                 MaximumChart = Convert.ToInt32(Max.Weight + 100);
-                IMC = Math.Round(WeightConverter.DoubleWeightConvetBack(Weight_Data.OrderBy(i => i.Date).Last().Weight , Profil.WeightUnit) / Math.Pow(Profil.Height / 100, 2), 1);
+                IMC = Math.Round(WeightConverter.DoubleWeightConvetBack(Weight_Data.OrderBy(i => i.Date).Last().Weight , Settings.WeightUnit) / Math.Pow(Profil.Height / 100, 2), 1);
                 if(string.IsNullOrWhiteSpace(Message))
                 {
-                    Message = "Dernier Poids : " + Weight_Data.Last().Weight + " " + Profil.WeightUnit;
+                    Message = "Dernier Poids : " + Weight_Data.Last().Weight + " " + Settings.WeightUnit;
                 }
             }
             if(IMC < 18.5)

@@ -11,16 +11,20 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Plugin.FacebookClient" Version="2.2.1" />
     <PackageReference Include="Plugin.Permissions" Version="6.0.1" />
+    <PackageReference Include="Portable.JWT" Version="1.0.5" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.2" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.52" />
-    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.1.0.52" />
-    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.52" />
+    <PackageReference Include="sameerIOTApps.Plugin.SecureStorage" Version="2.5.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="18.1.0.54" />
+    <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.54" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.6.0.726" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.800" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.4.2" />
   </ItemGroup>
 
@@ -65,6 +69,9 @@
     <Compile Update="Views\Statistiques_Pages\Hb1AcStatistique_Page.xaml.cs">
       <DependentUpon>Hb1AcStatistique_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Statistiques_Pages\StepsStatistique_Page.xaml.cs">
+      <DependentUpon>StepsStatistique_Page.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Statistiques_Pages\WeightStatistique_Page.xaml.cs">
       <DependentUpon>WeightStatistique_Page.xaml</DependentUpon>
     </Compile>
@@ -107,6 +114,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Home_Pages\Heart_Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Login_Pages\FirstUseLanguage_Page.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Login_Pages\ForgotPasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Login_Pages\Login_Page.xaml">

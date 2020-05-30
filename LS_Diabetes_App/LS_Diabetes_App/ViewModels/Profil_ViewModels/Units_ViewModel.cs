@@ -15,7 +15,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
     {
         private IDataStore DataStore { get; set; }
         private INavigation Navigation { get; set; }
-        public Profil_Model Profil { get; set; }
+        public Settings_Model Profil { get; set; }
        
         private string[] weight_unit = new string[] { "Kg", "lbs" };
         private string[] height_unit = new string[] { "cm", "pied" };
@@ -44,7 +44,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
         {
             DataStore = dataStore;
             Navigation = navigation;
-            Profil = DataStore.GetProfilAsync().First();
+            Profil = DataStore.GetSettingsAsync().First();
             SaveCommand = new Command(async () =>
             {
                 await ExecuteOnSave();
@@ -55,7 +55,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
         {
             if(await DependencyService.Get<IDialog>().AlertAsync("" , "Voulez Vous Modifier ?" , "Oui" , "Non"))
             {
-                DataStore.UpdateProfil(Profil);
+                DataStore.UpdateSettings(Profil);
                 MessagingCenter.Send(this, "DataUpdated");
                 await Navigation.PopModalAsync();
             }

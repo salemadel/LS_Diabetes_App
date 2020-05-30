@@ -120,11 +120,17 @@
   <data name="AllFieldsMessage" xml:space="preserve">
     <value>Il faut remplir tous les champs</value>
   </data>
+  <data name="Average" xml:space="preserve">
+    <value>Moyenne</value>
+  </data>
   <data name="BirthDateMessage" xml:space="preserve">
     <value>Date de naissance Non Valide !</value>
   </data>
   <data name="BirthDate_PlaceHolder" xml:space="preserve">
     <value>Date de naissance</value>
+  </data>
+  <data name="Blood_pressure" xml:space="preserve">
+    <value>Tension Artérielle</value>
   </data>
   <data name="ConfirmPasswordMessage" xml:space="preserve">
     <value>Veuillez Confirmer votre Mot de Passe !</value>
@@ -138,8 +144,17 @@
   <data name="Diagnostic_Year" xml:space="preserve">
     <value>Année du diagnostic</value>
   </data>
+  <data name="Dosage" xml:space="preserve">
+    <value>Posologie</value>
+  </data>
+  <data name="Drug" xml:space="preserve">
+    <value>Médicament</value>
+  </data>
   <data name="Drugs_Label" xml:space="preserve">
     <value>Médicaments</value>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>Veuillez entrer le code de vérification</value>
   </data>
   <data name="Female_RadioButton" xml:space="preserve">
     <value>Femme</value>
@@ -159,6 +174,12 @@
   <data name="Height_Unit" xml:space="preserve">
     <value>Unité de Taille</value>
   </data>
+  <data name="Highest" xml:space="preserve">
+    <value>La Plus Haute</value>
+  </data>
+  <data name="Hight" xml:space="preserve">
+    <value>Elevée</value>
+  </data>
   <data name="Home_Glucose_Lavel_Label" xml:space="preserve">
     <value>Glycémie</value>
   </data>
@@ -168,11 +189,26 @@
   <data name="InsulinPumpTherapy_Label" xml:space="preserve">
     <value>Thérapie par pompe à insuline</value>
   </data>
+  <data name="InternetMessage" xml:space="preserve">
+    <value>veuillez vérifier votre connexion internet</value>
+  </data>
   <data name="LastName_PlaceHolder" xml:space="preserve">
     <value>Nom</value>
   </data>
+  <data name="Low" xml:space="preserve">
+    <value>Basse</value>
+  </data>
+  <data name="Lowest" xml:space="preserve">
+    <value>La Plus Basse</value>
+  </data>
   <data name="Male_RadioButton" xml:space="preserve">
     <value>Homme</value>
+  </data>
+  <data name="NewPasswordMessage" xml:space="preserve">
+    <value>Veuillez entrer votre nouveau mot de passe</value>
+  </data>
+  <data name="Next_medication" xml:space="preserve">
+    <value>Prochaine Prise de Médicament</value>
   </data>
   <data name="Note_Label" xml:space="preserve">
     <value>Note</value>
@@ -180,17 +216,41 @@
   <data name="Password_PlaceHolder" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
+  <data name="Physical_activity" xml:space="preserve">
+    <value>Activité physique</value>
+  </data>
   <data name="Position_Label" xml:space="preserve">
     <value>Position</value>
   </data>
   <data name="Pression_Label" xml:space="preserve">
     <value>Pression artérielle</value>
   </data>
+  <data name="Remaining_time" xml:space="preserve">
+    <value>Temps Restant</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
+  <data name="RessetPassword" xml:space="preserve">
+    <value>Saisissez votre adresse email pour réinitialisez votre mot de passe</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Sauvgarder</value>
+  </data>
+  <data name="Select_Language" xml:space="preserve">
+    <value>Veuillez choisir votre langue</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
   <data name="SignIn_Label" xml:space="preserve">
     <value>Connexion</value>
   </data>
   <data name="SignUp_Label" xml:space="preserve">
     <value>Inscription</value>
+  </data>
+  <data name="SixLettersMessage" xml:space="preserve">
+    <value>Le mot de passe doit contenir au moins 6 caractères</value>
   </data>
   <data name="Step_Label" xml:space="preserve">
     <value>Pas</value>
@@ -209,5 +269,11 @@
   </data>
   <data name="Weight_Label" xml:space="preserve">
     <value>Poids</value>
+  </data>
+  <data name="Weight_Unit" xml:space="preserve">
+    <value>Unité de Poids</value>
+  </data>
+  <data name="Welcom" xml:space="preserve">
+    <value>Bienvenu </value>
   </data>
 </root>

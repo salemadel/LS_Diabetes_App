@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:combobox="clr-namespace:Syncfusion.XForms.ComboBox;assembly=Syncfusion.SfComboBox.XForms"
+             mc:Ignorable="d"
+             x:Class="LS_Diabetes_App.Views.Login_Pages.FirstUseLanguage_Page" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="ExtraBoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="350" />
+                <RowDefinition Height="200" />
+            </Grid.RowDefinitions>
+            <Image Source="SmartHealthIcon.png" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Margin="0,100,0,0" WidthRequest="200" HeightRequest="200" Aspect="AspectFill" Grid.Row="0" />
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Text="{Binding Resources[Select_Language]}" Grid.Row="0"  FontSize="17" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+                <combobox:SfComboBox  DataSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" SelectedIndex="{Binding Selected_Index}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" TextColor="Black" Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" WidthRequest="100"/>
+                <ImageButton Source="next.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding FirstUseCommand}" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

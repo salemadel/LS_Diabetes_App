@@ -1,6 +1,8 @@
-﻿using LS_Diabetes_App.Converters;
+﻿using LS_Diabetes_App.Api;
+using LS_Diabetes_App.Converters;
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
+using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views.Login_Pages;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ using Xamarin.Forms;
 
 namespace LS_Diabetes_App.ViewModels
 {
-    public class SignUp_ViewModel : INotifyPropertyChanged
+    public class SignUp_ViewModel : ViewModelBase
     {
         private string[] type_list = new string[] { "Type 1", "Type 2", "Autre" };
         private string[] weight_unit = new string[] { "Kg", "lbs" };
@@ -53,7 +55,9 @@ namespace LS_Diabetes_App.ViewModels
         public string Diagnostic_Date { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+        private string VerifiedPassword { get; set; }
         public Profil_Model Profil { get; set; }
+        public Settings_Model Settings { get; set; }
         private IDataStore DataStore;
         private INavigation Navigation;
 
@@ -88,17 +92,20 @@ namespace LS_Diabetes_App.ViewModels
         public Command SignUpCommand { get; set; }
         public Command ProfilBaseCommand { get; set; }
 
-        public SignUp_ViewModel(INavigation navigation, IDataStore dataStore, string source)
+        public SignUp_ViewModel(INavigation navigation, IDataStore dataStore, string source , string password)
         {
             DataStore = dataStore;
             Navigation = navigation;
             Profil = new Profil_Model();
+            Settings = new Settings_Model();
             if (source == "ProfilBase")
             {
                 if (DataStore.GetProfilAsync().Count() > 0)
                 {
                     Profil = DataStore.GetProfilAsync().First();
+                    VerifiedPassword = password;
                 }
+                Settings = DataStore.GetSettingsAsync().First();
             }
             SignUpCommand = new Command(async () =>
             {
@@ -111,42 +118,59 @@ namespace LS_Diabetes_App.ViewModels
         }
 
         private async Task ExecuteOnSignUp()
-        {
-            Password = "adel";
-            ConfirmPassword = "adel";
+        { 
+
+            
             if (!string.IsNullOrWhiteSpace(Profil.Email) & !string.IsNullOrWhiteSpace(Profil.FirstName) & !string.IsNullOrWhiteSpace(Profil.LastName) & !string.IsNullOrWhiteSpace(Profil.Sexe) & !string.IsNullOrWhiteSpace(Date) & !string.IsNullOrWhiteSpace(Password) & !string.IsNullOrWhiteSpace(ConfirmPassword))
             {
                 IsBusy = true;
-                if(!Password.Equals(ConfirmPassword))
+                string checkpassword = CheckPassword();
+                if(!string.IsNullOrEmpty(checkpassword))
                 {
-                    DependencyService.Get<IMessage>().ShortAlert("Veuillez Confirmer votre Mot de Passe !");
+                    DependencyService.Get<IMessage>().ShortAlert(checkpassword);
                     return;
                 }
                 DateTime temp;
                 if(!DateTime.TryParse(Date , out temp))
                 {
-                    DependencyService.Get<IMessage>().ShortAlert("Date de naissance Non Valide !");
+                    DependencyService.Get<IMessage>().ShortAlert(Resources["BirthDateMessage"]);
                     return;
                 }
-              
-                await Task.Delay(2000);
-                DataStore.DeleteProfil(Profil);
-                Profil.Birth_Date = System.Convert.ToDateTime(Date);
-                DataStore.AddProfil(Profil);
-                IsBusy = false;
-                await Navigation.PushAsync(new Profil_Base_Page(), true);
+
+               /* var api = new RestApi();
+                var result = await api.EmailCheck(Profil.Email);
+                if(result.Item1)
+                {
+                    DataStore.DeleteProfil(Profil);
+                    Profil.Birth_Date = System.Convert.ToDateTime(Date);
+                    DataStore.AddProfil(Profil);
+                    
+                    await Navigation.PushAsync(new Profil_Base_Page(Password), true);
+                }
+                else
+                {
+                    DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+                }*/
+                
+
             }
             else
             {
                
-                DependencyService.Get<IMessage>().ShortAlert("Il Faut remplir tous les champs !");
+                DependencyService.Get<ISnackBar>().Show(Resources["AllFieldsMessage"]);
             }
+            DataStore.DeleteProfil(Profil);
+            Profil.Birth_Date = System.Convert.ToDateTime(Date);
+            DataStore.AddProfil(Profil);
+
+            await Navigation.PushAsync(new Profil_Base_Page(Password), true);
+            IsBusy = false;
         }
 
         private async Task ExecuteOnProfilBase()
         {
            
-            if (!string.IsNullOrWhiteSpace(Profil.DiabetesType) & !string.IsNullOrWhiteSpace(Profil.Glucometer) & !string.IsNullOrWhiteSpace(Profil.GlycemiaUnit) & !string.IsNullOrWhiteSpace(Profil.WeightUnit))
+            if (!string.IsNullOrWhiteSpace(Profil.DiabetesType) & !string.IsNullOrWhiteSpace(Profil.Glucometer) & !string.IsNullOrWhiteSpace(Settings.GlycemiaUnit) & !string.IsNullOrWhiteSpace(Settings.WeightUnit))
             {
                 int x;
                 if (!int.TryParse(Diagnostic_Date, out x) | Diagnostic_Date.Length <4)
@@ -155,27 +179,54 @@ namespace LS_Diabetes_App.ViewModels
                     return;
                 }
                 IsBusy = true;
-                await Task.Delay(2000);
+                
                 var heightconverter = new HeightConverter();
-                Profil.Height = heightconverter.Convert(Profil.Height, Profil.HeighttUnit);
+                Profil.Height = heightconverter.Convert(Profil.Height, Settings.HeighttUnit);
                 Profil.Diagnostic_Year = x;
-                DataStore.UpdateProfil(Profil);
+                /* var restapi = new RestApi();
+                 var result = await restapi.Resigter(Profil, VerifiedPassword);
+                 if(result.Item1)
+                 {
+                     DataStore.UpdateSettings(Settings);
+                     var Objectifs = new Objectif_Model();
+                     Objectifs.Max_Glycemia = 120;
+                     Objectifs.Min_Glycemia = 70;
+                     Objectifs.Weight_Objectif = 80;
+                     Objectifs.Steps_Objectif = 10000;
+                     DataStore.AddObjectif(Objectifs);
+                     DataStore.UpdateProfil(Profil);
+                     Application.Current.MainPage = new MainPage();
+                 }
+                 else
+                 {
+                     DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+                 }*/
+                DataStore.UpdateSettings(Settings);
                 var Objectifs = new Objectif_Model();
                 Objectifs.Max_Glycemia = 120;
                 Objectifs.Min_Glycemia = 70;
                 Objectifs.Weight_Objectif = 80;
                 Objectifs.Steps_Objectif = 10000;
                 DataStore.AddObjectif(Objectifs);
-                IsBusy = false;
+                DataStore.UpdateProfil(Profil);
                 Application.Current.MainPage = new MainPage();
+                IsBusy = false;
+                
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string name = "")
+        private string CheckPassword()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            if(!Password.Equals(ConfirmPassword))
+            {
+                return Resources["ConfirmPasswordMessage"];
+            }
+            if(Password.Length <6)
+            {
+                return Resources["SixLettersMessage"];
+            }
+            return string.Empty;
         }
+       
     }
 }

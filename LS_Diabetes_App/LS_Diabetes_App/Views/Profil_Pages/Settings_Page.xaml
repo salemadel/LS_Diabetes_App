@@ -47,14 +47,14 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" TextColor="Black" Text="Langue" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                <combobox:SfComboBox  DataSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="0" Grid.Column="1" />
+                <combobox:SfComboBox  DataSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}" SelectedIndex="{Binding Selected_Index}"  ShowBorder="False" FontFamily="{StaticResource NormalFont}" TextSize="15" Grid.Row="0" Grid.Column="1" />
 
 
 
                 <Label Text="Notification" TextColor="Black" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                <sfbutton:SfSwitch x:Name="UnitTypes_Combobox"   Grid.Row="1" Grid.Column="1" VisualType="Cupertino"/>
+                <sfbutton:SfSwitch x:Name="UnitTypes_Combobox"   Grid.Row="1" Grid.Column="1" VisualType="Cupertino" IsOn="{Binding Notification}"/>
                 <Label Grid.Row="2" Grid.Column="0" TextColor="Black" Text="Localisation" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-                <sfbutton:SfSwitch x:Name="Height_Combobox"  Grid.Row="2" Grid.Column="1" VisualType="Cupertino"/>
+                <sfbutton:SfSwitch x:Name="Height_Combobox"  Grid.Row="2" Grid.Column="1" VisualType="Cupertino" IsOn="{Binding Location}"/>
 
                 <ImageButton  Source="ok.png" Padding="25" BackgroundColor="#00B2C8"  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  HeightRequest="70" WidthRequest="70" Command="{Binding SaveCommand}" />
             </Grid>

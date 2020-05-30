@@ -14,8 +14,23 @@ namespace LS_Diabetes_App.Models
 
         [JsonIgnore]
         [Ignore]
-        private string firstname { get; set; }
+        private string identifier { get; set; }
+        [JsonProperty("identifier")]
+        public string Indentifier
+        {
+            get { return firstname; }
+            set
+            {
+                if (firstname != value)
+                    firstname = value;
+                OnPropertyChanged();
+            }
+        }
 
+        [JsonIgnore]
+        [Ignore]
+        private string firstname { get; set; }
+       [JsonProperty("firstname")]
         public string FirstName
         {
             get { return firstname; }
@@ -30,7 +45,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string lastname { get; set; }
-
+        [JsonProperty("lastname")]
         public string LastName
         {
             get { return lastname; }
@@ -45,7 +60,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string email { get; set; }
-
+        [JsonProperty("email")]
         public string Email
         {
             get { return email; }
@@ -60,7 +75,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string sexe { get; set; }
-
+        [JsonProperty("sex")]
         public string Sexe
         {
             get { return sexe; }
@@ -75,7 +90,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private string diabetestype { get; set; }
-
+        [JsonProperty("diabetestype")]
         public string DiabetesType
         {
             get { return diabetestype; }
@@ -87,55 +102,30 @@ namespace LS_Diabetes_App.Models
             }
         }
 
+       
         [JsonIgnore]
         [Ignore]
-        private string glycemiaunit { get; set; } = "mg / dL";
-
-        public string GlycemiaUnit
+        private string avatar { get; set; }
+        [JsonProperty("avatar")]
+        public string Avatar
         {
-            get { return glycemiaunit; }
+            get { return avatar; }
             set
             {
-                if (glycemiaunit != value)
-                    glycemiaunit = value;
+                if (avatar != value)
+                    avatar = value;
                 OnPropertyChanged();
             }
         }
 
-        [JsonIgnore]
-        [Ignore]
-        private string weightunit { get; set; } = "Kg";
+       
 
-        public string WeightUnit
-        {
-            get { return weightunit; }
-            set
-            {
-                if (weightunit != value)
-                    weightunit = value;
-                OnPropertyChanged();
-            }
-        }
-
-        [JsonIgnore]
-        [Ignore]
-        private string heighttunit { get; set; } = "cm";
-
-        public string HeighttUnit
-        {
-            get { return heighttunit; }
-            set
-            {
-                if (heighttunit != value)
-                    heighttunit = value;
-                OnPropertyChanged();
-            }
-        }
+       
 
         [JsonIgnore]
         [Ignore]
         private string glucometer { get; set; }
-
+        [JsonProperty("glucometer")]
         public string Glucometer
         {
             get { return glucometer; }
@@ -146,11 +136,11 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-
+       
         [JsonIgnore]
         [Ignore]
         private int diagnostic_year { get; set; }
-
+        [JsonProperty("diagnosis_year")]
         public int Diagnostic_Year
         {
             get { return diagnostic_year; }
@@ -165,7 +155,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private DateTime birth_date { get; set; }
-
+        [JsonProperty("birthday")]
         public DateTime Birth_Date
         {
             get { return birth_date; }
@@ -180,7 +170,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private double height { get; set; }
-
+        [JsonProperty("height")]
         public double Height
         {
             get { return height; }

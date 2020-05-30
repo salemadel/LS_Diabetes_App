@@ -14,7 +14,7 @@ namespace LS_Diabetes_App.Interfaces
 
         IEnumerable<Drugs_Model> GetDrugsAsync();
 
-        IEnumerable<Insulune_Model> GetInsulineAsync();
+        IEnumerable<Settings_Model> GetSettingsAsync();
 
         IEnumerable<Hb1Ac_Model> GetHb1acAsync();
 
@@ -29,7 +29,7 @@ namespace LS_Diabetes_App.Interfaces
 
         void AddDrugs(Drugs_Model data);
 
-        void AddInsuline(Insulune_Model data);
+        void AddSettings(Settings_Model data);
 
         void AddHbaAc(Hb1Ac_Model data);
 
@@ -43,7 +43,7 @@ namespace LS_Diabetes_App.Interfaces
 
         void UpdateDrugs(Drugs_Model data);
 
-        void UpdateInsuline(Insulune_Model data);
+        void UpdateSettings(Settings_Model data);
 
         void UpdateHb1Ac(Hb1Ac_Model data);
 
@@ -57,7 +57,7 @@ namespace LS_Diabetes_App.Interfaces
 
         void DeleteDrugs(Drugs_Model data);
 
-        void DeleteInsuline(Insulune_Model data);
+        void DeleteSettings(Settings_Model data);
 
         void DeleteHb1Ac(Hb1Ac_Model data);
 

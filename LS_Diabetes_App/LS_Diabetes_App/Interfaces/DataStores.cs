@@ -30,7 +30,7 @@ namespace LS_Diabetes_App.Interfaces
             _connection.Insert(data);
         }
 
-        public void AddInsuline(Insulune_Model data)
+        public void AddSettings(Settings_Model data)
         {
             _connection.Insert(data);
         }
@@ -75,7 +75,7 @@ namespace LS_Diabetes_App.Interfaces
             _connection.Delete(data);
         }
 
-        public void DeleteInsuline(Insulune_Model data)
+        public void DeleteSettings(Settings_Model data)
         {
             _connection.Delete(data);
         }
@@ -115,9 +115,9 @@ namespace LS_Diabetes_App.Interfaces
             return _connection.Table<Hb1Ac_Model>();
         }
 
-        public IEnumerable<Insulune_Model> GetInsulineAsync()
+        public IEnumerable<Settings_Model> GetSettingsAsync()
         {
-            return _connection.Table<Insulune_Model>();
+            return _connection.Table<Settings_Model>();
         }
 
         public IEnumerable<Objectif_Model> GetObjectifAsync()
@@ -160,7 +160,7 @@ namespace LS_Diabetes_App.Interfaces
             _connection.Update(data);
         }
 
-        public void UpdateInsuline(Insulune_Model data)
+        public void UpdateSettings(Settings_Model data)
         {
             _connection.Update(data);
         }

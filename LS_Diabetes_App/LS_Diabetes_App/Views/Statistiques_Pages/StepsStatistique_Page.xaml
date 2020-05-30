@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Custom="clr-namespace:LS_Diabetes_App.Custom_Controls"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             mc:Ignorable="d"
+             x:Class="LS_Diabetes_App.Views.Statistiques_Pages.StepsStatistique_Page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
+                <On Platform="Android" Value="VarelaRound-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="BoldFont">
+                <On Platform="Android" Value="Roboto-Bold.ttf#Open Sans" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="ExtraBoldFont">
+                <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
+            </OnPlatform>
+            <Converters:ZeroToDashConverter x:Key="ZeroConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" BackgroundColor="Default">
+                <Label Text="Statistique Activité Phisique." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+            <Grid Grid.Row="1" VerticalOptions="StartAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <buttons:SfSegmentedControl x:Name="DateSegemnt" SelectionTextColor="White" FontColor="#00B2C8" SelectedIndex="{Binding Selected_Date_Index}" ItemsSource="{Binding DateItems}" FontFamily="{StaticResource NormalFont}" FontSize="13" CornerRadius="10" Margin="10,0,10,0"  HeightRequest="60" Color="Transparent"   VisibleSegmentsCount="4" BorderColor="#00B2C8"   Grid.Row="0"   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"  SelectionChanged="Handle_SelectionChanged">
+                    <buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                        <buttons:SelectionIndicatorSettings 
+    Color="#00B2C8">
+                        </buttons:SelectionIndicatorSettings>
+                    </buttons:SfSegmentedControl.SelectionIndicatorSettings>
+                </buttons:SfSegmentedControl>
+                <Frame Grid.Row="1" Margin="5,5,5,5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="240" />
+                            <RowDefinition Height="160" />
+                            <RowDefinition Height="160" />
+                        </Grid.RowDefinitions>
+                        <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="100" WidthRequest="100" CornerRadius="60" BackgroundColor="{Binding GlucoseColor}">
+                            <StackLayout>
+                                <Label Text="Pas" FontFamily="{StaticResource NormalFont}" FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                                <Label Text="{Binding IMC , Converter={StaticResource ZeroConverter}}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="24" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="{Binding Message}" TextColor="Black" Margin="5,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" />
+                        <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="155" WidthRequest="300" Margin="5,10,5,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout  Grid.Column="0">
+                                    <Label Text="Le Plus haut" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Max.Weight , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Max.Date , StringFormat='{0:HH:mm dd/MM/yyyy}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="Le Plus Bas" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Min.Weight , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Min.Date , StringFormat='{0:HH:mm dd/MM/yyyy}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                </StackLayout>
+                            </Grid>
+                        </StackLayout>
+
+                        <chart:SfChart Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HeightRequest="280" WidthRequest="300" Margin="5,10,5,0">
+
+                            <chart:SfChart.PrimaryAxis>
+
+                                <chart:DateTimeAxis RangePadding="Additional" LabelRotationAngle="0">
+                                    <chart:DateTimeAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11" LabelFormat="dd/MMMM"/>
+                                    </chart:DateTimeAxis.LabelStyle>
+                                </chart:DateTimeAxis>
+                            </chart:SfChart.PrimaryAxis>
+
+                            <chart:SfChart.SecondaryAxis>
+
+                                <chart:NumericalAxis Minimum="0" Maximum="{Binding MaximumChart}" ShowMajorGridLines="False" ShowMinorGridLines="False">
+                                    <chart:NumericalAxis.LabelStyle>
+                                        <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11"/>
+                                    </chart:NumericalAxis.LabelStyle>
+                                </chart:NumericalAxis>
+                            </chart:SfChart.SecondaryAxis>
+                            <chart:SplineSeries ItemsSource="{Binding Weight_Data}" XBindingPath="Date" SplineType="Monotonic" YBindingPath="Weight" Color="{Binding GlucoseColor}" StrokeWidth="2">
+                                <chart:SplineSeries.DataMarker>
+
+                                    <chart:ChartDataMarker ShowLabel="False" 
+						   ShowMarker="True"
+						   
+						   MarkerWidth="10" 
+						   MarkerHeight="10"
+						   MarkerColor="{Binding GlucoseColor}" 
+						   MarkerBorderColor="{Binding GlucoseColor}"
+						   MarkerBorderWidth="0"/>
+
+                                </chart:SplineSeries.DataMarker>
+                            </chart:SplineSeries>
+                        </chart:SfChart>
+                    </Grid>
+                </Frame>
+
+                <Frame Grid.Row="2" VerticalOptions="EndAndExpand"  HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="0" BackgroundColor="White" Margin="0,0,0,10">
+                    <ActivityIndicator  Color="#275db5"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+                </Frame>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

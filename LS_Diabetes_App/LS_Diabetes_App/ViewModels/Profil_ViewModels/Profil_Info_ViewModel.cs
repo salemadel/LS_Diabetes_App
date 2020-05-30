@@ -17,7 +17,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
         private string[] type_list = new string[] { "Type 1", "Type 2", "Autre" };
         private string[] glucometer_list = new string[] { "Check 3", "Autre" };
         public Profil_Model Profil { get; set; }
-        public Profil_Model Old_Profil { get; set; }
+        public Settings_Model Settings { get; set; }
         private IDataStore DataStore { get; set; }
         private INavigation Navigation { get; set; }
 
@@ -62,8 +62,8 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
             Navigation = navigation;
             HeightConverter = new HeightConverter();
             Profil = DataStore.GetProfilAsync().First();
-            Old_Profil = Profil;
-            Profil.Height = HeightConverter.ConvertBack(Profil.Height, Profil.HeighttUnit);
+            Settings = DataStore.GetSettingsAsync().First();
+            Profil.Height = HeightConverter.ConvertBack(Profil.Height, Settings.HeighttUnit);
             Date = Profil.Birth_Date.ToString("dd/MM/yyyy");
             Diagnostic_Date = Profil.Diagnostic_Year.ToString();
             EditProfilCommand = new Command(async () =>

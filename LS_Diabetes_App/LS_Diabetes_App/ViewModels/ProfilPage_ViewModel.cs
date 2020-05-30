@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Essentials;
+using Plugin.SecureStorage;
+using LS_Diabetes_App.Views.Login_Pages;
 
 namespace LS_Diabetes_App.ViewModels
 {
@@ -35,6 +37,7 @@ namespace LS_Diabetes_App.ViewModels
         public Command EditProfilCommand { get; set; }
         public Command ShareCommand { get; set; }
         public Command SettingsCommand { get; set; }
+        public Command DisconnectCommand { get; set; }
         public ProfilPage_ViewModel(INavigation navigation, IDataStore dataStore)
         {
             Navigation = navigation;
@@ -61,6 +64,10 @@ namespace LS_Diabetes_App.ViewModels
             SettingsCommand = new Command(async () =>
             {
                 await ExecuteOnSettingsClicked();
+            });
+            DisconnectCommand = new Command(async () =>
+            {
+                await ExecuteOnDisconnect();
             });
         }
 
@@ -95,6 +102,14 @@ namespace LS_Diabetes_App.ViewModels
                 Text ="Smart Health ID : "+ text,
                 Title = "Partager mon Id",
             });
+        }
+        private async Task ExecuteOnDisconnect()
+        {
+            IsBusy = true;
+            await Task.Delay(3000);
+            CrossSecureStorage.Current.DeleteKey("acces_token");
+            App.Current.MainPage = new NavigationPage(new Login_Page());
+            IsBusy = false;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -61,7 +61,7 @@
                     </buttons:SfSegmentedControl>
                 </StackLayout>
                 
-                <Label Text="{Binding Message}" TextColor="Black" Margin="5,0,0,0" Grid.Row="1" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding Message}" TextColor="Black" Margin="5,0,0,0" Grid.Row="1" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
                
                 <Frame Grid.Row="2" VerticalOptions="StartAndExpand"  HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}" HeightRequest="45" WidthRequest="45" CornerRadius="50" Padding="0" BackgroundColor="White" Margin="0,0,0,10">
                     <ActivityIndicator  Color="#00B2C8"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
@@ -146,13 +146,14 @@
 
                             <chart:SfChart.SecondaryAxis>
 
-                                <chart:NumericalAxis Minimum="0" Maximum="{Binding MaximumChart}" ShowMajorGridLines="True" ShowMinorGridLines="True">
+                                <chart:NumericalAxis x:Name="Numerical" Minimum="0" Maximum="{Binding MaximumChart}" ShowMajorGridLines="True" ShowMinorGridLines="True">
                                     <chart:NumericalAxis.LabelStyle>
                                         <chart:ChartAxisLabelStyle FontFamily="{StaticResource NormalFont}" TextColor="Black" FontSize="11"/>
                                     </chart:NumericalAxis.LabelStyle>
+                                  
                                 </chart:NumericalAxis>
                             </chart:SfChart.SecondaryAxis>
-                            <chart:SplineSeries  ItemsSource="{Binding Glucose_Data}" SplineType="Monotonic" XBindingPath="Date" YBindingPath="Glycemia" Color="{Binding GlucoseColor}" StrokeWidth="2">
+                            <chart:SplineSeries  ItemsSource="{Binding Glucose_Data}" SplineType="Monotonic" XBindingPath="Date" YBindingPath="Glycemia" Color="Black" StrokeWidth="2">
                                 <chart:SplineSeries.DataMarker>
 
                                     <chart:ChartDataMarker ShowLabel="False" 
@@ -160,8 +161,8 @@
 						   
 						   MarkerWidth="10" 
 						   MarkerHeight="10"
-						   MarkerColor="{Binding GlucoseColor}" 
-						   MarkerBorderColor="{Binding GlucoseColor}"
+						   MarkerColor="Black" 
+						   MarkerBorderColor="Black"
 						   MarkerBorderWidth="0"/>
 
                                 </chart:SplineSeries.DataMarker>

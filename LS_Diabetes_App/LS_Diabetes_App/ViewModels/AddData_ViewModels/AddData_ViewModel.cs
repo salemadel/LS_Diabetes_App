@@ -166,12 +166,12 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
         }
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
-        public Profil_Model Profil { get; set; }
+        public Settings_Model Profil { get; set; }
         private PermissionsRequest PermissionsRequest { get; set; }
 
         private INavigation Navigation { get; set; }
 
-        public AddData_ViewModel(string source , INavigation navigation, IDataStore _datastore, Profil_Model profil , object data = null)
+        public AddData_ViewModel(string source , INavigation navigation, IDataStore _datastore, Settings_Model profil , object data = null)
         {
             this.Navigation = navigation;
             this.dataStore = _datastore;

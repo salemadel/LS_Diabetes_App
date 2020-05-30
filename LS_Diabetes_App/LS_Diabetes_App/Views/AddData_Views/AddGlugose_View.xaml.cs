@@ -13,8 +13,8 @@ namespace LS_Diabetes_App.Views.AddData_Views
     public partial class AddGlugose_View : ContentPage
     {
         private bool timepickerfucused { get; set; }
-        private Profil_Model Profil { get; set; }
-        public AddGlugose_View(string source , Profil_Model profil , object data)
+        private Settings_Model Profil { get; set; }
+        public AddGlugose_View(string source , Settings_Model profil , object data)
         {
             InitializeComponent();
             var datastore = new DataStores();
