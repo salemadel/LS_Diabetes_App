@@ -120,6 +120,8 @@
   <ItemGroup>
     <Compile Include="Custom_Controls_Renderer\Custom_DatePicker_Renderer.cs" />
     <Compile Include="Custom_Controls_Renderer\Custom_Editor_Renderer.cs" />
+    <Compile Include="Custom_Controls_Renderer\Custom_Entry_Borderless.cs" />
+    <Compile Include="Custom_Controls_Renderer\Custom_Entry_Numbers.cs" />
     <Compile Include="Custom_Controls_Renderer\Custom_Entry_Renderer.cs" />
     <Compile Include="Custom_Controls_Renderer\Custom_StackLayout_Renderer.cs" />
     <Compile Include="Interfaces\BootReciver.cs" />
@@ -338,6 +340,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\labo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\internet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\linkedin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\flickr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\notification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\instagram.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -63,7 +63,7 @@
                     <Behavior:GlycemieBehavior />
                 </CustomEntry:Custom_Entry.Behaviors>
             </CustomEntry:Custom_Entry>
-            <Label Text="{Binding Resources[Atrial_Fibrillation]}" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+            <Label Text="{Binding Resources[atrial_fibrillation]}" Grid.Row="3" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <syncfusion:SfCheckBox Grid.Row="3" Grid.Column="1" CheckedColor="#00B2C8" IsChecked="{Binding Pression.Atrial_Fibrilation}" />
             <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="4" Grid.Column="0">
                 <syncfusion:SfRadioButton  Text="{Binding Resources[At_Home]}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding At_Home}" FontSize="15" Margin="5,0,0,0" />

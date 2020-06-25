@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters"
-             x:Class="LS_Diabetes_App.Home_Pages.Connections_Page">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:Converters="clr-namespace:LS_Diabetes_App.Converters" xmlns:Behaviors="clr-namespace:LS_Diabetes_App.Behaviors" xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             x:Class="LS_Diabetes_App.Home_Pages.Connections_Page"
+             x:Name="ConnectionsPage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <OnPlatform x:TypeArguments="x:String" x:Key="NormalFont">
@@ -14,6 +15,7 @@
                 <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
             </OnPlatform>
             <Converters:ZeroToDashConverter x:Key="ZeroConverter" />
+            <Converters:BoolReversConverter x:Key="ReversBool"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
@@ -25,7 +27,46 @@
             <StackLayout Grid.Row="0" BackgroundColor="Default">
                 <Label Text="{Binding Resources[Connection_Requests]}" FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
             </StackLayout>
-            <ActivityIndicator Grid.Row="1" Color="#00B2C8"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+            <Grid Grid.Row="1">
+                <ListView ItemsSource="{Binding Folowers}"  HasUnevenRows="True" SeparatorColor="LightGray" Margin="5,0,0,0" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Key}" CachingStrategy ="RecycleElement">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="50">
+                                <Label Text="{Binding Key}" Margin="5,0,0,0"  FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0" Grid.Row="0"  Grid.RowSpan="3" BackgroundColor="#00B2C8" />
+                                    <Label  Grid.Row="0" TextColor="Black"  Grid.Column="1"  Text="{Binding doctor.FullName}"  FontFamily="{StaticResource BoldFont}" FontSize="18" Margin="5,5,0,0"  VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+                                    <Label  Grid.Row="1" TextColor="Black"   Grid.Column="1"  Text="{Binding doctor.speciality}"  FontFamily="{StaticResource NormalFont}" FontSize="14" Margin="5,0,0,0"  VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+                                    <Grid  Grid.Row="2" Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <sfButtons:SfButton Grid.Column="0" FontSize="13" ImageSource="quit.png" ShowIcon="True" ImageAlignment="Left" Text="{Binding Resources[Deny]}" BackgroundColor="#e74c3c" HeightRequest="30" WidthRequest="100" HorizontalTextAlignment="Center" ImageWidth="20" CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,5,0,3" Command="{Binding Source={x:Reference ConnectionsPage}, Path=BindingContext.DenyCommand}" CommandParameter="{Binding .}"/>
+                                        <sfButtons:SfButton Grid.Column="1" FontSize="13"  IsVisible="{Binding accepted , Converter={StaticResource ReversBool}}"  ImageSource="ok.png" ShowIcon="True" ImageAlignment="Left" Text="{Binding Resources[Accept]}" BackgroundColor="#00B2C8" HeightRequest="30" WidthRequest="100" HorizontalTextAlignment="Center" ImageWidth="20" CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="0,5,0,3" Command="{Binding Source={x:Reference ConnectionsPage}, Path=BindingContext.AcceptCommand}" CommandParameter="{Binding .}" />
+                                    </Grid>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ActivityIndicator Color="#56CB94"  VerticalOptions="CenterAndExpand"  HorizontalOptions="CenterAndExpand" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HeightRequest="40" WidthRequest="40" />
+            </Grid>
         </Grid>
     </ScrollView>
 </ContentPage>

@@ -10,12 +10,12 @@ namespace LS_Diabetes_App.Views.Login_Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Profil_Base_Page : ContentPage
     {
-        public Profil_Base_Page(string password, string facebook_id = null)
+        public Profil_Base_Page(string source , string password, string facebook_id = null)
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
             var datastore = new DataStores();
-            BindingContext = new SignUp_ViewModel(Navigation, datastore, "ProfilBase", password, facebook_id);
+            BindingContext = new SignUp_ViewModel(Navigation, datastore, source, password, facebook_id);
         }
 
         private void Glucometer_Combobox_SelectionChanged(object sender, Syncfusion.XForms.ComboBox.SelectionChangedEventArgs e)

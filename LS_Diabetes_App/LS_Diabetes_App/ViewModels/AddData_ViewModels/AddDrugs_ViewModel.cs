@@ -1,15 +1,19 @@
 ﻿using LS_Diabetes_App.Interfaces;
+using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
 using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.Views;
 using LS_Diabetes_App.Views.AddData_Views;
+using Newtonsoft.Json;
 using Plugin.Media;
 using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -64,14 +68,24 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 OnPropertyChanged();
             }
         }
-
+        private int index { get; set; }
+        public int Index
+        {
+            get { return index; }
+            set
+            {
+                if (index != value)
+                    index = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsVisible { get; set; }
 
         public Command SaveCommand { get; set; }
         public Command DeleteCommand { get; set; }
         public Command EditCommand { get; set; }
         public Command TakePictureCommand { get; set; }
-
+        public List<string> DrugsList { get; set; }
         public AddDrugs_ViewModel(INavigation navigation, IDataStore dataStore, Drugs_Model drug = null)
         {
             DataStore = dataStore;
@@ -94,7 +108,14 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 Drugs = new Drugs_Model();
                 Times_List = new ObservableCollection<string>();
             }
-
+            string JsonFile = "DrugsJson.json";
+            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(AddDrugs_ViewModel)).Assembly;
+            Stream stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{JsonFile}");
+            using (var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                DrugsList = JsonConvert.DeserializeObject<List<DrugsJsonModel>>(json).Select(i =>i.Name).ToList();
+            }
             PermissionsRequest = new PermissionsRequest();
             MessagingCenter.Subscribe<AddDrugs_View, string>(this, "AddDrugs", (sender, args) =>
            {
@@ -131,11 +152,18 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 DependencyService.Get<IMessage>().ShortAlert("Invalid Duration !");
                 return;
             }
-            if (!string.IsNullOrEmpty(Drugs.Drug) & !string.IsNullOrEmpty(Drugs.Taking_Time) & Times_List.Count > 0 & Drugs.Dose > 0)
+            if (!string.IsNullOrEmpty(Drugs.Drug) & index >=0 & Times_List.Count > 0 & Drugs.Dose > 0)
             {
                 if (await DependencyService.Get<IDialog>().AlertAsync("", "Voulez Vous Enregistrer ?", "Oui", "Non"))
                 {
                     Drugs.Times_List = Times_List.ToList();
+                    switch(Index)
+                    {
+                        case 0:Drugs.Taking_Time = "unimportant"; break;
+                        case 1: Drugs.Taking_Time = "without food"; break;
+                        case 2: Drugs.Taking_Time = "preparandial"; break;
+                        case 3: Drugs.Taking_Time = "postparandial"; break;
+                    }
                     Drugs.PicturePathe = PicturePath;
                     DataStore.AddDrugs(Drugs);
                     MessagingCenter.Send(this, "DataUpdated");

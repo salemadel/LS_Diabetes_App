@@ -27,6 +27,21 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
+        [JsonIgnore]
+        [Ignore]
+        private string api_id { get; set; }
+
+        [JsonProperty("_id")]
+        public string Api_Id
+        {
+            get { return api_id; }
+            set
+            {
+                if (api_id != value)
+                    api_id = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonIgnore]
         [Ignore]
@@ -40,6 +55,38 @@ namespace LS_Diabetes_App.Models
             {
                 if (firstname != value)
                     firstname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        private string wilaya { get; set; }
+
+        [JsonProperty("wilaya")]
+        public string Wilaya
+        {
+            get { return wilaya; }
+            set
+            {
+                if (wilaya != value)
+                    wilaya = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        private string city { get; set; }
+
+        [JsonProperty("city")]
+        public string City
+        {
+            get { return city; }
+            set
+            {
+                if (city != value)
+                    city = value;
                 OnPropertyChanged();
             }
         }
@@ -143,8 +190,7 @@ namespace LS_Diabetes_App.Models
         [JsonIgnore]
         [Ignore]
         private int diagnostic_year { get; set; }
-
-        [JsonProperty("diagnosis_date")]
+        [JsonIgnore]
         public int Diagnostic_Year
         {
             get { return diagnostic_year; }
@@ -155,7 +201,17 @@ namespace LS_Diabetes_App.Models
                 OnPropertyChanged();
             }
         }
-
+        [Ignore]
+        [JsonProperty("diagnosis_date")]
+        public string diagnosis_date
+        {
+            set
+            {
+                DateTime x;
+                int y;
+                Diagnostic_Year = (DateTime.TryParse(value , out x)) ? x.Year : (int.TryParse(value , out y)) ? y : 0;
+            }
+        }
         [JsonIgnore]
         [Ignore]
         private DateTime birth_date { get; set; }

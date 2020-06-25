@@ -12,11 +12,5 @@ namespace LS_Diabetes_App.Home_Pages
             InitializeComponent();
             BindingContext = new Connections_ViewModel();
         }
-
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            await (BindingContext as Connections_ViewModel).ExecuteOnGetConnection();
-        }
     }
 }

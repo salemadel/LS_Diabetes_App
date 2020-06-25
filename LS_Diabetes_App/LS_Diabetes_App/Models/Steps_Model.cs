@@ -29,9 +29,9 @@ namespace LS_Diabetes_App.Models
 
         [JsonIgnore]
         [Ignore]
-        private double? steps { get; set; } = 0;
+        private double steps { get; set; } = 0;
 
-        public double? Steps
+        public double Steps
         {
             get { return steps; }
             set

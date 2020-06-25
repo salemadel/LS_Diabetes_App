@@ -44,11 +44,11 @@
             <TimePicker x:Name="TimePicker" Focused="TimePicker_Focused" PropertyChanged="TimePicker_PropertyChanged" IsVisible="False" Time="{Binding Time}" />
             <DatePicker x:Name="DatePicker" IsVisible="False" Date="{Binding Date}" />
             <Label Text="{Binding Resources[Glycemia]}" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry x:Name="glucose_Entry" Grid.Row="1" Keyboard="Numeric" IsEnabled="{Binding IsVisible}" Grid.Column="1" Text="{Binding Glucose.Glycemia ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="{Binding Profil.GlycemiaUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" TextChanged="glucose_Entry_TextChanged">
-                <CustomEntry:Custom_Entry.Behaviors>
+            <CustomEntry:Custom_Entry_Numbers x:Name="glucose_Entry" Grid.Row="1"  IsEnabled="{Binding IsVisible}" Grid.Column="1" Text="{Binding Glucose.Glycemia ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="{Binding Profil.GlycemiaUnit}" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" TextChanged="glucose_Entry_TextChanged">
+                <CustomEntry:Custom_Entry_Numbers.Behaviors>
                     <Behavior:GlycemieBehavior />
-                </CustomEntry:Custom_Entry.Behaviors>
-            </CustomEntry:Custom_Entry>
+                </CustomEntry:Custom_Entry_Numbers.Behaviors>
+            </CustomEntry:Custom_Entry_Numbers>
             <syncfusion:SfRadioGroup Orientation="Horizontal" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
                 <syncfusion:SfRadioButton  Text="{Binding Resources[Empty]}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" FontSize="15" IsChecked="{Binding No_Eat}" Margin="5,0,0,0" />
                 <syncfusion:SfRadioButton  Text="{Binding Resources[Before_Meal]}" CheckedColor="#00B2C8" FontFamily="{StaticResource NormalFont}" IsChecked="{Binding Befor_Eat}" FontSize="15" Margin="5,0,0,0" />

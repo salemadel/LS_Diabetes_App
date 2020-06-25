@@ -177,7 +177,21 @@ namespace LS_Diabetes_App.Models.Data_Models
                 return Date.ToString("yyyy/MM/dd");
             }
         }
+        [JsonIgnore]
+        [Ignore]
+        private bool uploaded { get; set; } = false;
 
+        [JsonIgnore]
+        public bool Uploaded
+        {
+            get { return uploaded; }
+            set
+            {
+                if (uploaded != value)
+                    uploaded = value;
+                OnPropertyChanged();
+            }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string name = "")

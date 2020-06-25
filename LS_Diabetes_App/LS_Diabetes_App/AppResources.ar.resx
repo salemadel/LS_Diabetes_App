@@ -123,6 +123,12 @@
   <data name="About_C" xml:space="preserve">
     <value>معلومات حول التطبيق</value>
   </data>
+  <data name="Accept" xml:space="preserve">
+    <value>قبول</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>الطلبات المقبولة</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>أضافة</value>
   </data>
@@ -185,6 +191,9 @@
   </data>
   <data name="DeleteMessage" xml:space="preserve">
     <value>هل تريد الحذف ؟</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>رفض</value>
   </data>
   <data name="DiabetesType_Label" xml:space="preserve">
     <value>نوع مرض السكري</value>
@@ -291,6 +300,9 @@
   <data name="LastName_PlaceHolder" xml:space="preserve">
     <value>اللقب</value>
   </data>
+  <data name="LastSevenDays" xml:space="preserve">
+    <value>سكر الدم في آخر 7 أيام</value>
+  </data>
   <data name="Last_F" xml:space="preserve">
     <value>آخر</value>
   </data>
@@ -332,6 +344,12 @@
   </data>
   <data name="Notifications" xml:space="preserve">
     <value>الإشعارات</value>
+  </data>
+  <data name="Not_Accepted" xml:space="preserve">
+    <value>طلبات قيد الإنتظار</value>
+  </data>
+  <data name="Number_Of_Times" xml:space="preserve">
+    <value>عدد المرات في اليوم</value>
   </data>
   <data name="Password_PlaceHolder" xml:space="preserve">
     <value>كلمة السر</value>

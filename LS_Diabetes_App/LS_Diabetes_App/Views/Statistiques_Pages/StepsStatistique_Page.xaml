@@ -29,7 +29,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackLayout Grid.Row="0" BackgroundColor="Default">
-                <Label Text="Statistique Activité Phisique." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+                <Label Text="{Binding Resources[Statistics]}" FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
             </StackLayout>
             <Grid Grid.Row="1" VerticalOptions="StartAndExpand">
                 <Grid.RowDefinitions>
@@ -53,8 +53,9 @@
                         </Grid.RowDefinitions>
                         <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"  VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="100" WidthRequest="100" CornerRadius="60" BackgroundColor="{Binding GlucoseColor}">
                             <StackLayout>
-                                <Label Text="Pas" FontFamily="{StaticResource NormalFont}" FontSize="16" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
-                                <Label Text="{Binding IMC , Converter={StaticResource ZeroConverter}}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="24" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                                <Label Text="{Binding Resources[Average]}" FontFamily="{StaticResource NormalFont}" FontSize="14" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                                <Label Text="{Binding Average , Converter={StaticResource ZeroConverter} , FallbackValue='--'}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="24" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
+                                <Label Text="{Binding Resources[Step_Label]}" TextColor="White" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,5,0,0" />
                             </StackLayout>
                         </Frame>
                         <Label Text="{Binding Message}" TextColor="Black" Margin="5,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" FontFamily="{StaticResource NormalFont}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" />
@@ -65,13 +66,13 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackLayout  Grid.Column="0">
-                                    <Label Text="Le Plus haut" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Max.Weight , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Highest_M]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Max.Steps , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Max.Date , StringFormat='{0:HH:mm dd/MM/yyyy}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                                 <StackLayout Grid.Column="1">
-                                    <Label Text="Le Plus Bas" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                                    <Label Text="{Binding Min.Weight , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Resources[Lowest_M]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                                    <Label Text="{Binding Min.Steps , Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                     <Label Text="{Binding Min.Date , StringFormat='{0:HH:mm dd/MM/yyyy}', FallbackValue='--'}"  FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                                 </StackLayout>
                             </Grid>
@@ -96,7 +97,7 @@
                                     </chart:NumericalAxis.LabelStyle>
                                 </chart:NumericalAxis>
                             </chart:SfChart.SecondaryAxis>
-                            <chart:SplineSeries ItemsSource="{Binding Weight_Data}" XBindingPath="Date" SplineType="Monotonic" YBindingPath="Weight" Color="{Binding GlucoseColor}" StrokeWidth="2">
+                            <chart:SplineSeries ItemsSource="{Binding Steps_Data}" XBindingPath="Date" SplineType="Monotonic" YBindingPath="Steps" Color="{Binding GlucoseColor}" StrokeWidth="2">
                                 <chart:SplineSeries.DataMarker>
 
                                     <chart:ChartDataMarker ShowLabel="False"

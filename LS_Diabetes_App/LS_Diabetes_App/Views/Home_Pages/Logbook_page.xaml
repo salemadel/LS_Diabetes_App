@@ -31,8 +31,9 @@
                 <RowDefinition Height="120" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackLayout Grid.Row="0" BackgroundColor="Default">
+            <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="Default">
                 <Label Text="LogBook." FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
+                <ImageButton Source="sync.png" Padding="10" BackgroundColor="#00B2C8"    CornerRadius="20" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Margin="0,0,10,0" HeightRequest="40" WidthRequest="40"  Command="{Binding SyncCommand}" />
             </StackLayout>
             <Grid Grid.Row="1">
                 <ListView ItemsSource="{Binding DataGrouped}" SelectedItem="{Binding Selected_item}" HasUnevenRows="True" SeparatorColor="LightGray" Margin="5,0,0,0" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Key}" CachingStrategy ="RecycleElement">

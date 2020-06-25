@@ -41,11 +41,11 @@
             <TimePicker x:Name="TimePicker" Focused="TimePicker_Focused" PropertyChanged="TimePicker_PropertyChanged" IsVisible="False" Time="{Binding Hb1Ac.Time}" />
             <DatePicker x:Name="DatePicker" IsVisible="False" Date="{Binding Hb1Ac.Date}" />
             <Label Text="Hb1ac" Grid.Row="1" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
-            <CustomEntry:Custom_Entry Grid.Row="1" Keyboard="Numeric" Grid.Column="1" Text="{Binding Hb1Ac.Hb1Ac ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="Ex : 6,3%" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
-                <CustomEntry:Custom_Entry.Behaviors>
+            <CustomEntry:Custom_Entry_Numbers Grid.Row="1"  Grid.Column="1" Text="{Binding Hb1Ac.Hb1Ac ,Converter={StaticResource StringToDouble} , Mode=OneWayToSource}" Placeholder="Ex : 6,3%" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200">
+                <CustomEntry:Custom_Entry_Numbers.Behaviors>
                     <Behavior:GlycemieBehavior />
-                </CustomEntry:Custom_Entry.Behaviors>
-            </CustomEntry:Custom_Entry>
+                </CustomEntry:Custom_Entry_Numbers.Behaviors>
+            </CustomEntry:Custom_Entry_Numbers>
             <Label Text="{Binding Resources[Laboratory]}" Grid.Row="2" Grid.Column="0" FontSize="17" FontFamily="{StaticResource NormalFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
             <CustomEntry:Custom_Entry Grid.Row="2"  Grid.Column="1" Text="{Binding Hb1Ac.Laboratory}" Placeholder="Laboratoire" FontFamily="{StaticResource NormalFont}" FontSize="15" Margin="5,0,0,0" PlaceholderColor="LightGray" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
             <ImageButton Source="camera.png" Padding="15" BackgroundColor="#00B2C8"  Grid.Row="3" Grid.Column="0" CornerRadius="50" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"  HeightRequest="50" WidthRequest="50" Command="{Binding TakePictureCommand}" />

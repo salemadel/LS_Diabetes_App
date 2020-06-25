@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 namespace LS_Diabetes_App.Droid.Interfaces
 {
     [Service(Enabled = true)]
-    [IntentFilter(new string[] { "com.Companyname.StepCounter" })]
+    [IntentFilter(new string[] { "com.shinnovative.smarthealth.StepCounter" })]
     public class StepCounter : Service, ISensorEventListener, INotifyPropertyChanged
     {
         private int StepsCounter = 0;
@@ -56,7 +56,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
             if (intent != null)
                 warning = intent.GetBooleanExtra("warning", false);
             InitSensorService();
-
+            
             return StartCommandResult.Sticky;
         }
 
@@ -83,7 +83,8 @@ namespace LS_Diabetes_App.Droid.Interfaces
             {
                 case SensorType.StepDetector:
                     stepDetector++;
-                    StepCountChanged(this, new StepCountChangedEventArgs { Value = stepDetector });
+                    Steps = stepDetector;
+                    SaveStepsService.SaveSteps(Steps);
                     break;
 
                 case SensorType.StepCounter:
@@ -93,9 +94,9 @@ namespace LS_Diabetes_App.Droid.Interfaces
                         counterSteps = (int)e.Values[0];
                     }
                     Steps = (int)e.Values[0] - counterSteps;
-                    //MessagingCenter.Send<object , int>(SaveStepsService, "Steps" , Steps);
+                   
                     SaveStepsService.SaveSteps(Steps);
-                    //StepCountChanged(this, new StepCountChangedEventArgs { Value = Steps });
+                  
 
                     break;
             }
@@ -105,6 +106,8 @@ namespace LS_Diabetes_App.Droid.Interfaces
         {
             sManager.UnregisterListener(this);
         }
+      
+       
 
         public bool IsAvailable()
         {
@@ -113,7 +116,7 @@ namespace LS_Diabetes_App.Droid.Interfaces
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public event StepCountChangedEventHandler StepCountChanged;
+     
 
         private void OnPropertyChanged([CallerMemberName] string name = "")
         {

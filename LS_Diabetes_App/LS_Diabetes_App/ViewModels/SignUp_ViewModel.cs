@@ -18,7 +18,7 @@ namespace LS_Diabetes_App.ViewModels
         private string[] weight_unit = new string[] { "Kg", "lbs" };
         private string[] height_unit = new string[] { "cm", "pied" };
         private string[] unit_list = new string[] { "mg / dL", "mmol / L" };
-        private string[] glucometer_list = new string[] { "Check 3", "Autre" };
+        private string[] glucometer_list = new string[] { "Check 3"," Bionime GM50" ,"Diagnocheck" , "BG Star" , "On Call Extra" , "Sabeel Extra" , "Contour" , "Freestyle" , "Accu-Check" , "Novacheck Voice" , "One Touch Verio" , "Gluneo" , "Humasens" , "VivaCheck Ino" , "One Touch Ultra" , "Glucosure Autocade" , "Zed Max" ,"Vital Check",  "Autre" };
         private string[] insuline_list = new string[] { "Autre" };
 
         public List<string> Type_List
@@ -92,16 +92,16 @@ namespace LS_Diabetes_App.ViewModels
         private string Facebook_Id { get; set; }
         public Command SignUpCommand { get; set; }
         public Command ProfilBaseCommand { get; set; }
-
+        private string Source { get; set; }
         public SignUp_ViewModel(INavigation navigation, IDataStore dataStore, string source, string password, string facebook_id = null)
         {
             DataStore = dataStore;
             Navigation = navigation;
             Facebook_Id = facebook_id;
-            DataStore.DeleteAllProfiles();
             Profil = new Profil_Model();
             Settings = new Settings_Model();
-            if (source == "ProfilBase")
+            Source = source;
+            if (source == "ProfilBase" | source == "FacebookLogin")
             {
                 if (DataStore.GetProfilAsync().Count() > 0)
                 {
@@ -144,11 +144,12 @@ namespace LS_Diabetes_App.ViewModels
                 var result = await api.EmailCheck(Profil.Email);
                 if (result.Item1)
                 {
-                    DataStore.DeleteProfil(Profil);
+                    
                     Profil.Birth_Date = System.Convert.ToDateTime(Date);
+                    DataStore.DeleteAllProfiles();
                     DataStore.AddProfil(Profil);
 
-                    await Navigation.PushAsync(new Profil_Base_Page(Password), true);
+                    await Navigation.PushAsync(new Profil_Base_Page("ProfilBase", Password), true);
                 }
                 else
                 {
@@ -183,7 +184,16 @@ namespace LS_Diabetes_App.ViewModels
                 Profil.Height = heightconverter.Convert(Profil.Height, Settings.HeighttUnit);
                 Profil.Diagnostic_Year = x;
                 var restapi = new RestApi();
-                var result = await restapi.Resigter(Profil, VerifiedPassword, Facebook_Id);
+                (bool, string) result = (false , "");
+                if(Source == "ProfilBase")
+                {
+                    result = await restapi.Resigter(Profil, VerifiedPassword, Facebook_Id);
+                }
+                if(Source =="FacebookLogin")
+                {
+                    result = await restapi.EditProfil(Profil, Facebook_Id);
+                }
+                 
                 if (result.Item1)
                 {
                     DataStore.UpdateSettings(Settings);

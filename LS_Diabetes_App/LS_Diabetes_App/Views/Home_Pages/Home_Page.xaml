@@ -71,6 +71,9 @@
                     </StackLayout>
                     <Label HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand"  Text="{Binding Resources[Today]}" FontSize="13"  FontFamily="{StaticResource NormalFont}" />
                 </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding StepsStatistiqueCommand}"/>
+                </Frame.GestureRecognizers>
             </Frame>
             <Frame Grid.Row="2" Grid.Column="1" BorderColor="#D72753" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="170" WidthRequest="150" Margin="5,10,10,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
                 <StackLayout>
@@ -151,7 +154,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="{Binding Resources[Today]}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                    <Label Text="{Binding Resources[LastSevenDays]}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TextColor="Black" FontFamily="{StaticResource BoldFont}" FontSize="16" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                     <StackLayout Grid.Row="1" Grid.Column="0">
                         <Label Text="{Binding Resources[Good]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                         <Label Text="{Binding Nbr_Normal ,Converter={StaticResource ZeroConverter}}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
@@ -192,18 +195,18 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Text="{Binding Resources[Next_medication]}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                    <Label Text="{Binding Resources[Next_medication]}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="18" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                     <StackLayout Grid.Row="1" Grid.Column="0">
-                        <Label Text="{Binding Resources[Drug]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                        <Label Text="{Binding Drug.Drug, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Resources[Drug]}" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Drug.Drug, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="18" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                     </StackLayout>
                     <StackLayout Grid.Row="1" Grid.Column="1">
-                        <Label Text="{Binding Resources[Dosage]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                        <Label Text="{Binding Drug.Dose ,Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Resources[Dosage]}" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Drug.Dose ,Converter={StaticResource ZeroConverter}, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="18" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                     </StackLayout>
                     <StackLayout Grid.Row="1" Grid.Column="2">
-                        <Label Text="{Binding Resources[Remaining_time]}" FontFamily="{StaticResource NormalFont}" FontSize="14" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
-                        <Label Text="{Binding RestDate, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="20" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding Resources[Remaining_time]}" FontFamily="{StaticResource NormalFont}" FontSize="13" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
+                        <Label Text="{Binding RestDate, FallbackValue='--'}" TextColor="Black" FontFamily="{StaticResource NormalFont}" FontSize="18" HorizontalOptions="CenterAndExpand" Margin="0,10,0,0" />
                     </StackLayout>
                 </Grid>
                 <Frame.GestureRecognizers>

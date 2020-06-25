@@ -79,6 +79,24 @@ namespace LS_Diabetes_App {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Accept.
+        /// </summary>
+        internal static string Accept {
+            get {
+                return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Accepted requests.
+        /// </summary>
+        internal static string Accepted {
+            get {
+                return ResourceManager.GetString("Accepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Add.
         /// </summary>
         internal static string Add {
@@ -264,6 +282,15 @@ namespace LS_Diabetes_App {
         internal static string DeleteMessage {
             get {
                 return ResourceManager.GetString("DeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Deny.
+        /// </summary>
+        internal static string Deny {
+            get {
+                return ResourceManager.GetString("Deny", resourceCulture);
             }
         }
         
@@ -592,6 +619,15 @@ namespace LS_Diabetes_App {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Glycemia in last 7 days.
+        /// </summary>
+        internal static string LastSevenDays {
+            get {
+                return ResourceManager.GetString("LastSevenDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Location.
         /// </summary>
         internal static string Location {
@@ -691,6 +727,15 @@ namespace LS_Diabetes_App {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pending requests.
+        /// </summary>
+        internal static string Not_Accepted {
+            get {
+                return ResourceManager.GetString("Not_Accepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Note.
         /// </summary>
         internal static string Note_Label {
@@ -705,6 +750,15 @@ namespace LS_Diabetes_App {
         internal static string Notifications {
             get {
                 return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Number of times per day.
+        /// </summary>
+        internal static string Number_Of_Times {
+            get {
+                return ResourceManager.GetString("Number_Of_Times", resourceCulture);
             }
         }
         
@@ -930,6 +984,15 @@ namespace LS_Diabetes_App {
         internal static string SuccesMessage {
             get {
                 return ResourceManager.GetString("SuccesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à .
+        /// </summary>
+        internal static string t {
+            get {
+                return ResourceManager.GetString("t", resourceCulture);
             }
         }
         

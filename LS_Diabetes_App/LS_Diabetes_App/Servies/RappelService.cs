@@ -34,7 +34,7 @@ namespace LS_Diabetes_App.Servies
                                     var time = Convert.ToDateTime(obj).ToString("HH:mm");
                                     var dateTime = date + " " + time;
                                     var selectedDateTime = DateTime.ParseExact(dateTime, "MM-dd-yyyy HH:mm", CultureInfo.InvariantCulture);
-                                    var MessageText = drug.Drug + " " + drug.Dose + " dose " + drug.Taking_Time;
+                                    var MessageText = drug.Drug + " " + drug.Dose + " dose " + drug.Taking_Time + " à "+time;
                                     DependencyService.Get<ILocalNotificationService>().Cancel(0);
                                     DependencyService.Get<ILocalNotificationService>().LocalNotification("Rappel Médicament", MessageText, drug.Id, selectedDateTime, drug.Duration);
                                 }
@@ -54,7 +54,7 @@ namespace LS_Diabetes_App.Servies
                                 var time = Convert.ToDateTime(obj).ToString("HH:mm");
                                 var dateTime = date + " " + time;
                                 var selectedDateTime = DateTime.ParseExact(dateTime, "MM-dd-yyyy HH:mm", CultureInfo.InvariantCulture);
-                                var MessageText = drug.Drug + " " + drug.Dose + " dose " + drug.Taking_Time;
+                                var MessageText = drug.Drug + " " + drug.Dose + " dose " + drug.Taking_Time + " à " + time;
                                 DependencyService.Get<ILocalNotificationService>().Cancel(0);
                                 DependencyService.Get<ILocalNotificationService>().LocalNotification("Rappel Médicament", MessageText, drug.Id, selectedDateTime, drug.Duration);
                             }

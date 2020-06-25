@@ -30,7 +30,7 @@ namespace LS_Diabetes_App.Converters
             {
                 string _value = (string)value;
                 double x;
-                return double.TryParse(_value, out x) ? x : 0;
+                return double.TryParse(_value.Replace(',','.') , NumberStyles.AllowDecimalPoint , CultureInfo.InvariantCulture, out x) ? x : 0;
             }
             else
             {

@@ -123,6 +123,12 @@
   <data name="About_C" xml:space="preserve">
     <value>About application</value>
   </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>Accepted requests</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
@@ -185,6 +191,9 @@
   </data>
   <data name="DeleteMessage" xml:space="preserve">
     <value>Would you like to delete ?</value>
+  </data>
+  <data name="Deny" xml:space="preserve">
+    <value>Deny</value>
   </data>
   <data name="DiabetesType_Label" xml:space="preserve">
     <value>Diabetes type</value>
@@ -291,6 +300,9 @@
   <data name="LastName_PlaceHolder" xml:space="preserve">
     <value>Last name</value>
   </data>
+  <data name="LastSevenDays" xml:space="preserve">
+    <value>Glycemia in last 7 days</value>
+  </data>
   <data name="Last_F" xml:space="preserve">
     <value>Last</value>
   </data>
@@ -332,6 +344,12 @@
   </data>
   <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
+  </data>
+  <data name="Not_Accepted" xml:space="preserve">
+    <value>Pending requests</value>
+  </data>
+  <data name="Number_Of_Times" xml:space="preserve">
+    <value>Number of times per day</value>
   </data>
   <data name="Password_PlaceHolder" xml:space="preserve">
     <value>Password</value>
@@ -407,6 +425,9 @@
   </data>
   <data name="SuccesMessage" xml:space="preserve">
     <value>Operation successfully completed</value>
+  </data>
+  <data name="t" xml:space="preserve">
+    <value />
   </data>
   <data name="Taking_Medication" xml:space="preserve">
     <value>Taking medication</value>

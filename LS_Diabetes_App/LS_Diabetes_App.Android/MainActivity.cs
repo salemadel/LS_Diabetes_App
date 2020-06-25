@@ -7,6 +7,7 @@ using Java.Security;
 using LS_Diabetes_App.Droid.Interfaces;
 using Plugin.CurrentActivity;
 using Plugin.FacebookClient;
+using Plugin.LocalNotifications;
 using Plugin.Media;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -14,7 +15,7 @@ using Xamarin.Facebook;
 
 namespace LS_Diabetes_App.Droid
 {
-    [Activity(Label = "Smart Health", Icon = "@drawable/SmartHealthIcon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Smart Health", Icon = "@drawable/SmartHealthIcon", Theme = "@style/MainTheme", MainLauncher = false, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation , LaunchMode = LaunchMode.SingleTop)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         public bool IsBound { get; set; }
@@ -33,6 +34,7 @@ namespace LS_Diabetes_App.Droid
             }
         }
 
+      
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjQzNzAyQDMxMzgyZTMxMmUzMGlDWTJIVjZqZ2swTU1GOFdDaVhrQkhYMktvZjV0TjRtUldJWFN4akpKRlU9");
@@ -40,7 +42,7 @@ namespace LS_Diabetes_App.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            FacebookSdk.SdkInitialize(this);
+            FacebookSdk.FullyInitialize();
 
             FacebookClientManager.Initialize(this);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
@@ -50,14 +52,16 @@ namespace LS_Diabetes_App.Droid
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             await CrossMedia.Current.Initialize();
 
+            
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 178, 200));
+            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.SmartHealthIcon;
+            StartStepService();
             LoadApplication(new App(new OAuth2Service()));
 #if DEBUG
             PrintHashKey(this);
 #endif
-            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
-            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-            Window.SetStatusBarColor(Android.Graphics.Color.Rgb(0, 178, 200));
-            StartStepService();
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent intent)
@@ -89,6 +93,7 @@ namespace LS_Diabetes_App.Droid
             var serviceIntent = new Intent(this, typeof(StepCounter));
             serviceConnection = new StepServiceConnection(this);
             BindService(serviceIntent, serviceConnection, Bind.AutoCreate);
+            StartStepService();
         }
 
         protected override void OnStop()
@@ -110,7 +115,7 @@ namespace LS_Diabetes_App.Droid
                 IsBound = false;
             }
         }
-
+        
         private void StartStepService()
         {
             try

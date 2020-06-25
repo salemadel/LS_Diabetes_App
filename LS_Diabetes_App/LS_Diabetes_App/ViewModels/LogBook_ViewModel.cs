@@ -1,4 +1,5 @@
-﻿using LS_Diabetes_App.Converters;
+﻿using LS_Diabetes_App.Api;
+using LS_Diabetes_App.Converters;
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Models.Data_Models;
@@ -6,6 +7,7 @@ using LS_Diabetes_App.Servies;
 using LS_Diabetes_App.ViewModels.AddData_ViewModels;
 using LS_Diabetes_App.ViewModels.Profil_ViewModels;
 using LS_Diabetes_App.Views;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -53,6 +55,10 @@ namespace LS_Diabetes_App.ViewModels
             PictureTappedCommand = new Command(async () =>
             {
                 await ExecuteOnPictureTapped();
+            });
+            SyncCommand = new Command(async () =>
+            {
+                await ExecuteOnSync();
             });
             UpdateData();
             MessagingCenter.Subscribe<AddData_ViewModel>(this, "DataUpdated", (sender) =>
@@ -120,7 +126,7 @@ namespace LS_Diabetes_App.ViewModels
         public Command ItemTappedCommand { get; set; }
         public Command DeleteCommand { get; set; }
         public Command PictureTappedCommand { get; set; }
-
+        public Command SyncCommand { get; set; }
         private void UpdateData()
         {
             List<LogBook_Model> _data = new List<LogBook_Model>();
@@ -260,6 +266,89 @@ namespace LS_Diabetes_App.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(Selected_item.PicturePath))
                 await Navigation.PushModalAsync(new Picture_View(Selected_item.PicturePath), true);
+        }
+
+        private async Task ExecuteOnSync()
+        {
+            IsBusy = true;
+            var RestApi = new RestApi();
+            var Result = await RestApi.GetActivity();
+            if(Result.Item1)
+            {
+                foreach(var item in DataStore.GetGlucosAsync().Where(i => i.Uploaded == true))
+                {
+                    DataStore.DeleteGlucose(item);
+                }
+                foreach (var item in DataStore.GetHb1acAsync().Where(i => i.Uploaded == true))
+                {
+                    DataStore.DeleteHb1Ac(item);
+                }
+                foreach (var item in DataStore.GetPressionAsync().Where(i => i.Uploaded == true))
+                {
+                    DataStore.DeletePression(item);
+                }
+                foreach (var item in DataStore.GetWeightAsync().Where(i => i.Uploaded == true))
+                {
+                    DataStore.DeleteWeight(item);
+                }
+                foreach(var item in JsonConvert.DeserializeObject<List<UploadData_Model>>(Result.Item2))
+                {
+                    if(item.type == "glucose")
+                    {
+                        var glucose = new Glucose_Model();
+                        glucose.Activity = (item.activity.HasValue) ? (bool)item.activity : false;
+                        glucose.Taking_Medication = (item.took_medication.HasValue) ? (bool)item.activity : false;
+                        glucose.Date = item.date_taken;
+                        glucose.Glucose_time = item.period;
+                        glucose.Note = item.note;
+                        glucose.Glycemia = (double)item.value;
+                        glucose.Uploaded = true;
+                        DataStore.AddGlucose(glucose);
+                    }
+                    if (item.type == "hba1c")
+                    {
+                        var hb1ac = new Hb1Ac_Model();
+                       
+                        hb1ac.Date = item.date_taken;
+                        hb1ac.Laboratory = item.laboratory;
+                        hb1ac.Note = item.note;
+                        hb1ac.Hb1Ac = (double)item.value;
+                        hb1ac.Uploaded = true;
+                        DataStore.AddHbaAc(hb1ac);
+                    }
+                    if (item.type == "weight")
+                    {
+                        var weight = new Weight_Model();
+                       
+                        weight.Date = item.date_taken;
+                       
+                        weight.Note = item.note;
+                        weight.Weight = (double)item.value;
+                        weight.Uploaded = true;
+                        DataStore.AddWeight(weight);
+                    }
+                    if (item.type == "pressure")
+                    {
+                        var pressure = new Pression_Model();
+                        pressure.Atrial_Fibrilation = (item.atrial_fibrilation.HasValue) ? (bool)item.activity : false;
+                       
+                        pressure.Date = item.date_taken;
+                        pressure.Where = item.place_taken;
+                        pressure.Note = item.note;
+                        pressure.Systolique = (item.systolic.HasValue) ? (int)item.systolic : 0;
+                        pressure.Diastolique =(item.diastolic.HasValue) ? (int)item.diastolic : 0;
+                        pressure.Heart_Freaquancy =(item.heart_frequency.HasValue) ? (int)item.heart_frequency : 0;
+                        pressure.Uploaded = true;
+                        DataStore.AddPression(pressure);
+                    }
+                }
+                UpdateData();
+            }
+            else
+            {
+                DependencyService.Get<IMessage>().ShortAlert(Result.Item2);
+            }
+            IsBusy = false;
         }
     }
 }

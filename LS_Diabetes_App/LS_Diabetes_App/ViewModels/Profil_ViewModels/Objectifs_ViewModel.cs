@@ -1,7 +1,9 @@
-﻿using LS_Diabetes_App.Converters;
+﻿using LS_Diabetes_App.Api;
+using LS_Diabetes_App.Converters;
 using LS_Diabetes_App.Interfaces;
 using LS_Diabetes_App.Models;
 using LS_Diabetes_App.Servies;
+using Org.BouncyCastle.Crypto.Prng;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,9 +51,18 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
             {
                 if (await DependencyService.Get<IDialog>().AlertAsync("", Resources["EditMessage"], Resources["Yes"], Resources["No"]))
                 {
+                    var restapi = new RestApi();
                     Objectifs.Max_Glycemia = GlycemiaConverter.DoubleGlycemiaConvertBack(double.Parse(Max_Glycemia), Profil.GlycemiaUnit);
                     Objectifs.Min_Glycemia = GlycemiaConverter.DoubleGlycemiaConvertBack(double.Parse(Min_Glycemia), Profil.GlycemiaUnit);
                     Objectifs.Weight_Objectif = WeightConverter.DoubleWeightConvetBack(Objectifs.Weight_Objectif, Profil.WeightUnit);
+                    var result = await restapi.Post_Objectifs("glucose", Objectifs.Max_Glycemia, Objectifs.Min_Glycemia);
+                    var result2 = await restapi.Post_Objectifs("weight", Objectifs.Weight_Objectif, Objectifs.Weight_Objectif);
+                    var result3 = await restapi.Post_Objectifs("walk", Objectifs.Steps_Objectif, Objectifs.Steps_Objectif);
+                    if(!(result.Item1 & result2.Item1 & result3.Item1))
+                    {
+                        DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+                        return;
+                    }
                     DataStore.UpdateObjectif(Objectifs);
                     MessagingCenter.Send(this, "DataUpdated");
                     DependencyService.Get<ISnackBar>().Show(Resources["SuccesMessage"]);

@@ -17,7 +17,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private DateTime date { get; set; } = DateTime.Now;
-
+        [JsonProperty("created_at")]
         public DateTime Date
         {
             get { return date; }
@@ -32,7 +32,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private DateTime startdate { get; set; } = DateTime.Now;
-
+        [JsonProperty("startDate")]
         public DateTime StartDate
         {
             get { return startdate; }
@@ -47,7 +47,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private double dose { get; set; }
-
+        [JsonProperty("dose")]
         public double Dose
         {
             get { return dose; }
@@ -62,7 +62,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private int duration { get; set; }
-
+        [JsonProperty("duration")]
         public int Duration
         {
             get { return duration; }
@@ -73,11 +73,25 @@ namespace LS_Diabetes_App.Models.Data_Models
                 OnPropertyChanged();
             }
         }
+        [JsonIgnore]
+        [Ignore]
+        private double number_of_times { get; set; }
+        [JsonIgnore]
+        public double Number_Of_Times
+        {
+            get { return number_of_times; }
+            set
+            {
+                if (number_of_times != value)
+                    number_of_times = value;
+                OnPropertyChanged();
+            }
+        }
 
         [JsonIgnore]
         [Ignore]
         private string drug { get; set; }
-
+        [JsonProperty("drug")]
         public string Drug
         {
             get { return drug; }
@@ -92,7 +106,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private string taking_time { get; set; }
-
+        [JsonProperty("period")]
         public string Taking_Time
         {
             get { return taking_time; }
@@ -107,7 +121,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private string times { get; set; }
-
+        [JsonProperty("times")]
         public string Times
         {
             get { return times; }
@@ -147,7 +161,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private string note { get; set; }
-
+        [JsonProperty("note")]
         public string Note
         {
             get { return note; }
@@ -162,7 +176,7 @@ namespace LS_Diabetes_App.Models.Data_Models
         [JsonIgnore]
         [Ignore]
         private string picturePath { get; set; }
-
+        [JsonProperty("created_at")]
         public string PicturePathe
         {
             get { return picturePath; }
@@ -267,6 +281,22 @@ namespace LS_Diabetes_App.Models.Data_Models
             {
                 if (alarmset != value)
                     alarmset = value;
+                OnPropertyChanged();
+            }
+        }
+
+        [JsonIgnore]
+        [Ignore]
+        private bool uploaded { get; set; } = false;
+
+        [JsonIgnore]
+        public bool Uploaded
+        {
+            get { return uploaded; }
+            set
+            {
+                if (uploaded != value)
+                    uploaded = value;
                 OnPropertyChanged();
             }
         }

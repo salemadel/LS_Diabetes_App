@@ -258,7 +258,7 @@ namespace LS_Diabetes_App.ViewModels.AddData_ViewModels
                 Glucose.Glucose_time = "fasting";
             }
             dataStore.AddGlucose(GlycemiaConverter.ConvertBack(Glucose, Profil.GlycemiaUnit));
-            System.Diagnostics.Debug.WriteLine(Glucose.Glucose_time);
+          //  System.Diagnostics.Debug.WriteLine(Glucose.Glucose_time);
             MessagingCenter.Send(this, "DataUpdated");
             await Navigation.PopModalAsync();
             //  IsBusy = false;

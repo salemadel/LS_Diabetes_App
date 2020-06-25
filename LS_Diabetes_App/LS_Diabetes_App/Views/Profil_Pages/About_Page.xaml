@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sfButtons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="LS_Diabetes_App.Views.Profil_Pages.About_Page" NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
@@ -29,8 +29,28 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
                     <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="100" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                <Label Text="Smart Health" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" Grid.Row="0" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="Version : 1.0.0.0" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" Grid.Row="1" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand"/>
+                <Label x:Name="Conditions_Label" Text="Condition d'utilisation" TextColor="#0077B5" TextDecorations="Underline" FontSize="15" FontFamily="{StaticResource BoldFont}" Grid.Row="2" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="5,0,0,0"/>
+                <Label Text="Nous Contacter :" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" Grid.Row="3" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="5,0,0,0"/>
+                <Grid Grid.Row="4"  VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" Margin="5,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Grid.Column="0" Source="internet.png"  Padding="10,10,10,10" Aspect="AspectFit" BackgroundColor="#00B2C8" CornerRadius="30" HeightRequest="60" WidthRequest="60" Command="{Binding WebdSiteCommand}"/>
+                    <ImageButton Grid.Column="1" Source="facebook.png" Padding="10,10,10,10" Aspect="AspectFit" BackgroundColor="#4267B2" CornerRadius="30" HeightRequest="60" WidthRequest="60" Clicked="ImageButton_Clicked"/>
+                    <ImageButton Grid.Column="2" Source="linkedin.png" Padding="10,10,10,10" Aspect="AspectFit" BackgroundColor="#0077B5" CornerRadius="30" HeightRequest="60" WidthRequest="60" Command="{Binding LinkedinCommand}"/>
+                    <ImageButton Grid.Column="3" Source="instagram.png" Padding="10,10,10,10" Aspect="AspectFit" BackgroundColor="Black" CornerRadius="30" HeightRequest="60" WidthRequest="60" Command="{Binding FlickrCommand}"/>
+                </Grid>
+                <!-- <sfButtons:SfButton Grid.Row="4" ImageSource="internet.png"   BackgroundColor="#00B2C8" CornerRadius="30" HeightRequest="60" WidthRequest="60" Command="{Binding WebdSiteCommand}"/>-->
             </Grid>
         </Grid>
     </ScrollView>

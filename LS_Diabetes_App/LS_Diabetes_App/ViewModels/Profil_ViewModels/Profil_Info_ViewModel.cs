@@ -15,7 +15,7 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
     public class Profil_Info_ViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private string[] type_list = new string[] { "Type 1", "Type 2", "Autre" };
-        private string[] glucometer_list = new string[] { "Check 3", "Autre" };
+        private string[] glucometer_list = new string[] { "Check 3", " Bionime GM50", "Diagnocheck", "BG Star", "On Call Extra", "Sabeel Extra", "Contour", "Freestyle", "Accu-Check", "Novacheck Voice", "One Touch Verio", "Gluneo", "Humasens", "VivaCheck Ino", "One Touch Ultra", "Glucosure Autocade", "Zed Max", "Vital Check", "Autre" };
         public Profil_Model Profil { get; set; }
         public Settings_Model Settings { get; set; }
         private IDataStore DataStore { get; set; }
@@ -107,6 +107,19 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
                 if (result.Item1)
                 {
                     DataStore.UpdateProfil(Profil);
+                    if(!string.IsNullOrEmpty(Password) & !string.IsNullOrEmpty(ConfirmPassword) & !string.IsNullOrEmpty(CheckPassword()))
+                    {
+                        var result2 = await restapi.ChangePassword(Password);
+                        if(result2.Item1)
+                        {
+                            DependencyService.Get<ISnackBar>().Show(Resources["SuccesMessage"]);
+                            await Navigation.PopModalAsync();
+                        }
+                        else
+                        {
+                            DependencyService.Get<IMessage>().ShortAlert(result.Item2);
+                        }
+                    }
                     DependencyService.Get<ISnackBar>().Show(Resources["SuccesMessage"]);
                     await Navigation.PopModalAsync();
                 }

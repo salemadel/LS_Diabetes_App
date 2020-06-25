@@ -297,13 +297,14 @@ namespace LS_Diabetes_App.ViewModels
 
         private GlycemiaConverter GlycemiaConverter { get; set; }
         private WeightConverter WeightConverter { get; set; }
+        private Upload_Service Upload_Service { get; set; }
         public Command AddDataTypeCommand { get; set; }
         public Command GlucoseStatistiqueCommand { get; set; }
         public Command WeightStatistiqueCommand { get; set; }
         public Command Hb1acSatistiqueCommand { get; set; }
         public Command PressionStatiqtiqueCommand { get; set; }
         public Command MedicationCommand { get; set; }
-
+        public Command StepsStatistiqueCommand { get; set; }
         public HomePage_ViewModel(INavigation navigation, IDataStore dataStore)
         {
             this.DataStore = dataStore;
@@ -313,6 +314,7 @@ namespace LS_Diabetes_App.ViewModels
             Weight_Data = new ObservableCollection<Weight_Model>();
             GlycemiaConverter = new GlycemiaConverter();
             WeightConverter = new WeightConverter();
+            Upload_Service = new Upload_Service();
             UpdateData();
             // DependencyService.Get<IStepCounter>().StepCountChanged += StepCounterService_StepCountChanged;
             AddDataTypeCommand = new Command(async () =>
@@ -338,6 +340,10 @@ namespace LS_Diabetes_App.ViewModels
             MedicationCommand = new Command(async () =>
             {
                 await ExecuteOnMedicationTapped();
+            });
+            StepsStatistiqueCommand = new Command(async () =>
+            {
+                await ExecuteOnStepsTapped();
             });
             MessagingCenter.Subscribe<object, int>(Application.Current, "Steps", (sender, args) =>
          {
@@ -392,6 +398,10 @@ namespace LS_Diabetes_App.ViewModels
             var timer = new System.Threading.Timer((e) =>
             {
                 UpdateData();
+                Task.Run(async() =>
+                {
+                    await Upload_Service.Upload();
+                });
             }, null, startTimeSpan, periodTimeSpan);
         }
 
@@ -411,7 +421,7 @@ namespace LS_Diabetes_App.ViewModels
             Nbr_Normal = 0;
             Min = 0;
             Max = 0;
-            foreach (var item in DataStore.GetGlucosAsync().Where(i => i.Date.Date == DateTime.Now.Date))
+            foreach (var item in DataStore.GetGlucosAsync().Where(i =>i.Date >= DateTime.Now.AddDays(-7)))
             {
                 Glucose_Data.Add(GlycemiaConverter.Convert(item, Profil.GlycemiaUnit));
             }
@@ -504,8 +514,8 @@ namespace LS_Diabetes_App.ViewModels
                                 if (drug.Indeterminer)
                                 {
                                     DateTime date = new DateTime();
-                                    date = (drug.StartDate.Date < DateTime.Now.Date) ? DateTime.Now.Date : drug.StartDate;
-                                    date = ((date != drug.StartDate) & DateTime.Now.TimeOfDay > TimeSpan.Parse(time)) ? date.AddDays(1) : date;
+                                    date = (drug.StartDate.Date <= DateTime.Now.Date) ? DateTime.Now.Date : drug.StartDate;
+                                    date = ((date >= drug.StartDate) & DateTime.Now.TimeOfDay > TimeSpan.Parse(time)) ? date.AddDays(1) : date;
                                     var rappeltime = date.Date + TimeSpan.Parse(time);
                                     keyvalue.Add(new KeyValuePair<string, string>(drug.Id.ToString(), rappeltime.ToString()));
                                 }
@@ -587,5 +597,13 @@ namespace LS_Diabetes_App.ViewModels
             await Navigation.PushModalAsync(new Drugs_Page(), true);
             IsBusy = false;
         }
+        private async Task ExecuteOnStepsTapped()
+        {
+            IsBusy = true;
+            await Navigation.PushModalAsync(new StepsStatistique_Page(), true);
+            IsBusy = false;
+        }
+
+       
     }
 }

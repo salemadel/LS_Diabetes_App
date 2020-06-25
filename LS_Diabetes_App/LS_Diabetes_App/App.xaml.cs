@@ -29,6 +29,12 @@ namespace LS_Diabetes_App
             else
             {
                 var settings = new Settings_Model();
+                var Objectifs = new Objectif_Model();
+                Objectifs.Max_Glycemia = 120;
+                Objectifs.Min_Glycemia = 70;
+                Objectifs.Weight_Objectif = 80;
+                Objectifs.Steps_Objectif = 10000;
+                datastore.AddObjectif(Objectifs);
                 datastore.AddSettings(settings);
                 CurrentLanguage = datastore.GetSettingsAsync().First().Language;
             }
