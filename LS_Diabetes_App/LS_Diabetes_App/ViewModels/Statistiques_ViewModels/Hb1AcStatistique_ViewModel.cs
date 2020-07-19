@@ -248,7 +248,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Average = Math.Round(Hb1Ac_Data.Sum(i => i.Hb1Ac) / Hb1Ac_Data.Count, 1);
                 if (string.IsNullOrWhiteSpace(Message))
                 {
-                    Message = Resources["Last"] + " Hb1Ac :" + Hb1Ac_Data.Last().Hb1Ac + " % ";
+                    Message = Resources["Last"] + " HbA1c :" + Hb1Ac_Data.Last().Hb1Ac + " % ";
                 }
             }
             if (Average < 5)

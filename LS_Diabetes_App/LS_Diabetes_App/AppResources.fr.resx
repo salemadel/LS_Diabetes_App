@@ -235,7 +235,7 @@
     <value>Prénom</value>
   </data>
   <data name="ForgotPassword_Label" xml:space="preserve">
-    <value>Mot de passe oublier ?</value>
+    <value>Mot de passe oublié ?</value>
   </data>
   <data name="Glucometer_Label" xml:space="preserve">
     <value>Glucométre</value>
@@ -434,6 +434,9 @@
   </data>
   <data name="Target" xml:space="preserve">
     <value>Glycémie cible</value>
+  </data>
+  <data name="Target_Weight" xml:space="preserve">
+    <value>Objectif poids</value>
   </data>
   <data name="Time_Label" xml:space="preserve">
     <value>Heure/Date</value>

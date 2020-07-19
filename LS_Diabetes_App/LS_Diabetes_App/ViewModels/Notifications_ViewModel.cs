@@ -45,7 +45,7 @@ namespace LS_Diabetes_App.ViewModels
             var Result = await RestApi.GetNotifications();
             if(Result.Item1)
             {
-                System.Diagnostics.Debug.WriteLine(Result.Item2);
+                System.Diagnostics.Debug.WriteLine("Get Notifications : "+Result.Item2);
                 Notifications = new ObservableCollection<Notifications_Model>(JsonConvert.DeserializeObject<List<Notifications_Model>>(Result.Item2));
                 foreach(var item in Notifications)
                 {

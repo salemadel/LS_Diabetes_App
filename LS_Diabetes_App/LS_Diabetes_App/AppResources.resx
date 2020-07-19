@@ -426,9 +426,6 @@
   <data name="SuccesMessage" xml:space="preserve">
     <value>Operation successfully completed</value>
   </data>
-  <data name="t" xml:space="preserve">
-    <value />
-  </data>
   <data name="Taking_Medication" xml:space="preserve">
     <value>Taking medication</value>
   </data>
@@ -437,6 +434,9 @@
   </data>
   <data name="Target" xml:space="preserve">
     <value>Target blood sugar</value>
+  </data>
+  <data name="Target_Weight" xml:space="preserve">
+    <value>Target weight</value>
   </data>
   <data name="Time_Label" xml:space="preserve">
     <value>Time</value>

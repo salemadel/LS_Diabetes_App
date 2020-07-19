@@ -78,7 +78,7 @@
             <Frame Grid.Row="2" Grid.Column="1" BorderColor="#D72753" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" HeightRequest="170" WidthRequest="150" Margin="5,10,10,0" HasShadow="True" BackgroundColor="White" CornerRadius="10">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
-                        <Label Text="Hb1Ac" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
+                        <Label Text="HbA1c" TextColor="Black" FontSize="20" FontFamily="{StaticResource BoldFont}" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand" />
                         <Image Source="hb1ac.png" HeightRequest="24" WidthRequest="24" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">

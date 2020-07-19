@@ -46,9 +46,9 @@ namespace LS_Diabetes_App.Models.Data_Models
 
         [JsonIgnore]
         [Ignore]
-        private int heart_freaquancy { get; set; }
+        private double heart_freaquancy { get; set; }
 
-        public int Heart_Freaquancy
+        public double Heart_Freaquancy
         {
             get { return heart_freaquancy; }
             set

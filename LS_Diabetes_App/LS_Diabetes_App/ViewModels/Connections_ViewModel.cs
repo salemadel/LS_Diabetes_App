@@ -116,7 +116,7 @@ namespace LS_Diabetes_App.ViewModels
             var Result = await RestApi.GetFollowers();
             if (Result.Item1)
             {
-               // System.Diagnostics.Debug.WriteLine(Result.Item2);
+              //  System.Diagnostics.Debug.WriteLine("Get Followers : " + Result.Item2);
                 List<Folowers_Model> _data = JsonConvert.DeserializeObject<List<Folowers_Model>>(Result.Item2);
                 var sorted = from data in _data
                              orderby data.accepted descending
@@ -155,14 +155,7 @@ namespace LS_Diabetes_App.ViewModels
             }
         }
 
-        private async Task GetNotifications()
-        {
-            var Result = await RestApi.GetNotifications();
-            if(Result.Item1)
-            {
-
-            }
-        }
+       
 
     }
 }

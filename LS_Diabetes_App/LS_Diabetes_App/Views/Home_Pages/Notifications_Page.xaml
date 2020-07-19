@@ -16,11 +16,7 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="ExtraBoldFont">
                 <On Platform="Android" Value="OpenSans-ExtraBold.ttf#Open Sans" />
             </OnPlatform>
-            <Converter:TimeSpanDateTimeConverter x:Key="TimeSpanToDateTime" />
-            <Converter:StringDoubleConvertercs x:Key="StringToDouble" />
-            <Converter:TypeToImageConverter x:Key="TypeToImage" />
-            <Converter:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
-            <Converter:NullToBoolConverter x:Key="NullToBool" />
+            
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -32,6 +28,27 @@
             <StackLayout Grid.Row="0" Orientation="Horizontal" BackgroundColor="Default">
                 <Label Text="{Binding Resources[Notifications]}" FontSize="30" Margin="10,10,10,10" FontFamily="{StaticResource ExtraBoldFont}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" />
             </StackLayout>
+            <ListView Grid.Row="1" ItemsSource="{Binding Notifications}"  HasUnevenRows="True" SeparatorColor="LightGray" Margin="5,0,0,0"  CachingStrategy ="RecycleElement">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" BackgroundColor="#00B2C8" />
+                                <Label  Grid.Row="0" TextColor="Black"   Grid.Column="1"  Text="{Binding Title}"  FontFamily="{StaticResource BoldFont}" FontSize="20" Margin="5,0,0,0"  VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+                                <Label  Grid.Row="1" TextColor="Black"   Grid.Column="1"  Text="{Binding message}"  FontFamily="{StaticResource NormalFont}" FontSize="16" Margin="5,2,0,0"  VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"  HeightRequest="60" WidthRequest="200" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </ContentPage.Content>
     

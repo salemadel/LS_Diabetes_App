@@ -350,7 +350,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
                 Average_dia = Math.Round(Convert.ToDouble(Pression_Data.Sum(i => i.Diastolique) / Pression_Data.Count), 1);
                 if (string.IsNullOrWhiteSpace(Message))
                 {
-                    Message = Resources["Last_F"] + " " + Resources["Blood_pressure"] + " : " + Pression_Data.Last().Systolique + " mmGh / " + Pression_Data.Last().Diastolique + " mmGh";
+                    Message = Resources["Last_F"] + " " + Resources["Blood_pressure"] + " : " + Pression_Data.Last().Systolique + " mm Hg / " + Pression_Data.Last().Diastolique + " mm Hg";
                 }
             }
             if (Average_sys >= 90 & Average_sys <= 120)

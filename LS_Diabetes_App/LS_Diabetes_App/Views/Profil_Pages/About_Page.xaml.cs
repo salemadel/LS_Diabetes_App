@@ -12,16 +12,7 @@ namespace LS_Diabetes_App.Views.Profil_Pages
         {
             InitializeComponent();
             BindingContext = new About_ViewModel();
-            TapGestureRecognizer tap = new TapGestureRecognizer();
-            tap.Tapped += ImageButton_Clicked;
-            Conditions_Label.GestureRecognizers.Add(tap);
+           
         }
-
-        private void ImageButton_Clicked(object sender, System.EventArgs e)
-        {
-            DependencyService.Get<IMessage>().ShortAlert("test");
-        }
-
-
     }
 }

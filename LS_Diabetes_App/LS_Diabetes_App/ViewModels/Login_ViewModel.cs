@@ -90,30 +90,32 @@ namespace LS_Diabetes_App.ViewModels
                 CrossSecureStorage.Current.SetValue("password", Password);
             }
             //   Application.Current.MainPage = new MainPage();
-          
-            var result = await RestApi.Login(Username.Trim(), Password);
-            if (result.Item1)
+            if (!string.IsNullOrEmpty(Username) & !string.IsNullOrEmpty(Password))
             {
-                var result2 = await RestApi.GetProfile();
-                if (result2.Item1)
+                var result = await RestApi.Login(Username.Trim(), Password);
+                if (result.Item1)
                 {
-                    DataStore.DeleteAllProfiles();
-                    DataStore.AddProfil(JsonConvert.DeserializeObject<Profil_Model>(result2.Item2));
-                    if (DataStore.GetSettingsAsync().Count() < 1)
+                    var result2 = await RestApi.GetProfile();
+                    if (result2.Item1)
                     {
-                        var settings = new Settings_Model();
-                        DataStore.AddSettings(settings);
+                        DataStore.DeleteAllProfiles();
+                        DataStore.AddProfil(JsonConvert.DeserializeObject<Profil_Model>(result2.Item2));
+                        if (DataStore.GetSettingsAsync().Count() < 1)
+                        {
+                            var settings = new Settings_Model();
+                            DataStore.AddSettings(settings);
+                        }
+                        Application.Current.MainPage = new MainPage();
                     }
-                    Application.Current.MainPage = new MainPage();
+                    else
+                    {
+                        DependencyService.Get<IMessage>().ShortAlert(result2.Item2);
+                    }
                 }
                 else
                 {
-                    DependencyService.Get<IMessage>().ShortAlert(result2.Item2);
+                    DependencyService.Get<IMessage>().ShortAlert(result.Item2);
                 }
-            }
-            else
-            {
-                DependencyService.Get<IMessage>().ShortAlert(result.Item2);
             }
             IsBusy = false;
         }

@@ -14,11 +14,11 @@ namespace LS_Diabetes_App.ViewModels
 {
     public class SignUp_ViewModel : ViewModelBase
     {
-        private string[] type_list = new string[] { "Type 1", "Type 2", "Autre" };
+        private string[] type_list = new string[] { "Type 1", "Type 2" , "Gestationnel", "Autre" };
         private string[] weight_unit = new string[] { "Kg", "lbs" };
         private string[] height_unit = new string[] { "cm", "pied" };
         private string[] unit_list = new string[] { "mg / dL", "mmol / L" };
-        private string[] glucometer_list = new string[] { "Check 3"," Bionime GM50" ,"Diagnocheck" , "BG Star" , "On Call Extra" , "Sabeel Extra" , "Contour" , "Freestyle" , "Accu-Check" , "Novacheck Voice" , "One Touch Verio" , "Gluneo" , "Humasens" , "VivaCheck Ino" , "One Touch Ultra" , "Glucosure Autocade" , "Zed Max" ,"Vital Check",  "Autre" };
+        private string[] glucometer_list = new string[] { "Check 3", "Vital Check", "Bionime GM50" ,"Diagnocheck" , "BG Star" , "On Call Extra" , "Sabeel Extra" , "Contour" , "Freestyle" , "Accu-Check" , "Novacheck Voice" , "One Touch Verio" , "Gluneo" , "Humasens" , "VivaCheck Ino" , "One Touch Ultra" , "Glucosure Autocade" , "Zed Max" ,  "Autre" };
         private string[] insuline_list = new string[] { "Autre" };
 
         public List<string> Type_List
@@ -71,7 +71,7 @@ namespace LS_Diabetes_App.ViewModels
                 }
                 else
                 {
-                    Profil.Sexe = "Femele";
+                    Profil.Sexe = "Female";
                 }
             }
         }

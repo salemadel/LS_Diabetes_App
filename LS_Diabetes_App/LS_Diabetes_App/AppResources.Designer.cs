@@ -988,15 +988,6 @@ namespace LS_Diabetes_App {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à .
-        /// </summary>
-        internal static string t {
-            get {
-                return ResourceManager.GetString("t", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Taking medication.
         /// </summary>
         internal static string Taking_Medication {
@@ -1020,6 +1011,15 @@ namespace LS_Diabetes_App {
         internal static string Target {
             get {
                 return ResourceManager.GetString("Target", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Target weight.
+        /// </summary>
+        internal static string Target_Weight {
+            get {
+                return ResourceManager.GetString("Target_Weight", resourceCulture);
             }
         }
         

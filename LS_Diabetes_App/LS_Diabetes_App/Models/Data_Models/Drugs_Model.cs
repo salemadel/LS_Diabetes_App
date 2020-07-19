@@ -287,6 +287,12 @@ namespace LS_Diabetes_App.Models.Data_Models
 
         [JsonIgnore]
         [Ignore]
+        public Drugs_Model Instance
+        {
+            get { return this; }
+        }
+        [JsonIgnore]
+        [Ignore]
         private bool uploaded { get; set; } = false;
 
         [JsonIgnore]

@@ -98,6 +98,7 @@ namespace LS_Diabetes_App.Servies
                     {
                         NullValueHandling = NullValueHandling.Ignore
                     });
+                    System.Diagnostics.Debug.WriteLine(json);
                     var Result = await RestApi.Post_Activity(json);
                     if (Result.Item1)
                     {

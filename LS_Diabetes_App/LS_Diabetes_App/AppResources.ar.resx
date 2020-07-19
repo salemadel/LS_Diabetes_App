@@ -241,7 +241,7 @@
     <value>غلوكومتر</value>
   </data>
   <data name="Glucose" xml:space="preserve">
-    <value>الجلوتوز</value>
+    <value>الجلوكوز</value>
   </data>
   <data name="Glycemia" xml:space="preserve">
     <value>سكر الدم</value>
@@ -435,6 +435,9 @@
   <data name="Target" xml:space="preserve">
     <value>سكر الدم المستهدف</value>
   </data>
+  <data name="Target_Weight" xml:space="preserve">
+    <value>الوزن المستهدف</value>
+  </data>
   <data name="Time_Label" xml:space="preserve">
     <value>الوقت</value>
   </data>
@@ -451,7 +454,7 @@
     <value>ايميل</value>
   </data>
   <data name="Weight_Label" xml:space="preserve">
-    <value>الميزان</value>
+    <value>الوزن</value>
   </data>
   <data name="Weight_Unit" xml:space="preserve">
     <value>وحدة الميزان</value>

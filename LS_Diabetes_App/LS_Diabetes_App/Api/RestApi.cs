@@ -113,7 +113,7 @@ namespace LS_Diabetes_App.Api
             {
                 var keyvalues = new List<KeyValuePair<string, string>>{
                 new KeyValuePair<string, string>("email" , user.Email),
-                new KeyValuePair<string, string>("facebook_id" , facebook_id),
+             //   new KeyValuePair<string, string>("facebook_id" , facebook_id),
 
                 new KeyValuePair<string, string>("avatar" , user.Avatar),
                 new KeyValuePair<string, string>("firstname" , user.FirstName),

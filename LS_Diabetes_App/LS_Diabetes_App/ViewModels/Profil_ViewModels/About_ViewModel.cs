@@ -40,12 +40,12 @@ namespace LS_Diabetes_App.ViewModels.Profil_ViewModels
       
         private async Task ExecuteOnFacebook()
         {
-            // await Browser.OpenAsync(new Uri("https://www.facebook.com/Salem.Pharma") , BrowserLaunchMode.SystemPreferred);
-            DependencyService.Get<IMessage>().ShortAlert("test");
+             await Browser.OpenAsync(new Uri("https://www.facebook.com/Salem.Pharma") , BrowserLaunchMode.SystemPreferred);
+          //  DependencyService.Get<IMessage>().ShortAlert("test");
         }
         private async Task ExecuteOnWebSite()
         {
-            await Browser.OpenAsync(new Uri("www.labosalem.dz"));
+            await Browser.OpenAsync(new Uri("https://www.labosalem.dz"), BrowserLaunchMode.SystemPreferred);
         }
         private async Task ExecuteOnLinkedin()
         {

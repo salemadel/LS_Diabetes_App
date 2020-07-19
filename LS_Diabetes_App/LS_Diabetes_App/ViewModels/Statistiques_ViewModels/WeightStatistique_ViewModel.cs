@@ -151,6 +151,7 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
         public ObservableCollection<SfSegmentItem> DateItems { get; set; }
         public Settings_Model Settings { get; set; }
         public Profil_Model Profil { get; set; }
+        private Objectif_Model Objectifs { get; set; }
         public Command FiltreCommand { get; set; }
 
         public WeightStatistique_ViewModel(INavigation navigation, IDataStore dataStore)
@@ -159,12 +160,14 @@ namespace LS_Diabetes_App.ViewModels.Statistiques_ViewModels
             DataStore = dataStore;
             Settings = DataStore.GetSettingsAsync().First();
             Profil = DataStore.GetProfilAsync().First();
+            Objectifs = DataStore.GetObjectifAsync().First();
             Weight_Data = new ObservableCollection<Weight_Model>();
             WeightConverter = new WeightConverter();
             HeightConverter = new HeightConverter();
             Selected_MaxDate = DateTime.Now.Date;
             Selected_MinDate = DateTime.Now.Date;
             Selected_Date_Index = 0;
+            Message = Resources["Target_Weight"] + " : " + Objectifs.Weight_Objectif.ToString() + " " + Settings.WeightUnit;
             DateItems = new ObservableCollection<SfSegmentItem>
         {
             new SfSegmentItem(){Text=Resources["Today"] },
